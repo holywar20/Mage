@@ -1,0 +1,22 @@
+{
+	"name": "Mage",
+	"title": "Mage Test System",
+	"description": "Mage",
+	"version": 0.1,
+	"author": "Bryan C. Winter",
+	"scripts": [],
+	"esmodules": ["Mage.js"],
+	"styles": [
+		"./styles/Mage.css"
+		],
+	"socket": true,
+	"gridDistance": 5,
+	"gridUnits": "Hex",
+	"primaryTokenAttribute": null,
+	"secondaryTokenAttribute": null,
+	"minimumCoreVersion": "0.5.0",
+	"compatibleCoreVersion": "0.5.1",
+	"url": "",
+	"manifest": "",
+	"download": ""
+}

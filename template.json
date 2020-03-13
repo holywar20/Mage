@@ -1,0 +1,61 @@
+{
+"Actor":{
+	"types" : ["mage"],
+	"templates" : {
+		"common" : {
+			"traits" : {
+				"str" : {
+					"value" : 0
+				} , 
+				"int" : {
+					"value" : 0
+				} , 
+				"cha" : {
+					"value" : 0
+				} ,
+				"per" : {
+					"value" : 0
+				}, 
+				"dex" : {
+					"value" : 0
+				},
+				"cor" : {
+					"value" : 0
+				}
+			}
+		}
+	},
+	"mage" :{
+		"templates" : ["common"],
+		"arcana" : {
+			"entropy" :{
+				"value" : 0
+			} , 
+			"time" :{
+				"value" : 0
+			} ,
+			"mind" :{
+				"value" : 0
+			} ,
+			"matter" :{
+				"value" : 0
+			} ,
+			"force" :{
+				"value" : 0
+			} ,
+			"life" :{
+				"value" : 0
+			} ,
+			"spirit" :{
+				"value" : 0
+			} ,
+			"correspondence" :{
+				"value" : 0
+			} ,
+			"prime" :{
+				"value" : 0
+			}
+		}
+	}
+}
+}
