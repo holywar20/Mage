@@ -1,3 +1,9 @@
+/* NOTE - this file is only a refrence. 
+		This is actually loaded by Foundry VTT, but electron aps can 
+		be hard to get at, so I made a copy for refrence and put it here.
+*/
+
+
 * {
   box-sizing: border-box;
   -webkit-user-select: none;
