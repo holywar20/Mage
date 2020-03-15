@@ -39,8 +39,13 @@ Hooks.once('init', async function() {
 /* Setup system							*/
 /* ------------------------------------ */
 Hooks.once('setup', function() {
-	// Do anything after initialization but before
-	// ready
+	Handlebars.registerHelper('if_equal', function(a, b, opts) {
+		if (a == b) {
+			return opts.fn(this)
+		} else {
+			return opts.inverse(this)
+		}
+	});
 });
 
 /* ------------------------------------ */

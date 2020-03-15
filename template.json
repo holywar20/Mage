@@ -27,6 +27,7 @@
 	},
 	"mage" :{
 		"templates" : ["common"],
+		"currentTab" : null,
 		"arcana" : {
 			"entropy" :{
 				"value" : 0

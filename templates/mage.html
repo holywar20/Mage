@@ -1,74 +1,164 @@
-<form>
-<div>
-	Debug : _id = {{ actor._id }}
+<form class="mage-form">
+
+<div class="debug">
+	Debug : _id = {{ actor._id }} | currentTab = {{ data.currentTab }}
 </div>
 
-<div>
-	<input name="actor.name" value="actor.name">
+<div	class="flex-row">
+	<button tab-name="character" selected="true" class="btn btn-large btn-main-tab">Character</button>
+	<button tab-name="equipment" 
+		{{#if_equal data.currentTab "equipment" }} selected="true" {{else}} selected="false" {{/if_equal}}
+		class="btn-main-tab btn btn-large">
+		Equipment</button>
+	<button tab-name="spellbook" selected="false" class="btn-main-tab btn btn-large">Spellbook</button>
+	<button tab-name="development" selected="false" class="btn-main-tab btn btn-large">Development</button>
 </div>
 
-<div class="flex-row">
-	<div>
-		<input
-			type="number"			
-			class=""
-			name="data.traits.str.value" 
-			value="{{ data.traits.str.value }}">
-		<button>Strength</button>
+{{#if_equal data.currentTab "character" }}
+<div id="character" class="tab main-container character-tab">
+	<div class="header grid-child">
+		<div class="flex-row">
+			<img src="systems/Mage/img/sheets/MageLogo.png">
+			<table class="table">
+				<tr>
+					<td>Player Name</td>
+					<td><input class="input-manual input-large"></td>
+				</tr>
+				<tr>
+					<td>Character</td>
+					<td><input class="input-manual input-large"></td>
+				</tr>
+
+				<tr>
+					<td>Tradition</td>
+					<td><input class="input-manual input-large"></td>
+				</tr>
+
+			</table>
+		</div>
+	</div> <!-- End pf Header-->
+
+	<div class="traits grid-child">
+		<div class="flex-row">
+			<div class="trait-box">
+				Strength
+				<button trait-name="str" class="btn btn-medium btn-traits">
+					<input
+						disabled="true"
+						value="{{ data.traits.str.value }}" 
+						class="input-small input-bigly"> 
+				</button>
+			</div>
+
+			<div class="trait-box">
+				Dexerity
+				<button trait-name="dex" class="btn btn-medium btn-traits">
+					<input
+						disabled="true"
+						value="{{ data.traits.dex.value }}" 
+						class="input-small input-bigly">
+				</button>
+			</div>
+
+			<div class="trait-box">
+				Perception
+				<button trait-name="per" class="btn btn-medium btn-traits">
+					<input
+						disabled="true"
+						value="{{ data.traits.per.value }}" 
+						class="input-small input-bigly">
+				</button>
+			</div>
+
+			<div class="trait-box">
+				Intelligence
+				<button trait-name="int" class="btn btn-medium btn-traits">
+					<input
+						disabled="true"
+						value="{{ data.traits.int.value }}" 
+						class="input-small input-bigly">
+				</button>
+			</div>
+
+			<div class="trait-box">
+				Charisma
+				<button trait-name="cha" class="btn btn-medium btn-traits">
+					<input
+						disabled="true"
+						value="{{ data.traits.cha.value }}" 
+						class="input-small input-bigly">
+				</button>
+			</div>
+
+			<div class="trait-box">
+				Courage
+				<button trait-name="cor" class="btn btn-medium btn-traits">
+					<input
+					disabled="true"
+					value="{{ data.traits.cor.value }}" 
+					class="input-small input-bigly">
+				</button>
+			</div>
+		</div>
+
+
 	</div>
 
-	<div>
-		<input
-			type="number"
-			class=""
-			name="data.traits.str.value" 
-			value="{{ data.traits.str.value }}">
-		<button>Dexerity</button>
+	<div class="vitals grid-child">
+		<div class="box-header">
+			<h3>Vitals</h3>
+		</div>
+
+		<div class="flex-row">
+			<div class="trait-box">
+			<input
+				disabled="true"
+				value="" 
+				class="input-small input-bigly">
+			<button class="btn btn-medium">Health</button>
+			</div>
+
+			<div class="trait-box">
+				<input
+				disabled="true"
+				value="" 
+				class="input-small input-bigly">
+			<button class="btn btn-medium">Paradox</button>
+			</div>
+		</div>
+		
 	</div>
 
-	<div>
-		<input
-			type="number"
-			class=""
-			name="data.traits.str.value" 
-			value="{{ data.traits.str.value }}">
-		<button>Perception</button>
+	<div class="skills grid-child">
+		Skills
 	</div>
 
-	<div>
-		<input
-			type="number"
-			class=""
-			name="data.traits.str.value" 
-			value="{{ data.traits.str.value }}">
-		<button>Charisma</button>
+	<div class="arcana grid-child">
+		Arcana
 	</div>
 
-	<div>
-		<input
-			type="number"
-			class=""
-			name="data.traits.str.value" 
-			value="{{ data.traits.str.value }}">
-		<button>Intelligence</button>
-	</div>
-
-	<div>
-		<input
-			type="number"
-			class=""
-			name="data.traits.str.value" 
-			value="{{ data.traits.str.value }}">
-		<button>Courage</button>
+	<div class="mods grid-child">
+		Universal Mods
 	</div>
 </div>
+{{/if_equal}}
 
-<div>
-	Testing Area! Expect Nonsense
+{{#if_equal data.currentTab "equipment" }}
+<div id="equipment" class="tab main-container equipment-tab">
+	Equipment!
 </div>
+{{/if_equal}}
 
-<div>
-	<button></button>
+{{#if_equal data.currentTab "spellbook"}}
+<div id="spellbook" class="tab main-container spellbook-tab">
+	SpellBook!
 </div>
+{{/if_equal}}
+
+{{#if_equal data.currentTab "development" }}
+<div id="development" class="tab main-container development-tab">
+	Development!
+</div>
+{{/if_equal}}
 
 </form>

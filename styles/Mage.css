@@ -1,6 +1,262 @@
-/* Grid */
+/* Edits done to affect the application ,outside of window.content boxes 
+	These should all override some property that is default that we do not want.
+*/
+.window-app .window-content{
+	background : none; /* A container element for the background. */
+}
 
+.debug {
+	background-color: white;
+	color : black;
+	/* display: hidden; */
+}
+
+@font-face {
+	font-family : HeaderFont;
+	src:url('../fonts/Dolphian.ttf');
+}
+
+/* Color Pallette */
+:root{
+	--bg-main 	: black;
+	--base-text-color : white;
+	--selected : rgb(63, 63, 63);
+
+	--gray-fade50: rgba(63,63,63, .5);
+
+	--primary				: rgba(133, 18 ,87 ,1);
+	--primary-fade50 		: rgba(133, 18 , 87 ,.5);
+	--secondary				: rgba(25 , 49 , 113, 1);
+	--secondary-fade50	: rgba(25 , 49 , 113, .5 );
+	--tertiary				: rgba(168, 155, 21 , 1);
+	--tertiary-fade50		: rgba(168, 155, 21 , .5);
+
+	--skills					: rgb(252, 96, 168);
+	--skills-fade50		: rgb(252, 96, 168, .5);
+	--traits					: rgb(206, 236, 151);
+	--traits-fade50		: rgba(206, 236, 151, .5);
+	--arcana					: rgb(244, 179, 147);
+	--arcana-fade50		: rgba(244, 179, 147 , .5);
+	--vitals					: rgb(255, 37, 37);
+	--vitals-fade50		: rgba(255, 37, 37 , .5);
+
+	--animation : all .5s ease-in-out; 
+}
+
+.mage-form{
+	background: var(--bg-main);
+	height: 100%;
+
+	color: var(--base-text-color);
+}
+
+/* Grid */
+.main-container{
+	display: grid;
+	grid-template-columns : 250px auto 250px;
+	grid-template-rows : 100px 200px auto;
+}
+
+.grid-child{
+	padding: 5px;
+	margin: 5px;
+
+	background-color: var(--gray-fade50);
+	border: 1px solid var(--primary);
+	border-radius : 5px 5px 0px 0px;
+}
+
+.mage-logo{
+	font-family: Mage
+}
+
+.header{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start:1;
+	grid-row-end: 1;
+}
+
+.traits{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start:2;
+	grid-row-end: 3;
+}
+
+.mods{
+	min-height: 400px;
+}
+
+.vitals{
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start:1;
+	grid-row-end: 3;
+}
+
+.arcana{
+	min-width: 250px;
+
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start:3;
+	grid-row-end: 4;
+}
+
+.skills{
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start:3;
+	grid-row-end: 4;
+}
+
+/* Flex */
 .flex-row{
 	display: flex;
 }
 
+.flex-col{
+	display: flex;
+	flex-direction: column;
+}
+
+.btn{
+	/* background-image: -webkit-linear-gradient(top, var(--primary), var(--secondary) );*/
+	border-radius: 5px;
+	
+	border : none;
+	
+	padding: -3px; 
+	margin: 3px;
+
+	font-size: 1.2em;
+	font-weight: 800;
+
+	color: var(--base-text-color);
+}
+
+.btn::hover{
+	background: var(--primary);
+}
+
+.btn-vitals{
+	background-color: var(--vitals);
+}
+
+.btn-traits{
+	background-color: var(--traits);
+}
+
+.btn-large{
+	width:200px;
+}
+
+.btn-medium{
+	width: 75px;
+	font-size: .85em;
+}
+
+.btn-small{
+	width: 50px;
+}
+
+.btn-icon{
+	width: 25px;
+}
+
+.btn-main-tab{
+	border: 2px solid var(--tertiary);
+	font-family : HeaderFont;
+
+	transition: var(--animation); 
+}
+
+.btn-main-tab[selected="true"]{
+	width: 210px;
+}
+
+/* Tables */
+.table{
+	border: none;
+	padding: 3px;
+	margin: 3px;
+}
+
+
+/* Inputs */
+
+input:disabled{
+	background-color: rgba(0,0,0,0);
+	border: 1px solid white;
+	border-radius: 5px;
+
+	text-align: center;
+}
+
+input{
+	color: white;
+}
+
+.input-manual:focus{
+	outline:none;
+	border-radius: 10px;
+
+	background-color: var(--selected);
+
+	box-shadow: 
+		2px 3px 5px var(--tertiary),
+		1px 1px 2px var(--tertiary),
+		inset 3px 3px 5px var(--tertiary);
+	border: 3px solid var(--tertiary);
+	
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.input-manual{
+	padding: 3px;
+
+	border: 1px solid var(--secondary);
+	border-radius: 5px;
+
+	transition: var(--animation); 
+}
+
+.input-manual{
+	background-color: black;
+	color: white;
+}
+
+.input-bigly{
+	font-size: 2.0em;
+	font-weight: 900;
+}
+
+.input-tiny{
+	width: 25px;
+}
+
+.input-small{
+	width: 50px;
+}
+
+.input-medium{
+	width: 75px;
+}
+
+.input-large{
+	width: 200px;
+}
+
+/* Layout */
+
+.trait-box{
+	text-align: center;
+	margin: 3px;
+	padding: 3px;
+}
+
+.box-header{
+	text-align: center;
+}
