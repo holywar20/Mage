@@ -40,14 +40,29 @@
 
 	<div class="traits grid-child">
 		<div class="flex-row">
-			<div class="trait-box">
-				Strength
-				<button trait-name="str" class="btn btn-medium btn-traits">
-					<input
-						disabled="true"
-						value="{{ data.traits.str.value }}" 
-						class="input-small input-bigly"> 
-				</button>
+			<div class="trait-box flex-row">
+				<div class="flex-col">
+					<div><h4>Strength</h4></div>
+					<div>
+						<button trait-name="str" class="btn btn-medium btn-traits">
+							<input
+								disabled="true"
+								value="{{ data.traits.str.value }}" 
+								class="input-small input-bigly input-traits"> 
+						</button>
+					</div>
+					<div>
+						<input class="input-subscript">
+					</div>
+				</div>
+
+				<div class="flex-col">
+					<div class="small-header">Equip.</div>
+					<div><input type="number" class="input-number"></div>
+					<div class="small-header">Enchant</div>
+					<div><input type="number" class="input-number"></div>
+				</div>
+
 			</div>
 
 			<div class="trait-box">
@@ -69,7 +84,9 @@
 						class="input-small input-bigly">
 				</button>
 			</div>
+		</div>
 
+		<div class="flex-row">
 			<div class="trait-box">
 				Intelligence
 				<button trait-name="int" class="btn btn-medium btn-traits">
