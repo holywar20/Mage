@@ -1,16 +1,30 @@
 {
-	"name": "Mage",
+	"name": "mage",
 	"title": "Mage Test System",
 	"description": "Mage",
 	"version": 0.1,
 	"author": "Bryan C. Winter",
 	"scripts": [],
 	"esmodules": ["Mage.js"],
+	"packs" : [{
+		"name": "tradition",
+		"label": "Magic Traditions",
+		"system": "mage",
+		"path": "./packs/traditions.db",
+		"entity": "Item"
+	} , {
+		"name" : "spells" ,
+		"label" : "Spells",
+		"system" : "mage",
+		"path" : "./packs/spells.db",
+		"entity": "Item"
+	}],
 	"styles": [
-		"./styles/Mage.css"
+		"./styles/Mage.css",
+		"./styles/ui.css"
 		],
 	"socket": true,
-	"gridDistance": 5,
+	"gridDistance": 1,
 	"gridUnits": "Hex",
 	"primaryTokenAttribute": null,
 	"secondaryTokenAttribute": null,

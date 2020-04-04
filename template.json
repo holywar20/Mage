@@ -1,62 +1,101 @@
 {
-"Actor":{
-	"types" : ["mage"],
-	"templates" : {
-		"common" : {
-			"traits" : {
-				"str" : {
-					"value" : 0
-				} , 
-				"int" : {
-					"value" : 0
-				} , 
-				"cha" : {
-					"value" : 0
-				} ,
-				"per" : {
-					"value" : 0
-				}, 
-				"dex" : {
-					"value" : 0
-				},
-				"cor" : {
-					"value" : 0
+	"Actor":{
+		"types" : ["mage"],
+		"templates" : {
+			"common" : {
+				"traits" : {
+					"str" : {
+						"value" : 0
+					} , 
+					"int" : {
+						"value" : 0
+					} , 
+					"cha" : {
+						"value" : 0
+					} ,
+					"per" : {
+						"value" : 0
+					}, 
+					"dex" : {
+						"value" : 0
+					},
+					"cor" : {
+						"value" : 0
+					}
 				}
 			}
-		}
-	},
-	"mage" :{
-		"templates" : ["common"],
-		"currentTab" : null,
-		"arcana" : {
-			"entropy" :{
-				"value" : 0
-			} , 
-			"time" :{
-				"value" : 0
-			} ,
-			"mind" :{
-				"value" : 0
-			} ,
-			"matter" :{
-				"value" : 0
-			} ,
-			"force" :{
-				"value" : 0
-			} ,
-			"life" :{
-				"value" : 0
-			} ,
-			"spirit" :{
-				"value" : 0
-			} ,
-			"correspondence" :{
-				"value" : 0
-			} ,
-			"prime" :{
-				"value" : 0
+		},
+		"mage" :{
+			"templates" : ["common"],
+			"currentTab" : "character",
+			"currentSkillTab" : "fortitude",
+			"test" : "100",
+			"tradition" : {
+				"key" : null , 
+				"name" : null , 
+				"boonName" : null,
+				"boonDescription" : null,
+				"penaltyDescription" : null 
+			},
+			"traitParts" : {
+				"str" : { "permanent" : 0 ,  "base" : 0 ,  "meta" : 0, "sustained" : 0, "temporary" : 0 },
+				"dex" : { "permanent" : 0 ,  "base" : 0 ,  "meta" : 0, "sustained" : 0, "temporary" : 0 },
+				"per" : { "permanent" : 0 ,  "base" : 0 ,  "meta" : 0, "sustained" : 0, "temporary" : 0 },
+				"int" : { "permanent" : 0 ,  "base" : 0 ,  "meta" : 0, "sustained" : 0, "temporary" : 0 },
+				"cor" : { "permanent" : 0 ,  "base" : 0 ,  "meta" : 0, "sustained" : 0, "temporary" : 0 }, 
+				"cha" : { "permanent" : 0 ,  "base" : 0 ,  "meta" : 0, "sustained" : 0, "temporary" : 0 }
+			},
+			"arcana" : {
+				"entropy" 		: { "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0} , 
+				"time" 			: { "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 } ,
+				"mind" 			: { "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 } ,
+				"matter" 		: { "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 } ,
+				"force" 			: { "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 } ,
+				"life" 			: { "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 } ,
+				"spirit" 		: { "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 } ,
+				"correspondence":{ "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 } ,
+				"prime" 			:{ "value" : 0 , "base" : 0 , "temporary" : 0 , "permanent" : 0 , "sustained" : 0 }
+			},
+			"skills" : {
+				"occult" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"cosmology" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"deception" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"empathy" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"survival" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"endurance" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"athletics" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"stealth" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"spot" 				: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"listen" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"mechanics" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"craft"				: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"academics" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"leadership" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"investigation"	: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"witchsight"		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"concentration"	: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"carry" 				: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"two-handed" 		: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"shields" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"larceny" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"throwing" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"duel-weilding"	: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"wand" 				: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"bladed" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"blunt" 				: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"peircing"			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"bows" 				: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 },
+				"firearms" 			: { "value" : 0 ,  "base" : 0, "sustained" : 0 , "permanent" : 0 , "temporary" : 0 }
 			}
 		}
+	}, 
+	"Item":{
+		"types" : ["tradition"],
+		"tradition" : {
+			"boonName" : "unassigned",
+			"traditionType" :"unassigned" ,
+			"boonDescription" : "unassigned",
+			"penaltyDescription" : "unassigned"
+		}
 	}
-}
 }

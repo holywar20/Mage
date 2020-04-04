@@ -1,0 +1,81 @@
+[
+	{
+		"traditionType" : "Artifice" , 
+		"name" : "Seekers of the Void" , 
+		"boonName" : "Preparation",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Artifice" , 
+		"name" : "Soceity of Ether" , 
+		"boonName" : "Guns of Ether",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Artifice" , 
+		"name" : "Solificati" , 
+		"boonName" : "Alchemy",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Artifice" , 
+		"name" : "Belaraus Clan" , 
+		"boonName" : "Tradecraft",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Theurgy",
+		"name" : "Order of Hermes" , 
+		"boonName" : "Gnostic Recall",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	}, {
+		"traditionType" : "Theurgy" ,
+		"name" : "Vauldermen" , 
+		"boonName" : "Pulse of the Planet",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Theurgy",
+		"name" : "Taftani" , 
+		"boonName" : "Secrets of the Djinn",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Theurgy" ,
+		"name" : "Stigmata Cabal" , 
+		"boonName" : "Blood Magic",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	}, {
+		"traditionType" : "Conviction",
+		"name" : "Brotherhood of the Rule" , 
+		"boonName" : "Rennisance Man",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Conviction",
+		"name" : "Celestial Chorus" , 
+		"boonName" : "Knights of the Realm",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Conviction",
+		"name" : "Cult of Grammaticus" , 
+		"boonName" : "Extreme Rhetoric",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Conviction",
+		"name" : "Onibaba" , 
+		"boonName" : "Bushido Spirit",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	} , {
+		"traditionType" : "Conviction",
+		"name" : "Euthanatos" , 
+		"boonName" : "The Wheel of Fate",
+		"boonDescription" : "",
+		"penaltyDescription" : "" 
+	}
+]

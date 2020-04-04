@@ -1,0 +1,13 @@
+ol.directory-list{
+	background-color: var(--grey-fade20);
+} 
+
+.window-app .window-content{
+	background: black;
+	color: white;
+}
+
+form button{
+	background: black;
+	color: white;
+}

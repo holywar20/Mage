@@ -1,9 +1,6 @@
 /* Edits done to affect the application ,outside of window.content boxes 
 	These should all override some property that is default that we do not want.
 */
-.window-app .window-content{
-	background : none; /* A container element for the background. */
-}
 
 .debug {
 	background-color: white;
@@ -20,41 +17,52 @@
 :root{
 	--bg-main 	: black;
 	--base-text-color : white;
-	--selected : rgb(33, 63, 33);
+	--selected : rgb(193, 117, 255);
 
-	--gray-fade50: rgba(63,63,63, .5);
+	--gray-fade25: rgba(50, 30, 50, 0.50);
+	--gray-fade50: rgba(20,20,20, .75);
 
 	--primary				: rgba(133, 18 ,87 ,1);
 	--primary-fade50 		: rgba(133, 18 , 87 ,.5);
 	--secondary				: rgba(25 , 49 , 113, 1);
 	--secondary-fade50	: rgba(25 , 49 , 113, .5 );
-	--tertiary				: rgba(168, 155, 21 , 1);
-	--tertiary-fade50		: rgba(168, 155, 21 , .5);
+	--tertiary				: rgb(219, 204, 23);
+	--tertiary-fade50		: rgba(219, 204, 23 , .5);
 
-	--skills					: rgba(252, 96, 168 ,1 );
-	--skills-fade50		: rgba(252, 96, 168, .5);
-	--traits					: rgb(90, 55, 90);
+	--resistance 			: rgb(119, 126, 22);
+	--resistance-text		: rgb(225, 235, 141);
+
+	--arcana					: rgba(15, 112, 47);
+	--arcana-text			: rgb(129, 252, 170);
+	--traits					: rgba(90, 55, 90);
 	--traits-fade50		: rgba(90, 55, 90, .5);
-	--arcana					: rgba(244, 179, 147);
-	--arcana-fade50		: rgba(244, 179, 147 , .5);
-	--vitals					: rgba(255, 37, 37 , 1);
-	--vitals-fade50		: rgba(255, 37, 37 , .5);
+	--traits-text			: rgb(202, 104, 202);
+	--skills					: rgba(16, 15, 95);
+	--skills-text			: rgb(87, 85, 255);
+	--vitals					: rgba(110, 15, 15);
+	--vitals-text			: rgb(255, 118, 118);
 
 	--animation : all .5s ease-in-out; 
 }
 
 .mage-form{
-	background: var(--bg-main);
+	background: no-repeat url('../img/sheets/background.jpg');
+
+	
 	height: 100%;
+	min-height: 800px;
+	min-width: 900px;
 
 	color: var(--base-text-color);
 }
 
 /* Grid */
 .main-container{
+	background: rgba( 0 , 0 ,0 , .75);
+
 	display: grid;
-	grid-template-columns : 250px auto 250px;
-	grid-template-rows : 100px 250px auto;
+	grid-template-columns : 350px 300px 250px;
+	grid-template-rows : 100px 200px 210px auto;
 }
 
 .grid-child{
@@ -62,8 +70,7 @@
 	margin: 5px;
 
 	background-color: var(--gray-fade50);
-	border: 1px solid var(--primary);
-	border-radius : 5px 5px 0px 0px;
+	border-radius : 0px 10px 10px 10px;
 }
 
 .mage-logo{
@@ -104,6 +111,15 @@
 	grid-row-end: 4;
 }
 
+.resistance{
+	min-width: 250px;
+
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end:5;
+}
+
 .skills{
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -114,6 +130,7 @@
 /* Flex */
 .flex-row{
 	display: flex;
+	justify-content: space-evenly;
 }
 
 .flex-col{
@@ -121,35 +138,62 @@
 	flex-direction: column;
 }
 
+.flex-center{
+	justify-content: center;
+	align-items: center;
+}
+
+.flex2{
+	flex-grow: 2;
+}
+
+/* buttons */
+
 .btn{
 	/* background-image: -webkit-linear-gradient(top, var(--primary), var(--secondary) );*/
 	border-radius: 5px;
-	
-	padding: -3px; 
 	margin: 3px;
 
 	font-size: 1.2em;
 	font-weight: 800;
 
 	color: var(--base-text-color);
+
+	border: 1px solid black;
 }
 
 .btn::hover{
 	background: var(--primary);
 }
-
 .btn-vitals{
 	background-color: var(--vitals);
 }
-
 .btn-traits{
 	background-color: var(--traits);
+}
+.btn-arcana{
+	background-color: var(--arcana);
+}
+.btn-skills{
+	background-color: var(--skills);
+}
 
-	border: 1px solid black;
+.btn-skills, .btn-arcana , .btn-vitals{
+	/* super specific styling to force everything to line up in containing elements */
+	max-width: 50px;
+	width:50px;
+	height: 28px;
+	margin-top: 1px;
+	line-height: 14px;
+	margin-bottom: 1px;
 }
 
 .btn-large{
 	width:200px;
+}
+
+.btn-hi-medium{
+	width: 100px;
 }
 
 .btn-medium{
@@ -165,35 +209,92 @@
 	width: 25px;
 }
 
-.btn-main-tab{
+/* Tab buttons */
+.btn-main-tab ,
+.btn-skills-tab{
 	border: 2px solid var(--tertiary);
 	font-family : HeaderFont;
 
-	transition: var(--animation); 
+	transition: var(--animation);
+	background-color: black;
 }
 
-.btn-main-tab[selected="true"]{
-	width: 210px;
+.btn-main-tab:hover,
+.btn-skills-tab:hover{
+	border: 2px solid var(--primary);
+	border-radius: 15px;
 }
 
-/* Tables */
+.btn-skills-tab .selected{
+	border: 2px solid var(--primary);
+	border-radius: 15px;
+
+	background-color(--secondary);
+}
+
+.btn-skills-tab:hover{
+	background-color:var(--skills);
+}
+
+.btn-main-tab:hover{
+	background-color:var(--primary);
+}
+
+/* CSS table */
 .table{
-	border: none;
-	padding: 3px;
-	margin: 3px;
+	display: table;
+	
+	border: 1px solid var(--primary-fade50);
+	border-radius: 5px 5px 5px 5px;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
 }
+
+.table .row:nth-child( even ){
+	background-color:var(--gray-fade25);
+}
+
+.header-row, .row , .resist-row{
+	display: table-row;
+	text-align: center;
+	
+	border-radius: 5px;
+
+	padding-left: 2px;
+	padding-right: 3px;
+}
+
+.header-row {
+	font-size: .9em;
+}
+
+.header-row div{
+	border-bottom: 1px solid var(--primary);
+}
+
+.row .col:first-child{
+	text-align: left;
+	width: 80px;
+	font-size: .9em;
+	color: var(--tertiary);
+	padding: 3px;
+}
+
+.col {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.skill-row:first-child{
+	text-align: left;
+	font-weight: 800;
+}
+
 
 
 /* Inputs */
-
-input:disabled{
-	background-color: rgba(0,0,0,0);
-	color: white;
-	border-radius: 5px;
-	border: none;
-
-	text-align: center;
-}
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -208,6 +309,32 @@ input{
 	border-radius: 5px;
 }
 
+.input-text:focus,
+.input-number:focus
+{
+	outline:none;
+	border-radius: 10px;
+
+	background-color: var(--selected);
+	color : black;
+
+	box-shadow: 
+		2px 3px 5px var(--tertiary),
+		1px 1px 2px var(--tertiary);
+	border: 2px solid var(--tertiary);
+}
+
+.input-text{
+	background-color: black;
+	color: white;
+
+	padding: 3px;
+
+	border: 1px solid var(--secondary);
+
+	transition: var(--animation); 
+}
+
 .input-number{
 	width: 2em;
 	height: 2em;
@@ -220,34 +347,14 @@ input{
 	transition: var(--animation); 
 }
 
-.input-manual:focus,
-.input-number:focus
-{
-	outline:none;
-	border-radius: 10px;
-
-	background-color: var(--selected);
-
-	box-shadow: 
-		2px 3px 5px var(--tertiary),
-		1px 1px 2px var(--tertiary);
-	border: 2px solid var(--tertiary);
-}
-
-.input-manual{
-	background-color: black;
+input:disabled{
 	color: white;
-
-	padding: 3px;
-
-	border: 1px solid var(--secondary);
-
-	transition: var(--animation); 
-}
-
-.input-trait{
+	border-radius: 5px;
 	border: none;
+	background: none;
+	text-align: center;
 }
+
 
 .input-bigly{
 	font-size: 2.0em;
@@ -271,43 +378,133 @@ input{
 }
 
 /* A small sized input meant to go under large things */
-.input-subscript{
-	border-radius: 100px;
+.input-trait-subscript{
+	border-radius: 5px;
 	border: 1px solid black;
+	padding: 0px;
+	margin: -10px;
+	width: 25px;
+	height: 25px;
 
-	width: 35px;
-	height: 35px;
-
-	background-color : var(--traits);
-
-	position: relative;
-	top: -10px;
-	right: 0px;
-
-	color : black;
+	background-color : var(--traits-fade50);
 
 	text-align: center;
 }
+
+.input-trait{
+	border: none;
+}
+
 
 /* Layout */
 
 .trait-box{
 	text-align: center;
 	margin: 3px;
-	padding: 3px;
+	padding: 1px;
+
+	border : 1px solid var(--primary-fade50);
+	border-radius: 5px 5px 0px 0px;
 }
 
-.box-header{
-	text-align: center;
+.big-trait-container{
+	margin-top: -10px; /* To close distance between Trait value & header */
 }
+
 
 /* text */
 
 div.small-header{
 	font-size: .75em;
-	color: var(--secondary);
-	padding : 5px;
+	padding : -1px; /* so this grows to edge of 1px padding it normally gets wrapped by */
 
+	justify-content: space-between;
+	align-items: center;
+}
+
+div.small-text{
+	font-size: .8em
+}
+
+.sub-header{
+	background-color: black;
+	border-radius: 4px 4px 0px 0px;
+	border: 1px solid var(--primary-fade50);
+	color: var(--tertiary);
+	font-size: 1.0em;
+	text-align: center;
+}
+
+.small-sub-header{
+	color:  var(--tertiary);
+	text-align: center;
+	border-radius: 3px;
+}
+
+div.striped{
+	background-color: var(--gray-fade25);
+}
+
+div.gen-header{
+	font-size: 1.4em;
+	background : none;
+}
+
+div.traits-header, 
+div.skills-header,
+div.vitals-header,
+div.arcana-header,
+div.mod-header,
+div.resistance-header{
 	background-color: var(--gray-fade50);
 	border-radius: 5px 5px 0px 0px;
+	min-width: 100px;
+	max-width: 100px;
+
+	margin-left: 5px; /* Want header to line up with grid-child beneath it. */
+	margin-bottom: -5px;
+	text-align: center;
+	padding: 3px;
+}
+
+div.resistance-header{
+	color: var(--resistance-text);
+}
+
+div.traits-header{
+	color: var(--traits-text);
+}
+
+div.skills-header{
+	color: var(--skills-text);
+}
+
+div.vitals-header{
+	color: var(--vitals-text);
+}
+
+div.arcana-header{
+	color: var(--arcana-text);
+}
+
+div.resist-header{
+	color: var(--resist-text);
+}
+
+div.mod-header{
+	color: white;
+}
+
+/* HRs */
+
+hr.flaired-divider{ 
+	height: 20px; 
+	border-style: solid; 
+	border-color: var(--tertiary); 
+	border-width: 0px 0 1px 0; 
+	border-radius: 20px;
+
+	margin-top: -20px;
+	margin-left:5px;
+	margin-right:5px;
 }
