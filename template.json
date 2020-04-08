@@ -90,12 +90,17 @@
 		}
 	}, 
 	"Item":{
-		"types" : ["tradition"],
+		"types" : ["tradition" , "spells"],
 		"tradition" : {
 			"boonName" : "unassigned",
 			"traditionType" :"unassigned" ,
 			"boonDescription" : "unassigned",
-			"penaltyDescription" : "unassigned"
+			"penaltyDescription" : "unassigned",
+			"googleDocPath": ""
+		},
+		"spells" : {
+			"name": "unassigned",
+			"description": "unassigned" 
 		}
 	}
 }

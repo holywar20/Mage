@@ -3,8 +3,8 @@
 export class Loader{
 	
 	paths = { 
-		tradition : "./systems/Mage/packs/traditions.json",
-		spells : "./systems.Mage/packs/spells.json"
+		tradition : "./systems/Mage/packs/traditions/traditions.json",
+		spells : "./systems.Mage/packs/spells/spells.json"
 	}
 
 	async loadCompendium( system, name ){
@@ -22,6 +22,7 @@ export class Loader{
 				itemArray.push( item );
 			});
 
+			console.log( itemArray );
 			itemArray.forEach( ( itemData ) => {
 				pack.importEntity( itemData );
 			});

@@ -14,7 +14,7 @@
 <hr class="flaired-divider">
 
 {{#if_equal data.currentTab "character" }}
-<div id="character" class="tab main-container character-tab">
+<div id="character" class="tab character-container character-tab">
 	<div class="header grid-child">
 		<div class="flex-row">
 			<img src="systems/Mage/img/sheets/MageLogo.png">
@@ -344,7 +344,7 @@
 		{{#if_equal data.currentSkillTab "fortitude" }}
 		<section class="table">
 			<div class="header-row skills-header">
-				<div class="col"><!-- Spacer --></div>
+				<div class="col">&nbsp;</div>
 				<div class="col">Trait</div>
 				<div class="col">Temp</div>
 				<div class="col">Sustain</div>
@@ -568,7 +568,7 @@
 		{{#if_equal data.currentSkillTab "reflex" }}
 		<section class="table">
 			<div class="header-row skills-header">
-				<div class="col"><!-- Spacer --></div>
+				<div class="col">&nbsp;</div>
 				<div class="col">Trait</div>
 				<div class="col">Temp</div>
 				<div class="col">Sustain</div>
@@ -791,7 +791,7 @@
 		{{#if_equal data.currentSkillTab "will" }}
 		<section class="table">
 			<div class="header-row skills-header">
-				<div class="col"><!-- Spacer --></div>
+				<div class="col">&nbsp;</div>
 				<div class="col">Trait</div>
 				<div class="col">Temp</div>
 				<div class="col">Sustain</div>
@@ -1025,7 +1025,7 @@
 
 		<div class="table">
 			<div class="header-row arcana-header">
-				<div class="col"></div>
+				<div class="col">&nbsp;</div>
 				<div class="col">Weaver</div>
 				<div class="col">Wyld</div>
 				<div class="col">Wyrm</div>
@@ -1171,8 +1171,39 @@
 {{/if_equal}}
 
 {{#if_equal data.currentTab "development" }}
-<div id="development" class="tab main-container development-tab">
-	Development!
+<div id="development" class="tab development-container development-tab">
+	<div class="char-points">
+		<div class="gen-header">
+			<div class="character-points-header">Character Points</div>
+		</div>
+	
+	<div class="grid-child"></div>
+	</div>
+	
+	<div class="trait-points">
+		<div class="gen-header">
+			<div class="traits-header">Traits</div>
+		</div>
+
+	<div class="grid-child"></div>
+	</div>
+
+	<div class="aracana-points">
+		<div class="gen-header">
+			<div class="arcana-header">Arcana</div>
+		</div>
+	<div class="grid-child"></div>
+	</div>
+	
+	<div class="skill-points">
+		<div class="gen-header">
+			<div class="skills-header">Skills</div>
+		</div>
+
+	<div class="grid-child"></div>
+	</div>
+	
+
 </div>
 {{/if_equal}}
 

@@ -10,7 +10,7 @@
 		"name": "tradition",
 		"label": "Magic Traditions",
 		"system": "mage",
-		"path": "./packs/traditions.db",
+		"path": "./packs/traditions/traditions.db",
 		"entity": "Item"
 	} , {
 		"name" : "spells" ,
@@ -20,8 +20,9 @@
 		"entity": "Item"
 	}],
 	"styles": [
+		"./styles/ui.css",
 		"./styles/Mage.css",
-		"./styles/ui.css"
+		"./packs/traditions/traditions.css"
 		],
 	"socket": true,
 	"gridDistance": 1,

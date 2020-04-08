@@ -47,22 +47,31 @@
 
 .mage-form{
 	background: no-repeat url('../img/sheets/background.jpg');
-
-	
 	height: 100%;
 	min-height: 800px;
 	min-width: 900px;
-
 	color: var(--base-text-color);
 }
 
 /* Grid */
-.main-container{
+.character-container{
 	background: rgba( 0 , 0 ,0 , .75);
+	height: 100%;
+	width: 100%;
 
 	display: grid;
 	grid-template-columns : 350px 300px 250px;
 	grid-template-rows : 100px 200px 210px auto;
+}
+
+.development-container{
+	background: rgba( 0 , 0 ,0 , .75);
+	height: 100%;
+	width: 100%;
+
+	display: grid;
+	grid-template-columns: 350px 550px;
+	grid-template-rows: 100px 300px 300px auto;
 }
 
 .grid-child{
@@ -71,7 +80,37 @@
 
 	background-color: var(--gray-fade50);
 	border-radius : 0px 10px 10px 10px;
+	border: 5px outset var(--primary-fade50)
 }
+
+.char-points{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
+.trait-points{
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+.skill-points{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 3;
+	grid-row-end: 4;
+}
+
+.skill-points{
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+.
 
 .mage-logo{
 	font-family: Mage
@@ -243,12 +282,10 @@
 /* CSS table */
 .table{
 	display: table;
-	
-	border: 1px solid var(--primary-fade50);
-	border-radius: 5px 5px 5px 5px;
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
+	border-radius: 5px;
 }
 
 .table .row:nth-child( even ){
@@ -259,8 +296,6 @@
 	display: table-row;
 	text-align: center;
 	
-	border-radius: 5px;
-
 	padding-left: 2px;
 	padding-right: 3px;
 }
@@ -285,6 +320,7 @@
 	display: table-cell;
 	text-align: center;
 	vertical-align: middle;
+	border-radius: 5px;
 }
 
 .skill-row:first-child{
@@ -430,13 +466,13 @@ div.small-text{
 	background-color: black;
 	border-radius: 4px 4px 0px 0px;
 	border: 1px solid var(--primary-fade50);
-	color: var(--tertiary);
+	color: white;
 	font-size: 1.0em;
 	text-align: center;
 }
 
 .small-sub-header{
-	color:  var(--tertiary);
+	color:  white;
 	text-align: center;
 	border-radius: 3px;
 }
@@ -448,6 +484,18 @@ div.striped{
 div.gen-header{
 	font-size: 1.4em;
 	background : none;
+}
+
+div.character-points-header{
+	border-radius: 5px 5px 0px 0px;
+	max-width: 200px;
+	min-width: 200px;
+
+	background-color: var(--gray-fade50);
+	margin-left: 5px; /* Want header to line up with grid-child beneath it. */
+	margin-bottom: -5px;
+	padding: 3px;
+	text-align: center;
 }
 
 div.traits-header, 
@@ -465,6 +513,14 @@ div.resistance-header{
 	margin-bottom: -5px;
 	text-align: center;
 	padding: 3px;
+
+	border: 1px solid;
+	border-bottom: 2px inset;
+}
+
+div.character-points-header{
+	color: var(--vitals-text);
+	
 }
 
 div.resistance-header{

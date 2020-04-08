@@ -1,0 +1,121 @@
+[
+	{
+		"name" : "Seekers of the Void" , 
+		"data" : {
+			"traditionType" : "Artifice" , 
+			"boonName" : "Preparation",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vQnyi9KSWhYAzeJAYo4yzfGKBTdWpN0KLjH-5UcYixkjtlk6BlEMRgDA2SrpFnXwQLugnSH0hT22Qyl/pub?embedded=true"
+		}
+	} , {
+		"name" : "Soceity of Ether" , 
+		"data": {
+			"traditionType" : "Artifice" , 
+			"boonName" : "Guns of Ether",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vSBFJ3v_wRT8xlQS_2nsaiSPDABsJc1FJh3u2kRt8hr-YIkLxxne3gLgn3IPQuxkYlrR7c7fu80-xl3/pub?embedded=true"
+		}
+	} , {
+		"name" : "Solificati" ,
+		"data" :{
+			"traditionType" : "Artifice" , 
+			"boonName" : "Alchemy",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vRJHa81co9nJWK68C4C19qpewQhZolfAVeuBwndEsQkMa-ZvyASdCsiHKT0zpPPDFlPnF9ETk7i-OTH/pub?embedded=true"
+		}
+	} , {
+		"name" : "Belaraus Clan" , 
+		"data" : {
+			"traditionType" : "Artifice" , 
+			"boonName" : "Tradecraft",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vQnyi9KSWhYAzeJAYo4yzfGKBTdWpN0KLjH-5UcYixkjtlk6BlEMRgDA2SrpFnXwQLugnSH0hT22Qyl/pub?embedded=true"
+		}
+	} , {
+		"name" : "Order of Hermes" , 
+		"data": {
+			"traditionType" : "Theurgy",
+			"boonName" : "Gnostic Recall",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vQhpmj8pnFVA4lynMtiBxPa_Ofg8C3lXd3-L9nur9pfXOsZ_fv6CSsA3Cw9F3XtLlvzNCeoS9NKk3_x/pub?embedded=true"
+		}
+	}, {
+		"name" : "Vauldermen" , 
+		"data" : {
+			"traditionType" : "Theurgy" ,
+			"boonName" : "Pulse of the Planet",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vRv-h0MWpDhKt7PGT4OxoLh1uTmdPgslrSukJJbZwh-Kngk35bq2UTxhYZEdf4VZG3YnKHD7LCI8D_p/pub?embedded=true"
+		}
+	} , {
+		"name" : "Taftani" , 
+		"data":{
+			"traditionType" : "Theurgy",
+			"boonName" : "Secrets of the Djinn",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vQ8Q_WuVBuFSk-SBVxmqQEmd2Po8CfoZl8HWSYR83LUlHdZJ_zgckr3eqhqkzBJxwA9wGDgAbcJHFjY/pub?embedded=true"
+		}
+	} , {
+		"name" : "Stigmata Cabal" , 
+		"data" : {
+			"traditionType" : "Theurgy" ,
+			"boonName" : "Blood Magic",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vT0uaXdsBrt7-2kC09asG1smJJn42kaNoXbG7LeOKsrZJT7EYAgHi9mmVMHDHjtqNo2bne0eiYYDraZ/pub?embedded=true"
+		}
+	}, {
+		"name" : "Brotherhood of the Rule" , 
+		"data" :{
+			"traditionType" : "Conviction",
+			"boonName" : "Rennisance Man",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vRJ_2Orn94wpbfL-gso70D8zWg7wtjlIV3z2rS5Ie9F9KKn9Ih9pcxLX_JhBRDCWsjsee9f4g60fBmY/pub?embedded=true"
+		}
+	} , {
+		"name" : "Celestial Chorus" , 
+		"data" : {
+			"traditionType" : "Conviction",
+			"boonName" : "Knights of the Realm",
+			"boonDescription" : "",
+			"penaltyDescription" : "",
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vQP3ONPboqpBqRt3fVe6ng-79pVa8f6zmPx90pqUQUbD3ki_zuyBYTyVUUUzns1pz8KFC8oePdONUfa/pub?embedded=true"
+		}
+	} , {
+		"name" : "Cult of Grammaticus" , 
+		"data" : {
+			"traditionType" : "Conviction",
+			"boonName" : "Extreme Rhetoric",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vQWqXh5KLDJv4Q0ErDQFMpUA9RNGXOBTmFtoEmZyV_KupILXnp9jE4u_phUq6nfEf6xEkoNRJDyNe0s/pub?embedded=true"
+		}
+	} , {
+		"name" : "Onibaba" , 
+		"data" : {
+			"traditionType" : "Conviction",
+			"boonName" : "Bushido Spirit",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vQjdijFKJ5eEHqwyGOgzAhmLALV2BDMMJ0cwkiAULvjt7-A0x_wJdRaM_g0y-Z8elELDcmr6nwhqccf/pub?embedded=true"
+		}
+	} , {
+		"name" : "Euthanatos" , 
+		"data" : {
+			"traditionType" : "Conviction",
+			"boonName" : "The Wheel of Fate",
+			"boonDescription" : "",
+			"penaltyDescription" : "" ,
+			"googleDocPath": "https://docs.google.com/document/d/e/2PACX-1vRIcN1pQd7bhaI3OqhZ2hPGbbqHMDoAMLIeFfy33JfEYH5R0OfJPawQ3yDl406gnpxxckxDimi44KkD/pub?embedded=true"
+		}
+		
+	}
+]

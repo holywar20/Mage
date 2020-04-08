@@ -1,7 +1,8 @@
-<form class="mage-form">
+<form class="tradition-form">
 	<div class="debug">
-		{{ item._id }} | {{ item.name }} | {{ item.boonName }}
+		{{ item._id }} | {{ item.name }} | {{ data.googleDocPath }} | {{ data.data.boonName }}
 	</div>
 	<br>
-	I am an Item Template!
+	<iframe class="document-iframe" 
+	src="{{ data.googleDocPath }}"></iframe>
 </form>
