@@ -1,7 +1,7 @@
 import { registerSettings } from './module/settings.js';
 import { preloadTemplates } from './module/preloadTemplates.js';
 
-import { BaseActor } from './module/actor/baseactor.js';
+import { MageActor } from './module/actor/mageactor.js';
 import { MageSheet } from './module/sheets/magesheet.js';
 
 import { BaseItem } from './module/item/baseitem.js';
@@ -20,7 +20,7 @@ Hooks.once('init', async function(){
 Hooks.once('init', async function() {
 
 	/* First set my default, base level configs */
-	CONFIG.Actor.entityClass = BaseActor;
+	CONFIG.Actor.entityClass = MageActor;
 	CONFIG.Item.entityClass = BaseItem;
 
 	Actors.unregisterSheet("core" , ActorSheet );
@@ -46,6 +46,7 @@ Hooks.once('init', async function() {
 /* Setup system							*/
 /* ------------------------------------ */
 Hooks.once('setup', function() {
+	/* A custom helper, that compares to values for equality */
 	Handlebars.registerHelper('if_equal', function(a, b, opts) {
 		if (a == b) {
 			return opts.fn(this)
@@ -86,3 +87,38 @@ Hooks.once('ready', function() {
   game.user.assignHotbarMacro(macro, slot);
   return false;
 } */
+
+/* Drawing stuff 
+function drawingTest() {
+  const drawingsData = [];
+  for (let i = 0; i < 200; i++) {
+    drawingsData.push({
+      type: CONST.DRAWING_TYPES.RECTANGLE,
+      author: game.user._id,
+      x: i,
+      y: i,
+      width: 10,
+      height: 10,
+      fillType: CONST.DRAWING_FILL_TYPES.SOLID,
+      fillColor: game.user.color,
+      fillAlpha: 0.15,
+      flags: { testBox: true },
+    });
+  }
+  canvas.scene
+    .createManyEmbeddedEntities("Drawing", drawingsData)
+    .then((drawings) => {
+      let ids = [];
+      drawings.forEach((drawingObject) => {
+        ids.push(drawingObject._id);
+      });
+      canvas.scene
+        .deleteManyEmbeddedEntities("Drawing", ids)
+        .then(() => {
+          console.log("success");
+        })
+        .catch(() => {
+          console.log("error");
+        });
+    });
+}*/

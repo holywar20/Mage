@@ -18,26 +18,57 @@
 	<div class="header grid-child">
 		<div class="flex-row">
 			<img src="systems/Mage/img/sheets/MageLogo.png">
-			<table class="table">
-				<tr>
-					<td>Player Name</td>
-					<td><input class="input-text input-large"></td>
-				</tr>
-				<tr>
-					<td>Character</td>
-					<td><input value="{{ actor.name }}" class="input-text input-large"></td>
-				</tr>
+			<section class="table">
+				<div class="row">
+					<div class="col">Character</div>
+					<div class="col-left-align">
+						<input class="input-text input-wide">
+					</div>
+				</div>
 
-				<tr>
-					<td>Tradition</td>
-					<td>
-					<select class="input-text" value="">
-						
-					</select>
-					</td>
-				</tr>
-
-			</table>
+				<div class="row">
+					<div class="col">Tradition</div>
+					<div class="col-left-align">
+						<select name="data.tradition" value="{{ data.tradition }}" class="input-text input-wide">
+							<option value=""> -- </option>
+							<option value="">Artifice</option>
+							<option value="SOCEITY">&nbsp;&nbsp;&nbsp;Soceity of Ether</option>
+							<option value="BELARUS">&nbsp;&nbsp;&nbsp;Belarus Clan</option>
+							<option value="SOLIFICATI">&nbsp;&nbsp;&nbsp;Solificati</option>
+							<option value="VOID">&nbsp;&nbsp;&nbsp;Void Engineers</option>
+							<option value="">Theurgy</option>
+							<option value="ORDER">&nbsp;&nbsp;&nbsp;Order of Hermes</option>
+							<option value="STIGMATA">&nbsp;&nbsp;&nbsp;Stigmata Cabal</option>
+							<option value="TAFTANI">&nbsp;&nbsp;&nbsp;Taftani</option>
+							<option value="VAULDERMEN">&nbsp;&nbsp;&nbsp;Vauldermen</option>
+							<option value="">Conviction</option>
+							<option value="CULT">&nbsp;&nbsp;&nbsp;Cult of Grammaticus</option>
+							<option value="ONIBABA">&nbsp;&nbsp;&nbsp;Onibaba</option>
+							<option value="CELESTIAL">&nbsp;&nbsp;&nbsp;Celestial Chorus</option>
+							<option value="EUTHANATOS">&nbsp;&nbsp;&nbsp;Euthanatos</option>
+							<option value="BROTHERHOOD">&nbsp;&nbsp;&nbsp;Brotherhood of the Rule</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">Mystic Traits</div>
+					<div class="col-left-align">
+						<select name="mystictraits.mental" value="{{ mystictraits.mental }}" class="input-text">
+							<option value=""> -- </option>
+							<option value="Str">Intelligence</option>
+							<option value="Dex">Charisma</option>
+							<option value="Per">Courage</option>
+						</select>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<select name="mystictraits.physical" value="{{ mystictraits.physical }}" class="input-text">
+							<option value=""> -- </option>
+							<option value="Str">Strength</option>
+							<option value="Dex">Dexerity</option>
+							<option value="Per">Perception</option>
+						</select>
+					</div>
+				</div>
+			</section>
 		</div>
 	</div> <!-- End pf Header-->
 
@@ -55,30 +86,29 @@
 		<div class="trait-box flex-row">
 			<div class="flex-col">
 
-				<div><h4 class="sub-header">Strength</h4></div>
+				<div class="trait-header-margin"><h4 class="sub-header">Strength</h4></div>
 				<div class="big-trait-container">
-					<input value="{{ data.traitParts.str.base }}" class="input-trait-subscript">
-					<button trait-name="str" class="btn btn-medium btn-traits">
-						<input
-							disabled="true"
-							value="{{ data.traits.str.value }}" 
-							class="input-small input-bigly input-traits"> 
-					</button>
+					<input disabled class="input-trait-subscript" value="{{ data.traitParts.str.base }}">
+					<button trait-name="str" class="btn btn-medium btn-traits">{{ data.traits.str.value }}</button>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Temp</div>
-					<div><input value="{{ data.traitParts.str.temporary }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.str.temp" 
+						value="{{ data.traitParts.str.temp }}"></div>
 				</div>
 
 				<div class="small-header flex-row striped">
 					<div>&nbsp;Sustain</div>
-					<div><input type="number" value="{{ data.traitParts.str.sustained }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.str.sustained" 
+						value="{{ data.traitParts.str.sustained }}"></div>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Perm</div>
-					<div><input type="number" value="{{ data.traitParts.str.permanent }}" class="input-number"></div>
+					<div><input type="number" value="{{ data.traitParts.str.perm }}" class="input-number"></div>
 				</div>
 				
 			</div>
@@ -89,28 +119,29 @@
 
 				<div><h4 class="sub-header">Dexerity</h4></div>
 				<div class="big-trait-container">
-					<input value="{{ data.traitParts.dex.base }}" class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">
-						<input
-							disabled="true"
-							value="{{ data.traits.dex.value }}" 
-							class="input-small input-bigly input-traits"> 
-					</button>
+					<input name="data.traitParts.dex.base" value="{{ data.traitParts.dex.base }}" disabled class="input-trait-subscript">
+					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.dex.value }}</button>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Temp</div>
-					<div><input type="number" value="{{ data.traitParts.dex.temporary }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.dex.temp"
+						value="{{ data.traitParts.dex.temp }}" ></div>
 				</div>
 
 				<div class="small-header flex-row striped">
 					<div>&nbsp;Sustain</div>
-					<div><input type="number" value="{{ data.traitParts.dex.sustained }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.dex.sustained"
+						value="{{ data.traitParts.dex.sustained }}"></div>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Perm</div>
-					<div><input type="number" value="{{ data.traitParts.dex.permanent }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.dex.perm"
+						value="{{ data.traitParts.dex.perm }}"></div>
 				</div>
 				
 			</div>
@@ -121,28 +152,29 @@
 
 				<div><h4 class="sub-header">Perception</h4></div>
 				<div class="big-trait-container">
-					<input value="{{ data.traitParts.per.base }}" class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">
-						<input
-							disabled="true"
-							value="{{ data.traits.per.value }}" 
-							class="input-small input-bigly input-traits"> 
-					</button>
+					<input name="data.traitParts.per.base" value="{{ data.traitParts.per.base }}" disabled class="input-trait-subscript">
+					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.per.value }}</button>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Temp</div>
-					<div><input type="number" value="{{ data.traitParts.per.temporary }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.per.temp"
+						value="{{ data.traitParts.per.temp }}"></div>
 				</div>
 
 				<div class="small-header flex-row striped">
 					<div>&nbsp;Sustain</div>
-					<div><input type="number" value="{{ data.traitParts.per.sustained }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.per.sustained"
+						value="{{ data.traitParts.per.sustained }}"></div>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Perm</div>
-					<div><input type="number" value="{{ data.traitParts.per.permanent }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.per.perm"
+						value="{{ data.traitParts.per.perm }}"></div>
 				</div>
 				
 			</div>
@@ -153,28 +185,31 @@
 
 				<div><h4 class="sub-header">Intelligence</h4></div>
 				<div class="big-trait-container">
-					<input value="{{ data.traitParts.int.base }}" class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">
-						<input
-							disabled="true"
-							value="{{ data.traits.int.value }}" 
-							class="input-small input-bigly input-traits"> 
-					</button>
+					<input 
+						name="data.traitParts.int.base" 
+						value="{{ data.traitParts.int.base }}" disabled class="input-trait-subscript">
+					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.int.value }}</button>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Temp</div>
-					<div><input type="number" value="{{ data.traitParts.int.temporary }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.int.temp"
+						value="{{ data.traitParts.int.temp }}"></div>
 				</div>
 
 				<div class="small-header flex-row striped">
 					<div>&nbsp;Sustain</div>
-					<div><input type="number" value="{{ data.traitParts.int.sustained }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.int.sustained"
+						value="{{ data.traitParts.int.sustained }}"></div>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Perm</div>
-					<div><input type="number" value="{{ data.traitParts.int.permanent }}" class="input-number"></div>
+					<div><input class="input-number" 
+						name="data.traitParts.int.perm"
+						value="{{ data.traitParts.int.perm }}"></div>
 				</div>
 					
 			</div>
@@ -185,28 +220,31 @@
 
 			<div><h4 class="sub-header">Charisma</h4></div>
 			<div class="big-trait-container">
-				<input value="{{ data.traitParts.cha.base }}" class="input-trait-subscript">
-				<button trait-name="dex" class="btn btn-medium btn-traits">
-					<input
-						disabled="true"
-						value="{{ data.traits.cha.value }}" 
-						class="input-small input-bigly input-traits"> 
-				</button>
+				<input disabled class="input-trait-subscript"
+					name="data.traitParts.cha.base"
+					value="{{ data.traitParts.cha.base }}">
+				<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.cha.value }}</button>
 			</div>
 
 			<div class="small-header flex-row">
 				<div>&nbsp;Temp</div>
-				<div><input type="number" value="{{ data.traitParts.cha.temporary }}" class="input-number"></div>
+				<div><input class="input-number"
+					name="data.traitParts.cha.temp"
+					value="{{ data.traitParts.cha.temp }}"></div>
 			</div>
 
 			<div class="small-header flex-row striped">
 				<div>&nbsp;Sustain</div>
-				<div><input type="number" value="{{ data.traitParts.cha.sustained }}" class="input-number"></div>
+				<div><input class="input-number" 
+					name="data.traitParts.cha.sustained"
+					value="{{ data.traitParts.cha.sustained }}"></div>
 			</div>
 
 			<div class="small-header flex-row">
 				<div>&nbsp;Perm</div>
-				<div><input type="number" value="{{ data.traitParts.cha.permanent }}" class="input-number"></div>
+				<div><input class="input-number" 
+					name="data.traitParts.cha.perm"
+					value="{{ data.traitParts.cha.perm }}"></div>
 			</div>
 				
 		</div>
@@ -217,28 +255,29 @@
 
 				<div><h4 class="sub-header">Courage</h4></div>
 				<div class="big-trait-container">
-					<input value="{{ data.traitParts.cor.base }}" class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">
-						<input
-							disabled="true"
-							value="{{ data.traits.cor.value }}" 
-							class="input-small input-bigly input-traits"> 
-					</button>
+					<input name="data.traitParts.cor.base" value="{{ data.traitParts.cor.base }}" disabled class="input-trait-subscript">
+					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.cor.value }}</button>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Temp</div>
-					<div><input type="number" value="{{ data.traitParts.cor.temporary }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.cor.temp" 
+						value="{{ data.traitParts.cor.temp }}"></div>
 				</div>
 
 				<div class="small-header flex-row striped">
 					<div>&nbsp;Sustain</div>
-					<div><input type="number" value="{{ data.traitParts.cor.sustained }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.cor.sustained" 
+						value="{{ data.traitParts.cor.sustained }}"></div>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Perm</div>
-					<div><input type="number" value="{{ data.traitParts.cor.permanent }}" class="input-number"></div>
+					<div><input class="input-number"
+						name="data.traitParts.cor.perm"
+						value="{{ data.traitParts.cor.perm }}"></div>
 				</div>
 					
 			</div>
@@ -257,7 +296,7 @@
 
 	<div class="grid-child">
 		<section class="table">
-			<div class="row">
+			<div class="header-row vitals-header">
 				<div class="col"></div>
 				<div class="col">Bonus</div>
 				<div class="col">Total</div>
@@ -265,44 +304,24 @@
 
 			<div class="row">
 				<div class="col">Health</div>
-				<div class="col"><input class="input-number"></div>
 				<div class="col">
-					<input class="input-number"> 
-					<span> / 20</span>
+					<input name="data.hp.bonus" value="{{ data.hp.bonus }}" class="input-number">
+				</div>
+				<div class="col">
+					<input name="data.hp.current" value="{{ data.hp.current }}" class="input-number">
+					/ <span>{{ data.hp.max }}</span> 
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col">Armor</div>
-				<div class="col"><input class="input-number"></div>
 				<div class="col">
-					<input class="input-number"> 
-					<span> / 20</span>
+					<input name="data.armor.bonus" value="{{ data.armor.bonus }}" class="input-number">
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col"></div>
-				<div class="col"></div>
-				<div class="col"></div>
-			</div>
-
-			<div class="row">
-				<div class="col">Fortitude</div>
-				<div class="col"><input class="input-number"></div>
-				<div class="col"><button class="btn btn-vitals">0</button></div>
-			</div>
-
-			<div class="row">
-				<div class="col">Reflex</div>
-				<div class="col"><input class="input-number"></div>
-				<div class="col"><button class="btn btn-vitals">0</button></div>
-			</div>
-
-			<div class="row">
-				<div class="col">Will</div>
-				<div class="col"><input class="input-number"></div>
-				<div class="col"><button class="btn btn-vitals">0</button></div>
+				<div class="col">
+					<input name="data.armor.current" value="{{ data.armor.current }}" class="input-number"> 
+					<span> / {{ data.armor.max }}</span>
+				</div>
 			</div>
 
 			<div class="row">
@@ -314,14 +333,34 @@
 			<div class="row">
 				<div class="col">Paradox</div>
 				<div class="col"><input class="input-number"></div>
-				<div class="col"><button class="btn btn-vitals">Roll</button></div>
+				<div class="col"><button class="btn btn-vitals"></button></div>
 			</div>
 
 			<div class="row">
 				<div class="col">Wounds</div>
-				<div class="col"><input class="input-number"></div>
 				<div class="col"><button class="btn btn-vitals">Roll</button></div>
 			</div>
+		</section>
+
+		<section class="table">
+			<div class="header-row vitals-header">
+				<div class="col">Save</div>
+				<div class="col">Bonus</div>
+				<div class="col">
+					Roll
+				</div>
+			</div>
+
+			{{#each data.defenses}}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col"><input class="input-number" name="temp" value="{{ Bonus }}"></div>
+				<div class="col">
+					<button class="btn btn-vitals">{{ value }}</button>
+				</div>
+			</div>
+			{{/each}}
+			
 		</section>
 	</div> <!-- End of Grid child -->
 	</div> <!-- end of Vitals -->
@@ -334,683 +373,86 @@
 
 	<div class="grid-child">
 		<div class="flex-row">
-			<button tab-name="fortitude" class="btn btn-hi-medium btn-skills-tab">Str-Cor</button>
-			<button tab-name="reflex" class="btn btn-hi-medium btn-skills-tab">Dex-Per</button>
-			<button tab-name="will" class="btn btn-hi-medium btn-skills-tab">Int-Cha</button>
+			<button tab-name="grit" class="btn btn-hi-medium btn-skills-tab">Grit</button>
+			<button tab-name="cunning" class="btn btn-hi-medium btn-skills-tab">Cunning</button>
+			<button tab-name="will" class="btn btn-hi-medium btn-skills-tab">Will</button>
 		</div>
 
-		<!-- <hr class="flaired-divider"> -->
-
-		{{#if_equal data.currentSkillTab "fortitude" }}
 		<section class="table">
-			<div class="header-row skills-header">
-				<div class="col">&nbsp;</div>
-				<div class="col">Trait</div>
-				<div class="col">Temp</div>
-				<div class="col">Sustain</div>
-				<div class="col">Perm</div>
-				<div class="col">Roll</div>
-			</div>
+		<div class="header-row skills-header">
+			<div class="col">&nbsp;</div>
+			<div class="col">Trait</div>
+			<div class="col">Equip</div>
+			<div class="col">Enchant</div>
+			<div class="col">Roll</div>
+		</div>
 
+		{{#if_equal data.currentSkillTab "grit" }}
+			{{#each data.skills.grit }}
 			<div class="row">
-				<div class="col">Bladed</div>
+				<div class="col">{{ name }}</div>
 				<div class="col small-text">
-					By Weap
+					{{ trait }}
 				</div>
 				<div class="col">
-					<input type="number" value="{{ data.skills.bladed.temporary }}" class="input-number">
+					<input type="number" skill-change="wand" name="equip" value="{{ equip }}" class="input-number">
 				</div>
 				<div class="col">
-					<input type="number" value="{{ data.skills.bladed.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.bladed.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="bladed" class="btn btn-skills">
-						{{ data.skills.bladed.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Blunt</div>
-				<div class="col small-text">
-					By Weap
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.blunt.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.blunt.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.blunt.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="blunt" class="btn btn-skills">
-						{{ data.skills.blunt.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Concentrate</div>
-				<div class="col small-text">
-					Cor
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.concentration.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.concentration.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.concentration.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="concentration" class="btn btn-skills">
-						{{ data.skills.concentration.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Carry</div>
-				<div class="col small-text">
-					Str
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.carry.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.carry.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.carry.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="carry" class="btn btn-skills">
-						{{ data.skills.carry.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">2Handed</div>
-				<div class="col small-text">
-					Str
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.two-handed.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.two-handed.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.two-handed.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="two-handed" class="btn btn-skills">
-						{{ data.skills.two-handed.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Shields</div>
-				<div class="col small-text">
-					Str
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.shields.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.shields.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.shields.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="shields" class="btn btn-skills">
-						{{ data.skills.shields.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Witch-sight</div>
-				<div class="col small-text">
-					Cor
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.witchsight.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.witchsight.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.witchsight.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="witchsight" class="btn btn-skills">
-						{{ data.skills.witchsight.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Survival</div>
-				<div class="col small-text">
-					Cor
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.survival.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.survival.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.survival.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="survival" class="btn btn-skills">
-						{{ data.skills.survival.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Endurance</div>
-				<div class="col small-text">
-					Str
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.endurance.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.endurance.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.endurance.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="endurance" class="btn btn-skills">
-						{{ data.skills.endurance.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Athletics</div>
-				<div class="col small-text">
-					Str
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.athletics.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.athletics.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.athletics.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="athletics" class="btn btn-skills">
-						{{ data.skills.athletics.value }}
-					</button>
-				</div>
-			</div>
-			
-		</section>
-		{{/if_equal}}
-
-		{{#if_equal data.currentSkillTab "reflex" }}
-		<section class="table">
-			<div class="header-row skills-header">
-				<div class="col">&nbsp;</div>
-				<div class="col">Trait</div>
-				<div class="col">Temp</div>
-				<div class="col">Sustain</div>
-				<div class="col">Perm</div>
-				<div class="col">Roll</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Bows</div>
-				<div class="col small-text">
-					By Weap
-				</div>
-				<div class="col">
-					<input type="number"  value="{{ data.skills.bows.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.bows.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.bows.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="bows" class="btn btn-skills">
-						{{ data.skills.bows.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Peircing</div>
-				<div class="col small-text">
-					By Weap
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.peircing.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.peircing.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.peircing.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="peircing" class="btn btn-skills">
-						{{ data.skills.peircing.value }} 
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Firearms</div>
-				<div class="col small-text">
-					By Weap
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.firearms.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.firearms.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.firearms.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="firearms" class="btn btn-skills">
-						{{ data.skills.firearms.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Stealth</div>
-				<div class="col small-text">
-					Dex
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.stealth.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.stealth.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.stealth.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="stealth" class="btn btn-skills">
-						{{ data.skills.stealth.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Larceny</div>
-				<div class="col small-text">
-					Dex
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.larceny.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.larceny.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.larceny.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="larceny" class="btn btn-skills">
-						{{ data.skills.larceny.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Throwing</div>
-				<div class="col small-text">
-					Dex
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.throwing.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.throwing.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.throwing.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="throwing" class="btn btn-skills">
-						{{ data.skills.throwing.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Duel Weild.</div>
-				<div class="col small-text">
-					Dex
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.duel-weilding.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.duel-weilding.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.duel-weilding.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="duel-weidling" class="btn btn-skills">
-						{{ data.skills.duel-weilding.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Stealth</div>
-				<div class="col small-text">
-					Dex
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.stealth.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.stealth.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.stealth.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="stealth" class="btn btn-skills">
-						{{ data.skills.stealth.value }}
-					</button>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col">Spot</div>
-				<div class="col small-text">
-					Per
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.spot.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.spot.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.spot.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="spot" class="btn btn-skills">
-						{{ data.skills.spot.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Listen</div>
-				<div class="col small-text">
-					Per
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.listen.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.listen.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.listen.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="listen" class="btn btn-skills">
-						{{ data.skills.listen.value }}
-					</button>
-				</div>
-			</div>
-		</section> <!-- End of DEX / PER skills -->
-		{{/if_equal}}
-
-		{{#if_equal data.currentSkillTab "will" }}
-		<section class="table">
-			<div class="header-row skills-header">
-				<div class="col">&nbsp;</div>
-				<div class="col">Trait</div>
-				<div class="col">Temp</div>
-				<div class="col">Sustain</div>
-				<div class="col">Perm</div>
-				<div class="col">Roll</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Wand</div>
-				<div class="col small-text">
-					By Weap
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.wand.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.wand.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.wand.permanent }}" class="input-number">
+					<input type="number" skill-change="wand" name="enchant" value="{{ enchant }}" class="input-number">
 				</div>
 				<div class="col">
 					<button skill-name="wand" class="btn btn-skills">
-						{{ data.skills.wand.value }}
+						{{ value }}
 					</button>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col">Mechanics</div>
-				<div class="col small-text">
-					Int
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.mechanics.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.mechanics.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.mechanics.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="mechanics" class="btn btn-skills">
-						{{ data.skills.mechanics.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Craft</div>
-				<div class="col small-text">
-					Int
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.craft.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.craft.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.craft.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="craft" class="btn btn-skills">
-						{{ data.skills.craft.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Academics</div>
-				<div class="col small-text">
-					Int
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.academics.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.academics.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.academics.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="academics" class="btn btn-skills">
-						{{ data.skills.academics.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Leadership</div>
-				<div class="col small-text">
-					Cha
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.leadership.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.leadership.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.leadership.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="leadership" class="btn btn-skills">
-						{{ data.skills.leadership.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Investigation</div>
-				<div class="col small-text">
-					Int
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.investigation.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.investigation.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.investigation.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="investigation" class="btn btn-skills">
-						{{ data.skills.investigation.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Occult</div>
-				<div class="col small-text">
-					Int
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.occult.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.occult.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.occult.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="occult" class="btn btn-skills">
-						{{ data.skills.occult.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Cosmology</div>
-				<div class="col small-text">
-					Int
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.cosmology.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.cosmology.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.cosmology.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="cosmology" class="btn btn-skills">
-						{{ data.skills.cosmology.value }}
-					</button>
-				</div>
-			</div>
-
-			
-			<div class="row">
-				<div class="col">Deception</div>
-				<div class="col small-text">
-					Cha
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.deception.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.deception.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.deception.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="deception" class="btn btn-skills">
-						{{ data.skills.deception.value }}
-					</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">Empathy</div>
-				<div class="col small-text">
-					Cha
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.empathy.temporary }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.empathy.sustained }}" class="input-number">
-				</div>
-				<div class="col">
-					<input type="number" value="{{ data.skills.empathy.permanent }}" class="input-number">
-				</div>
-				<div class="col">
-					<button skill-name="empathy" class="btn btn-skills">
-						{{ data.skills.empathy.value }}
-					</button>
-				</div>
-			</div>
-		</section>
+			{{/each}}
 		{{/if_equal}}
+
+		{{#if_equal data.currentSkillTab "cunning" }}
+			{{#each data.skills.cunning }}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col small-text">
+					{{ trait }}
+				</div>
+				<div class="col">
+					<input type="number" skill-change="wand" name="equip" value="{{ equip }}" class="input-number">
+				</div>
+				<div class="col">
+					<input type="number" skill-change="wand" name="enchant" value="{{ enchant }}" class="input-number">
+				</div>
+				<div class="col">
+					<button skill-name="wand" class="btn btn-skills">
+						{{ value }}
+					</button>
+				</div>
+			</div>
+			{{/each}}
+		{{/if_equal}}
+
+		{{#if_equal data.currentSkillTab "will" }}
+			{{#each data.skills.will }}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col small-text">
+					{{ trait }}
+				</div>
+				<div class="col">
+					<input type="number" skill-change="wand" name="equip" value="{{ equip }}" class="input-number">
+				</div>
+				<div class="col">
+					<input type="number" skill-change="wand" name="enchant" value="{{ enchant }}" class="input-number">
+				</div>
+				<div class="col">
+					<button skill-name="wand" class="btn btn-skills">
+						{{ value }}
+					</button>
+				</div>
+			</div>
+			{{/each}}
+		{{/if_equal}}
+		</section>
 
 		
 	</div> <!-- End of Grid Child -->
@@ -1023,7 +465,7 @@
 
 	<div class="grid-child">
 
-		<div class="table">
+		<section class="table">
 			<div class="header-row arcana-header">
 				<div class="col">&nbsp;</div>
 				<div class="col">Weaver</div>
@@ -1078,7 +520,7 @@
 					<button arcana-name="Forces" class="btn btn-arcana">0</button>
 				</div>
 			</div>
-		</div>
+		</section>
 
 	</div> <!-- end of Gen Header-->
 	</div> <!-- End of Arcana -->
@@ -1090,6 +532,7 @@
 
 	<div class="grid-child">
 		<section class="table">
+
 			<div class="header-row resistance-header">
 				<div class="col">Material</div>
 				<div class="col">Elemental</div>
@@ -1099,49 +542,95 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Blunt</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.blunt }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Thermal</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.thermal }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Solar</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.solar }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 			</div>
 
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Peircing</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.peircing }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 			
 				<div class="col">
 					<div class="small-sub-header">Electric</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.electric }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Lunar</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.lunar }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 			</div>
 
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Slashing</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.slashing }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 			
 				<div class="col">
 					<div class="small-sub-header">Toxic</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.toxic }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Banal</div>
-					<input class="input-number">
+					<select class="input-text" value="{{ data.resist.banal }}">
+						<option value="0">Immune</option>
+						<option value=".5">Resist</option>
+						<option value="1">Normal</option>
+						<option value="2">Weak</option>
+					</select>
 				</div>
 			</div>
+
 		</section>
 	</div><!-- End of Grid-Child-->
 	
@@ -1185,14 +674,78 @@
 			<div class="traits-header">Traits</div>
 		</div>
 
-	<div class="grid-child"></div>
+	<div class="grid-child">
+		<section class="table">
+			<div class="header-row">
+				<div class="col"></div>
+				<div class="col">Trait</div>
+				<div class="col">Super</div>
+				<div class="col">Total</div>
+				<div class="col">Cost</div>
+			</div>
+
+			{{#each data.traitParts}}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col"><input class="input-number" value="{{ base }}"></div>
+				<div class="col"><input class="input-number" value="{{ super }}"></div>
+				<div class="col">
+					<input disabled class="input-number" value="{{ total }}">
+				</div>
+				<div class="col">
+					<input disabled class="input-number" value="{{ cost }}">
+				</div>
+			</div>
+			{{/each}}
+
+			<div class="row">
+				<div class="col-center-focus">TOTAL</div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col">
+					<input disabled class="input-number" value="{{ data.cp.traits }}">
+				</div>
+			</div>
+		</section>
+	</div>
 	</div>
 
 	<div class="aracana-points">
 		<div class="gen-header">
 			<div class="arcana-header">Arcana</div>
 		</div>
-	<div class="grid-child"></div>
+	<div class="grid-child">
+		<section class="table">
+			<div class="header-row">
+				<div class="col"></div>
+				<div class="col">Arcana</div>
+				<div class="col">Super</div>
+				<div class="col">Total</div>
+				<div class="col">Cost</div>
+			</div>
+
+			{{#each data.arcana}}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col">
+					<input value="{{ base }}" class="input-number">
+				</div>
+				<div class="col">{{ super }}</div>
+				<div class="col">{{ total }}</div>
+				<div class="col">{{ cost }}</div>
+			</div>
+			{{/each}}
+
+			<div class="row">
+				<div class="col-center-focus">TOTAL</div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col"><input disabled class="input-number" value="{{ data.cp.skills }}"></div>
+			</div>
+		</section>
+	</div>
 	</div>
 	
 	<div class="skill-points">
@@ -1200,7 +753,162 @@
 			<div class="skills-header">Skills</div>
 		</div>
 
-	<div class="grid-child"></div>
+	<div class="grid-child">
+	<div class="flex-row">
+		<div class="flex2">
+		<section class="table">
+			<div class="header-row skills-header">
+				<div class="col">Grit</div>
+				<div class="col">Trait</div>
+				<div class="col">Skill</div>
+				<div class="col">Super</div>
+				<div class="col">Total</div>
+				<div class="col">Tier</div>
+				<div class="col">Cost</div>
+			</div>
+
+			{{#each data.skills.grit }}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col">{{ trait }}</div>
+				<div class="col">
+					<input class="input-number" name="base" value="{{ base }}">
+				</div>
+				<div class="col">
+					<input class="input-number" name="super" value="{{ super }}">
+				</div>
+				<div class="col">
+					<div class="skill-calculated-display">{{ total }}</div>
+				</div>
+				<div class="col">{{ tier }}</div>
+				<div class="col">
+					<div class="skill-calculated-display">{{ cost }}</div>
+				</div>
+			</div>
+			{{/each}}
+		</section>
+
+		<div>&nbsp;</div>
+
+		<section class="table">
+			<div class="header-row skills-header">
+				<div class="col">Cunning</div>
+				<div class="col">Trait</div>
+				<div class="col">Skill</div>
+				<div class="col">Super</div>
+				<div class="col">Total</div>
+				<div class="col">Tier</div>
+				<div class="col">Cost</div>
+			</div>
+
+			{{#each data.skills.cunning }}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col">{{ trait }}</div>
+				<div class="col">
+					<input class="input-number" name="base" value="{{ base }}">
+				</div>
+				<div class="col">
+					<input class="input-number" name="super" value="{{ super }}">
+				</div>
+				<div class="col">
+					<div class="skill-calculated-display">{{ total }}</div>
+				</div>
+				<div class="col">{{ tier }}</div>
+				<div class="col">
+					<div class="skill-calculated-display">{{ cost }}</div>
+				</div>
+			</div>
+			{{/each}}
+		</section>
+
+		</div> <!-- End of left column-->
+
+		<div class="flex2">
+		<section class="table">
+			<div class="header-row skills-header">
+				<div class="col">Will</div>
+				<div class="col">Trait</div>
+				<div class="col">Skill</div>
+				<div class="col">Super</div>
+				<div class="col">Total</div>
+				<div class="col">Tier</div>
+				<div class="col">Cost</div>
+			</div>
+
+			{{#each data.skills.will }}
+			<div class="row">
+				<div class="col">{{ name }}</div>
+				<div class="col">{{ trait }}</div>
+				<div class="col">
+					<input class="input-number" name="base" value="{{ base }}">
+				</div>
+				<div class="col">
+					<input class="input-number" name="super" value="{{ super }}">
+				</div>
+				<div class="col">
+					<div class="skill-calculated-display">{{ total }}</div>
+				</div>
+				<div class="col">x{{ tier }}</div>
+				<div class="col">
+					<div class="skill-calculated-display">{{ cost }}</div>
+				</div>
+			</div>
+			{{/each}}
+		</section>
+
+		<div>&nbsp;</div>
+
+		<section class="table">
+			<div class="header-row skills-header">
+				<div class="col"></div>
+				<div class="col">
+					Specializations
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Cosmology</div>
+				<div class="col">
+					<textarea class="input-text textarea-small"></textarea>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Occult</div>
+				<div class="col">
+					<textarea class="input-text textarea-small"></textarea>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Academics</div>
+				<div class="col">
+					<textarea class="input-text textarea-small"></textarea>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Survival</div>
+				<div class="col">
+					<textarea class="input-text textarea-small"></textarea>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Craft</div>
+				<div class="col">
+					<textarea class="input-text textarea-small"></textarea>
+				</div>
+			</div>
+		</section>
+
+		</div>
+	
+	</div>
+	</div>
+		
+	</div>
 	</div>
 	
 

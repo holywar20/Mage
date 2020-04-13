@@ -17,7 +17,7 @@
 :root{
 	--bg-main 	: black;
 	--base-text-color : white;
-	--selected : rgb(193, 117, 255);
+	--selected : rgba(25 , 49 , 113, .5 );
 
 	--gray-fade25: rgba(50, 30, 50, 0.50);
 	--gray-fade50: rgba(20,20,20, .75);
@@ -26,7 +26,7 @@
 	--primary-fade50 		: rgba(133, 18 , 87 ,.5);
 	--secondary				: rgba(25 , 49 , 113, 1);
 	--secondary-fade50	: rgba(25 , 49 , 113, .5 );
-	--tertiary				: rgb(219, 204, 23);
+	--tertiary				: rgba(219, 204, 23 , 1);
 	--tertiary-fade50		: rgba(219, 204, 23 , .5);
 
 	--resistance 			: rgb(119, 126, 22);
@@ -37,8 +37,9 @@
 	--traits					: rgba(90, 55, 90);
 	--traits-fade50		: rgba(90, 55, 90, .5);
 	--traits-text			: rgb(202, 104, 202);
-	--skills					: rgba(16, 15, 95);
-	--skills-text			: rgb(87, 85, 255);
+	--skills					: rgba(16, 15, 95 ,1);
+	--skills-text			: rgba(130, 179, 239 ,1);
+	--skills-fade50		: rgba(16, 15, 95 , .5);
 	--vitals					: rgba(110, 15, 15);
 	--vitals-text			: rgb(255, 118, 118);
 
@@ -70,8 +71,8 @@
 	width: 100%;
 
 	display: grid;
-	grid-template-columns: 350px 550px;
-	grid-template-rows: 100px 300px 300px auto;
+	grid-template-columns: 300px 600px;
+	grid-template-rows: 100px 270px auto;
 }
 
 .grid-child{
@@ -80,7 +81,7 @@
 
 	background-color: var(--gray-fade50);
 	border-radius : 0px 10px 10px 10px;
-	border: 5px outset var(--primary-fade50)
+	border: 3px outset var(--primary-fade50)
 }
 
 .char-points{
@@ -172,6 +173,7 @@
 	justify-content: space-evenly;
 }
 
+
 .flex-col{
 	display: flex;
 	flex-direction: column;
@@ -184,6 +186,7 @@
 
 .flex2{
 	flex-grow: 2;
+	width: 50%;
 }
 
 /* buttons */
@@ -204,17 +207,18 @@
 .btn::hover{
 	background: var(--primary);
 }
-.btn-vitals{
+.btn-vitals, .input-vitals{
 	background-color: var(--vitals);
 }
-.btn-traits{
+.btn-traits , .input-traits{
 	background-color: var(--traits);
 }
-.btn-arcana{
+.btn-arcana, .input-aracana{
 	background-color: var(--arcana);
 }
-.btn-skills{
+.btn-skills , .input-skills{
 	background-color: var(--skills);
+	color: white;
 }
 
 .btn-skills, .btn-arcana , .btn-vitals{
@@ -237,11 +241,12 @@
 
 .btn-medium{
 	width: 75px;
-	font-size: .85em;
+	font-size: 1.5em;
 }
 
 .btn-small{
 	width: 50px;
+	font-size: 1.2em;
 }
 
 .btn-icon{
@@ -308,9 +313,9 @@
 	border-bottom: 1px solid var(--primary);
 }
 
-.row .col:first-child{
+.row .col:first-child , .col.row-leader{
 	text-align: left;
-	width: 80px;
+	width: 100px;
 	font-size: .9em;
 	color: var(--tertiary);
 	padding: 3px;
@@ -323,6 +328,22 @@
 	border-radius: 5px;
 }
 
+.col-center-focus{
+	display: table-cell;
+	text-align: center;
+	font-size: 1.1em;
+	color: var(--tertiary);
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
+.col-left-align{
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
 .skill-row:first-child{
 	text-align: left;
 	font-weight: 800;
@@ -331,7 +352,6 @@
 
 
 /* Inputs */
-
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
 	-webkit-appearance: none; 
@@ -345,6 +365,15 @@ input{
 	border-radius: 5px;
 }
 
+.textarea-small{
+	min-height:44px;
+	width: 200px;
+}
+
+.input-wide{
+	min-width:200px;
+}
+
 .input-text:focus,
 .input-number:focus
 {
@@ -352,12 +381,11 @@ input{
 	border-radius: 10px;
 
 	background-color: var(--selected);
-	color : black;
 
 	box-shadow: 
 		2px 3px 5px var(--tertiary),
 		1px 1px 2px var(--tertiary);
-	border: 2px solid var(--tertiary);
+	border: 1px solid var(--tertiary);
 }
 
 .input-text{
@@ -383,15 +411,6 @@ input{
 	transition: var(--animation); 
 }
 
-input:disabled{
-	color: white;
-	border-radius: 5px;
-	border: none;
-	background: none;
-	text-align: center;
-}
-
-
 .input-bigly{
 	font-size: 2.0em;
 	font-weight: 900;
@@ -414,7 +433,7 @@ input:disabled{
 }
 
 /* A small sized input meant to go under large things */
-.input-trait-subscript{
+.input-trait-subscript:disabled{
 	border-radius: 5px;
 	border: 1px solid black;
 	padding: 0px;
@@ -423,14 +442,16 @@ input:disabled{
 	height: 25px;
 
 	background-color : var(--traits-fade50);
-
+	border: none;
+	color: white;
 	text-align: center;
 }
 
-.input-trait{
-	border: none;
+/* For number fields your not supposed to modify*/
+div.skill-calculated-display{
+	font-weight:800;
+	font-size:1.1em;
 }
-
 
 /* Layout */
 
@@ -477,10 +498,6 @@ div.small-text{
 	border-radius: 3px;
 }
 
-div.striped{
-	background-color: var(--gray-fade25);
-}
-
 div.gen-header{
 	font-size: 1.4em;
 	background : none;
@@ -514,13 +531,13 @@ div.resistance-header{
 	text-align: center;
 	padding: 3px;
 
-	border: 1px solid;
-	border-bottom: 2px inset;
+	border-top: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
 }
 
 div.character-points-header{
 	color: var(--vitals-text);
-	
 }
 
 div.resistance-header{

@@ -12,7 +12,9 @@ export class MageSheet extends ActorSheet {
 	TAB_BUTTONS = '.btn-main-tab';
 
 	SKILL_BUTTONS = '.btn-skills';
-	SKILL_NAME = 'skill-name'
+	SKILL_EDIT_ATTRIBUTE_SELECTOR = 'input[skill-change]';
+	SKILL_CHANGE_DATA = 'skill-change'
+	SKILL_NAME = 'skill-name';
 
 	ARCANA_BUTTONS = '.btn-arcana';
 	ARCANA_NAME = 'arcana-name';
@@ -35,24 +37,30 @@ export class MageSheet extends ActorSheet {
 	activateListeners( html ) {
 		super.activateListeners( html );
 
+		/* Tabs */
 		this.mySheetHtml = html;
 		this.mySheetHtml.find( this.TAB_BUTTONS ).click( this._changeMainTab.bind( event ) );
 		this.mySheetHtml.find( this.SKILL_TAB_BUTTONS ).click( this._changeSkillTab.bind( event ) );
 
 
+		/* Clickable Buttons */
 		this.mySheetHtml.find( this.SKILL_BUTTONS ).click( this._skillButtonClick.bind( event) );
 		this.mySheetHtml.find( this.ARCANA_BUTTONS ).click( this._arcanaButtonClick.bind( event) );
 		this.mySheetHtml.find( this.TRAIT_BUTTONS ).click( this._traitButtonClick.bind( event ) );
 		this.mySheetHtml.find( this.SAVE_BUTTONS ).click( this._saveButtonClick.bind( event ) );
+
+		/* Value changes */
+		this.mySheetHtml.find( this.SKILL_EDIT_ATTRIBUTE_SELECTOR ).change( this._skillChanged.bind( event ) );
 	}
 
 	/* Setup methods */
-	_populateDropDown(){
-		
-	}
-
 
 	/* Private methods. ( Not really private, because JS doesn't do that ) */
+
+	_skillChanged = ( event ) => {
+		this.skill = event.currentTarget.getAttribute( this.SKILL_CHANGE_DATA );
+	}
+
 	_changeMainTab = ( event ) => {
 		let buttons = this.mySheetHtml.find( this.TAB_BUTTONS );
 		/*buttons.forEach( ( ele ) => {
@@ -145,5 +153,13 @@ export class MageSheet extends ActorSheet {
 		}).render(true);
 	}
 
+
+	/*
+		Item Dragging! 
+	html.find('li.item').each((i, li) => {
+      if ( li.classList.contains("inventory-header") ) return;
+      li.setAttribute("draggable", true);
+      li.addEventListener("dragstart", handler, false);
+    });*/
 
 }
