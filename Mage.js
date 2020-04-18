@@ -1,18 +1,21 @@
 import { registerSettings } from './module/settings.js';
 import { preloadTemplates } from './module/preloadTemplates.js';
 
-import { MageActor } from './module/actor/mageactor.js';
-import { MageSheet } from './module/sheets/magesheet.js';
+/* Import Actors + Actor sheets */
+import { MageActor } from './module/actor/mage/mage.actor.js';
+import { MageSheet } from './module/actor/mage/mage.sheet.js';
 
-import { BaseItem } from './module/item/baseitem.js';
-import { TraditionSheet } from './module/sheets/traditionsheet.js';
-import { WeaponSheet } from './module/sheets/weaponsheet.js';
+
+/* Import Items + Item Sheets */
+import { BaseItem } from './module/item/base.item.js';
+import { TraditionSheet } from './module/item/tradition/tradition.sheet.js';
+import { WeaponSheet } from './module/item/weapon/weapon.sheet.js';
 
 import { Loader } from './helpers/loaders.js';
 
 Hooks.once('init', async function(){
 	registerSettings();
-	await preloadTemplates();
+	// await preloadTemplates(); Add templates to preload. There shouldn't be that many.
 });
 
 /* ------------------------------------ */
@@ -42,7 +45,7 @@ Hooks.once('init', async function() {
 	registerSettings();
 	
 	// Preload Handlebars templates
-	await preloadTemplates();
+	// await preloadTemplates();
 	
 });
 

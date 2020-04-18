@@ -1,0 +1,37 @@
+@font-face {
+	font-family : HeaderFont;
+	src:url('../fonts/Dolphian.ttf');
+}
+
+/* Color Pallette */
+:root{
+	--bg-main 	: black;
+	--base-text-color : white;
+	--selected : rgba(25 , 49 , 113, .5 );
+
+	--gray-fade25: rgba(50, 30, 50, 0.50);
+	--gray-fade50: rgba(20,20,20, .75);
+
+	--primary				: rgba(133, 18 ,87 ,1);
+	--primary-fade50 		: rgba(133, 18 , 87 ,.5);
+	--secondary				: rgba(25 , 49 , 113, 1);
+	--secondary-fade50	: rgba(25 , 49 , 113, .5 );
+	--tertiary				: rgba(219, 204, 23 , 1);
+	--tertiary-fade50		: rgba(219, 204, 23 , .5);
+
+	--resistance 			: rgb(119, 126, 22);
+	--resistance-text		: rgb(225, 235, 141);
+
+	--arcana					: rgba(15, 112, 47);
+	--arcana-text			: rgb(129, 252, 170);
+	--traits					: rgba(90, 55, 90);
+	--traits-fade50		: rgba(90, 55, 90, .5);
+	--traits-text			: rgb(202, 104, 202);
+	--skills					: rgba(16, 15, 95 ,1);
+	--skills-text			: rgba(130, 179, 239 ,1);
+	--skills-fade50		: rgba(16, 15, 95 , .5);
+	--vitals					: rgba(110, 15, 15);
+	--vitals-text			: rgb(255, 118, 118);
+
+	--animation : all .5s ease-in-out; 
+}

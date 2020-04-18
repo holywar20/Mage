@@ -3,5 +3,5 @@ export const preloadTemplates = async function() {
 		'systems/Mage/templates/mage.html'
 	];
 
-	return loadTemplates(templatePaths);
+	return loadTemplates();
 }

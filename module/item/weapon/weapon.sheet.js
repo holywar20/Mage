@@ -6,7 +6,7 @@ export class WeaponSheet extends ItemSheet{
 	mySheetHtml = null
 
 	get template() {
-		return "systems/mage/templates/weapon.html"
+		return "systems/mage/module/item/weapon/weapon.sheet.html"
 	}
 
 	activateListeners( html ) {

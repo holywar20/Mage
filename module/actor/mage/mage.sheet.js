@@ -37,7 +37,7 @@ export class MageSheet extends ActorSheet {
 
 	/* Overrides */
 	get template() {
-		return "systems/mage/templates/mage.html"
+		return "systems/mage/module/actor/mage/mage.sheet.html"
 	}
 
 	activateListeners( html ) {
@@ -47,7 +47,6 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml = html;
 		this.mySheetHtml.find( this.TAB_BUTTONS ).click( this._changeMainTab.bind( event ) );
 		this.mySheetHtml.find( this.SKILL_TAB_BUTTONS ).click( this._changeSkillTab.bind( event ) );
-
 
 		/* Clickable Buttons */
 		this.mySheetHtml.find( this.SKILL_BUTTONS ).click( this._skillButtonClick.bind( event) );

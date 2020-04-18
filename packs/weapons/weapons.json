@@ -1,10 +1,10 @@
 [
 	{
 		"name" : "Theyrian Longsword",
+		"img" : "systems/mage/icons/items/weapons/sword-long.jpg",
 		"data" : {
 			"dmg" : "2d6",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/sword-long.jpg",
 			"dieMod" : 0,
 			"description" : "A simple but effective straight long blade of Theyrian Make",
 			"weaponType" : "Martial",
@@ -17,10 +17,11 @@
 		}
 	} , {
 		"name" : "Theyrian Great Sword",
+		"img":"systems/mage/icons/items/weapons/sword-great.jpg",
 		"data" : {
 			"dmg" : "2d8",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/sword-great.jpg",
+			
 			"dieMod" : 0,
 			"description" : "A 5 Foot Blade made with a high hilt to accommidate two hands, it's a surprisingly fast weapon, made to be flexible, light and allow for maximize leverage in close quarters",
 			"weaponType" : "Martial",
@@ -33,10 +34,10 @@
 		}
 	} , {
 		"name" : "Dhahabi Short Spear",
+		"img":"systems/mage/icons/items/weapons/bolt.png",
 		"data" : {
 			"dmg" : "2d6",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/bolt.jpg",
 			"dieMod" : 0,
 			"description" : "A long one handed spear. It was designed initially to assist in Dhahabi's famous shield wall formations. It's fallen out of use with the advent of firearms, but it's still effective in small skirmishes. ",
 			"weaponType" : "Martial",
@@ -49,10 +50,10 @@
 		}
 	} , {
 		"name" : "Dhahabi Long Spear",
+		"img": "systems/mage/icons/items/weapons/spear.jpg",
 		"data" : {
 			"dmg" : "2d8",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/spear.jpg",
 			"dieMod" : 0,
 			"description" : "A two handed long spear, better adapted to those who empheize speed than strength allowing for great power but also freedom of movement.",
 			"weaponType" : "Martial",
@@ -65,10 +66,10 @@
 		}
 	} , {
 		"name" : "Knight's Mace",
+		"img" : "systems/mage/icons/items/weapons/morningstar.jpg",
 		"data" : {
 			"dmg" : "2d6",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/morningstar.jpg",
 			"dieMod" : 0,
 			"description" : "A mace with a large, heavy, blunted head. This particular mace is adorned with holy sigils and may have once belonged to a Knight of the Southern Kingdom of Calistas",
 			"weaponType" : "Martial",
@@ -81,10 +82,10 @@
 		}
 	} , {
 		"name" : "Valorian Warhammer",
+		"img" :"systems/mage/icons/items/weapons/warhammer.png",
 		"data" : {
 			"dmg" : "2d8",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/warhammer.jpg",
 			"dieMod" : 0,
 			"description" : "A single headed steel hammer, with a pick on the back to deal additional damage on the back swing.",
 			"weaponType" : "Martial",
@@ -97,10 +98,10 @@
 		}
 	} , {
 		"name" : "Woodcutter's Axe",
+		"img" : "systems/mage/icons/items/weapons/axe-wood.jpg",
 		"data" : {
 			"dmg" : "2d8",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/axe-wood.jpg",
 			"dieMod" : 0,
 			"description" : "A plain axe, made for cutting the thick trees of StarWood in the Black Forest of Calistas, much to the chagrin of the Fae who once lived there. ",
 			"weaponType" : "Heavy",
@@ -114,12 +115,12 @@
 		}
 	} , {
 		"name" : "Valorian Waraxe",
+		"img" : "systems/mage/icons/items/weapons/battleaxe.png",
 		"data" : {
 			"dmg" : "2d10",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/battleaxe.jpg",
 			"dieMod" : 0,
-			"description" : "The Valorians will often use axes like this for splitting open doors in the lightly defended hinterlands along the Gold Coast during their infmous raids.",
+			"description" : "The Valorians will often use axes like this for splitting open doors in the lightly defended hinterlands along the Gold Coast during their infamous raids.",
 			"weaponType" : "Heavy",
 			"use" : [
 				{ "skill" : "blunt" , "dmgType" : "blunt" ,  "dmgTrait" : "str" , "hitTrait" : "str" },
@@ -131,10 +132,10 @@
 		}
 	} , {
 		"name" : "Meridian Trident",
+		"img" : "systems/mage/icons/items/weapons/rod.jpg",
 		"data" : {
 			"dmg" : "2d8",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/rod.jpg",
 			"dieMod" : 0,
 			"description" : "The Meridians are a sea faring people. Tridents like this one are often used as both weapons and a crude fishing tool when at sea.",
 			"weaponType" : "Heavy",
@@ -148,10 +149,10 @@
 		}
 	} , {
 		"name" : "Theyrian Wheat Scythe",
+		"img" : "systems/mage/icons/items/weapons/sickle.jpg",
 		"data" : {
 			"dmg" : "2d10",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/sickle.jpg",
 			"dieMod" : 0,
 			"description" : "A farmer's Wheat Scythe with an extra offset secondary handle placed near it's midpoint for easily cutting large amounts of wheat. This one has ",
 			"weaponType" : "Heavy",
@@ -165,10 +166,10 @@
 		}
 	} , {
 		"name" : "Worker's Pick",
+		"img" : "systems/mage/icons/items/weapons/pick.jpg",
 		"data" : {
 			"dmg" : "2d8",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/pick.jpg",
 			"dieMod" : 0,
 			"description" : "A miner's pick. Given the runes on it, it was most likely owned by a Valorian Worker in one of the Iron Mines south of Angel's Tier.",
 			"weaponType" : "Heavy",
@@ -182,10 +183,10 @@
 		}
 	} , {
 		"name" : "Angel Guard's Poleaxe",
+		"img" : "systems/mage/icons/items/weapons/glaive.png",
 		"data" : {
 			"dmg" : "2d10",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/glaive.png",
 			"dieMod" : 0,
 			"description" : "A short, one handed Poleaxe that is normally seen in the hands of the elite Angel Guard in Angel's Tear",
 			"weaponType" : "Heavy",
@@ -199,10 +200,10 @@
 		}
 	} , {
 		"name" : "Dalamere Scimitar",
+		"img" : "systems/mage/icons/items/weapons/sword-arcane.jpg",
 		"data" : {
 			"dmg" : "2d5",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/sword-arcane.jpg",
 			"dieMod" : 0,
 			"description" : "A short curved blade , made to go around armor rather than through it.",
 			"weaponType" : "Finesse",
@@ -216,10 +217,10 @@
 		}
 	} , {
 		"name" : "Arcadian Katana",
+		"img" : "systems/mage/icons/items/weapons/sword-curved.jpg",
 		"data" : {
 			"dmg" : "2d7",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/sword-curved.jpg",
 			"dieMod" : 0,
 			"description" : "a 4 foot, single edge, well balanced curved blade that is best used in two hands, made for quick, precise and decisive strikes.",
 			"weaponType" : "Finesse",
@@ -233,10 +234,10 @@
 		}
 	} , {
 		"name" : "Theyrian Rapier",
+		"img" : "systems/mage/icons/items/weapons/sword-short.jpg",
 		"data" : {
 			"dmg" : "2d5",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/sword-short",
 			"dieMod" : 0,
 			"description" : "A long blade often utilized by Theyrian nobles for duels. It favors a very fast style, inflicting many small wounds quickly and exploiting holes in armor.",
 			"weaponType" : "Finesse",
@@ -250,10 +251,10 @@
 		}
 	} , {
 		"name" : "Merdian Rapier",
+		"img" : "systems/mage/icons/items/weapons/sword-short.jpg",
 		"data" : {
 			"dmg" : "2d7",
 			"hands" : 1,
-			"iconPath": "icons/items/weapons/sword-short",
 			"dieMod" : 0,
 			"description" : "An extremely long single handed blade, that requires a free hand just to maintain proper balance. Meridian Ship Captains will often sport these blades.",
 			"weaponType" : "Finesse",
@@ -267,12 +268,12 @@
 		}
 	} , {
 		"name" : "Calistas Scepter",
+		"img" : "systems/mage/icons/items/weapons/staff-blue.jpg",
 		"data" : {
 			"dmg" : "2d5",
-			"hands" : 2,
-			"iconPath": "icons/items/weapons/staff-blue.jpg",
+			"hands" : 1,
 			"dieMod" : 0,
-			"description" : "",
+			"description" : "A brilliant scepter, often used by officers and knights of Calistas as a symbol of office",
 			"weaponType" : "Finesse",
 			"use" : [
 				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
@@ -283,20 +284,20 @@
 			]
 		}
 	} , {
-		"name" : "Ironwood Staff",
+		"name" : "Ironwood Quarterstaff",
+		"img" : "systems/mage/icons/items/weapons/quarterstaff.png",
 		"data" : {
-			"dmg" : "2d5",
+			"dmg" : "2d7",
 			"hands" : 2,
-			"iconPath": "icons/items/weapons/staff.png",
 			"dieMod" : 0,
-			"description" : "A long blade often utilized by Theyrian nobles for duels. It favors a very fast style, inflicting many small wounds quickly and exploiting holes in armor.",
+			"description" : "A long staff made from petrified Ironwood, harvested from the dead forests of the Great Dhahabi Desert.",
 			"weaponType" : "Finesse",
 			"use" : [
 				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
 				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "str" , "hitTrait" : "str" }
 			],
 			"implictMods" : [
-				{ "modType" : "damage" , "modValue" : 1 }
+				{ "modType" : "damage" , "modValue" : 2 }
 			]
 		}
 	}
