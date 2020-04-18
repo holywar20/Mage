@@ -6,6 +6,7 @@ import { MageSheet } from './module/sheets/magesheet.js';
 
 import { BaseItem } from './module/item/baseitem.js';
 import { TraditionSheet } from './module/sheets/traditionsheet.js';
+import { WeaponSheet } from './module/sheets/weaponsheet.js';
 
 import { Loader } from './helpers/loaders.js';
 
@@ -33,6 +34,9 @@ Hooks.once('init', async function() {
 	Items.registerSheet("mage" , TraditionSheet, {
 		types: ["tradition"]
 	});
+  Items.registerSheet("mage" , WeaponSheet ,{
+    types: ["weapon"]
+  });
 
 	// Register custom system settings
 	registerSettings();
@@ -54,6 +58,14 @@ Hooks.once('setup', function() {
 			return opts.inverse(this)
 		}
 	});
+
+  Handlebars.registerHelper('if_greater', function( a , b , opts){
+    if( a >= b ){
+      return opts.fn(this)
+    } else {
+      return opts.inverse(this)
+    }
+  });
 });
 
 /* ------------------------------------ */
@@ -62,7 +74,8 @@ Hooks.once('setup', function() {
 Hooks.once('ready', function() {
 	
 	var loader = new Loader();
-	loader.loadCompendium( 'mage' , 'tradition');
+	loader.loadCompendium( 'mage' , 'tradition' );
+  loader.loadCompendium( 'mage' , 'weapon' );
 });
 
 // Code for making a macro based on an item drop

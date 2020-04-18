@@ -1,0 +1,17 @@
+.weapons-form{
+	background: url('../img/sheets/background.jpg');
+}
+
+.weapon-img{
+	width: 64px;
+	height: 64px;
+}
+
+
+.weapon-container{
+	background-color: rgba( 0 , 0 ,0 , .75);
+	
+	display: grid;
+}
+
+

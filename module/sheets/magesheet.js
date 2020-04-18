@@ -1,7 +1,13 @@
 
 export class MageSheet extends ActorSheet {
-	constructor(...args ) {
-		super(...args);
+	constructor( ...args ) {
+		const data = {...args}
+
+		super( data[0] , {
+			height: 900,
+			width: 950,
+			resizable: false
+		});
 	}
 
 	mySheetHtml = null
@@ -31,7 +37,7 @@ export class MageSheet extends ActorSheet {
 
 	/* Overrides */
 	get template() {
-		return "systems/Mage/templates/mage.html"
+		return "systems/mage/templates/mage.html"
 	}
 
 	activateListeners( html ) {

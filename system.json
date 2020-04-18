@@ -13,14 +13,22 @@
 		"path": "./packs/traditions/traditions.db",
 		"entity": "Item"
 	} , {
-		"name" : "spells" ,
+		"name" : "spell" ,
 		"label" : "Spells",
 		"system" : "mage",
 		"path" : "./packs/spells.db",
 		"entity": "Item"
+	} , {
+		"name" : "weapon",
+		"label" : "Basic Weapons",
+		"system" : "mage",
+		"path" : "./packs/weapons/weapons.db",
+		"entity" : "Item"
 	}],
 	"styles": [
 		"./styles/ui.css",
+		"./styles/general.css",
+		"./packs/weapons/weapons.css",
 		"./styles/Mage.css",
 		"./packs/traditions/traditions.css"
 		],
@@ -30,7 +38,7 @@
 	"primaryTokenAttribute": null,
 	"secondaryTokenAttribute": null,
 	"minimumCoreVersion": "0.5.0",
-	"compatibleCoreVersion": "0.5.1",
+	"compatibleCoreVersion": "0.5.4",
 	"url": "",
 	"manifest": "",
 	"download": ""

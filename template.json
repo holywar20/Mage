@@ -18,6 +18,7 @@
 			"currentTab" : "character",
 			"currentSkillTab" : "grit",
 			"tradition" : "0",
+			"exp" : 30 ,
 			"mystictraits" : {
 				"mental" : "" , "physical" : "" 
 			},
@@ -33,7 +34,10 @@
 			"armor" : { "current" : 0 , "bonus" : 0, "max" : 0 },
 			"hp": { "current" : 0 , "bonus" : 0 , "max" : 0 },
 			"cp": {
-				"spent" : 0 , "trained" : 0 , "earned" : 0 , "skills" : 0 , "traits" : 0 ,  "arcana" : 0 , "feats" : 0 
+				"remaining": 0 , "spent" : 0 , "trained" : 0 , "earned" : 0 , "skills" : 0 , "traits" : 0 ,  "arcana" : 0 , "feats" : 0 
+			},
+			"creation":{
+				"skills" : 45 , "traits" : 15 , "arcana" : 30 
 			},
 			"traitParts" : {
 				"str" : { "name" : "Strength", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
@@ -94,7 +98,7 @@
 		}
 	}, 
 	"Item":{
-		"types" : ["tradition" , "spells"],
+		"types" : ["tradition" , "spells" , "weapon"],
 		"tradition" : {
 			"boonName" : "unassigned",
 			"traditionType" :"unassigned" ,
@@ -105,6 +109,17 @@
 		"spells" : {
 			"name": "unassigned",
 			"description": "unassigned" 
+		},
+		"weapon":{
+			"name": "unassigned",
+			"dmg" : "unassigned",
+			"hands" : 1,
+			"weaponType" : "Martial",
+			"use" : [
+				{ "skill" : "blunt" , "type" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" }
+			],
+			"implicitMods": [],
+			"description": "unassigned"
 		}
 	}
 }

@@ -1,3 +1,5 @@
+
+
 ol.directory-list{
 	background-color: var(--grey-fade20);
 } 
@@ -9,5 +11,14 @@ ol.directory-list{
 
 form button{
 	background: black;
+	color: white;
+}
+
+button.dialog-button{
+	background: grey;
+	color: white;
+}
+
+p.notes{
 	color: white;
 }

@@ -4,13 +4,14 @@ export class Loader{
 	
 	paths = { 
 		tradition : "./systems/Mage/packs/traditions/traditions.json",
-		spells : "./systems.Mage/packs/spells/spells.json"
+		weapon : "./systems/mage/packs/weapons/weapons.json",
+		spell : "./systems/Mage/packs/spells/spells.json"
 	}
 
 	async loadCompendium( system, name ){
 		const pack = await this.getPack( system , name );
-		let cleared = await this.clearCompendium( pack );
 
+		let cleared = await this.clearCompendium( pack );
 		const content = await this.getJson( name );
 
 		if( pack && content && cleared ) {
@@ -22,7 +23,6 @@ export class Loader{
 				itemArray.push( item );
 			});
 
-			console.log( itemArray );
 			itemArray.forEach( ( itemData ) => {
 				pack.importEntity( itemData );
 			});
@@ -33,7 +33,7 @@ export class Loader{
 		let index = await pack.getIndex()
 		
 		index.forEach( ( dbItem ) => {
-			pack.deleteEntity( dbItem.id );
+			pack.deleteEntity( dbItem._id );
 		});
 
 		return true;
@@ -43,7 +43,7 @@ export class Loader{
 		let packname = `${system}.${name}`;
 		const pack = await game.packs.find( ( p ) => { 
 			return p.collection == packname; 
-		} );
+		});
 
 		if( pack ) {
 			return pack;

@@ -48,31 +48,35 @@
 
 .mage-form{
 	background: no-repeat url('../img/sheets/background.jpg');
-	height: 100%;
 	min-height: 800px;
-	min-width: 900px;
+	min-width: 950px;
+	max-width: 950px;
 	color: var(--base-text-color);
 }
 
 /* Grid */
 .character-container{
-	background: rgba( 0 , 0 ,0 , .75);
-	height: 100%;
-	width: 100%;
+	background-color: rgba( 0 , 0 ,0 , .75);
 
 	display: grid;
 	grid-template-columns : 350px 300px 250px;
 	grid-template-rows : 100px 200px 210px auto;
 }
 
+.equipment-container{
+	background-color: rgba( 0 , 0 ,0 , .75);
+
+	display: grid;
+	grid-template-columns : 150px 150px 150px 150px 150px 150px;
+	grid-template-rows : 400px auto;
+}
+
 .development-container{
 	background: rgba( 0 , 0 ,0 , .75);
-	height: 100%;
-	width: 100%;
 
 	display: grid;
 	grid-template-columns: 300px 600px;
-	grid-template-rows: 100px 270px auto;
+	grid-template-rows: 115px 270px auto;
 }
 
 .grid-child{
@@ -111,7 +115,7 @@
 	grid-row-start: 2;
 	grid-row-end: 3;
 }
-.
+
 
 .mage-logo{
 	font-family: Mage
@@ -170,7 +174,6 @@
 /* Flex */
 .flex-row{
 	display: flex;
-	justify-content: space-evenly;
 }
 
 
@@ -185,8 +188,16 @@
 }
 
 .flex2{
-	flex-grow: 2;
+	flex-grow: 1;
 	width: 50%;
+}
+
+.flex1-3{
+	flex-grow: 1;
+}
+
+.flex2-3{
+	flex-grow: 2;
 }
 
 /* buttons */
@@ -273,7 +284,7 @@
 	border: 2px solid var(--primary);
 	border-radius: 15px;
 
-	background-color(--secondary);
+	background-color:(--secondary);
 }
 
 .btn-skills-tab:hover{
@@ -297,7 +308,9 @@
 	background-color:var(--gray-fade25);
 }
 
-.header-row, .row , .resist-row{
+
+
+.header-row, .row , .resist-row , .clean-row{
 	display: table-row;
 	text-align: center;
 	
@@ -448,9 +461,54 @@ input{
 }
 
 /* For number fields your not supposed to modify*/
-div.skill-calculated-display{
+div.skill-calculated-display,
+div.arcana-calculated-display, 
+div.trait-calculated-display,
+div.total-calculated-display{
 	font-weight:800;
 	font-size:1.1em;
+	width: 25px;
+	height: 22px;
+	line-height: 22px;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.cp-calculated-display{
+	font-weight:900;
+	font-size:1.4em;
+	width: 50px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.display-bad{
+	color: red;
+}
+
+div.display-good{
+	color: green;
+}
+
+
+div.trait-calculated-display{
+	background-color: var(--traits);
+}
+
+div.arcana-calculated-display{
+	background-color: var(--arcana);
+}
+
+div.skill-calculated-display{
+	background-color: var(--skills);
+}
+
+div.total-calculated-display{
+	background-color: var(--tertiary-fade50);
 }
 
 /* Layout */

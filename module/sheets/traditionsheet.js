@@ -6,7 +6,7 @@ export class TraditionSheet extends ItemSheet{
 	}
 
 	get template() {
-		const path = "systems/Mage/templates/tradition.html";
+		const path = "systems/mage/templates/tradition.html";
 		return path;
 	}
 
