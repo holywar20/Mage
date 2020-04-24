@@ -11,7 +11,7 @@
 			"use" : [
 				{ "skill" : "bladed" , "dmgType" : "slashing" , "dmgTrait" : "str" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "allSaves" , "modValue" : 1 }
 			]
 		}
@@ -21,14 +21,13 @@
 		"data" : {
 			"dmg" : "2d8",
 			"hands" : 2,
-			
 			"dieMod" : 0,
 			"description" : "A 5 Foot Blade made with a high hilt to accommidate two hands, it's a surprisingly fast weapon, made to be flexible, light and allow for maximize leverage in close quarters",
 			"weaponType" : "Martial",
 			"use" : [
 				{ "skill" : "bladed" , "dmgType" : "slashing" , "dmgTrait" : "str" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "allSaves" , "modValue" : 1 }
 			]
 		}
@@ -44,7 +43,7 @@
 			"use" : [
 				{ "skill" : "piercing" , "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "reach" , "modValue" : 1 }
 			]
 		}
@@ -60,7 +59,7 @@
 			"use" : [
 				{ "skill" : "piercing" , "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "reach" , "modValue" : 1 }
 			]
 		}
@@ -76,7 +75,7 @@
 			"use" : [
 				{ "skill" : "blunt" , "dmgType" : "blunt" , "dmgTrait" : "str" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "damage" , "modValue" : 2 }
 			]
 		}
@@ -92,7 +91,7 @@
 			"use" : [
 				{ "skill" : "blunt" , "dmgType" : "blunt" , "dmgTrait" : "str" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "damage" , "modValue" : 2 }
 			]
 		}
@@ -109,7 +108,7 @@
 				{ "skill" : "blunt" , "dmgType" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" },
 				{ "skill" : "bladed" ,"dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "allSaves" , "modValue" : 1 }
 			]
 		}
@@ -126,7 +125,7 @@
 				{ "skill" : "blunt" , "dmgType" : "blunt" ,  "dmgTrait" : "str" , "hitTrait" : "str" },
 				{ "skill" : "bladed" ,"dmgType" : "slashing","dmgTrait" : "str" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "allSaves" , "modValue" : 1 }
 			]
 		}
@@ -143,7 +142,7 @@
 				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "dex" , "hitTrait" : "per" },
 				{ "skill" : "bladed"   , "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "reach" , "modValue" : 1 }
 			]
 		}
@@ -160,7 +159,7 @@
 				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "dex" , "hitTrait" : "per" },
 				{ "skill" : "bladed"   , "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "reach" , "modValue" : 1 }
 			]
 		}
@@ -177,7 +176,7 @@
 				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "per" },
 				{ "skill" : "blunt"  , "dmgType" : "blunt", "dmgTrait" : "per" , "hitTrait" : "str" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "damage" , "modValue" : 2 }
 			]
 		}
@@ -194,7 +193,7 @@
 				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "per" },
 				{ "skill" : "blunt"  , "dmgType" : "blunt", "dmgTrait" : "per" , "hitTrait" : "str" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "reach" , "modValue" : 1 }
 			]
 		}
@@ -211,7 +210,7 @@
 				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
 				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "str" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "allSaves" , "modValue" : 1 }
 			]
 		}
@@ -228,7 +227,7 @@
 				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
 				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "str" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "allSaves" , "modValue" : 1 }
 			]
 		}
@@ -245,7 +244,7 @@
 				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
 				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "per" , "hitTrait" : "per" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "reach" , "modValue" : 1 }
 			]
 		}
@@ -262,7 +261,7 @@
 				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
 				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "per" , "hitTrait" : "per" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "reach" , "modValue" : 1 }
 			]
 		}
@@ -279,13 +278,13 @@
 				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
 				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "str" , "hitTrait" : "str" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "damage" , "modValue" : 2 }
 			]
 		}
 	} , {
 		"name" : "Ironwood Quarterstaff",
-		"img" : "systems/mage/icons/items/weapons/quarterstaff.png",
+		"img" : "systems/mage/icons/items/weapons/quarterstaff.jpg",
 		"data" : {
 			"dmg" : "2d7",
 			"hands" : 2,
@@ -296,7 +295,7 @@
 				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
 				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "str" , "hitTrait" : "str" }
 			],
-			"implictMods" : [
+			"implicitMods" : [
 				{ "modType" : "damage" , "modValue" : 2 }
 			]
 		}

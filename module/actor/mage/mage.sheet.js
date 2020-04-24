@@ -161,10 +161,10 @@ export class MageSheet extends ActorSheet {
 
 	/*
 		Item Dragging! 
-	html.find('li.item').each((i, li) => {
-      if ( li.classList.contains("inventory-header") ) return;
-      li.setAttribute("draggable", true);
-      li.addEventListener("dragstart", handler, false);
-    });*/
+		html.find('li.item').each((i, li) => {
+		if ( li.classList.contains("inventory-header") ) return;
+		li.setAttribute("draggable", true);
+		li.addEventListener("dragstart", handler, false);
+	});*/
 
 }

@@ -33,5 +33,305 @@
 	--vitals					: rgba(110, 15, 15);
 	--vitals-text			: rgb(255, 118, 118);
 
+	--warn: rgba(110, 15, 15);
+	--success : rgba( 15, 110, 15);
+
 	--animation : all .5s ease-in-out; 
+}
+
+/* Grid & layout */
+.debug {
+	background-color: white;
+	color : black;
+	/* display: hidden; */
+}
+
+div.gen-header{
+	font-size: 1.4em;
+	background : none;
+}
+
+hr.flaired-divider{ 
+	height: 20px; 
+	border-style: solid; 
+	border-color: var(--tertiary); 
+	border-width: 0px 0 1px 0; 
+	border-radius: 20px;
+
+	margin-top: -20px;
+	margin-left:5px;
+	margin-right:5px;
+}
+
+.grid-child{
+	padding: 5px;
+	margin: 5px;
+
+	background-color: var(--gray-fade50);
+	border-radius : 0px 10px 10px 10px;
+	border: 3px outset var(--primary-fade50);
+
+	min-height: 85%;
+}
+
+/* Flex */
+.flex-row{
+	display: flex;
+}
+
+
+.flex-col{
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-center{
+	justify-content: center;
+	align-items: center;
+}
+
+.flex2{
+	flex-grow: 1;
+	width: 50%;
+}
+
+.flex1-3{
+	flex-grow: 1;
+}
+
+.flex2-3{
+	flex-grow: 2;
+}
+
+/* CSS table */
+.table{
+	display: table;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	border-radius: 5px;
+}
+
+.table .row:nth-child( even ){
+	background-color:var(--gray-fade25);
+}
+
+
+.header-row, .row , .clean-row{
+	display: table-row;
+	text-align: center;
+	
+	padding-left: 2px;
+	padding-right: 3px;
+}
+
+.header-row {
+	font-size: .9em;
+}
+
+.header-row div{
+	border-bottom: 1px solid var(--primary);
+}
+
+.row .col:first-child , .col.row-leader{
+	text-align: left;
+	width: 100px;
+	font-size: .9em;
+	color: var(--tertiary);
+	padding: 3px;
+}
+
+.tight-row .col:first-child{
+	text-align: left;
+	width: 50px;
+	font-size: .9em;
+	color: var(--tertiary);
+	padding: 3px;
+}
+
+.col {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
+.col-center-focus{
+	display: table-cell;
+	text-align: center;
+	font-size: 1.1em;
+	color: var(--tertiary);
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
+.col-left-align{
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
+/* Inputs */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+	-webkit-appearance: none; 
+	margin: 0; 
+}
+
+input{
+	color: white;
+	background-color: black;
+
+	border-radius: 5px;
+}
+
+.textarea-medium:disabled,
+.textarea-small:disabled{
+	color: lightgrey;
+}
+
+.textarea-medium,
+.textarea-small
+{
+	color: white;
+}
+
+.textarea-medium{
+	border: 1px solid var(--primary);
+	border-radius: 5px;
+	
+	min-height:80px;
+	width:350px;
+}
+
+.textarea-small{
+	border: 1px solid var(--primary);
+	border-radius: 5px;
+
+	min-height:44px;
+	width: 200px;
+}
+
+.input-wide{
+	min-width:200px;
+}
+
+.input-text:focus,
+.input-number:focus
+{
+	outline:none;
+	border-radius: 10px;
+
+	background-color: var(--selected);
+
+	box-shadow: 
+		2px 3px 5px var(--tertiary),
+		1px 1px 2px var(--tertiary);
+	border: 1px solid var(--tertiary);
+}
+
+.input-text{
+	background-color: black;
+	color: white;
+
+	padding: 3px;
+
+	border: 1px solid var(--secondary);
+
+	transition: var(--animation); 
+}
+
+.input-number{
+	width: 2em;
+	height: 2em;
+
+	text-align: center;
+
+	border-radius: 5px;
+	border: 1px solid var(--secondary);
+
+	transition: var(--animation); 
+}
+
+.input-bigly{
+	font-size: 2.0em;
+	font-weight: 900;
+}
+
+.input-tiny{
+	width: 25px;
+}
+
+.input-small{
+	width: 50px;
+}
+
+.input-medium{
+	width: 75px;
+}
+
+.input-large{
+	width: 100px;
+}
+
+/* Buttons */
+
+.btn{
+	/* background-image: -webkit-linear-gradient(top, var(--primary), var(--secondary) );*/
+	border-radius: 5px;
+	margin: 3px;
+
+	font-size: 1.2em;
+	font-weight: 800;
+
+	color: var(--base-text-color);
+
+	border: 1px solid black;
+}
+
+.btn-large{
+	width:200px;
+}
+
+.btn-hi-medium{
+	width: 100px;
+}
+
+.btn-medium{
+	width: 75px;
+	font-size: 1.5em;
+}
+
+.btn-small{
+	width: 50px;
+	font-size: 1.2em;
+}
+
+/* Super specific styling here to deal with centering & Icons */
+.btn-icon{
+	width: 24px;
+	height: 24px;
+	padding: 0px;
+	line-height: 32px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.btn-icon img{
+	width: 16px;
+	height: 16px;
+}
+
+.btn-warn{
+	background-color: var(--warn);
+}
+
+.btn-success{
+	background-color: var(--success);
+}
+
+.btn-neutral{
+	background-color: var(--secondary);
 }

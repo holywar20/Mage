@@ -1,17 +1,46 @@
 .weapons-form{
-	background: url('../../img/sheets/background.jpg');
+	background: no-repeat url('../../../img/sheets/background.jpg');
+	
+	min-width: 370px;
+	max-width: 370px;
+	
+	color: var(--base-text-color);
 }
 
 .weapon-img{
-	width: 64px;
-	height: 64px;
+	width: 128px;
+	height: 128px;
 }
-
 
 .weapon-container{
 	background-color: rgba( 0 , 0 ,0 , .75);
 	
 	display: grid;
+	grid-template-columns: 130px auto;
+	grid-template-rows: 130px auto;
+}
+
+.weapon-image{
+	border: 1px solid var(--primary);
+
+	grid-row-start: 1;
+	grid-row-end:  2;
+	grid-column-start: 1;
+	grid-column-end: 1;
+}
+
+.weapon-title{
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 2;
+	grid-column-end: 3;
+}
+
+.weapon-data{
+	grid-row-start: 2;
+	grid-row-end:  3;
+	grid-column-start: 1;
+	grid-column-end: 3;
 }
 
 

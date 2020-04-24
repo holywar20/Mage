@@ -78,7 +78,7 @@ Hooks.once('ready', function() {
 	
 	var loader = new Loader();
 	loader.loadCompendium( 'mage' , 'tradition' );
-  loader.loadCompendium( 'mage' , 'weapon' );
+  //loader.loadCompendium( 'mage' , 'weapon' );
 });
 
 // Code for making a macro based on an item drop

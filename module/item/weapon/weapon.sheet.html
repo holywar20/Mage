@@ -1,9 +1,194 @@
 <form class="weapons-form">
 
-<div class="debug">
-	Debug : _id = {{ item._id }} | {{ item.name }}
-</div>
+<div class="weapon-container">
+	<div class="weapon-image">
+		<img class="weapon-img" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+	</div>
 
-	<img class="weapon-img" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+	<div class="weapon-title">
+		<div class="grid-child">
+			<div class="gen-header">
+				<input class="input-text input-wide"  name="name" value="{{ item.name }}">
+			</div>
 
+			<section class="table">
+				<div class="tight-row">
+					<div class="col">Dmg</div>
+					<div class="col-left-align">
+					<input class="input-text input-large" name="data.dmg" value="{{ data.dmg }}"></div>
+				</div>
+
+				<div class="tight-row">
+					<div class="col">Hands</div>
+					<div class="col-left-align">
+					<select class="input-text input-large" name="data.hands">
+						{{#select data.hands }}
+						<option value="1">1-Handed</option>
+						<option value="2">2-Handed</option>
+						{{/select}}
+					</select>
+					</div>
+				</div>
+
+				<div class="tight-row">
+					<div class="col">Type</div>
+					<div class="col-left-align">
+						<select class="input-text input-medium" name="data.weaponType">
+							{{#select data.weaponType }}
+							<option value=""></option>
+							<option value="martial">Martial</option>
+							<option value="finesse">Finesse</option>
+							<option value="heavy">Heavy</option>
+							{{/select }}
+						</select>  <i>( AP 
+							{{#if_equal data.weaponType "heavy" }} 3 {{/if_equal}} 
+							{{#if_equal data.weaponType "finesse"}} 2 {{/if_equal}} 
+							{{#if_equal data.weaponType "heavy"}} 2 {{/if_equal}} )</i>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<div class="weapon-data">
+		<div class="grid-child">
+
+			<section class="table">
+				<div class="row">
+					<div class="col">Styles</div>
+				</div> 
+
+				<div class="header-row">
+					<div class="col">Skill</div>
+					<div class="col">Dmg Type</div>
+					<div class="col">Dmg Trait</div>
+					<div class="col">Hit Trait</div>
+					<div class="col">&nbsp;</div>
+				</div>
+
+				
+				{{#each data.styles as |style id|}}
+				<div class="row">
+					<div class="col">
+						<select class="input-text input-medium" name="data.styles.{{id}}.skill">
+							{{#select style.skill }}
+							<option value=""> -- </option>
+							<option value="blunt">Blunt</option>
+							<option value="bladed">Bladed</option>
+							<option value="piercing">Piercing</option>
+							<option value="bows">Bows</option>
+							<option value="firearms">Firearms</option>
+							<option value="wand">Wand</option>
+							{{/select}}
+						</select>
+					</div>
+					<div class="col">
+						<select class="input-text input-medium" name="data.styles.{{id}}.dmgType">
+							{{#select style.dmgType }}
+							<option value="solar">Solar</option>
+							<option value="banal">Banal</option>
+							<option value="lunar">Lunar</option>
+							<option value="thermal">Thermal</option>
+							<option value="electric">Electric</option>
+							<option value="toxic">Toxic</option>
+							<option value="bashing">Bashing</option>
+							<option value="piercing">Piercing</option>
+							<option value="slashing">Slashing</option>
+							{{/select }}
+						</select>
+					</div>
+					<div class="col">
+						<select class="input-text input-small" name="data.styles.{{id}}.dmgTrait">
+							{{#select style.dmgTrait }}
+							<option value="str">Strength</option>
+							<option value="per">Perception</option>
+							<option value="dex">Dexerity</option>
+							<option value="cor">Courage</option>
+							<option value="int">Intelligence</option>
+							<option value="cha">Charisma</option>
+							{{/select}}
+						</select>
+					</div>
+					<div class="col">
+						<select class="input-text input-small" name="data.styles.{{id}}.hitTrait">
+							{{#select style.hitTrait }}
+							<option value="str">Strength</option>
+							<option value="per">Perception</option>
+							<option value="dex">Dexerity</option>
+							<option value="cor">Courage</option>
+							<option value="int">Intelligence</option>
+							<option value="cha">Charisma</option>
+							{{/select }}
+						</select>
+					</div>
+					<div class="col">
+						<button delete-style="{{id}}" class="btn btn-icon btn-warn">
+							<img src="systems/mage/img/icons/trash.png">
+						</button>
+					</div>
+				</div>
+				{{/each}}
+
+				<div class="row">
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col">
+						<button add-style="true" class="btn btn-icon btn-success">
+							<img src="systems/mage/img/icons/add-row.png">
+						</button>
+					</div>
+				</div>
+
+			</section>
+
+			<section class="table">
+				<div class="row">
+					<div class="col">Modifiers</div>
+				</div> 
+
+				<div class="header-row">
+					<div class="col">Mod</div>
+					<div class="col">Value</div>
+					<div class="col">&nbsp;</div>
+				</div>
+
+				{{#each data.implicitMods as |mod id| }}
+				<div class="row">
+					<div class="col">
+						<select class="input-text input-large" name="data.implicitMods.{{id}}.modType">
+							{{#select mod.modType}}
+							<option value="allSaves">All Saves</option>
+							<option value="reach">Reach</option>
+							<option value="damage">Damage</option>
+							{{/select}}
+						</select>
+					</div>
+					<div class="col">
+						<input class="input-text input-large" name="data.implicitMods.{{id}}.modValue" value="{{ mod.modValue }}">
+					</div>
+					<div class="col">
+						<button delete-mod="{{id}}" class="btn btn-icon btn-warn">
+							<img src="systems/mage/img/icons/trash.png">
+						</button>
+					</div>
+				</div>
+				{{/each}}
+
+				<div class="row">
+					<div class="col"></div>
+					<div class="col"></div>
+					<button add-mod class="btn btn-icon btn-success">
+						<img src="systems/mage/img/icons/add-row.png">
+					</button>
+				</div>
+			</section>
+
+			<div></div>
+			<textarea class="textarea-medium" name="data.description">{{ data.description }}</textarea>
+		</div>
+	</div>
+
+</div> <!-- End of Weapon Container-->
 </form>

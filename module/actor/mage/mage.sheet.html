@@ -542,7 +542,7 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Blunt</div>
-					<select class="input-text" value="{{ data.resist.blunt }}">
+					<select class="input-text" name="data.resist.blunt" value="{{ data.resist.blunt }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -551,7 +551,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Thermal</div>
-					<select class="input-text" value="{{ data.resist.thermal }}">
+					<select class="input-text" name="data.resist.thermal" value="{{ data.resist.thermal }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -560,7 +560,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Solar</div>
-					<select class="input-text" value="{{ data.resist.solar }}">
+					<select class="input-text" name="data.resist.solar" value="{{ data.resist.solar }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -572,7 +572,7 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Peircing</div>
-					<select class="input-text" value="{{ data.resist.peircing }}">
+					<select class="input-text" name="data.resist.piercing" value="{{ data.resist.piercing }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -582,7 +582,7 @@
 			
 				<div class="col">
 					<div class="small-sub-header">Electric</div>
-					<select class="input-text" value="{{ data.resist.electric }}">
+					<select class="input-text" name="data.resist.electric" value="{{ data.resist.electric }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -591,7 +591,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Lunar</div>
-					<select class="input-text" value="{{ data.resist.lunar }}">
+					<select class="input-text" name="data.resist.lunar" value="{{ data.resist.lunar }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -603,7 +603,7 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Slashing</div>
-					<select class="input-text" value="{{ data.resist.slashing }}">
+					<select class="input-text" name="data.resist.slashing" value="{{ data.resist.slashing }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -613,7 +613,7 @@
 			
 				<div class="col">
 					<div class="small-sub-header">Toxic</div>
-					<select class="input-text" value="{{ data.resist.toxic }}">
+					<select class="input-text" name="data.resist.toxic" value="{{ data.resist.toxic }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -622,7 +622,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Banal</div>
-					<select class="input-text" value="{{ data.resist.banal }}">
+					<select class="input-text" name="data.resist.banal" value="{{ data.resist.banal }}">
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
@@ -649,11 +649,31 @@
 
 {{#if_equal data.currentTab "equipment" }}
 <div id="equipment" class="tab equipment-container equipment-tab">
-	<div class="equipment-detail"></div>
-	<div class="paper-doll"></div>
-	<div class=""></div>
-	<div></div>
-	<div></div>
+	<div class="stats-grid">
+		<div class="grid-child">
+			Development
+		</div>
+	</div>
+	<div class="doll-grid">
+		<div class="grid-child">
+			Development
+		</div>
+	</div>
+	<div class="inventory-grid">
+		<div class="grid-child">
+			Development
+		</div>
+	</div>
+	<div class="left-macro-grid">
+		<div class="grid-child">
+			Development
+		</div>
+	</div>
+	<div class="right-macro-grid">
+		<div class="grid-child">
+			Development
+		</div>
+	</div>
 </div> <!-- End of Equipment Tab -->
 {{/if_equal}}
 
