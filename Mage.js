@@ -10,6 +10,7 @@ import { MageSheet } from './module/actor/mage/mage.sheet.js';
 import { BaseItem } from './module/item/base.item.js';
 import { TraditionSheet } from './module/item/tradition/tradition.sheet.js';
 import { WeaponSheet } from './module/item/weapon/weapon.sheet.js';
+import { SpellSheet } from './module/item/spell/spell.sheet.js';
 
 import { Loader } from './helpers/loaders.js';
 
@@ -39,6 +40,9 @@ Hooks.once('init', async function() {
 	});
   Items.registerSheet("mage" , WeaponSheet ,{
     types: ["weapon"]
+  });
+  Items.registerSheet("mage" , SpellSheet ,{
+    types: ["spells"]
   });
 
 	// Register custom system settings
@@ -77,9 +81,17 @@ Hooks.once('setup', function() {
 Hooks.once('ready', function() {
 	
 	var loader = new Loader();
-	loader.loadCompendium( 'mage' , 'tradition' );
+	//loader.loadCompendium( 'mage' , 'tradition' );
   //loader.loadCompendium( 'mage' , 'weapon' );
 });
+
+/*
+function rollItemMacro( name ){
+  const speaker = ChatMessage.getSpeaker();
+
+  console.log( name );
+  console.log( speaker );
+}*/
 
 // Code for making a macro based on an item drop
 

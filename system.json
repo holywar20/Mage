@@ -14,7 +14,7 @@
 		"entity": "Item"
 	} , {
 		"name" : "spell" ,
-		"label" : "Spells",
+		"label" : "Known Magics",
 		"system" : "mage",
 		"path" : "./packs/spells.db",
 		"entity": "Item"
@@ -28,7 +28,10 @@
 	"styles": [
 		"./styles/ui.css",
 		"./styles/general.css",
+		
 		"./module/actor/mage/mage.sheet.css",
+		
+		"./module/item/spell/spell.sheet.css",
 		"./module/item/weapon/weapon.sheet.css",
 		"./module/item/tradition/tradition.sheet.css"
 		],

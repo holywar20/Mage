@@ -22,14 +22,15 @@
 				<div class="row">
 					<div class="col">Character</div>
 					<div class="col-left-align">
-						<input class="input-text input-wide">
+						<input name="actor.name" value="{{ actor.name }}" class="input-text input-wide">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col">Tradition</div>
 					<div class="col-left-align">
-						<select name="data.tradition" value="{{ data.tradition }}" class="input-text input-wide">
+						<select name="data.tradition" class="input-text input-wide">
+							{{#select data.tradition }}
 							<option value=""> -- </option>
 							<option value="">Artifice</option>
 							<option value="SOCEITY">&nbsp;&nbsp;&nbsp;Soceity of Ether</option>
@@ -47,24 +48,29 @@
 							<option value="CELESTIAL">&nbsp;&nbsp;&nbsp;Celestial Chorus</option>
 							<option value="EUTHANATOS">&nbsp;&nbsp;&nbsp;Euthanatos</option>
 							<option value="BROTHERHOOD">&nbsp;&nbsp;&nbsp;Brotherhood of the Rule</option>
+							{{/select }}
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">Mystic Traits</div>
 					<div class="col-left-align">
-						<select name="mystictraits.mental" value="{{ mystictraits.mental }}" class="input-text">
+						<select name="data.mystictraits.mental" class="input-text">
+							{{#select data.mystictraits.mental }}
 							<option value=""> -- </option>
-							<option value="Str">Intelligence</option>
-							<option value="Dex">Charisma</option>
-							<option value="Per">Courage</option>
+							<option value="int">Intelligence</option>
+							<option value="cor">Courage</option>
+							<option value="per">Perception</option>
+							{{/select }}
 						</select>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<select name="mystictraits.physical" value="{{ mystictraits.physical }}" class="input-text">
+						<select name="data.mystictraits.physical"  class="input-text">
+							{{#select data.mystictraits.physical }}
 							<option value=""> -- </option>
-							<option value="Str">Strength</option>
-							<option value="Dex">Dexerity</option>
-							<option value="Per">Perception</option>
+							<option value="str">Strength</option>
+							<option value="dex">Dexerity</option>
+							<option value="cha">Charisma</option>
+							{{/select}}
 						</select>
 					</div>
 				</div>
@@ -297,13 +303,13 @@
 	<div class="grid-child">
 		<section class="table">
 			<div class="header-row vitals-header">
-				<div class="col"></div>
+				<div class="col-lead-short"></div>
 				<div class="col">Bonus</div>
-				<div class="col">Total</div>
+				<div class="col">Current / Max</div>
 			</div>
 
 			<div class="row">
-				<div class="col">Health</div>
+				<div class="col-lead-short">Health</div>
 				<div class="col">
 					<input name="data.hp.bonus" value="{{ data.hp.bonus }}" class="input-number" type="number">
 				</div>
@@ -314,7 +320,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col">Armor</div>
+				<div class="col-lead-short">Armor</div>
 				<div class="col">
 					<input name="data.armor.bonus" value="{{ data.armor.bonus }}" class="input-number" type="number">
 				</div>
@@ -325,38 +331,50 @@
 			</div>
 
 			<div class="row">
-				<div class="col"></div>
-				<div class="col"></div>
-				<div class="col"></div>
+				<div class="col-lead-short">Paradox</div>
+				<div class="col"><input name="data.paradox.bonus" value="{{data.paradox.bonus}}" class="input-number" type="number"></div>
+				<div class="col">
+					<input name="data.paradox.current" value="{{ data.paradox.current }}" class="input-number" type="number">
+					<span> / {{ data.paradox.max }}</span> 
+					</div>
+			</div>
+
+		</section>
+
+		<section class="table">
+			<div class="header-row vitals-header">
+				<div class="col-center-align">Wound Roll</div>
+				<div class="col">Paradox Roll</div>
 			</div>
 
 			<div class="row">
-				<div class="col">Paradox</div>
-				<div class="col"><input class="input-number" type="number"></div>
-				<div class="col"><button class="btn btn-vitals"></button></div>
-			</div>
+				<div class="col-center-align">
+					<button paradox-button class="btn btn-vitals">{{ data.paradox.current }}</button>
+				</div>
 
-			<div class="row">
-				<div class="col">Wounds</div>
-				<div class="col"><button class="btn btn-vitals">Roll</button></div>
+				<div class="col">
+					<button wound-button class="btn btn-vitals">TODO</button>
+				</div>
 			</div>
 		</section>
 
 		<section class="table">
 			<div class="header-row vitals-header">
-				<div class="col">Save</div>
-				<div class="col">Bonus</div>
+				<div class="col-lead-short"></div>
+				<div class="col">Equip</div>
+				<div class="col">Enchant</div>
 				<div class="col">
 					Roll
 				</div>
 			</div>
 
-			{{#each data.defenses}}
+			{{#each data.defenses as |defense id|}}
 			<div class="row">
-				<div class="col">{{ name }}</div>
-				<div class="col"><input class="input-number" type="number" name="temp" value="{{ Bonus }}"></div>
+				<div class="col-lead-short">{{ defense.name }}</div>
+				<div class="col"><input class="input-number" type="number" name="data.defenses.{{id}}.equip" value="{{ defense.equip }}"></div>
+				<div class="col"><input class="input-number" type="number" name="data.defenses.{{id}}.enchant" value="{{ defense.enchant }}"></div>
 				<div class="col">
-					<button class="btn btn-vitals">{{ value }}</button>
+					<button save-name={{id}} class="btn btn-vitals">{{ defense.value }}</button>
 				</div>
 			</div>
 			{{/each}}
@@ -388,21 +406,21 @@
 		</div>
 
 		{{#if_equal data.currentSkillTab "grit" }}
-			{{#each data.skills.grit }}
+			{{#each data.skills.grit as |skill id|}}
 			<div class="row">
 				<div class="col">{{ name }}</div>
 				<div class="col small-text">
-					{{ trait }}
+					{{ skill.trait }}
 				</div>
 				<div class="col">
-					<input type="number" skill-change="wand" name="equip" value="{{ equip }}" class="input-number" type="number">
+					<input type="number" name="data.skills.grit.{{id}}.equip" value="{{ skill.equip }}" class="input-number">
 				</div>
 				<div class="col">
-					<input type="number" skill-change="wand" name="enchant" value="{{ enchant }}" class="input-number" type="number">
+					<input type="number" name="data.skills.grit.{{id}}.enchant" value="{{ skill.enchant }}" class="input-number">
 				</div>
 				<div class="col">
-					<button skill-name="wand" class="btn btn-skills">
-						{{ value }}
+					<button grit-skill-name="{{ id }}" class="btn btn-skills">
+						{{ skill.value }}
 					</button>
 				</div>
 			</div>
@@ -410,21 +428,21 @@
 		{{/if_equal}}
 
 		{{#if_equal data.currentSkillTab "cunning" }}
-			{{#each data.skills.cunning }}
+			{{#each data.skills.cunning as |skill id|}}
 			<div class="row">
 				<div class="col">{{ name }}</div>
 				<div class="col small-text">
 					{{ trait }}
 				</div>
 				<div class="col">
-					<input type="number" skill-change="wand" name="equip" value="{{ equip }}" class="input-number" type="number">
+					<input type="number" name="data.skills.cunning.{{id}}.equip" value="{{ skill.equip }}" class="input-number">
 				</div>
 				<div class="col">
-					<input type="number" skill-change="wand" name="enchant" value="{{ enchant }}" class="input-number" type="number">
+					<input type="number" name="data.skills.cunning.{{id}}.enchant" value="{{ skill.enchant }}" class="input-number">
 				</div>
 				<div class="col">
-					<button skill-name="wand" class="btn btn-skills">
-						{{ value }}
+					<button cunning-skill-name="{{ id }}" class="btn btn-skills">
+						{{ skill.value }}
 					</button>
 				</div>
 			</div>
@@ -432,21 +450,21 @@
 		{{/if_equal}}
 
 		{{#if_equal data.currentSkillTab "will" }}
-			{{#each data.skills.will }}
+			{{#each data.skills.will as |skill id|}}
 			<div class="row">
-				<div class="col">{{ name }}</div>
+				<div class="col">{{ skill.name }}</div>
 				<div class="col small-text">
-					{{ trait }}
+					{{ skill.trait }}
 				</div>
 				<div class="col">
-					<input type="number" skill-change="wand" name="equip" value="{{ equip }}" class="input-number" type="number">
+					<input type="number" name="data.skills.will.{{id}}.equip" value="{{ skill.equip }}" class="input-number">
 				</div>
 				<div class="col">
-					<input type="number" skill-change="wand" name="enchant" value="{{ enchant }}" class="input-number" type="number">
+					<input type="number" name="data.skills.will.{{id}}.enchant" value="{{ skill.enchant }}" class="input-number">
 				</div>
 				<div class="col">
-					<button skill-name="wand" class="btn btn-skills">
-						{{ value }}
+					<button will-skill-name="{{ id }}" class="btn btn-skills">
+						{{ skill.value }}
 					</button>
 				</div>
 			</div>
@@ -477,15 +495,21 @@
 				<div class="col">Goverance</div>
 				<div class="col">
 					<div class="small-sub-header">Time</div>
-					<button arcana-name="Time" class="btn btn-arcana">0</button>
+					<button arcana-name="time" class="btn btn-arcana">
+						{{ data.arcana.time.value }}
+					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Space</div>
-					<button arcana-name="Space" class="btn btn-arcana">0</button>
+					<button arcana-name="space" class="btn btn-arcana">
+						{{ data.arcana.space.value }}
+					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Entropy</div>
-					<button arcana-name="Entropy" class="btn btn-arcana">0</button>
+					<button arcana-name="entropy" class="btn btn-arcana">
+						{{ data.arcana.entropy.value }}
+					</button>
 				</div>
 			</div>
 
@@ -493,15 +517,21 @@
 				<div class="col">Patterns</div>
 				<div class="col">
 					<div class="small-sub-header">Matter</div>
-					<button arcana-name="" class="btn btn-arcana">0</button>
+					<button arcana-name="matter" class="btn btn-arcana">
+						{{ data.arcana.matter.value }}
+					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Life</div>
-					<button arcana-name="Life" class="btn btn-arcana">0</button>
+					<button arcana-name="life" class="btn btn-arcana">
+						{{ data.arcana.life.value }}
+					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Spirit</div>
-					<button arcana-name="Spirit" class="btn btn-arcana">0</button>
+					<button arcana-name="spirit" class="btn btn-arcana">
+						{{ data.arcana.spirit.value }}
+					</button>
 				</div>
 			</div>
 
@@ -509,15 +539,21 @@
 				<div class="col">Essence</div>
 				<div class="col">
 					<div class="small-sub-header">Mind</div>
-					<button arcana-name="Mind" class="btn btn-arcana">0</button>
+					<button arcana-name="mind" class="btn btn-arcana">
+						{{ data.arcana.mind.value }}
+					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Prime</div>
-					<button arcana-name="Prime" class="btn btn-arcana">0</button>
+					<button arcana-name="prime" class="btn btn-arcana">
+						{{ data.arcana.prime.value }}
+					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Forces</div>
-					<button arcana-name="Forces" class="btn btn-arcana">0</button>
+					<button arcana-name="force" class="btn btn-arcana">
+						{{ data.arcana.force.value }}
+					</button>
 				</div>
 			</div>
 		</section>
@@ -650,26 +686,72 @@
 {{#if_equal data.currentTab "equipment" }}
 <div id="equipment" class="tab equipment-container equipment-tab">
 	<div class="stats-grid">
+		<div class="gen-header">
+			<div class="vitals-header">
+				Statistics
+			</div>
+		</div>
+
 		<div class="grid-child">
-			Development
+			<table class="table">
+				<tr class="header-row">
+					<td class="col">1</td>
+					<td class="col">1</td>
+					<td class="col">1</td>
+					<td class="col">1</td>
+				</tr>
+
+				<tr class="row">
+					<td class="col">1</td>
+					<td class="col">1</td>
+					<td class="col">1</td>
+					<td class="col">1</td>
+				</tr>
+			</table>
+
 		</div>
 	</div>
 	<div class="doll-grid">
+		<div class="gen-header">
+			<div class="vitals-header">
+				Equipped
+			</div>
+		</div>
+		
 		<div class="grid-child">
 			Development
 		</div>
 	</div>
 	<div class="inventory-grid">
+		<div class="gen-header">
+			<div class="backpack-header">
+				Backpack
+			</div>
+		</div>
+
 		<div class="grid-child">
 			Development
 		</div>
 	</div>
 	<div class="left-macro-grid">
+		<div class="gen-header">
+			<div class="auto-macro-header">
+				Auto Macros
+			</div>
+		</div>
+
 		<div class="grid-child">
 			Development
 		</div>
 	</div>
 	<div class="right-macro-grid">
+		<div class="gen-header">
+			<div class="custom-macro-header">
+				Custom Macros
+			</div>
+		</div>
+
+
 		<div class="grid-child">
 			Development
 		</div>

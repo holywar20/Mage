@@ -71,7 +71,7 @@ hr.flaired-divider{
 	border-radius : 0px 10px 10px 10px;
 	border: 3px outset var(--primary-fade50);
 
-	min-height: 85%;
+	min-height: 90%;
 }
 
 /* Flex */
@@ -104,12 +104,13 @@ hr.flaired-divider{
 }
 
 /* CSS table */
-.table{
+.table {
 	display: table;
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
 	border-radius: 5px;
+	border: none;
 }
 
 .table .row:nth-child( even ){
@@ -129,7 +130,7 @@ hr.flaired-divider{
 	font-size: .9em;
 }
 
-.header-row div{
+.header-row div , .header-row td{
 	border-bottom: 1px solid var(--primary);
 }
 
@@ -141,6 +142,17 @@ hr.flaired-divider{
 	padding: 3px;
 }
 
+.col-lead-short{
+	text-align: left;
+	width: 50px;
+	font-size: .9em;
+	color: var(--tertiary);
+	padding: 3px;
+	display: table-cell;
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
 .tight-row .col:first-child{
 	text-align: left;
 	width: 50px;
@@ -148,6 +160,8 @@ hr.flaired-divider{
 	color: var(--tertiary);
 	padding: 3px;
 }
+
+
 
 .col {
 	display: table-cell;
@@ -165,6 +179,13 @@ hr.flaired-divider{
 	border-radius: 5px;
 }
 
+.col-center-align{
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
 .col-left-align{
 	display: table-cell;
 	text-align: left;
@@ -172,7 +193,11 @@ hr.flaired-divider{
 	border-radius: 5px;
 }
 
-/* Inputs */
+/* Inputs & Selects */
+select{
+	font-size:.8em;
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
 	-webkit-appearance: none; 

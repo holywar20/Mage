@@ -19,12 +19,14 @@ export class MageActor extends Actor{
 	prepareData(){
 		super.prepareData();
 		const data = this.data.data;
-		console.log( data );
 		/* Make sure player data isn't stupid */
 		//this._sanitizeCharacterData( data );
 
 		/* Calculate costs & total values first. */
 		this._calculateTotalsAndCosts( data );
+		
+		// Build mods array
+		//this._calculateMods();
 
 		/* Do character global character point math */
 		this._calculateGlobalCosts( data );
@@ -39,7 +41,7 @@ export class MageActor extends Actor{
 	}
 
 	_prepareItems( data ){
-		console.log( data );
+		
 	}
 
 	_triangularNumberFormula( base , costMultiple ){
@@ -48,24 +50,63 @@ export class MageActor extends Actor{
 
 	_calculateTraits( data ){
 		for( let [traitKey, trait] of Object.entries( data.traitParts ) ){
-			data.traits[traitKey] = +trait.base + +trait.temp + +trait.sustain + +trait.perm;
+			data.traits[traitKey].value = +trait.base + +trait.temp + +trait.sustained + +trait.perm;
+		}
+	}
+
+	_calculateSaves( data ){
+		for( let [ saveKey, skillGroup] of Object.entries( data.skills ) ){
+			
+			let saveTotal = 0;
+			if( saveKey =="cunning" ){ saveTotal = +data.trait.dex.value + +data.trait.per.value }
+			if( saveKey =="grit "){ saveTotal = +data.trait.str.value + +data.trait.cor.value }
+			if( saveKey =="will"){ saveTotal = +data.trait.cha.value + +data.trait.int.value }
+
+			let skillTotal = 0
+			for( let skill of Object.values( skillGroup ) ){
+				skillTotal += +skill.value
+			}
+			data.defenses[saveKey].base = +saveTotal + Math.trunc(skillTotal / 5 );
+			data.defenses[saveKey].value = data.defenses[saveKey].base + data.defenses[saveKey].bonus;
 		}
 	}
 
 	_calculateDerived( data ){
-	
+		// Calculate PAradox
+		data.paradox.max = +data.mystictraits.physical + +data.mystictraits.mental;
+
+		
 	}
 
 	_calculateArcana( data ){
-	
+		let traitBonus = 0;
+
+		if( data.mystictraits.mental ){ traitBonus += +data.traits[data.mystictraits.mental].value; }
+		if( data.mystictraits.physical ){ traitBonus += +data.traits[data.mystictraits.physical].value; }
+
+		if( traitBonus > 0 ){
+			traitBonus = Math.trunc( traitBonus / 2 );
+		}
+
+		for( let sphere of Object.values( data.arcana ) ){
+			sphere.value = +traitBonus + +sphere.total;
+		}
 	}
 
 	_calculateSkills( data ){
-	
+		for( let skillGroup of Object.values( data.skills) ){
+			for( let skill of Object.values( skillGroup ) ){
+
+				// When a skill doesn't have a trait, it's a -- line instead. Ugly, but better than making a new field.
+				let traitValue = skill.trait == "--" ? 0 : data.traits[skill.trait].value
+				skill.value = +traitValue + +skill.equip + +skill.enchant + +skill.total;
+			}
+		}
 	}
 
 	_calculateGlobalCosts( data ){
-	
+		data.cp.spent = data.cp.traits + data.cp.skills + data.cp.arcana;
+		
 	}
 
 	_calculateTotalsAndCosts( data ){
@@ -83,7 +124,7 @@ export class MageActor extends Actor{
 			trait.cost = this._triangularNumberFormula( trait.base , this.TRAIT_MULTIPLE );
 			traitCumulative += trait.cost;
 		}
-		data.cp.trait = traitCumulative;
+		data.cp.traits = traitCumulative;
 
 		let skillCumulative = 0;
 		for( let skillGroup of Object.values( data.skills) ){

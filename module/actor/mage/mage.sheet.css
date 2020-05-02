@@ -337,13 +337,16 @@ div.small-text{
 	border-radius: 3px;
 }
 
-div.character-points-header{
+div.character-points-header, 
+div.custom-macro-header,
+div.auto-macro-header
+{
 	border-radius: 5px 5px 0px 0px;
 	max-width: 200px;
 	min-width: 200px;
 
 	background-color: var(--gray-fade50);
-	margin-left: 5px; /* Want header to line up with grid-child beneath it. */
+	margin-left: 5px; /* Makes header tab line up with grid-child beneath it. */
 	margin-bottom: -5px;
 	padding: 3px;
 	text-align: center;
@@ -354,13 +357,16 @@ div.skills-header,
 div.vitals-header,
 div.arcana-header,
 div.mod-header,
-div.resistance-header{
+div.resistance-header,
+div.stats-header,
+div.backpack-header
+{
 	background-color: var(--gray-fade50);
 	border-radius: 5px 5px 0px 0px;
 	min-width: 100px;
 	max-width: 100px;
 
-	margin-left: 5px; /* Want header to line up with grid-child beneath it. */
+	margin-left: 5px; /* Makes header tab line up with grid-child beneath it. */
 	margin-bottom: -5px;
 	text-align: center;
 	padding: 3px;
@@ -370,19 +376,19 @@ div.resistance-header{
 	border-right: 1px solid;
 }
 
-div.character-points-header{
+div.character-points-header, div.equipped-header{
 	color: var(--vitals-text);
 }
 
-div.resistance-header{
+div.resistance-header, div.backpack-header{
 	color: var(--resistance-text);
 }
 
-div.traits-header{
+div.traits-header, div.stats-header{
 	color: var(--traits-text);
 }
 
-div.skills-header{
+div.skills-header , div.auto-macro-header{
 	color: var(--skills-text);
 }
 
@@ -398,6 +404,7 @@ div.resist-header{
 	color: var(--resist-text);
 }
 
-div.mod-header{
+div.mod-header, div.custom-macro-header{
 	color: white;
 }
+

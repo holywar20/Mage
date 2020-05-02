@@ -23,14 +23,14 @@
 				"mental" : "" , "physical" : "" 
 			},
 			"defenses" : {
-				"grit" :	{ "name" : "Grit"  , "base" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
-				"Will" : { "name" : "Will"  , "base" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
-				"cunning": { "name" : "Cunning" , "base" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 }
+				"grit" :	{ "name" : "Grit"  , "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
+				"Will" :	{ "name" : "Will"  , "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
+				"cunning":{ "name" : "Cunning" , "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 }
 			},
 			"resist" :{
 				"bashing" : 1 , "thermal" : 1 , "solar" : 1, "piercing" : 1 , "electric" : 1 , "lunar" : 1 , "slashing" : 1, "toxic" : 1, "banal" : 1 
 			},
-			"paradox" :{ "current" : 0 , "max" : 0 },
+			"paradox" :{ "current" : 0 , "bonus", "max" : 0 },
 			"armor" : { "current" : 0 , "bonus" : 0, "max" : 0 },
 			"hp": { "current" : 0 , "bonus" : 0 , "max" : 0 },
 			"cp": {
@@ -48,15 +48,15 @@
 				"cha" : { "name" : "Charisma", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 }
 			},
 			"arcana" : {
-				"entropy" 		: { "name": "Entropy"			, "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} , 
-				"time" 			: { "name": "Time"				, "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} ,
-				"mind" 			: { "name": "Mind"				, "value" : 0 , "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} ,
-				"matter" 		: { "name": "Matter"				, "value" : 0 , "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} ,
-				"force" 			: { "name": "Force"				, "value" : 0 , "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} ,
-				"life" 			: { "name": "Life"				, "value" : 0 , "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} ,
-				"spirit" 		: { "name": "Spirit"				, "value" : 0 , "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} ,
-				"correspondence":{ "name": "Correspondence"  , "value" : 0 , "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0} ,
-				"prime" 			: { "name": "Prime"				, "value" : 0 , "base" : 0 , "super" : 0, "temp" : 0 , "perm" : 0 , "sustained" : 0 ,"total" : 0 , "cost" : 0}
+				"entropy" 		: { "name": "Entropy", "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} , 
+				"time" 			: { "name": "Time"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"mind" 			: { "name": "Mind"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"matter" 		: { "name": "Matter"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"force" 			: { "name": "Force"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"life" 			: { "name": "Life"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"spirit" 		: { "name": "Spirit"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"space"			: { "name": "space" 	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"prime" 			: { "name": "Prime"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0}
 			},
 			"skills" : {
 				"grit": {
@@ -107,7 +107,8 @@
 			"googleDocPath": ""
 		},
 		"spells" : {
-			"description": "unassigned" 
+			"description": "unassigned" ,
+			"spellType" : "cantrip"
 		},
 		"weapon":{
 			"dmg" : "",

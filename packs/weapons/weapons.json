@@ -8,12 +8,12 @@
 			"dieMod" : 0,
 			"description" : "A simple but effective straight long blade of Theyrian Make",
 			"weaponType" : "Martial",
-			"use" : [
-				{ "skill" : "bladed" , "dmgType" : "slashing" , "dmgTrait" : "str" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "allSaves" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial" : { "skill" : "bladed" , "dmgType" : "slashing" , "dmgTrait" : "str" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial": { "modType" : "allSaves" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Theyrian Great Sword",
@@ -24,12 +24,12 @@
 			"dieMod" : 0,
 			"description" : "A 5 Foot Blade made with a high hilt to accommidate two hands, it's a surprisingly fast weapon, made to be flexible, light and allow for maximize leverage in close quarters",
 			"weaponType" : "Martial",
-			"use" : [
-				{ "skill" : "bladed" , "dmgType" : "slashing" , "dmgTrait" : "str" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "allSaves" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial" : { "skill" : "bladed" , "dmgType" : "slashing" , "dmgTrait" : "str" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" : { "modType" : "allSaves" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Dhahabi Short Spear",
@@ -40,12 +40,12 @@
 			"dieMod" : 0,
 			"description" : "A long one handed spear. It was designed initially to assist in Dhahabi's famous shield wall formations. It's fallen out of use with the advent of firearms, but it's still effective in small skirmishes. ",
 			"weaponType" : "Martial",
-			"use" : [
-				{ "skill" : "piercing" , "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "reach" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial" :{ "skill" : "piercing" , "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "reach" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Dhahabi Long Spear",
@@ -56,12 +56,12 @@
 			"dieMod" : 0,
 			"description" : "A two handed long spear, better adapted to those who empheize speed than strength allowing for great power but also freedom of movement.",
 			"weaponType" : "Martial",
-			"use" : [
-				{ "skill" : "piercing" , "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "reach" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial" :{ "skill" : "piercing" , "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" : { "modType" : "reach" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Knight's Mace",
@@ -72,12 +72,12 @@
 			"dieMod" : 0,
 			"description" : "A mace with a large, heavy, blunted head. This particular mace is adorned with holy sigils and may have once belonged to a Knight of the Southern Kingdom of Calistas",
 			"weaponType" : "Martial",
-			"use" : [
-				{ "skill" : "blunt" , "dmgType" : "blunt" , "dmgTrait" : "str" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "damage" , "modValue" : 2 }
-			]
+			"styles" : {
+				"initial" :{ "skill" : "blunt" , "dmgType" : "blunt" , "dmgTrait" : "str" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "damage" , "modValue" : 2 }
+			}
 		}
 	} , {
 		"name" : "Valorian Warhammer",
@@ -88,12 +88,12 @@
 			"dieMod" : 0,
 			"description" : "A single headed steel hammer, with a pick on the back to deal additional damage on the back swing.",
 			"weaponType" : "Martial",
-			"use" : [
-				{ "skill" : "blunt" , "dmgType" : "blunt" , "dmgTrait" : "str" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "damage" , "modValue" : 2 }
-			]
+			"styles" : {
+				"initial" :{ "skill" : "blunt" , "dmgType" : "blunt" , "dmgTrait" : "str" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "damage" , "modValue" : 2 }
+			}
 		}
 	} , {
 		"name" : "Woodcutter's Axe",
@@ -104,13 +104,13 @@
 			"dieMod" : 0,
 			"description" : "A plain axe, made for cutting the thick trees of StarWood in the Black Forest of Calistas, much to the chagrin of the Fae who once lived there. ",
 			"weaponType" : "Heavy",
-			"use" : [
-				{ "skill" : "blunt" , "dmgType" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" },
-				{ "skill" : "bladed" ,"dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "allSaves" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "blunt" , "dmgType" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" },
+				"initial2" :{ "skill" : "bladed" ,"dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "allSaves" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Valorian Waraxe",
@@ -121,13 +121,13 @@
 			"dieMod" : 0,
 			"description" : "The Valorians will often use axes like this for splitting open doors in the lightly defended hinterlands along the Gold Coast during their infamous raids.",
 			"weaponType" : "Heavy",
-			"use" : [
-				{ "skill" : "blunt" , "dmgType" : "blunt" ,  "dmgTrait" : "str" , "hitTrait" : "str" },
-				{ "skill" : "bladed" ,"dmgType" : "slashing","dmgTrait" : "str" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "allSaves" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "blunt" , "dmgType" : "blunt" ,  "dmgTrait" : "str" , "hitTrait" : "str" },
+				"initial2" :{ "skill" : "bladed" ,"dmgType" : "slashing","dmgTrait" : "str" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "allSaves" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Meridian Trident",
@@ -138,13 +138,13 @@
 			"dieMod" : 0,
 			"description" : "The Meridians are a sea faring people. Tridents like this one are often used as both weapons and a crude fishing tool when at sea.",
 			"weaponType" : "Heavy",
-			"use" : [
-				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "dex" , "hitTrait" : "per" },
-				{ "skill" : "bladed"   , "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "reach" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "dex" , "hitTrait" : "per" },
+				"initial2" :{ "skill" : "bladed"   , "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "reach" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Theyrian Wheat Scythe",
@@ -155,13 +155,13 @@
 			"dieMod" : 0,
 			"description" : "A farmer's Wheat Scythe with an extra offset secondary handle placed near it's midpoint for easily cutting large amounts of wheat. This one has ",
 			"weaponType" : "Heavy",
-			"use" : [
-				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "dex" , "hitTrait" : "per" },
-				{ "skill" : "bladed"   , "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" }
-			],
-			"implicitMods" : [
-				{ "modType" : "reach" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "dex" , "hitTrait" : "per" },
+				"initial2" :{ "skill" : "bladed"   , "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "reach" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Worker's Pick",
@@ -172,13 +172,13 @@
 			"dieMod" : 0,
 			"description" : "A miner's pick. Given the runes on it, it was most likely owned by a Valorian Worker in one of the Iron Mines south of Angel's Tier.",
 			"weaponType" : "Heavy",
-			"use" : [
-				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "per" },
-				{ "skill" : "blunt"  , "dmgType" : "blunt", "dmgTrait" : "per" , "hitTrait" : "str" }
-			],
-			"implicitMods" : [
-				{ "modType" : "damage" , "modValue" : 2 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "per" },
+				"initial2" :{ "skill" : "blunt"  , "dmgType" : "blunt", "dmgTrait" : "per" , "hitTrait" : "str" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "damage" , "modValue" : 2 }
+			}
 		}
 	} , {
 		"name" : "Angel Guard's Poleaxe",
@@ -189,13 +189,13 @@
 			"dieMod" : 0,
 			"description" : "A short, one handed Poleaxe that is normally seen in the hands of the elite Angel Guard in Angel's Tear",
 			"weaponType" : "Heavy",
-			"use" : [
-				{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "per" },
-				{ "skill" : "blunt"  , "dmgType" : "blunt", "dmgTrait" : "per" , "hitTrait" : "str" }
-			],
-			"implicitMods" : [
-				{ "modType" : "reach" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "piercing", "dmgType" : "piercing" , "dmgTrait" : "per" , "hitTrait" : "per" },
+				"initial2" :{ "skill" : "blunt"  , "dmgType" : "blunt", "dmgTrait" : "per" , "hitTrait" : "str" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "reach" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Dalamere Scimitar",
@@ -206,13 +206,13 @@
 			"dieMod" : 0,
 			"description" : "A short curved blade , made to go around armor rather than through it.",
 			"weaponType" : "Finesse",
-			"use" : [
-				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
-				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "str" }
-			],
-			"implicitMods" : [
-				{ "modType" : "allSaves" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
+				"initial2" :{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "str" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "allSaves" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Arcadian Katana",
@@ -223,13 +223,13 @@
 			"dieMod" : 0,
 			"description" : "a 4 foot, single edge, well balanced curved blade that is best used in two hands, made for quick, precise and decisive strikes.",
 			"weaponType" : "Finesse",
-			"use" : [
-				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
-				{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "str" }
-			],
-			"implicitMods" : [
-				{ "modType" : "allSaves" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
+				"initial2" :{ "skill" : "bladed", "dmgType" : "slashing", "dmgTrait" : "str" , "hitTrait" : "str" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "allSaves" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Theyrian Rapier",
@@ -240,13 +240,13 @@
 			"dieMod" : 0,
 			"description" : "A long blade often utilized by Theyrian nobles for duels. It favors a very fast style, inflicting many small wounds quickly and exploiting holes in armor.",
 			"weaponType" : "Finesse",
-			"use" : [
-				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
-				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "per" , "hitTrait" : "per" }
-			],
-			"implicitMods" : [
-				{ "modType" : "reach" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
+				"initial2" :{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "per" , "hitTrait" : "per" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "reach" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Merdian Rapier",
@@ -257,13 +257,13 @@
 			"dieMod" : 0,
 			"description" : "An extremely long single handed blade, that requires a free hand just to maintain proper balance. Meridian Ship Captains will often sport these blades.",
 			"weaponType" : "Finesse",
-			"use" : [
-				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
-				{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "per" , "hitTrait" : "per" }
-			],
-			"implicitMods" : [
-				{ "modType" : "reach" , "modValue" : 1 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "dex" , "hitTrait" : "dex" },
+				"initial2" :{ "skill" : "piercing", "dmgType" : "piercing", "dmgTrait" : "per" , "hitTrait" : "per" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "reach" , "modValue" : 1 }
+			}
 		}
 	} , {
 		"name" : "Calistas Scepter",
@@ -274,13 +274,13 @@
 			"dieMod" : 0,
 			"description" : "A brilliant scepter, often used by officers and knights of Calistas as a symbol of office",
 			"weaponType" : "Finesse",
-			"use" : [
-				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
-				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "str" , "hitTrait" : "str" }
-			],
-			"implicitMods" : [
-				{ "modType" : "damage" , "modValue" : 2 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
+				"initial2" :{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "str" , "hitTrait" : "str" }
+			},
+			"implicitMods" : {
+				"initial" :{ "modType" : "damage" , "modValue" : 2 }
+			}
 		}
 	} , {
 		"name" : "Ironwood Quarterstaff",
@@ -291,13 +291,13 @@
 			"dieMod" : 0,
 			"description" : "A long staff made from petrified Ironwood, harvested from the dead forests of the Great Dhahabi Desert.",
 			"weaponType" : "Finesse",
-			"use" : [
-				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
-				{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "str" , "hitTrait" : "str" }
-			],
-			"implicitMods" : [
-				{ "modType" : "damage" , "modValue" : 2 }
-			]
+			"styles" : {
+				"initial1" :{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "per" , "hitTrait" : "per" },
+				"initial2" :{ "skill" : "blunt", "dmgType" : "bashing", "dmgTrait" : "str" , "hitTrait" : "str" }
+			},
+			"implicitMods" : {
+				"initia" :{ "modType" : "damage" , "modValue" : 2 }
+			}
 		}
 	}
 ]

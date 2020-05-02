@@ -11,29 +11,36 @@ export class MageSheet extends ActorSheet {
 	}
 
 	mySheetHtml = null
+	actorData = this.actor.data.data;
 
 	/* CSS selector string 'constants' to make finding and refering to things with Jquery less annoying. */
 	TAB_NAME = 'tab-name';
 	SKILL_TAB_BUTTONS = '.btn-skills-tab';
 	TAB_BUTTONS = '.btn-main-tab';
 
-	SKILL_BUTTONS = '.btn-skills';
-	SKILL_EDIT_ATTRIBUTE_SELECTOR = 'input[skill-change]';
-	SKILL_CHANGE_DATA = 'skill-change'
-	SKILL_NAME = 'skill-name';
+	SKILL_INPUTS_SELECTOR = "input[skill-change]"
 
-	ARCANA_BUTTONS = '.btn-arcana';
+	CUNNING_BUTTON_SELECTOR = "button[cunning-skill-name]";
+	CUNNING_SKILL_NAME = 'cunning-skill-name';
+	
+	WILL_BUTTON_SELECTOR = "button[will-skill-name]";
+	WILL_SKILL_NAME = 'will-skill-name'
+	
+	GRIT_BUTTON_SELECTOR = "button[grit-skill-name]";
+	GRIT_SKILL_NAME = 'grit-skill-name';
+
+	ARCANA_BUTTON_SELECTOR = 'button[arcana-name]';
 	ARCANA_NAME = 'arcana-name';
 
-	TRAIT_BUTTONS = '.btn-traits';
+	TRAIT_BUTTON_SELECTOR = 'button[trait-name]';
 	TRAIT_NAME = 'trait-name'
 
-	SAVE_BUTTONS = '.btn-traits';
+	SAVE_BUTTON_SELECTOR = 'button[save-name]';
 	SAVE_NAME = 'save-name';
 
-	SELECTED = "selected";
-	/* Constants which should apply to all sheets */
-	test = "Test!";
+	TAB_BUTTON_SELECTOR = "button[selected]"
+
+
 
 	/* Overrides */
 	get template() {
@@ -49,22 +56,17 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.SKILL_TAB_BUTTONS ).click( this._changeSkillTab.bind( event ) );
 
 		/* Clickable Buttons */
-		this.mySheetHtml.find( this.SKILL_BUTTONS ).click( this._skillButtonClick.bind( event) );
-		this.mySheetHtml.find( this.ARCANA_BUTTONS ).click( this._arcanaButtonClick.bind( event) );
-		this.mySheetHtml.find( this.TRAIT_BUTTONS ).click( this._traitButtonClick.bind( event ) );
-		this.mySheetHtml.find( this.SAVE_BUTTONS ).click( this._saveButtonClick.bind( event ) );
+		this.mySheetHtml.find( this.CUNNING_BUTTON_SELECTOR ).click( this._cunningButtonClick.bind( this) );
+		this.mySheetHtml.find( this.WILL_BUTTON_SELECTOR ).click( this._willButtonClick.bind( this) );
+		this.mySheetHtml.find( this.GRIT_BUTTON_SELECTOR ).click( this._gritButtonClick.bind( this) );
 
-		/* Value changes */
-		this.mySheetHtml.find( this.SKILL_EDIT_ATTRIBUTE_SELECTOR ).change( this._skillChanged.bind( event ) );
+		this.mySheetHtml.find( this.ARCANA_BUTTON_SELECTOR ).click( this._arcanaButtonClick.bind( this ) );
+		this.mySheetHtml.find( this.TRAIT_BUTTON_SELECTOR ).click( this._traitButtonClick.bind( this ) );
+		this.mySheetHtml.find( this.SAVE_BUTTON_SELECTOR ).click( this._saveButtonClick.bind( this ) );
 	}
-
-	/* Setup methods */
 
 	/* Private methods. ( Not really private, because JS doesn't do that ) */
 
-	_skillChanged = ( event ) => {
-		this.skill = event.currentTarget.getAttribute( this.SKILL_CHANGE_DATA );
-	}
 
 	_changeMainTab = ( event ) => {
 		let buttons = this.mySheetHtml.find( this.TAB_BUTTONS );
@@ -81,81 +83,79 @@ export class MageSheet extends ActorSheet {
 		this.actor.update({"data.currentSkillTab" : tabName });
 	}
 
-	_saveButtonClick = ( event ) => {
+	async _saveButtonClick( event ){
+		console.log( event );
 		let buttonRollName = event.currentTarget.getAttribute( this.SAVE_NAME );
+		console.log( this.actorData , buttonRollName );
+		let saveValue = this.actorData.defenses[buttonRollName].value;
 
-		new Dialog({
-			title: `${buttonRollName} Check`,
-			content: `<p>What type of check?</p>`,
-			buttons: {
-				test: {
-					label: "Ability Test",
-					callback: () => { console.log("Ability!")}
-				},
-				save: {
-					label: "Saving Throw",
-					callback: () => { console.log("Save!") }
-				}
-			}
-		}).render(true);
+		if( saveValue < 1) { saveValue = 1; }
+
+		let roll = new Roll(`${saveValue}d10>cs`);
+		roll.roll();
+		roll.render();
+		roll.toMessage();
 	}
 
-	_skillButtonClick = ( event ) => {
-		let buttonRollName = event.currentTarget.getAttribute( this.SKILL_NAME );
+	async _cunningButtonClick( event ){
+		let buttonRollName = event.currentTarget.getAttribute( this.CUNNING_SKILL_NAME );
+		let mySkill = this.actorData.skills.cunning[buttonRollName].value
 
-		new Dialog({
-			title: `${buttonRollName} Check`,
-			content: `<p>What type of check?</p>`,
-			buttons: {
-				test: {
-					label: "Ability Test",
-					callback: () => { console.log("Ability!")}
-				},
-				save: {
-					label: "Saving Throw",
-					callback: () => { console.log("Save!") }
-				}
-			}
-		}).render(true);
+		if( mySkill < 1 ) { mySkill = 1; }
+
+		let roll = new Roll(`${mySkill}d10>cs`);
+		roll.roll();
+		roll.render();
+		roll.toMessage();
 	}
 
-	_arcanaButtonClick = ( event ) =>{
+	async _willButtonClick( event ){
+		let buttonRollName = event.currentTarget.getAttribute( this.WILL_SKILL_NAME );
+		let mySkill = this.actorData.skills.will[buttonRollName].value;
+
+		if( mySkill < 1 ) { mySkill = 1; }
+
+		let roll = new Roll(`${mySkill}d10>cs`);
+		roll.roll();
+		roll.render();
+		roll.toMessage();
+	}
+
+	async _gritButtonClick( event ){
+		let buttonRollName = event.currentTarget.getAttribute( this.GRIT_SKILL_NAME );
+		let mySkill = this.actorData.skills.grit[buttonRollName].value
+
+		if( mySkill < 1 ) { mySkill = 1; }
+
+		let roll = new Roll(`${mySkill}d10>cs`);
+		roll.roll();
+		roll.render();
+		roll.toMessage();
+	}
+
+	async _arcanaButtonClick( event ){
+		console.log( event )
 		let buttonRollName = event.currentTarget.getAttribute( this.ARCANA_NAME );
+		let myArcana = this.actorData.arcana[buttonRollName].value;
 
-		new Dialog({
-			title: `${buttonRollName} Check`,
-			content: `<p>What type of check?</p>`,
-			buttons: {
-				test: {
-					label: "Ability Test",
-					callback: () => { console.log("Ability!")}
-				},
-				save: {
-					label: "Saving Throw",
-					callback: () => { console.log("Save!") }
-				}
-			}
-		}).render(true);
+		if( myArcana < 1 ) { myArcana = 1; }
+
+		let roll = new Roll(`${myArcana}d10>7cs`);
+		roll.roll();
+		roll.render();
+		roll.toMessage();
 	}
 
-	_traitButtonClick = ( event ) => {
+	async _traitButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.TRAIT_NAME );
-		
+		let myTrait = this.actorData.traits[buttonRollName].value;
 
-		new Dialog({
-			title: `${buttonRollName} Check`,
-			content: `<p>What type of check?</p>`,
-			buttons: {
-				test: {
-					label: "Ability Test",
-					callback: () => { console.log("Ability!")}
-				},
-				save: {
-					label: "Saving Throw",
-					callback: () => { console.log("Save!") }
-				}
-			}
-		}).render(true);
+		if( myTrait < 1 ) { myTrait = 1; }
+		
+		let roll = new Roll(`${myTrait}d10>7cs`);
+		roll.roll();
+		roll.render();
+		roll.toMessage();
 	}
 
 
@@ -166,5 +166,18 @@ export class MageSheet extends ActorSheet {
 		li.setAttribute("draggable", true);
 		li.addEventListener("dragstart", handler, false);
 	});*/
-
+/* new Dialog({
+			title: `${buttonRollName} Check`,
+			content: `<p>What type of arcana check?</p>`,
+			buttons: {
+				test: {
+					label: "Ability Test",
+					callback: () => { console.log("Ability!")}
+				},
+				save: {
+					label: "Saving Throw",
+					callback: () => { console.log("Save!") }
+				}
+			}
+		}).render(true);*/
 }

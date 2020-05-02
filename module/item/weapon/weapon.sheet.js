@@ -1,8 +1,12 @@
 export class WeaponSheet extends ItemSheet{
 	constructor(...args) {
-		const data = {...args};
-
-		super(...args);
+		let [item , options] = [...args];
+		super( item , {
+			editable : true,
+			width : 400,
+			height: 600 ,
+			resizable: true
+		});
 	}
 
 	stylePrototype = { "skill" : "blunt" , "dmgType" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" }
@@ -87,24 +91,22 @@ export class WeaponSheet extends ItemSheet{
 		return this.item.update({ [`data.styles.-=${targetKey}`] : null });
 	}
 
-	_addImplicitModEvent ( self, clickEvent ){
-		let newKey = self.randomKey();
-		self.weaponData.implicitMods[newKey] = {}
-		Object.assign( self.weaponData.implicitMods[newKey], self.implicitModPrototype );
-		self.object.update({"implicitMods": this.weaponData.implicitMods })
+	_addImplicitModEvent ( event ){
+		event.preventDefault();
+
+		let newKey = this.randomKey();
+		this.weaponData.implicitMods[newKey] = {}
+		Object.assign( this.weaponData.implicitMods[newKey], this.implicitModPrototype );
+		
+		return this.object.update({"implicitMods": this.weaponData.implicitMods })
 	}
 
-	_deleteImplicitModEvent( self, clickEvent ){
-		let targetKey = clickEvent.currentTarget.getAttribute( this.DELETE_MOD_ATTRIBUTE);
-		console.log(targetKey);
-		
-		delete this.weaponData.implicitMods[targetKey.toString()];
-		
-		console.log( this.weaponData.implicitMods[targetKey.toString()] );
-		console.log( this.weaponData.implicitMods[2] );
-		console.log( this.weaponData );
+	async _deleteImplicitModEvent( event ){
+		event.preventDefault();
+		await this._onSubmit( event );
 
-		this.object.update({"implicitMods" : this.weaponData.implicitMods });
+		const targetKey = event.currentTarget.getAttribute( this.DELETE_MOD_ATTRIBUTE )
+		return this.item.update({ [`data.implicitMods.-=${targetKey}`] : null });
 	}
 
 	/* TODO - Hoist this into some helpers */

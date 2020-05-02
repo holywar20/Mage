@@ -43,7 +43,7 @@
 						</select>  <i>( AP 
 							{{#if_equal data.weaponType "heavy" }} 3 {{/if_equal}} 
 							{{#if_equal data.weaponType "finesse"}} 2 {{/if_equal}} 
-							{{#if_equal data.weaponType "heavy"}} 2 {{/if_equal}} )</i>
+							{{#if_equal data.weaponType "martial"}} 2 {{/if_equal}} )</i>
 					</div>
 				</div>
 			</section>
@@ -69,7 +69,7 @@
 				
 				{{#each data.styles as |style id|}}
 				<div class="row">
-					<div class="col">
+					<div class="col-center-align">
 						<select class="input-text input-medium" name="data.styles.{{id}}.skill">
 							{{#select style.skill }}
 							<option value=""> -- </option>
@@ -98,7 +98,7 @@
 						</select>
 					</div>
 					<div class="col">
-						<select class="input-text input-small" name="data.styles.{{id}}.dmgTrait">
+						<select class="input-text input-medium" name="data.styles.{{id}}.dmgTrait">
 							{{#select style.dmgTrait }}
 							<option value="str">Strength</option>
 							<option value="per">Perception</option>
@@ -110,7 +110,7 @@
 						</select>
 					</div>
 					<div class="col">
-						<select class="input-text input-small" name="data.styles.{{id}}.hitTrait">
+						<select class="input-text input-medium" name="data.styles.{{id}}.hitTrait">
 							{{#select style.hitTrait }}
 							<option value="str">Strength</option>
 							<option value="per">Perception</option>
