@@ -24,6 +24,10 @@
       return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
     }
 
+    
+
+    
+
     // Otherwise roll the Item directly
     else return item.roll();
   }

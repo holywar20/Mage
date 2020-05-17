@@ -9,19 +9,19 @@
 	"packs" : [{
 		"name": "tradition",
 		"label": "Magic Traditions",
-		"system": "mage",
+		"system": "Mage",
 		"path": "./packs/traditions/traditions.db",
 		"entity": "Item"
 	} , {
 		"name" : "spell" ,
 		"label" : "Known Magics",
-		"system" : "mage",
-		"path" : "./packs/spells.db",
+		"system" : "Mage",
+		"path" : "./packs/spells/spells.db",
 		"entity": "Item"
 	} , {
 		"name" : "weapon",
 		"label" : "Basic Weapons",
-		"system" : "mage",
+		"system" : "Mage",
 		"path" : "./packs/weapons/weapons.db",
 		"entity" : "Item"
 	}],
@@ -34,14 +34,14 @@
 		"./module/item/spell/spell.sheet.css",
 		"./module/item/weapon/weapon.sheet.css",
 		"./module/item/tradition/tradition.sheet.css"
-		],
+	],
 	"socket": true,
 	"gridDistance": 1,
 	"gridUnits": "Hex",
 	"primaryTokenAttribute": null,
 	"secondaryTokenAttribute": null,
 	"minimumCoreVersion": "0.5.0",
-	"compatibleCoreVersion": "0.5.4",
+	"compatibleCoreVersion": "0.5.5",
 	"url": "",
 	"manifest": "",
 	"download": ""

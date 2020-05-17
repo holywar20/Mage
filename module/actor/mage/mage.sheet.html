@@ -32,22 +32,22 @@
 						<select name="data.tradition" class="input-text input-wide">
 							{{#select data.tradition }}
 							<option value=""> -- </option>
-							<option value="">Artifice</option>
-							<option value="SOCEITY">&nbsp;&nbsp;&nbsp;Soceity of Ether</option>
-							<option value="BELARUS">&nbsp;&nbsp;&nbsp;Belarus Clan</option>
-							<option value="SOLIFICATI">&nbsp;&nbsp;&nbsp;Solificati</option>
-							<option value="VOID">&nbsp;&nbsp;&nbsp;Void Engineers</option>
-							<option value="">Theurgy</option>
-							<option value="ORDER">&nbsp;&nbsp;&nbsp;Order of Hermes</option>
-							<option value="STIGMATA">&nbsp;&nbsp;&nbsp;Stigmata Cabal</option>
-							<option value="TAFTANI">&nbsp;&nbsp;&nbsp;Taftani</option>
-							<option value="VAULDERMEN">&nbsp;&nbsp;&nbsp;Vauldermen</option>
-							<option value="">Conviction</option>
-							<option value="CULT">&nbsp;&nbsp;&nbsp;Cult of Grammaticus</option>
-							<option value="ONIBABA">&nbsp;&nbsp;&nbsp;Onibaba</option>
-							<option value="CELESTIAL">&nbsp;&nbsp;&nbsp;Celestial Chorus</option>
-							<option value="EUTHANATOS">&nbsp;&nbsp;&nbsp;Euthanatos</option>
-							<option value="BROTHERHOOD">&nbsp;&nbsp;&nbsp;Brotherhood of the Rule</option>
+							<option value="">-- Artifice</option>
+							<option value="SOCEITY">Soceity of Ether</option>
+							<option value="BELARUS">Belarus Clan</option>
+							<option value="SOLIFICATI">Solificati</option>
+							<option value="VOID">Void Engineers</option>
+							<option value="">-- Theurgy</option>
+							<option value="ORDER">Order of Hermes</option>
+							<option value="STIGMATA">Stigmata Cabal</option>
+							<option value="TAFTANI">Taftani</option>
+							<option value="VAULDERMEN">Vauldermen</option>
+							<option value="">-- Conviction</option>
+							<option value="CULT">Cult of Grammaticus</option>
+							<option value="ONIBABA">Onibaba</option>
+							<option value="CELESTIAL">Celestial Chorus</option>
+							<option value="EUTHANATOS">Euthanatos</option>
+							<option value="BROTHERHOOD">Brotherhood of the Rule</option>
 							{{/select }}
 						</select>
 					</div>
@@ -773,30 +773,26 @@
 		</div>
 	
 	<div class="grid-child">
-		<div class="flex-row">
-
-			<div>
-			<section class="table">
-				<div class="header-row">
-					<div class="col">Reamining</div>
-					<div class="col">Spent</div>
-					<div class="col">Total</div>
-					<div class="col">Earned</div>
-					<div class="col">Trained</div>
-				</div>
-
-				<div class="clean-row">
-					<div class="col"><div class="cp-calculated-display">{{ data.cp.remaining }}</div></div>
-					<div class="col"><div class="cp-calculated-display">{{ data.cp.spent }}</div></div>
-					<div class="col"><div class="cp-calculated-display">{{ data.cp.trained }}</div></div>
-					<div class="col"><div class="cp-calculated-display">{{ data.cp.earned }}</div></div>
-					<div class="col"><div class="cp-calculated-display">{{ data.cp.trained }}</div></div>
-				</div>
-			</section>
+		<div>
+		<section class="table">
+			<div class="header-row">
+				<div class="col">Reamining</div>
+				<div class="col">Spent</div>
+				<div class="col">Total</div>
+				<div class="col">Earned</div>
+				<div class="col">Trained</div>
 			</div>
 
-			<div class="flex2-3">
-			<section class="table">
+			<div class="clean-row">
+				<div class="col"><div class="cp-calculated-display">{{ data.cp.remaining }}</div></div>
+				<div class="col"><div class="cp-calculated-display">{{ data.cp.spent }}</div></div>
+				<div class="col"><div class="cp-calculated-display">{{ data.cp.trained }}</div></div>
+				<div class="col"><div class="cp-calculated-display">{{ data.cp.earned }}</div></div>
+				<div class="col"><div class="cp-calculated-display">{{ data.cp.trained }}</div></div>
+			</div>
+		</section>
+		</div>
+		<!--			<section class="table">
 				<div class="header-row">
 					<div class="col">Games</div>
 				</div>
@@ -808,11 +804,7 @@
 					{{/each}}
 					</div>
 				</div>
-			</section>
-			</div>
-
-
-		</div><!-- End of flex-col-->
+			</section> -->
 	</div> <!-- End of grid child-->
 	</div> <!-- End of Character Points -->
 	
@@ -864,7 +856,7 @@
 	</div>
 	</div>
 
-	<div class="aracana-points">
+	<div class="arcana-points">
 		<div class="gen-header">
 			<div class="arcana-header">Arcana</div>
 		</div>
@@ -1058,35 +1050,35 @@
 			<div class="row">
 				<div class="col">Cosmology</div>
 				<div class="col">
-					<textarea class="input-text textarea-small"></textarea>
+					<textarea name="data.spec.cosmology" class="input-text textarea-small">{{ data.spec.cosmology }}</textarea>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col">Occult</div>
 				<div class="col">
-					<textarea class="input-text textarea-small"></textarea>
+					<textarea name="data.spec.occult" class="input-text textarea-small">{{ data.spec.occult }}</textarea>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col">Academics</div>
 				<div class="col">
-					<textarea class="input-text textarea-small"></textarea>
+					<textarea name="data.spec.academics" class="input-text textarea-small">{{ data.spec.academics }}</textarea>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col">Survival</div>
 				<div class="col">
-					<textarea class="input-text textarea-small"></textarea>
+					<textarea name="data.spec.survival" class="input-text textarea-small">{{ data.spec.survival }}</textarea>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col">Craft</div>
 				<div class="col">
-					<textarea class="input-text textarea-small"></textarea>
+					<textarea name="data.spec.craft" class="input-text textarea-small">{{ data.spec.craft }}</textarea>
 				</div>
 			</div>
 		</section>

@@ -1,3 +1,124 @@
 <form class="spell-form">
-	Spell Sheet!
+
+<div class="flex-row">
+	<img class="spell-img" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+	<div class="grid-child">
+		<section class="table">
+			<div class="row">
+				<div class="col">Name</div>
+				<div class="col">
+					<input name="item.name" value="{{ item.name }}"class="input-text">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Type</div>
+				<div class="col">
+					<select name="data.spellType" class="input-text">
+						{{#select data.spellType}}
+							<option value="Simple">Simple</option>
+							<option value="Complex">Complex</option>
+							<option value="Extended">Extended</option>
+							<option value="Instant">Instant</option>
+							<option value="Enchantment">Enchantment</option>
+						{{/select}}
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Vulgarity</div>
+				<div class="col">
+					<select name="data.vulgarity" class="input-text">
+					{{#select data.vulgarity }}
+						<option value="never">Never</option>
+						<option value="coincidental">Coincidental</option>
+						<option value="witness">Witness</option>
+						<option value="always">Always</option>
+					{{/select}}
+					</select>
+				</div>
+			</div>
+		</section>
+		
+		<section class="table">
+			<div class="row">
+				<div class="col">
+					Targets
+				</div>
+				<div class="col">
+					<input name="data.targets.num" class="input-number">
+				</div>
+				<div class="col">					
+					<select name="data.targets" class="input-text">
+						{{#select data.targets}}
+							<option value="self">Self</option>
+							<option value="other">Other</option>
+							<option value="area">Area</option>
+							<option value="hexes">Hexes</option>
+							<option value="Line">Line</option>
+						{{/select}}
+					</select>
+				</div>
+				<div class="col">
+					<input name="data.targets.num2" class="input-number">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					Duration
+				</div>
+				<div class="col"></div>
+			</div>
+
+			<div class="row">
+				<div class="col">Level</div>
+				<div class="col">
+					<input name="data.level" value="{{data.level}}" class="input-number">
+				</div>
+				<div class="col">Paradox</div>
+				<div class="col">
+					<input name="data.paradox" value="{{ data.paradox }}" class="input-number">
+				</div>
+			</div>
+		</section>
+
+		<section class="table">
+			
+		</section>
+	</div>
+</div>
+
+<div class="flex-row">
+	<div class="flex-1">
+		<div class="grid-child">
+		<section class="table">
+			<div class="row">
+				<div class="col">Description</div>
+				<div class="col">
+					<textarea class="textarea-medium"></textarea>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+
+<div class = "flex-row">
+	<div class="flex-1">
+		<div class="grid-child">
+		<section class="table">
+			<div class="col"></div>
+			<div class="col">
+			</div>
+		</section>
+			
+		</div>
+	</div>
+</div>
+
+</div>
+
+
 </form>

@@ -12,7 +12,7 @@
 
 	display: grid;
 	grid-template-columns : 350px 300px 250px;
-	grid-template-rows : 100px 200px 210px auto;
+	grid-template-rows : 100px 220px 210px 200px;
 }
 
 .equipment-container{
@@ -21,6 +21,14 @@
 	display: grid;
 	grid-template-columns : 150px 150px 150px 150px 150px 150px;
 	grid-template-rows : 400px 400px;
+}
+
+.development-container{
+	background: rgba( 0 , 0 ,0 , .75);
+
+	display: grid;
+	grid-template-columns: 300px 600px;
+	grid-template-rows: 100px 270px 290px auto;
 }
 
 .stats-grid{
@@ -62,19 +70,18 @@
 	grid-row-end: 3;
 }
 
-.development-container{
-	background: rgba( 0 , 0 ,0 , .75);
-
-	display: grid;
-	grid-template-columns: 300px 600px;
-	grid-template-rows: 115px 270px auto;
-}
-
 .char-points{
 	grid-column-start: 1;
-	grid-column-end: 3;
+	grid-column-end: 2;
 	grid-row-start: 1;
 	grid-row-end: 2;
+}
+
+.game-points{
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 5;
 }
 
 .trait-points{
@@ -85,17 +92,17 @@
 }
 
 .skill-points{
-	grid-column-start: 1;
+	grid-column-start: 2;
 	grid-column-end: 3;
-	grid-row-start: 3;
+	grid-row-start: 1;
 	grid-row-end: 4;
 }
 
-.skill-points{
-	grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 3;
+.arcana-points{
+	grid-column-start:1;
+	grid-column-end:2;
+	grid-row-start:3;
+	grid-row-end: 5;
 }
 
 .mage-logo{
@@ -117,7 +124,10 @@
 }
 
 .mods{
-	min-height: 400px;
+	grid-column-start: 3;
+	grid-column-end : 4;
+	grid-row-start: 3;
+	grid-row-end: 5;
 }
 
 .vitals{
@@ -128,8 +138,6 @@
 }
 
 .arcana{
-	min-width: 250px;
-
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start:3;
@@ -137,8 +145,6 @@
 }
 
 .resistance{
-	min-width: 250px;
-
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 4;
@@ -149,7 +155,7 @@
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start:3;
-	grid-row-end: 4;
+	grid-row-end: 5;
 }
 
 /* buttons */
@@ -350,6 +356,10 @@ div.auto-macro-header
 	margin-bottom: -5px;
 	padding: 3px;
 	text-align: center;
+
+	border-top: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
 }
 
 div.traits-header, 
@@ -358,6 +368,7 @@ div.vitals-header,
 div.arcana-header,
 div.mod-header,
 div.resistance-header,
+div.games-header,
 div.stats-header,
 div.backpack-header
 {

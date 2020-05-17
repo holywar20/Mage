@@ -42,7 +42,7 @@ Hooks.once('init', async function() {
     types: ["weapon"]
   });
   Items.registerSheet("mage" , SpellSheet ,{
-    types: ["spells"]
+    types: ["spell"]
   });
 
 	// Register custom system settings

@@ -1,7 +1,9 @@
 .spell-form{
 	background: no-repeat url('../../../img/sheets/background.jpg');
-	min-height: 550px;
-	min-width: 430px;
-	max-width: 430px;
 	color: var(--base-text-color);
+}
+
+.spell-img{
+	width: 128px;
+	height: 128px;
 }

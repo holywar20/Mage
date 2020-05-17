@@ -19,6 +19,9 @@
 			"currentSkillTab" : "grit",
 			"tradition" : "0",
 			"exp" : 30 ,
+			"spec" : {
+				"survival": "","academics": "", "craft" : "" , "occult" : "", "cosmology" : ""
+			},
 			"mystictraits" : {
 				"mental" : "" , "physical" : "" 
 			},
@@ -30,7 +33,7 @@
 			"resist" :{
 				"bashing" : 1 , "thermal" : 1 , "solar" : 1, "piercing" : 1 , "electric" : 1 , "lunar" : 1 , "slashing" : 1, "toxic" : 1, "banal" : 1 
 			},
-			"paradox" :{ "current" : 0 , "bonus", "max" : 0 },
+			"paradox" :{ "current" : 0 , "bonus" : 0, "max" : 0 },
 			"armor" : { "current" : 0 , "bonus" : 0, "max" : 0 },
 			"hp": { "current" : 0 , "bonus" : 0 , "max" : 0 },
 			"cp": {
@@ -98,7 +101,7 @@
 		}
 	}, 
 	"Item":{
-		"types" : ["tradition" , "spells" , "weapon"],
+		"types" : ["tradition" , "spell" , "weapon"],
 		"tradition" : {
 			"boonName" : "unassigned",
 			"traditionType" :"unassigned" ,
@@ -106,9 +109,16 @@
 			"penaltyDescription" : "unassigned",
 			"googleDocPath": ""
 		},
-		"spells" : {
-			"description": "unassigned" ,
-			"spellType" : "cantrip"
+		"spell" : {
+			"vulgarity" : "never",
+			"paradox" : 0,
+			"level" : 0,
+			"targets" : {
+				"num" : 0 , "type" : "self" , "num2" : 0
+			},
+			"spellType" : "simple",
+			"duration" : "1 Action",
+			"description": "unassigned"
 		},
 		"weapon":{
 			"dmg" : "",

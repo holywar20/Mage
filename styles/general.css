@@ -9,6 +9,8 @@
 	--base-text-color : white;
 	--selected : rgba(25 , 49 , 113, .5 );
 
+	--input-background : rgba(20,20,20, .8);
+
 	--gray-fade25: rgba(50, 30, 50, 0.50);
 	--gray-fade50: rgba(20,20,20, .75);
 
@@ -71,12 +73,14 @@ hr.flaired-divider{
 	border-radius : 0px 10px 10px 10px;
 	border: 3px outset var(--primary-fade50);
 
-	min-height: 90%;
+	min-height: calc(100% - 40px);
 }
 
 /* Flex */
 .flex-row{
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 
@@ -88,6 +92,11 @@ hr.flaired-divider{
 .flex-center{
 	justify-content: center;
 	align-items: center;
+}
+
+.flex-1{
+	flex-grow:1;
+	width: 0;
 }
 
 .flex2{
@@ -206,7 +215,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 input{
 	color: white;
-	background-color: black;
+	background-color: var(--input-background);
 
 	border-radius: 5px;
 }
@@ -220,6 +229,8 @@ input{
 .textarea-small
 {
 	color: white;
+	background-color: var(--input-background);
+	border: 1px solid var(--secondary);
 }
 
 .textarea-medium{
@@ -227,7 +238,6 @@ input{
 	border-radius: 5px;
 	
 	min-height:80px;
-	width:350px;
 }
 
 .textarea-small{
@@ -235,12 +245,12 @@ input{
 	border-radius: 5px;
 
 	min-height:44px;
-	width: 200px;
 }
 
 .input-wide{
-	min-width:200px;
+	min-width:150px;
 }
+
 
 .input-text:focus,
 .input-number:focus
