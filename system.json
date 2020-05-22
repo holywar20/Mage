@@ -9,19 +9,19 @@
 	"packs" : [{
 		"name": "tradition",
 		"label": "Magic Traditions",
-		"system": "Mage",
+		"system": "mage",
 		"path": "./packs/traditions/traditions.db",
 		"entity": "Item"
 	} , {
 		"name" : "spell" ,
 		"label" : "Known Magics",
-		"system" : "Mage",
+		"system" : "mage",
 		"path" : "./packs/spells/spells.db",
 		"entity": "Item"
 	} , {
 		"name" : "weapon",
 		"label" : "Basic Weapons",
-		"system" : "Mage",
+		"system" : "mage",
 		"path" : "./packs/weapons/weapons.db",
 		"entity" : "Item"
 	}],

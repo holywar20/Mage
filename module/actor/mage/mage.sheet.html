@@ -31,7 +31,7 @@
 					<div class="col-left-align">
 						<select name="data.tradition" class="input-text input-wide">
 							{{#select data.tradition }}
-							<option value=""> -- </option>
+							<option value=""></option>
 							<option value="">-- Artifice</option>
 							<option value="SOCEITY">Soceity of Ether</option>
 							<option value="BELARUS">Belarus Clan</option>
@@ -78,8 +78,6 @@
 		</div>
 	</div> <!-- End pf Header-->
 
-	
-
 	<div class="traits">
 
 	<div class="gen-header">
@@ -95,7 +93,10 @@
 				<div class="trait-header-margin"><h4 class="sub-header">Strength</h4></div>
 				<div class="big-trait-container">
 					<input disabled class="input-trait-subscript" value="{{ data.traitParts.str.base }}">
-					<button trait-name="str" class="btn btn-medium btn-traits">{{ data.traits.str.value }}</button>
+					<button trait-name="str" class="btn btn-medium btn-traits">
+					<span class="inline-icon">&#127922;</span>
+					{{ data.traits.str.value }}
+					</button>
 				</div>
 
 				<div class="small-header flex-row">
@@ -126,14 +127,18 @@
 				<div><h4 class="sub-header">Dexerity</h4></div>
 				<div class="big-trait-container">
 					<input name="data.traitParts.dex.base" value="{{ data.traitParts.dex.base }}" disabled class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.dex.value }}</button>
+					<button trait-name="dex" class="btn btn-medium btn-traits">
+					<span class="inline-icon">&#127922;</span>
+					{{ data.traits.dex.value }}
+					</button>
 				</div>
 
 				<div class="small-header flex-row">
 					<div>&nbsp;Temp</div>
 					<div><input class="input-number" type="number"
 						name="data.traitParts.dex.temp"
-						value="{{ data.traitParts.dex.temp }}" ></div>
+						value="{{ data.traitParts.dex.temp }}" >
+						</div>
 				</div>
 
 				<div class="small-header flex-row striped">
@@ -159,7 +164,10 @@
 				<div><h4 class="sub-header">Perception</h4></div>
 				<div class="big-trait-container">
 					<input name="data.traitParts.per.base" value="{{ data.traitParts.per.base }}" disabled class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.per.value }}</button>
+					<button trait-name="dex" class="btn btn-medium btn-traits">
+					<span class="inline-icon">&#127922;</span>
+					{{ data.traits.per.value }}
+					</button>
 				</div>
 
 				<div class="small-header flex-row">
@@ -194,7 +202,9 @@
 					<input 
 						name="data.traitParts.int.base" 
 						value="{{ data.traitParts.int.base }}" disabled class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.int.value }}</button>
+					<button trait-name="dex" class="btn btn-medium btn-traits">
+					<span class="inline-icon">&#127922;</span>
+					{{ data.traits.int.value }}</button>
 				</div>
 
 				<div class="small-header flex-row">
@@ -229,7 +239,10 @@
 				<input disabled class="input-trait-subscript"
 					name="data.traitParts.cha.base"
 					value="{{ data.traitParts.cha.base }}">
-				<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.cha.value }}</button>
+				<button trait-name="dex" class="btn btn-medium btn-traits">
+					<span class="inline-icon">&#127922;</span>
+					{{ data.traits.cha.value }}
+				</button>
 			</div>
 
 			<div class="small-header flex-row">
@@ -262,7 +275,10 @@
 				<div><h4 class="sub-header">Courage</h4></div>
 				<div class="big-trait-container">
 					<input name="data.traitParts.cor.base" value="{{ data.traitParts.cor.base }}" disabled class="input-trait-subscript">
-					<button trait-name="dex" class="btn btn-medium btn-traits">{{ data.traits.cor.value }}</button>
+					<button trait-name="dex" class="btn btn-medium btn-traits">
+						<span class="inline-icon">&#127922;</span>
+						{{ data.traits.cor.value }}
+					</button>
 				</div>
 
 				<div class="small-header flex-row">
@@ -349,11 +365,15 @@
 
 			<div class="row">
 				<div class="col-center-align">
-					<button paradox-button class="btn btn-vitals">{{ data.paradox.current }}</button>
+					<button wound-button class="btn btn-vitals">
+						<span class="inline-icon">&#127922;</span>
+					</button>
 				</div>
 
 				<div class="col">
-					<button wound-button class="btn btn-vitals">TODO</button>
+					<button paradox-button class="btn btn-vitals">
+						<span class="inline-icon">&#127922;</span>
+					{{ data.paradox.current }}</button>
 				</div>
 			</div>
 		</section>
@@ -374,7 +394,10 @@
 				<div class="col"><input class="input-number" type="number" name="data.defenses.{{id}}.equip" value="{{ defense.equip }}"></div>
 				<div class="col"><input class="input-number" type="number" name="data.defenses.{{id}}.enchant" value="{{ defense.enchant }}"></div>
 				<div class="col">
-					<button save-name={{id}} class="btn btn-vitals">{{ defense.value }}</button>
+					<button save-name={{id}} class="btn btn-vitals">
+						<span class="inline-icon">&#127922;</span>
+						{{ defense.value }}
+					</button>
 				</div>
 			</div>
 			{{/each}}
@@ -420,6 +443,7 @@
 				</div>
 				<div class="col">
 					<button grit-skill-name="{{ id }}" class="btn btn-skills">
+						<span class="inline-icon">&#127922;</span>
 						{{ skill.value }}
 					</button>
 				</div>
@@ -442,6 +466,7 @@
 				</div>
 				<div class="col">
 					<button cunning-skill-name="{{ id }}" class="btn btn-skills">
+						<span class="inline-icon">&#127922;</span>
 						{{ skill.value }}
 					</button>
 				</div>
@@ -464,6 +489,7 @@
 				</div>
 				<div class="col">
 					<button will-skill-name="{{ id }}" class="btn btn-skills">
+						<span class="inline-icon">&#127922;</span>
 						{{ skill.value }}
 					</button>
 				</div>
@@ -496,18 +522,21 @@
 				<div class="col">
 					<div class="small-sub-header">Time</div>
 					<button arcana-name="time" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.time.value }}
 					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Space</div>
 					<button arcana-name="space" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.space.value }}
 					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Entropy</div>
 					<button arcana-name="entropy" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.entropy.value }}
 					</button>
 				</div>
@@ -518,18 +547,21 @@
 				<div class="col">
 					<div class="small-sub-header">Matter</div>
 					<button arcana-name="matter" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.matter.value }}
 					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Life</div>
 					<button arcana-name="life" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.life.value }}
 					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Spirit</div>
 					<button arcana-name="spirit" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.spirit.value }}
 					</button>
 				</div>
@@ -540,18 +572,21 @@
 				<div class="col">
 					<div class="small-sub-header">Mind</div>
 					<button arcana-name="mind" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.mind.value }}
 					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Prime</div>
 					<button arcana-name="prime" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.prime.value }}
 					</button>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Forces</div>
 					<button arcana-name="force" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.force.value }}
 					</button>
 				</div>
@@ -760,8 +795,138 @@
 {{/if_equal}}
 
 {{#if_equal data.currentTab "spellbook"}}
-<div id="spellbook" class="tab main-container spellbook-tab">
-	SpellBook!
+<div id="spellbook" class="tab spell-book-container spellbook-tab">
+	<div class="spellbook-filter-grid">
+		<div class="gen-header">
+			<div class="spellbook-filter-header">Filters</div>
+		</div>
+	
+		<div class="grid-child">
+
+		</div>
+	</div>
+
+	<div class="spellbook-sort-grid">
+		<div class="gen-header">
+			<div class="spellbook-sort-header">Sort</div>
+		</div>
+
+		<div class="grid-child">
+		
+		</div>
+	</div>
+
+	<div class="spellbook-rote-grid">
+		<div class="gen-header">
+			<div class="spellbook-rote-header">Rotes</div>
+		</div>
+
+		<div class="grid-child">
+			<div class="justify-content-between">
+				<span>Memorized</span>
+				<span class="non-input-number">0</span>
+			</div>
+			<div class="justify-content-between">
+				<span>Remaining</span>
+				<span class="non-input-number">0</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="spellbook-list-grid">
+		<div class="gen-header">
+			<div class="spellbook-list-header">Spellbook</div>
+		</div>
+
+		<div class="grid-child">
+			{{#each data.spells as |spell id|}}
+			<div class="one-third-element">
+				<div class="flex-row mini-card-top">
+					<div>
+						<button roll-spell="{{spell._id}}" class="btn btn-spellroll">
+							<img src="{{spell.img}}">
+						</button>
+					</div>
+					<div class="flex-2">
+						<span class="row-title">{{ spell.name }}</span><br>
+						<span class="row-subtitle">{{ spell.data.spellType }}</span><br>
+						<span class="row-subtitle">
+
+						</span>
+					</div>
+					<div class="flex-2">
+						<div class="justify-content-between">
+							<span>
+							{{#if spell.data.memorized.value }}
+								<button memorize-spell="{{spell._id}}" class="btn btn-success">
+									<img src="systems/mage/img/icons/memorize.png">
+								</button>
+								<input class="type-number" value="{{spell.memorized.num}}">
+							{{else}}
+								<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-warn">
+									<img src="systems/mage/img/icons/memorize.png">
+								</button>
+							{{/if}}
+							</span>
+
+							<span>
+								<button delete-spell="{{spell._id}}" class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/trash.png">
+								</button>
+							</span>
+						</div>
+
+						<div class="justify-content-between">
+							<div><!-- Just a spacer for now--></div>
+
+							<button edit-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
+								<img src="systems/mage/img/icons/gear.png">
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-row mini-card-bottom">
+					<div class="flex-1">
+						<div class="justify-content-between">
+							<span class="row-subtitle">&nbsp;Vulgarity</span>
+							<span class="span-non-input-number">{{ spell.data.vulgarity }}</span>
+						</div>
+
+						<div class="justify-content-between">
+							<span class="row-subtitle">&nbsp;Paradox</span>
+							<span class="span-non-input-number">{{ spell.data.paradox }}</span>
+						</div>
+					</div>
+
+					<div class="flex-1">
+						<div class="justify-content-between">
+							<span class="row-subtitle">&nbsp;&nbsp;&nbsp;Level</span>
+							<span class="span-non-input-number">{{ spell.data.level }}</span>
+						</div>
+						
+						<div class="justify-content-between">
+							<span class="row-subtitle">&nbsp;&nbsp;&nbsp;Arcana</span>
+							<span class="span-non-input-number">{{ spell.data.arcana }}</span>
+						</div>
+					</div>
+
+					<div class="flex-1">
+
+					</div>
+				</div>
+			</div>
+			{{/each}}
+
+			<div class="one-third-element">
+				<button add-spell class="btn btn-large btn-success">
+					<span>Add New Spell</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	
 </div><!-- End of Spellbook Tab -->
 {{/if_equal}}
 
@@ -791,7 +956,7 @@
 				<div class="col"><div class="cp-calculated-display">{{ data.cp.trained }}</div></div>
 			</div>
 		</section>
-		</div>
+	</div>
 		<!--			<section class="table">
 				<div class="header-row">
 					<div class="col">Games</div>

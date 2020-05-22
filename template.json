@@ -17,6 +17,8 @@
 			"templates" : ["common"],
 			"currentTab" : "character",
 			"currentSkillTab" : "grit",
+			"spells" : [],
+			"items" : [],
 			"tradition" : "0",
 			"exp" : 30 ,
 			"spec" : {
@@ -110,14 +112,25 @@
 			"googleDocPath": ""
 		},
 		"spell" : {
+			"editable" : false,
+			"effects" :{},
+			"spheres" : {},
+			"memorized" : {
+				"value" : false , "number" : 0
+			},
+			"arcana" : 0,
 			"vulgarity" : "never",
 			"paradox" : 0,
-			"level" : 0,
+			"range": {
+				"num" : 0 , "type" : "hexes"
+			},
 			"targets" : {
 				"num" : 0 , "type" : "self" , "num2" : 0
 			},
+			"duration" : {
+				"num" : 0 , "type" : ""
+			},
 			"spellType" : "simple",
-			"duration" : "1 Action",
 			"description": "unassigned"
 		},
 		"weapon":{

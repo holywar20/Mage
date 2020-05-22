@@ -40,7 +40,16 @@ export class MageSheet extends ActorSheet {
 
 	TAB_BUTTON_SELECTOR = "button[selected]"
 
+	SPELL_ADD = "button[add-spell]";
 
+	SPELL_DELETE = "button[delete-spell]";
+	SPELL_DELETE_NAME = "delete-spell";
+	SPELL_EDIT = "button[edit-spell]";
+	SPELL_EDIT_NAME = "edit-spell";
+	SPELL_ROLL = "button[roll-spell]";
+	SPELL_ROLL_NAME = "roll-spell";
+	SPELL_MEMORIZE = "button[memorize-spell]";
+	SPELL_MEMORIZE_NAME = "memorize-spell";
 
 	/* Overrides */
 	get template() {
@@ -63,6 +72,14 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.ARCANA_BUTTON_SELECTOR ).click( this._arcanaButtonClick.bind( this ) );
 		this.mySheetHtml.find( this.TRAIT_BUTTON_SELECTOR ).click( this._traitButtonClick.bind( this ) );
 		this.mySheetHtml.find( this.SAVE_BUTTON_SELECTOR ).click( this._saveButtonClick.bind( this ) );
+
+		/* Spells  */
+		this.mySheetHtml.find( this.SPELL_ADD ).click( this._onSpellAdd.bind( this ) );
+		this.mySheetHtml.find( this.SPELL_EDIT ).click( this._onSpellEdit.bind( this ) );
+		this.mySheetHtml.find( this.SPELL_DELETE ).click( this._onSpellDelete.bind( this ) );
+		this.mySheetHtml.find( this.SPELL_ROLL ).click( this._onSpellRoll.bind( this ) );
+
+		/* Item Inventory */
 	}
 
 	/* Private methods. ( Not really private, because JS doesn't do that ) */
@@ -158,6 +175,43 @@ export class MageSheet extends ActorSheet {
 		roll.toMessage();
 	}
 
+	_onSpellRoll( event ){
+		event.preventDefault();
+		console.log("rolling!");
+	}
+
+	_onSpellAdd( event ){
+		const itemData = {
+			name: `New Spell`,
+			type: "spell",
+			data : {
+				"arcana" : "5"
+			}
+		}
+
+		const result = this.actor.createOwnedItem( itemData );
+		console.log( this.actor);
+	}
+
+	_onSpellEdit( event ){
+		event.preventDefault();
+		let spellId = event.currentTarget.getAttribute( this.SPELL_EDIT_NAME );
+		let spell = this.actor.getOwnedItem( spellId );
+		spell.sheet.render( true );
+	}
+
+	_onSpellDelete( event ){
+		event.preventDefault();
+		let spellId = event.currentTarget.getAttribute( this.SPELL_DELETE_NAME );
+		this.actor.deleteOwnedItem( spellId );
+	}
+
+	/*
+	_onSpellMemorize( event ){
+		event.preventDefault();
+		let spellId = event.currentTarget.getAttribute( this.SPELL_DELETE_NAME );
+		console.log("Memorizing"); 
+	}*/
 
 	/*
 		Item Dragging! 

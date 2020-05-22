@@ -7,28 +7,51 @@
 }
 
 /* Grid */
-.character-container{
+.character-container, .equipment-container, .development-container, .spell-book-container{
 	background-color: rgba( 0 , 0 ,0 , .75);
 
 	display: grid;
+}
+
+
+.character-container{
 	grid-template-columns : 350px 300px 250px;
 	grid-template-rows : 100px 220px 210px 200px;
 }
 
 .equipment-container{
-	background-color: rgba( 0 , 0 ,0 , .75);
-
-	display: grid;
 	grid-template-columns : 150px 150px 150px 150px 150px 150px;
 	grid-template-rows : 400px 400px;
 }
 
 .development-container{
-	background: rgba( 0 , 0 ,0 , .75);
-
-	display: grid;
 	grid-template-columns: 300px 600px;
 	grid-template-rows: 100px 270px 290px auto;
+}
+
+.spell-book-container{
+	grid-template-columns: 385px 385px 130px;
+	grid-template-rows:100px 600px;
+}
+
+.spellbook-rote-grid{
+	grid-column: 3 / 4;
+	grid-row: 1 / 2; 
+}
+
+.spellbook-filter-grid{
+	grid-column: 1 / 2;
+	grid-row: 1 / 2;
+}
+
+.spellbook-sort-grid{
+	grid-column: 2  / 3;
+	grid-row: 1 / 2;
+}
+
+.spellbook-list-grid{
+	grid-column: 1 / 4;
+	grid-row: 2 / 3;
 }
 
 .stats-grid{
@@ -168,12 +191,22 @@
 .btn-traits , .input-traits{
 	background-color: var(--traits);
 }
-.btn-arcana, .input-aracana{
+.btn-arcana, .input-aracana, .btn-spellroll{
 	background-color: var(--arcana);
 }
 .btn-skills , .input-skills{
 	background-color: var(--skills);
 	color: white;
+}
+
+.btn-spellroll img::hover{
+	text-shadow: 4px 3px black;
+}
+
+.btn-spellroll{
+	width: 50px;
+	height: 50px;
+	padding: 2px;
 }
 
 .btn-skills, .btn-arcana , .btn-vitals{
@@ -370,7 +403,11 @@ div.mod-header,
 div.resistance-header,
 div.games-header,
 div.stats-header,
-div.backpack-header
+div.backpack-header,
+div.spellbook-list-header,
+div.spellbook-sort-header,
+div.spellbook-filter-header,
+div.spellbook-rote-header
 {
 	background-color: var(--gray-fade50);
 	border-radius: 5px 5px 0px 0px;
@@ -386,6 +423,8 @@ div.backpack-header
 	border-left: 1px solid;
 	border-right: 1px solid;
 }
+
+
 
 div.character-points-header, div.equipped-header{
 	color: var(--vitals-text);
@@ -407,7 +446,11 @@ div.vitals-header{
 	color: var(--vitals-text);
 }
 
-div.arcana-header{
+div.arcana-header, 
+div.spellbook-list-header,
+div.spellbook-sort-header,
+div.spellbook-filter-header,
+div.spellbook-rote-header{
 	color: var(--arcana-text);
 }
 

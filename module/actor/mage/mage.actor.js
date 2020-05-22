@@ -35,13 +35,28 @@ export class MageActor extends Actor{
 		this._calculateArcana( data );
 		this._calculateSkills( data );
 
-		this._prepareItems( data );
+		this._prepareItems( this.data.items );
 
 		this._calculateDerived( data );
 	}
 
-	_prepareItems( data ){
+	_prepareItems( itemList ){
+		const inventory = {
+			weapons : { label : "Weapons" , type: "weapon" ,  items: [] },
+			spells : { label : "Spells" , type: "spell" , items: [] }
+		}
 		
+		
+		let [weapons , spells] = itemList.reduce( ( allArrays, item ) =>{
+			console.log( item );
+			if( item.type === "spell" ) allArrays[1].push( item );
+			if( item.type === "weapons" ) allArrays[0].push( item );
+
+			return allArrays;
+		} , [[], []] );
+
+		this.data.data.weapons = weapons;
+		this.data.data.spells = spells;
 	}
 
 	_triangularNumberFormula( base , costMultiple ){

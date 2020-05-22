@@ -8,20 +8,20 @@
 			<div class="row">
 				<div class="col">Name</div>
 				<div class="col">
-					<input name="item.name" value="{{ item.name }}"class="input-text">
+					<input name="name" value="{{ item.name }}"class="input-text">
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col">Type</div>
-				<div class="col">
+				<div class="col-left-align">
 					<select name="data.spellType" class="input-text">
 						{{#select data.spellType}}
-							<option value="Simple">Simple</option>
-							<option value="Complex">Complex</option>
-							<option value="Extended">Extended</option>
-							<option value="Instant">Instant</option>
-							<option value="Enchantment">Enchantment</option>
+							<option value="simple">Simple</option>
+							<option value="complex">Complex</option>
+							<option value="extended">Extended</option>
+							<option value="instant">Instant</option>
+							<option value="enchantment">Enchantment</option>
 						{{/select}}
 					</select>
 				</div>
@@ -29,7 +29,7 @@
 
 			<div class="row">
 				<div class="col">Vulgarity</div>
-				<div class="col">
+				<div class="col-left-align">
 					<select name="data.vulgarity" class="input-text">
 					{{#select data.vulgarity }}
 						<option value="never">Never</option>
@@ -41,28 +41,66 @@
 				</div>
 			</div>
 		</section>
-		
+	</div>
+</div>
+
+<div class="flex-row">
+<div class="flex-1">
+	<div class="grid-child">
 		<section class="table">
 			<div class="row">
-				<div class="col">
-					Targets
+
+				<div class="col">Level</div>
+				<div class="col-left-align">
+					<input name="data.level" value="{{data.level}}" class="input-number">
 				</div>
-				<div class="col">
-					<input name="data.targets.num" class="input-number">
+				<div class="col"></div>
+
+				<div class="col-lead-short">Paradox</div>
+				<div class="col-left-align">
+					<input name="data.paradox" value="{{ data.paradox }}" class="input-number">
 				</div>
-				<div class="col">					
-					<select name="data.targets" class="input-text">
-						{{#select data.targets}}
-							<option value="self">Self</option>
-							<option value="other">Other</option>
-							<option value="area">Area</option>
+				<div class="col"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-lead-short">
+					Range
+				</div>
+				<div class="col-left-align">
+					<input name="data.range.num" value="{{data.range.num}}" class="input-number">
+				</div>
+				<div class="col-left-align">
+					<select name="data.range.type" class="input-text">
+						{{#select data.targets.type}}
 							<option value="hexes">Hexes</option>
-							<option value="Line">Line</option>
+							<option value="miles">Kilometers</option>
 						{{/select}}
 					</select>
 				</div>
-				<div class="col">
-					<input name="data.targets.num2" class="input-number">
+
+				<div class="col-lead-short">
+					Targets
+				</div>
+				<div class="col-left-align">
+					<input name="data.targets.num" value="{{data.targets.num}}" class="input-number">
+				</div>
+				<div class="col-left-align">					
+					<select name="data.targets.type" class="input-text">
+						{{#select data.targets.type}}
+							<option value="self">Self</option>
+							<option value="targets">Targets</option>
+							<option value="area">Area</option>
+							<option value="hexes">Hexes</option>
+							<option value="line">Line</option>
+							<option value="other">Other</option>
+						{{/select}}
+					</select>
+				</div>
+				<div class="col-left-align">
+					{{#if_equal data.targets.type "line"}}
+					Width <input name="data.targets.num2" class="input-number">
+					{{/if_equal }}
 				</div>
 			</div>
 
@@ -70,55 +108,159 @@
 				<div class="col">
 					Duration
 				</div>
+				<div class="col-left-align">
+					<input class="input-number" name="data.duration.num" value="{{ data.duration.num }}">
+				</div>
+				<div class="col-left-align">
+					<select class="input-text" name="data.duration.type">
+						{{#select data.duration.type}}
+							<option value="rounds">Rounds</option>
+							<option value="hours">Hours</option>
+							<option value="days">Days</option>
+							<option value="reserved">Reserved</option>
+							<option value="permanent">Permanent</option>
+						{{/select}}
+					</select>
+				</div>
+				<div class="col-left-align"></div>
+			</div>
+
+		</section>
+
+		<section class="table">
+			<div class="row"></div>
+			<div class="row">
+				<div class="col">Description</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<textarea class="textarea-medium" name="data.description">{{ data.description }}</textarea>
+				</div>
+			</div>
+		</section>
+			
+	</div>
+</div>
+</div> <!-- End of Spell Details-->
+
+<div class="flex-row">
+	<div class="flex-2">
+		<div class="grid-child">
+		<section class="table">
+			<div class="row">
+				<div class="col">Effects</div>
+				<div class="col"></div>
 				<div class="col"></div>
 			</div>
 
+			{{#each data.effects as |effect id|}}
 			<div class="row">
-				<div class="col">Level</div>
 				<div class="col">
-					<input name="data.level" value="{{data.level}}" class="input-number">
+					<select name="data.effects.{{id}}.type" class="input-text">
+					{{#select effect.type}}
+						<option value="damage">Damage</option>
+						<option value="resist">Resist</option>
+						<option value="status">Status</option>
+					{{/select}}
+					<select>
 				</div>
-				<div class="col">Paradox</div>
 				<div class="col">
-					<input name="data.paradox" value="{{ data.paradox }}" class="input-number">
+					<select name="data.effects.{{id}}.subtype" class="input-text">
+					{{#select effect.subtype}}
+						<option value="">-- Physical --</option>
+						<option value="bashing">Bashing</option>
+						<option value="peircing">Peircing</option>
+						<option value="slashing">Slashing</option>
+						<option value="">-- Elemental --</option>
+						<option value="toxic">Toxic</option>
+						<option value="thermal">Thermal</option>
+						<option value="electric">Electric</option>
+						<option value="">-- Celestial --</option>
+						<option value="solar">Solar</option>
+						<option value="lunar">Lunar</option>
+						<option value="banal">Banal</option>
+					{{/select}}
+					</select>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.effects.{{id}}.num" value="{{effect.num}}">
+				</div>
+				<div class="col">
+					<button delete-effect="{{id}}" class="btn btn-icon btn-warn">
+						<img src="systems/mage/img/icons/trash.png">
+					</button>
 				</div>
 			</div>
-		</section>
+			{{/each}}
 
-		<section class="table">
-			
+			<div class="row">
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<button add-effect class="btn btn-icon btn-success">
+					<img src="systems/mage/img/icons/add-row.png">
+				</button>
+			</div>
 		</section>
+		</div><!-- End of effects grid-child -->
 	</div>
-</div>
 
-<div class="flex-row">
 	<div class="flex-1">
 		<div class="grid-child">
 		<section class="table">
 			<div class="row">
-				<div class="col">Description</div>
+				<div class="col">Spheres</div>
+				<div class="col"></div>
+			</div>
+			{{#each data.spheres as |sphere id|}}
+			<div class="row">
 				<div class="col">
-					<textarea class="textarea-medium"></textarea>
+					<select name="data.spheres.{{id}}.type" class="input-text">
+						{{#select sphere.type}}
+						<option value=""></option>
+						<option value="">-- Wyrm</option>
+						<option value="entropy">Entropy</option>
+						<option value="spirit">Spirit</option>
+						<option value="force">Force</option>
+						<option value="">-- Wyld</option>
+						<option value="space">Space</option>
+						<option value="life">Life</option>
+						<option value="prime">Prime</option>
+						<option value="">-- Weaver</option>
+						<option value="time">Time</option>
+						<option value="matter">Matter</option>
+						<option value="mind">Mind</option>
+						{{/select}}
+					</select>
+				</div>
+
+				<div class="col">
+					<input value="{{ sphere.num }}" class="input-number">
+				</div>
+
+				<div class="col">
+					<button delete-sphere="{{id}}" class="btn btn-icon btn-warn">
+						<img src="systems/mage/img/icons/trash.png">
+					</button>
+				</div>
+			</div>
+			{{/each}}
+			
+			<div class="row">
+				<div class="col"></div>
+				<div clas="col"></div>
+				<div class="col">
+					<button add-sphere class="btn btn-icon btn-success">
+						<img src="systems/mage/img/icons/add-row.png">
+					</button>
 				</div>
 			</div>
 		</section>
+		</div><!-- End of schools grid-child -->
 	</div>
-</div>
+</div><!-- End of spell Data-->
 
-<div class = "flex-row">
-	<div class="flex-1">
-		<div class="grid-child">
-		<section class="table">
-			<div class="col"></div>
-			<div class="col">
-			</div>
-		</section>
-			
-		</div>
-	</div>
-</div>
 
-</div>
 
 
 </form>
