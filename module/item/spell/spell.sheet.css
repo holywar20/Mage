@@ -3,7 +3,14 @@
 	color: var(--base-text-color);
 }
 
+.spell-container{
+	background-color: var(--gray-fade50);
+	min-height: 500px;
+}
+
 .spell-img{
 	width: 128px;
 	height: 128px;
+
+	border: 1px solid var(--primary);
 }

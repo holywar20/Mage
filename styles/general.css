@@ -106,7 +106,6 @@ hr.flaired-divider{
 	justify-content: space-between;
 }
 
-
 .flex-col{
 	display: flex;
 	flex-direction: column;
@@ -137,6 +136,11 @@ hr.flaired-divider{
 
 .flex-2{
 	flex-grow: 2;
+	width: 0;
+}
+
+.fex-3{
+	flex-grow: 3;
 	width: 0;
 }
 
@@ -446,3 +450,21 @@ span.inline-icon{
 	justify-content: space-between;
 }
 
+span.tag{
+	background-color: var(--secondary);
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 3px;
+}
+
+span.damage-display{
+	font-size: .85em;
+	color: white;
+	float: right;
+}
+
+table.clean-table{
+	border: 0px;
+	margin: 3px;
+	font-size: .9em;
+}

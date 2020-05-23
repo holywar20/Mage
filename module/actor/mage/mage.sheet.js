@@ -78,6 +78,7 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.SPELL_EDIT ).click( this._onSpellEdit.bind( this ) );
 		this.mySheetHtml.find( this.SPELL_DELETE ).click( this._onSpellDelete.bind( this ) );
 		this.mySheetHtml.find( this.SPELL_ROLL ).click( this._onSpellRoll.bind( this ) );
+		this.mySheetHtml.find( this.SPELL_MEMORIZE ).click( this._onSpellMemorize.bind( this ) );
 
 		/* Item Inventory */
 	}
@@ -184,9 +185,7 @@ export class MageSheet extends ActorSheet {
 		const itemData = {
 			name: `New Spell`,
 			type: "spell",
-			data : {
-				"arcana" : "5"
-			}
+			data : {}
 		}
 
 		const result = this.actor.createOwnedItem( itemData );
@@ -205,13 +204,15 @@ export class MageSheet extends ActorSheet {
 		let spellId = event.currentTarget.getAttribute( this.SPELL_DELETE_NAME );
 		this.actor.deleteOwnedItem( spellId );
 	}
-
-	/*
+	
 	_onSpellMemorize( event ){
 		event.preventDefault();
-		let spellId = event.currentTarget.getAttribute( this.SPELL_DELETE_NAME );
-		console.log("Memorizing"); 
-	}*/
+		let spellId = event.currentTarget.getAttribute( this.SPELL_MEMORIZE_NAME );
+		let spell = this.actor.getOwnedItem( spellId );
+		spell.update({'data.memorized.value' : !spell.data.data.memorized.value });
+
+		console.log( spell );
+	}
 
 	/*
 		Item Dragging! 

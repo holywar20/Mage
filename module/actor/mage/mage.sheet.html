@@ -847,26 +847,21 @@
 							<img src="{{spell.img}}">
 						</button>
 					</div>
-					<div class="flex-2">
-						<span class="row-title">{{ spell.name }}</span><br>
+					<div class="flex-3">
+						{{ spell.name }}</span><br>
 						<span class="row-subtitle">{{ spell.data.spellType }}</span><br>
 						<span class="row-subtitle">
-
+						{{#each spell.data.spheres as |sphere id|}}
+							<span class="tag">{{ sphere.type }} {{ sphere.num }}</span>
+						{{/each}}
 						</span>
 					</div>
 					<div class="flex-2">
 						<div class="justify-content-between">
 							<span>
-							{{#if spell.data.memorized.value }}
-								<button memorize-spell="{{spell._id}}" class="btn btn-success">
-									<img src="systems/mage/img/icons/memorize.png">
+								<button edit-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
+									<img src="systems/mage/img/icons/gear.png">
 								</button>
-								<input class="type-number" value="{{spell.memorized.num}}">
-							{{else}}
-								<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-warn">
-									<img src="systems/mage/img/icons/memorize.png">
-								</button>
-							{{/if}}
 							</span>
 
 							<span>
@@ -877,11 +872,23 @@
 						</div>
 
 						<div class="justify-content-between">
-							<div><!-- Just a spacer for now--></div>
-
-							<button edit-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
-								<img src="systems/mage/img/icons/gear.png">
-							</button>
+							<div>
+								{{#if spell.data.memorized.value }}
+									Count:
+									<input class="input-number" name="data.spells.{{id}}.memorized.num" value="{{spell.memorized.num}}">
+								{{/if}}
+							</div>
+							<span class="row-title">
+								{{#if spell.data.memorized.value }}
+									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
+										<img src="systems/mage/img/icons/memorize.png">
+									</button>
+								{{else}}
+									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-warn">
+										<img src="systems/mage/img/icons/memorize.png">
+									</button>
+								{{/if}}
+							</span>
 						</div>
 					</div>
 				</div>
@@ -897,22 +904,28 @@
 							<span class="row-subtitle">&nbsp;Paradox</span>
 							<span class="span-non-input-number">{{ spell.data.paradox }}</span>
 						</div>
-					</div>
 
-					<div class="flex-1">
-						<div class="justify-content-between">
-							<span class="row-subtitle">&nbsp;&nbsp;&nbsp;Level</span>
-							<span class="span-non-input-number">{{ spell.data.level }}</span>
-						</div>
-						
 						<div class="justify-content-between">
 							<span class="row-subtitle">&nbsp;&nbsp;&nbsp;Arcana</span>
 							<span class="span-non-input-number">{{ spell.data.arcana }}</span>
 						</div>
 					</div>
 
-					<div class="flex-1">
+					<div class="flex-2 align-right">
+						{{#each spell.data.effects as |effect id|}}
+							
 
+							{{#if_equal effect.type "damage" }}
+								<span class="damage-display">Deals {{ effect.num }} {{ effect.subtype }} Dmg</span>
+							{{/if_equal}}
+
+							{{#if_equal effect.type "status" }}
+								<span></span>
+							{{/if_equal}}
+
+							
+						{{/each}}
+						</table>
 					</div>
 				</div>
 			</div>

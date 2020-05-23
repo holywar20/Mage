@@ -1,13 +1,19 @@
 <form class="spell-form">
+<div class="spell-container">
+
 
 <div class="flex-row">
+	<div class="flex-1">
 	<img class="spell-img" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
 
+	</div>
+
+	<div class="flex-2">
 	<div class="grid-child">
 		<section class="table">
 			<div class="row">
 				<div class="col">Name</div>
-				<div class="col">
+				<div class="col-left-align">
 					<input name="name" value="{{ item.name }}"class="input-text">
 				</div>
 			</div>
@@ -40,28 +46,22 @@
 					</select>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col">Paradox</div>
+				<div class="col-left-align">
+					<input name="data.paradox" value="{{ data.paradox }}" class="input-number">
+				</div>
+			</div>
 		</section>
-	</div>
-</div>
+	</div> <!-- End of Grid child-->
+	</div><!-- End of Flex-2 -->
+</div><!-- End of flex row-->
 
 <div class="flex-row">
 <div class="flex-1">
 	<div class="grid-child">
 		<section class="table">
-			<div class="row">
-
-				<div class="col">Level</div>
-				<div class="col-left-align">
-					<input name="data.level" value="{{data.level}}" class="input-number">
-				</div>
-				<div class="col"></div>
-
-				<div class="col-lead-short">Paradox</div>
-				<div class="col-left-align">
-					<input name="data.paradox" value="{{ data.paradox }}" class="input-number">
-				</div>
-				<div class="col"></div>
-			</div>
 
 			<div class="row">
 				<div class="col-lead-short">
@@ -89,11 +89,12 @@
 					<select name="data.targets.type" class="input-text">
 						{{#select data.targets.type}}
 							<option value="self">Self</option>
-							<option value="targets">Targets</option>
-							<option value="area">Area</option>
-							<option value="hexes">Hexes</option>
-							<option value="line">Line</option>
 							<option value="other">Other</option>
+							<option value="targets">Targets</option>
+							<option value="hexes">Hexes</option>
+							<option value="radius">Radius</option>
+							<option value="line">Line</option>
+							<option value="cone">Cone</option>
 						{{/select}}
 					</select>
 				</div>
@@ -106,6 +107,12 @@
 
 			<div class="row">
 				<div class="col">
+					Description
+				</div>
+				<div class="col"></div>
+				<div class="col"></div>
+
+				<div class="col-lead-short">
 					Duration
 				</div>
 				<div class="col-left-align">
@@ -128,10 +135,6 @@
 		</section>
 
 		<section class="table">
-			<div class="row"></div>
-			<div class="row">
-				<div class="col">Description</div>
-			</div>
 			<div class="row">
 				<div class="col">
 					<textarea class="textarea-medium" name="data.description">{{ data.description }}</textarea>
@@ -235,7 +238,7 @@
 				</div>
 
 				<div class="col">
-					<input value="{{ sphere.num }}" class="input-number">
+					<input name="data.spheres.{{id}}.num" value="{{ sphere.num }}" class="input-number">
 				</div>
 
 				<div class="col">
@@ -261,6 +264,5 @@
 </div><!-- End of spell Data-->
 
 
-
-
+</div>
 </form>

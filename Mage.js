@@ -73,6 +73,10 @@ Hooks.once('setup', function() {
       return opts.inverse(this)
     }
   });
+
+  Handlebars.registerHelper('capitalize' , function( string , opts ){
+    
+  });
 });
 
 /* ------------------------------------ */
