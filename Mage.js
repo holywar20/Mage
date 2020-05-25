@@ -85,8 +85,8 @@ Hooks.once('setup', function() {
 Hooks.once('ready', function() {
 	
 	var loader = new Loader();
-	loader.loadCompendium( 'mage' , 'tradition' );
-  loader.loadCompendium( 'mage' , 'weapon' );
+	//loader.loadCompendium( 'mage' , 'tradition' );
+  //loader.loadCompendium( 'mage' , 'weapon' );
 });
 
 /*

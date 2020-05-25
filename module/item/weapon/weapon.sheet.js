@@ -9,7 +9,7 @@ export class WeaponSheet extends ItemSheet{
 		});
 	}
 
-	stylePrototype = { "skill" : "blunt" , "dmgType" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" }
+	stylePrototype = { "skill" : "blunt" , "dmgType" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" , "total" : 0 }
 	implicitModPrototype = {"modType" : "allsaves" , "modValue" : "1" }
 
 	ADD_STYLE_BUTTON_SELECTOR = 'button[add-style]';

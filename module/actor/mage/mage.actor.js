@@ -46,11 +46,9 @@ export class MageActor extends Actor{
 			spells : { label : "Spells" , type: "spell" , items: [] }
 		}
 		
-		
 		let [weapons , spells] = itemList.reduce( ( allArrays, item ) =>{
-			console.log( item );
 			if( item.type === "spell" ) allArrays[1].push( item );
-			if( item.type === "weapons" ) allArrays[0].push( item );
+			if( item.type === "weapon" ) allArrays[0].push( item );
 
 			return allArrays;
 		} , [[], []] );

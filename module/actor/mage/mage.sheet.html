@@ -1,14 +1,25 @@
 <form class="mage-form">
 
+<!-- 
 <div class="debug">
 	Debug : _id = {{ actor._id }} | currentTab = {{ data.currentTab }}
-</div>
+</div>-->
 
-<div	class="flex-row flex-center">
-	<button tab-name="character" selected="true" class="btn btn-large btn-main-tab">Character</button>
-	<button tab-name="equipment" selected="false" class="btn-main-tab btn btn-large">Equipment</button>
-	<button tab-name="spellbook" selected="false" class="btn-main-tab btn btn-large">Spellbook</button>
-	<button tab-name="development" selected="false" class="btn-main-tab btn btn-large">Development</button>
+<div	class="flex-row flex-center pad-4">
+	<button tab-name="character" 
+		{{#if_equal data.currentTab "character"}} selected {{/if_equal}} 
+	class="btn btn-large btn-main-tab">Character</button>
+	<button tab-name="equipment" 
+		{{#if_equal data.currentTab "equipment"}} selected {{/if_equal}} 
+		class="btn btn-large btn-main-tab">Equipment</button>
+	<button tab-name="spellbook" 
+		{{#if_equal data.currentTab "spellbook"}} selected {{/if_equal}} 
+		class="btn btn-large btn-main-tab">
+		Spellbook</button>
+	<button tab-name="development" class="btn btn-large btn-main-tab"
+		{{#if_equal data.currentTab "development"}} selected {{/if_equal}}>
+		Development
+	</button>
 </div>
 
 <hr class="flaired-divider">
@@ -414,9 +425,15 @@
 
 	<div class="grid-child">
 		<div class="flex-row">
-			<button tab-name="grit" class="btn btn-hi-medium btn-skills-tab">Grit</button>
-			<button tab-name="cunning" class="btn btn-hi-medium btn-skills-tab">Cunning</button>
-			<button tab-name="will" class="btn btn-hi-medium btn-skills-tab">Will</button>
+			<button tab-name="grit" 
+				{{#if_equal data.currentSkillTab "grit"}} selected {{/if_equal}} 
+				class="btn btn-hi-medium btn-skills-tab">Grit</button>
+			<button tab-name="cunning" 
+				{{#if_equal data.currentSkillTab "cunning"}} selected {{/if_equal}} 
+				class="btn btn-hi-medium btn-skills-tab">Cunning</button>
+			<button tab-name="will" 
+				{{#if_equal data.currentSkillTab "will"}} selected {{/if_equal}} 
+				class="btn btn-hi-medium btn-skills-tab">Will</button>
 		</div>
 
 		<section class="table">
@@ -720,75 +737,264 @@
 
 {{#if_equal data.currentTab "equipment" }}
 <div id="equipment" class="tab equipment-container equipment-tab">
-	<div class="stats-grid">
+	<div class="equip-list-grid">
 		<div class="gen-header">
-			<div class="vitals-header">
-				Statistics
-			</div>
+			<div class="equip-list-header">Inventory</div>
 		</div>
 
 		<div class="grid-child">
-			<table class="table">
-				<tr class="header-row">
-					<td class="col">1</td>
-					<td class="col">1</td>
-					<td class="col">1</td>
-					<td class="col">1</td>
-				</tr>
+			<div class="expandable">
+				<div button-expandable="stats" class="flex-row expandable-header 
+					{{#if_equal data.inventoryExpanded.stats true}}open{{/if_equal}}">
+					<div class="flex-1">Character</div>
+					<div class="flex-half flex-justify-self-right"></div>
+				</div>
 
-				<tr class="row">
-					<td class="col">1</td>
-					<td class="col">1</td>
-					<td class="col">1</td>
-					<td class="col">1</td>
-				</tr>
-			</table>
+				<div expandable-data="stats" class="expanded 
+					{{#if_equal data.inventoryExpanded.stats true}}open{{/if_equal}}">
+					<section>
+						Stats!
+					</section>
+				</div>
+			</div><!-- End of Expandable Stats -->
+
+			<div class="expandable">
+				<div button-expandable="weapons" class="flex-row expandable-header
+					{{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
+					<div class="flex-1">Weapons</div>
+					<div class="flex-half flex-justify-self-right"></div>
+				</div>
+
+				<div expandable-data="weapons" class="expanded
+					{{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
+					<section class="table">
+						{{#each data.weapons as |weapon id| }}
+						<div class="row">
+							<div class="col">
+								<span><img class="inventory-item" src="{{weapon.img}}"></span>
+							</div>
+							<div class="col">
+								<span>{{weapon.name}}</span><br>
+								<span></span>
+							</div>
+							<div class="col">
+								{{#each weapon.data.styles as |style id|}}
+								<button class="btn btn-vitals">
+									{{ style.skill }} {{ style.total }}
+								</button>
+								{{/each}}
+							</div>
+							<div class="col justify-content-between">
+								<span>
+									<button edit-weapon="{{weapon._id}}" class="btn btn-icon btn-neutral">
+										<img src="systems/mage/img/icons/gear.png">
+									</button>
+								</span>
+
+								<span>
+									<button delete-weapon="{{weapon._id}}" class="btn btn-icon btn-warn">
+										<img src="systems/mage/img/icons/trash.png">
+									</button>
+								</span>
+							</div>
+						</div>
+						{{/each}}
+					</section>
+
+					<div class="flex-row">
+						<div></div>
+						<div class="align-right">
+							<button add-weapon class="btn btn-large btn-success">
+							<span>Add Weapon</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div><!-- End of expandable weapons-->
+
+			<div class="expandable">
+				<div button-expandable="armor" class="flex-row expandable-header
+					{{#if_equal data.inventoryExpanded.armor true}}open{{/if_equal}}">
+					<div class="flex-1">Armor</div>
+					<div class="flex-half flex-justify-self-right">
+
+					</div>
+				</div>
+
+				<div expandable-data="armor" class="expanded
+					{{#if_equal data.inventoryExpanded.armor true}}open{{/if_equal}}
+					">
+					<section>
+						Armor
+					</section>
+				</div>
+			</div>
+
+			<div class="expandable">
+				<div button-expandable="other" class="flex-row expandable-header
+					{{#if_equal data.inventoryExpanded.other true}}open{{/if_equal}}
+					">
+					<div class="flex-1">Other Equipment</div>
+					<div class="flex-half flex-justify-self-right">
+
+					</div>
+				</div>
+
+				<div expandable-data="other" class="expanded
+					{{#if_equal data.inventoryExpanded.other true}}open{{/if_equal}}
+					">
+					<section>
+						Other Equipment & Consumables
+					</section>
+				</div>
+			</div>
+
+			<div class="expandable">
+				<div button-expandable="assets" class="flex-row expandable-header
+					{{#if_equal data.inventoryExpanded.assets true}}open{{/if_equal}}
+					">
+					<div class="flex-1">Assets & Income</div>
+					<div class="flex-half flex-justify-self-right">
+
+					</div>
+				</div>
+
+				<div expandable-data="assets" class="expanded
+					{{#if_equal data.inventoryExpanded.assets true}}open{{/if_equal}} ">
+					<section>
+						Assets
+					</section>
+				</div>
+			</div>
 
 		</div>
 	</div>
+
 	<div class="doll-grid">
 		<div class="gen-header">
-			<div class="vitals-header">
-				Equipped
-			</div>
+			<div class="doll-header">Armor</div>
 		</div>
 		
 		<div class="grid-child">
-			Development
+			<div class="paper-doll">
+				<img src="systems/mage/img/sheets/paper-doll.png">
+
+				<div class="armor-set-container">
+					<div class="flex-row">
+						<div class="flex-1"></div>
+						<div class="flex-1">
+							<img class="armor-equipment" src="systems/mage/icons/items/equipment/cloak-fur.jpg"><br>
+							<span class="small-text">Helmet</span>
+						</div>
+						<div class="flex-1">
+							<img class="armor-equipment" src="systems/mage/icons/items/equipment/cowl.jpg"><br>
+							<span class="small-text">Neck</span>
+						</div>
+					</div>
+
+					<div class="flex-row">
+						<div class="flex-1"></div>
+						<div class="flex-1">
+							<img class="armor-equipment" src="systems/mage/icons/items/armor/halfplate.png"><br>
+							<span class="small-text">Armor</span>
+						</div>
+						<div class="flex-1">
+							<img class="armor-equipment" src="systems/mage/icons/items/jewelry/ring-eye.jpg"><br>
+							<span class="small-text">Right Ring</span>
+						</div>
+					</div>
+
+					<div class="flex-row">
+						<div class="flex-1">
+							<img class="armor-equipment" src="systems/mage/icons/items/jewelry/ring-gold.jpg"><br>
+							<span class="small-text">Left Ring</span>
+						</div>
+						<div class="flex-1">
+							<img class="armor-equipment" src="systems/mage/icons/items/jewelry/ring-gold.jpg"><br>
+							<span class="small-text">Belt</span>
+						</div>
+						<div class="flex-1">
+							
+						</div>
+					</div>
+					
+					<div class="flex-row">
+						<div class="flex-1"></div>
+						<div class="flex-1">
+							<img class="armor-equipment" src="systems/mage/icons/items/equipment/boots.png"><br>
+							<span class="small-text">Boots</span>
+						</div>
+						<div class="flex-1"></div>
+					</div>
+
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="inventory-grid">
+
+	<div class="weapon-set-grid">
 		<div class="gen-header">
-			<div class="backpack-header">
-				Backpack
-			</div>
+			<div class="weapon-set-header">Weapons</div>
 		</div>
 
 		<div class="grid-child">
-			Development
-		</div>
-	</div>
-	<div class="left-macro-grid">
-		<div class="gen-header">
-			<div class="auto-macro-header">
-				Auto Macros
-			</div>
-		</div>
+			<section class="table">
+				<div class="row weapon-set-container">
+					<div class="col-lead-short">
+						<button class="btn btn-neutral">Equip<br>Set 1</button>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/weapons/battleaxe.png"><br>
+						<span class="small-text">Battleaxe of Justice</span>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/armor/shield.png"><br>
+						<span class="small-text">Mirror Shield</span>
+					</div>
+				</div>
 
-		<div class="grid-child">
-			Development
-		</div>
-	</div>
-	<div class="right-macro-grid">
-		<div class="gen-header">
-			<div class="custom-macro-header">
-				Custom Macros
-			</div>
-		</div>
+				<div class="row weapon-set-container">
+					<div class="col-lead-short">
+						<button class="btn btn-neutral">Equip<br>Set 2</button>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/weapons/battleaxe.png"><br>
+						<span class="small-text">Battleaxe of Justice</span>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/armor/shield.png"><br>
+						<span class="small-text">Mirror Shield</span>
+					</div>
+				</div>
 
+				<div class="row weapon-set-container">
+					<div class="col-lead-short">
+						<button class="btn btn-neutral">Equip<br>Set 3</button>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/weapons/battleaxe.png"><br>
+						<span class="small-text">Battleaxe of Justice</span>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/armor/shield.png"><br>
+						<span class="small-text">Mirror Shield</span>
+					</div>
+				</div>
 
-		<div class="grid-child">
-			Development
+				<div class="row weapon-set-container">
+					<div class="col-lead-short">
+						<button class="btn btn-neutral">Equip<br>Set 3</button>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/weapons/battleaxe.png"><br>
+						<span class="small-text">Battleaxe of Justice</span>
+					</div>
+					<div class="col">
+						<img src="systems/mage/icons/items/armor/shield.png"><br>
+						<span class="small-text">Mirror Shield</span>
+					</div>
+				</div>
+			</section>
 		</div>
 	</div>
 </div> <!-- End of Equipment Tab -->

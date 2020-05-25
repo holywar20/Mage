@@ -41,7 +41,6 @@ export class MageSheet extends ActorSheet {
 	TAB_BUTTON_SELECTOR = "button[selected]"
 
 	SPELL_ADD = "button[add-spell]";
-
 	SPELL_DELETE = "button[delete-spell]";
 	SPELL_DELETE_NAME = "delete-spell";
 	SPELL_EDIT = "button[edit-spell]";
@@ -50,6 +49,21 @@ export class MageSheet extends ActorSheet {
 	SPELL_ROLL_NAME = "roll-spell";
 	SPELL_MEMORIZE = "button[memorize-spell]";
 	SPELL_MEMORIZE_NAME = "memorize-spell";
+
+	/* Inventory Expandables */
+	INVENTORY_EXPANDABLE_BUTTON = "div[button-expandable]";
+	INVENTORY_EXPANDABLE_BUTTON_DATA = "button-expandable"
+	INVENTORY_EXPANDABLE_TARGET = "div[expandable-data]";
+	INVENTORY_EXPANDABLE_DATA = "expandable-data";
+
+	/* Inventory Management */
+	WEAPON_ADD ="button[add-weapon]";
+	WEAPON_DELETE = "button[delete-weapon]";
+	WEAPON_DELETE_NAME = "delete-weapon";
+	WEAPON_EDIT = "button[edit-weapon]";
+	WEAPON_EDIT_NAME = "edit-weapon";
+	WEAPON_ROLL = "button[roll-weapon]";
+	WEAPON_ROLL_NAME = "roll-weapon";
 
 	/* Overrides */
 	get template() {
@@ -81,18 +95,57 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.SPELL_MEMORIZE ).click( this._onSpellMemorize.bind( this ) );
 
 		/* Item Inventory */
+		this.mySheetHtml.find( this.INVENTORY_EXPANDABLE_BUTTON ).click( this._onInventoryExpand.bind(this) );
+
+		this.mySheetHtml.find( this.WEAPON_ADD ).click(this._onWeaponAdd.bind( this ) );
+		this.mySheetHtml.find( this.WEAPON_DELETE ).click(this._onWeaponDelete.bind( this ) );
+		this.mySheetHtml.find( this.WEAPON_EDIT ).click(this._onWeaponEdit.bind( this ) );
+		this.mySheetHtml.find( this.WEAPON_ROLL ).click(this._onWeaponRoll.bind( this ) );
+
 	}
 
 	/* Private methods. ( Not really private, because JS doesn't do that ) */
+	_onWeaponAdd( event ){
+		const itemData = {
+			name: `New Weapon`,
+			type: "weapon",
+			data : {}
+		}
 
+		const result = this.actor.createOwnedItem( itemData );
+		console.log( this.actor);
+	}
+
+	_onWeaponDelete( event ){
+		event.preventDefault();
+		let weaponId = event.currentTarget.getAttribute( this.WEAPON_DELETE_NAME );
+		this.actor.deleteOwnedItem( weaponId );
+	}
+
+	_onWeaponEdit( event ){
+		event.preventDefault();
+		let weaponId = event.currentTarget.getAttribute( this._EDIT_NAME );
+		let spell = this.actor.getOwnedItem( spellId );
+		spell.sheet.render( true );
+	}
+
+	_onWeaponRoll( event ){
+		console.log("roll");
+	}
 
 	_changeMainTab = ( event ) => {
 		let buttons = this.mySheetHtml.find( this.TAB_BUTTONS );
-		/*buttons.forEach( ( ele ) => {
-			ele.removeClass("selected");
-		});*/
-
 		let tabName = event.currentTarget.getAttribute( this.TAB_NAME );
+
+		buttons.each( ( idx ) => {
+			let buttonName = buttons[idx].getAttribute( this.TAB_NAME );
+			if( buttonName == tabName ){
+				buttons[idx].classList.add("selected");
+			} else {
+				buttons[idx].classList.remove("selected");
+			}
+		});
+
 		this.actor.update({"data.currentTab" : tabName });
 	}
 
@@ -101,10 +154,43 @@ export class MageSheet extends ActorSheet {
 		this.actor.update({"data.currentSkillTab" : tabName });
 	}
 
+	/* Bit complicated, but needed to do some hacky crap to get handlebars to update right. 
+	* This will add / remove an open class ( to ensure the current view works ). Then it updates inventoryExpanded to ensure it remembers
+	the current tab on page refresh */
+	async _onInventoryExpand( event ){
+		let buttonData = event.currentTarget.getAttribute( this.INVENTORY_EXPANDABLE_BUTTON_DATA );
+
+		var expandables = this.mySheetHtml.find( this.INVENTORY_EXPANDABLE_TARGET );
+		expandables.each( ( idx ) =>{
+			let thisExpandableData = expandables[idx].getAttribute( this.INVENTORY_EXPANDABLE_DATA );
+			if( thisExpandableData == buttonData ){
+				expandables[idx].classList.add('open');
+			} else {
+				expandables[idx].classList.remove('open');
+			}
+		});
+
+		var expandableHeaders = this.mySheetHtml.find( this.INVENTORY_EXPANDABLE_BUTTON );
+		expandableHeaders.each( ( idx ) => {
+			let headerData = expandableHeaders[idx].getAttribute( this.INVENTORY_EXPANDABLE_BUTTON_DATA );
+			if( headerData == buttonData ){
+				expandableHeaders[idx].classList.add('open');
+			} else {
+				expandableHeaders[idx].classList.remove('open');
+			}
+		});
+
+		let newExpandedInventory = this.actor.data.data.inventoryExpanded;
+		for( let type in newExpandedInventory ){
+			newExpandedInventory[type] = false;
+		}
+		newExpandedInventory[buttonData] = true;
+		console.log( newExpandedInventory );
+		this.actor.update({"data.inventoryExpanded" : newExpandedInventory });
+	}
+
 	async _saveButtonClick( event ){
-		console.log( event );
 		let buttonRollName = event.currentTarget.getAttribute( this.SAVE_NAME );
-		console.log( this.actorData , buttonRollName );
 		let saveValue = this.actorData.defenses[buttonRollName].value;
 
 		if( saveValue < 1) { saveValue = 1; }

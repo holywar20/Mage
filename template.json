@@ -17,7 +17,16 @@
 			"templates" : ["common"],
 			"currentTab" : "character",
 			"currentSkillTab" : "grit",
+			"inventoryExpanded" : {
+				"stats" : true, 
+				"weapons" : false,
+				"armor" : false,
+				"other" : false,
+				"assets" : false
+			},
 			"spells" : [],
+			"weapons": [],
+			"armoritems" : [],
 			"items" : [],
 			"tradition" : "0",
 			"exp" : 30 ,

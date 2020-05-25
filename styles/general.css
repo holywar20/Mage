@@ -60,7 +60,7 @@ hr.flaired-divider{
 	border-width: 0px 0 1px 0; 
 	border-radius: 20px;
 
-	margin-top: -20px;
+	margin-top: -15px;
 	margin-left:5px;
 	margin-right:5px;
 }
@@ -106,9 +106,24 @@ hr.flaired-divider{
 	justify-content: space-between;
 }
 
+.flex-row-margin{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
 .flex-col{
 	display: flex;
 	flex-direction: column;
+}
+
+.flex-align{
+	align-items:center;
+}
+
+.flex-justify-self-right{
+	display: inline-flex;
+	justify-content: flex-end;
 }
 
 .flex-center{
@@ -445,6 +460,10 @@ span.inline-icon{
 	background-color: var(--secondary);
 }
 
+.btn-primary{
+	background-color: var(--primary);
+}
+
 .justify-content-between{
 	display: flex;
 	justify-content: space-between;
@@ -467,4 +486,53 @@ table.clean-table{
 	border: 0px;
 	margin: 3px;
 	font-size: .9em;
+}
+
+/* Expandables */
+div.expandable-header{
+	border: 3px inset var(--tertiary);
+	background: black;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 5px;
+}
+
+div.expandable-header.open{
+	border: 3px inset var(--secondary);
+	background: linear-gradient(90deg, var( --secondary-fade50) 0%, var(--secondary) 100%);
+	transition: var(--animation)
+}
+
+div.expanded{
+	min-height: 0px;
+	max-height: 0px;
+	overflow:hidden;
+	transition: var(--animation);
+
+	background-color: var(--gray-fade50);
+}
+
+div.expanded.open{
+	min-height:520px;
+	max-height:520px;
+	overflow-y: scroll;
+	transition: var(--animation);
+
+	background-color: var(--gray-fade50);
+}
+
+button[button-expandable]{
+	transform: rotate(90deg);
+	transition: var(--animation);
+}
+
+button.rotate-down{
+	transform: rotate(-90deg);
+	transition: var(--animation);
+}
+
+/* PAdding & MArgins */
+
+.pad-4{
+	padding: 4px;
 }
