@@ -154,7 +154,7 @@ hr.flaired-divider{
 	width: 0;
 }
 
-.fex-3{
+.flex-3{
 	flex-grow: 3;
 	width: 0;
 }
@@ -215,6 +215,11 @@ hr.flaired-divider{
 	font-size: .7em;
 	color: var(--tertiary);
 	align-self: center;
+}
+
+.small-text{
+	font-size: .7em;
+	color: var(--tertiary);
 }
 
 .row .col:first-child , .col.row-leader{

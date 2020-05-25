@@ -449,3 +449,11 @@ img.inventory-item{
 	width: 48px;
 	height: 48px;
 }
+
+.weapons-list .flex-row div{
+	padding: 2px;
+}
+
+.weapons-list .flex-row:nth-child(even){
+	background-color: var(--gray-fade25);
+}

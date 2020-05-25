@@ -759,47 +759,58 @@
 			</div><!-- End of Expandable Stats -->
 
 			<div class="expandable">
-				<div button-expandable="weapons" class="flex-row expandable-header
-					{{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
+				<div button-expandable="weapons" class="flex-row expandable-header {{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
 					<div class="flex-1">Weapons</div>
 					<div class="flex-half flex-justify-self-right"></div>
 				</div>
 
-				<div expandable-data="weapons" class="expanded
-					{{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
-					<section class="table">
-						{{#each data.weapons as |weapon id| }}
-						<div class="row">
-							<div class="col">
-								<span><img class="inventory-item" src="{{weapon.img}}"></span>
-							</div>
-							<div class="col">
-								<span>{{weapon.name}}</span><br>
-								<span></span>
-							</div>
-							<div class="col">
-								{{#each weapon.data.styles as |style id|}}
-								<button class="btn btn-vitals">
-									{{ style.skill }} {{ style.total }}
-								</button>
-								{{/each}}
-							</div>
-							<div class="col justify-content-between">
-								<span>
-									<button edit-weapon="{{weapon._id}}" class="btn btn-icon btn-neutral">
-										<img src="systems/mage/img/icons/gear.png">
-									</button>
-								</span>
-
-								<span>
-									<button delete-weapon="{{weapon._id}}" class="btn btn-icon btn-warn">
-										<img src="systems/mage/img/icons/trash.png">
-									</button>
-								</span>
+				<div expandable-data="weapons" class="weapons-list expanded {{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
+					{{#each data.weapons as |weapon id| }}
+					<div class="flex-row">
+						<div class="flex-1">
+							<span><img class="inventory-item" src="{{weapon.img}}"></span>
+						</div>
+						<div class="flex-3">
+							<div>{{weapon.name}}</div>
+							<div class="small-text">{{ weapon.data.hands }} Handed</div>
+							<div class="small-text">{{ weapon.data.weaponType }}</div>
+						</div>
+						<div class="flex-1">
+							<div>{{ weapon.data.dmg }}</div>
+							<div>
+								Dmg
 							</div>
 						</div>
-						{{/each}}
-					</section>
+						<div class="flex-2">
+							{{#each weapon.data.implicitMods as |mod id|}}
+								<div class="justify-content-between">
+									<span class="small-text">{{ mod.modType }}</span>
+									<span class="small-text">{{ mod.modValue }}</span>
+								</div>
+							{{/each}}
+						</div>
+
+						<div class="flex-3">
+								{{#each weapon.data.styles as |weapon id|}}
+								<span>
+								<button class="btn btn-vitals btn">
+									<span class="inline-icon">🎲</span> {{ weapon.total }}
+								</button>
+								<div class="row-subtitle">{{ weapon.skill }}</div>
+								</span>
+								{{/each}}
+						</div>
+
+						<div class="flex-1 justify-content-between">
+							<button edit-weapon="{{weapon._id}}" class="btn btn-icon btn-neutral">
+								<img src="systems/mage/img/icons/gear.png">
+							</button>
+							<button delete-weapon="{{weapon._id}}" class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/trash.png">
+							</button>
+						</div>
+					</div>
+					{{/each}}
 
 					<div class="flex-row">
 						<div></div>
@@ -809,7 +820,9 @@
 							</button>
 						</div>
 					</div>
+
 				</div>
+	
 			</div><!-- End of expandable weapons-->
 
 			<div class="expandable">

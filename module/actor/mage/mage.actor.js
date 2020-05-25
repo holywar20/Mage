@@ -53,6 +53,11 @@ export class MageActor extends Actor{
 			return allArrays;
 		} , [[], []] );
 
+		weapons.forEach( ( weapon ) => {
+			console.log( weapon );
+		});
+
+
 		this.data.data.weapons = weapons;
 		this.data.data.spells = spells;
 	}
@@ -86,7 +91,7 @@ export class MageActor extends Actor{
 
 	_calculateDerived( data ){
 		// Calculate PAradox
-		data.paradox.max = +data.mystictraits.physical + +data.mystictraits.mental;
+		// data.paradox.max = +data.mystictraits.physical + +data.mystictraits.mental;
 
 		
 	}

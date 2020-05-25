@@ -124,9 +124,10 @@ export class MageSheet extends ActorSheet {
 
 	_onWeaponEdit( event ){
 		event.preventDefault();
-		let weaponId = event.currentTarget.getAttribute( this._EDIT_NAME );
-		let spell = this.actor.getOwnedItem( spellId );
-		spell.sheet.render( true );
+		let weaponId = event.currentTarget.getAttribute( this.WEAPON_EDIT_NAME );
+		console.log( weaponId );
+		let weapon = this.actor.getOwnedItem( weaponId );
+		weapon.sheet.render( true );
 	}
 
 	_onWeaponRoll( event ){

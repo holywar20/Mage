@@ -98,7 +98,7 @@ export class WeaponSheet extends ItemSheet{
 		this.weaponData.implicitMods[newKey] = {}
 		Object.assign( this.weaponData.implicitMods[newKey], this.implicitModPrototype );
 		
-		return this.object.update({"implicitMods": this.weaponData.implicitMods })
+		return this.item.update({"implicitMods": this.weaponData.implicitMods })
 	}
 
 	async _deleteImplicitModEvent( event ){
