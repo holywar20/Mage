@@ -1,0 +1,36 @@
+#chat-log li.message{
+	background: black;
+	color: white;
+}
+
+#chat-log li.message header h4.message-sender{
+	border: 1px solid var(--secondary);
+	background: var(--secondary);
+	color: white;
+	border-radius: 5px;
+	padding: 3px;
+}
+
+.chat-row{
+	display: flex;
+}
+
+.chat-cell-1{
+	width: 0;
+	flex: 1 1 auto;
+}
+
+.chat-cell-2{
+	width: 0;
+	flex: 3 3 auto;
+}
+
+.chat-cell-3{
+	width: 0;
+	flex: 3 3 auto;
+}
+
+.chat-cell-half{
+	width: 0;
+	flex: .5 .5 auto;
+}

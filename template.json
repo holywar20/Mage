@@ -17,6 +17,29 @@
 			"templates" : ["common"],
 			"currentTab" : "character",
 			"currentSkillTab" : "grit",
+			"weaponsets" : {
+				"rweapon1" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"lweapon1" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"rweapon2" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"lweapon2" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"rweapon3" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"lweapon3" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"rweapon4" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"lweapon4" : { "itemId" : null , "itemRef" : null, "type" : "weapon"}
+			},
+			"equipped": { 
+				"armor" :{ "itemId"  : null , "itemRef ": null , "type": "armor" },
+				"helm" : { "itemId"  : null , "itemRef ": null , "type": "helm" },
+				"neck" : { "itemId"  : null , "itemRef ": null , "type": "neck" }, 
+				"belt" : { "itemId"  : null , "itemRef ": null , "type": "belt" },
+
+				"rring" : { "itemId"  : null , "itemRef ": null , "type": "ring" },
+				"lring" : { "itemId"  : null , "itemRef ": null , "type": "ring"},
+				"boots" : { "itemId" : null , "itemRef" : null, "type" : "boots"},
+				
+				"rweapon" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
+				"lweapon" : { "itemId" : null , "itemRef" : null, "type" : "weapon"}
+			},
 			"inventoryExpanded" : {
 				"stats" : true, 
 				"weapons" : false,

@@ -64,6 +64,7 @@ export class MageSheet extends ActorSheet {
 	WEAPON_EDIT_NAME = "edit-weapon";
 	WEAPON_ROLL = "button[roll-weapon]";
 	WEAPON_ROLL_NAME = "roll-weapon";
+	WEAPON_DRAG = "div[weapon-drag]"
 
 	/* Overrides */
 	get template() {
@@ -101,10 +102,22 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.WEAPON_DELETE ).click(this._onWeaponDelete.bind( this ) );
 		this.mySheetHtml.find( this.WEAPON_EDIT ).click(this._onWeaponEdit.bind( this ) );
 		this.mySheetHtml.find( this.WEAPON_ROLL ).click(this._onWeaponRoll.bind( this ) );
+		
+		this.mySheetHtml.find( this.WEAPON_DRAG ).each( ( i , element ) => {
+			let handler = event => this._onDragItemStart( event );
+			element.setAttribute("draggable", true);
+			element.addEventListener( "dragstart", handler, false);
+		});
 
 	}
 
 	/* Private methods. ( Not really private, because JS doesn't do that ) */
+	_onWeaponDrag( event ){
+	
+	}
+
+
+	
 	_onWeaponAdd( event ){
 		const itemData = {
 			name: `New Weapon`,
@@ -257,10 +270,7 @@ export class MageSheet extends ActorSheet {
 
 		if( myTrait < 1 ) { myTrait = 1; }
 		
-		let roll = new Roll(`${myTrait}d10>7cs`);
-		roll.roll();
-		roll.render();
-		roll.toMessage();
+		this.actor.rollAttribute( buttonRollName );
 	}
 
 	_onSpellRoll( event ){
@@ -301,14 +311,15 @@ export class MageSheet extends ActorSheet {
 		console.log( spell );
 	}
 
-	/*
-		Item Dragging! 
+
+	/*	Item Dragging! 
 		html.find('li.item').each((i, li) => {
 		if ( li.classList.contains("inventory-header") ) return;
 		li.setAttribute("draggable", true);
 		li.addEventListener("dragstart", handler, false);
-	});*/
-/* new Dialog({
+	});
+		
+		new Dialog({
 			title: `${buttonRollName} Check`,
 			content: `<p>What type of arcana check?</p>`,
 			buttons: {

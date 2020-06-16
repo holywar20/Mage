@@ -40,6 +40,51 @@ export class MageActor extends Actor{
 		this._calculateDerived( data );
 	}
 
+	async roll({configureDialog=true}={}) {
+	// Toggle default roll mode
+		let rollMode = game.settings.get("core", "rollMode");
+		if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData["whisper"] = ChatMessage.getWhisperIDs("GM");
+		if ( rollMode === "blindroll" ) chatData["blind"] = true;
+
+		// Create the chat message
+	return ChatMessage.create(chatData);
+	}
+
+	async rollAttribute( attribute ){
+		console.log( this , attribute );
+		const token = this.token;
+		const actor = this._id;
+		const name = this.name;
+
+		console.log("Rolling an attribute");
+
+		let traitValue = this.data.data.traits[attribute].value;
+		let traitParts = this.data.data.traitParts[attribute];
+		let roll = new Roll(`${traitValue}d10>7cs`);
+
+		let templateData = {
+			test : "SOMETHING!",
+			traitValue : traitValue,
+			traitName : traitParts['name']
+		}
+		
+	
+		let template = `systems/mage/chat/attribute.html`;
+		const html = await renderTemplate(template, templateData);
+
+		const chatData = {
+			user : game.user._id,
+			content : html,
+			speaker : {
+				actor: actor,
+				token: token,
+				alias : name
+			}
+		}
+		
+		return ChatMessage.create( chatData );
+	}
+
 	_prepareItems( itemList ){
 		const inventory = {
 			weapons : { label : "Weapons" , type: "weapon" ,  items: [] },
@@ -52,11 +97,6 @@ export class MageActor extends Actor{
 
 			return allArrays;
 		} , [[], []] );
-
-		weapons.forEach( ( weapon ) => {
-			console.log( weapon );
-		});
-
 
 		this.data.data.weapons = weapons;
 		this.data.data.spells = spells;
@@ -92,8 +132,6 @@ export class MageActor extends Actor{
 	_calculateDerived( data ){
 		// Calculate PAradox
 		// data.paradox.max = +data.mystictraits.physical + +data.mystictraits.mental;
-
-		
 	}
 
 	_calculateArcana( data ){

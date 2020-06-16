@@ -28,7 +28,8 @@
 	"styles": [
 		"./styles/ui.css",
 		"./styles/general.css",
-		
+		"./chat/allchat.css",
+
 		"./module/actor/mage/mage.sheet.css",
 		
 		"./module/item/spell/spell.sheet.css",
