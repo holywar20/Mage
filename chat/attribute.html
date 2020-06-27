@@ -1,12 +1,27 @@
-<div class="mage-card">
+<div class="chat-card">
+	
 	<div class="chat-row">
-		<div class="chat-cell-2">
-			{{ traitName }}
-		</div>
 		<div class="chat-cell-1">
-			<span class="number">
-				{{ traitValue }}
-			</span>
+			<img class="chat-image" src="{{traitIconPath}}">
+		</div>
+
+		<div class="chat-cell-3">
+			<div class="card-title">{{ traitName }}</div>
+			<div class="card-subtitle">
+				<span class="chat-value">{{ rollString }}</span>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="chat-row-last">
+		
+		<div class="chat-cell-1">
+			<button class="chat-button">
+				{{ rollResult }}
+			</button>
 		</div>
 	</div>
+
 </div>

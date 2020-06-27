@@ -60,12 +60,23 @@ export class MageActor extends Actor{
 
 		let traitValue = this.data.data.traits[attribute].value;
 		let traitParts = this.data.data.traitParts[attribute];
-		let roll = new Roll(`${traitValue}d10>7cs`);
+		
+		if( traitValue <  1)
+			traitValue = 1;
+		//let longRollString = 
+		let rollString = `${traitValue}d10>7cs`;
+		
+		let roll = new Roll(rollString);
+		roll.roll();
+
+		console.log( roll );
 
 		let templateData = {
-			test : "SOMETHING!",
+			rollString : rollString, 
+			rollResult : roll._total,
 			traitValue : traitValue,
-			traitName : traitParts['name']
+			traitName : traitParts['name'],
+			traitIconPath : "systems/mage/icons/traits/"+traitParts['name']+".png"
 		}
 		
 	

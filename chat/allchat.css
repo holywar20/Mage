@@ -1,18 +1,45 @@
-#chat-log li.message{
-	background: black;
+#chat-log .message{
+	background: 
+		url('../img/sheets/chatscroll.png');
 	color: white;
+	border: 3px inset var(--primary);
+	border-radius: 0px 10px 10px 10px;
+	padding: 0px;
+}
+
+#chat-log .message-header{
+	background: var(--primary-fade50);
+	padding: 0px;
+	border-bottom: 2px groove var(--tertiary-fade50);
 }
 
 #chat-log li.message header h4.message-sender{
-	border: 1px solid var(--secondary);
-	background: var(--secondary);
 	color: white;
-	border-radius: 5px;
-	padding: 3px;
+	text-align: center;
+}
+
+#chat-log .message-timestamp{
+	color : lightgray;
+}
+
+#chat-log .message-delete{
+	color: red;
+}
+
+#chat-log .message-metadata{
+	padding: 2px;
 }
 
 .chat-row{
 	display: flex;
+	border-bottom: 1px solid var(--tertiary-fade50);
+	padding: 3px;
+}
+
+.chat-row-last{
+	display: flex;
+	border-bottom: none;
+	padding: 3px;
 }
 
 .chat-cell-1{
@@ -33,4 +60,49 @@
 .chat-cell-half{
 	width: 0;
 	flex: .5 .5 auto;
+}
+
+.chat-card{
+	padding: 3px;
+}
+
+.card-title{
+	font-size: 18px;
+	text-align: center;
+	padding: 4px;
+}
+
+.card-subtitle{
+	text-align: center;
+	padding: 5px;
+}
+
+.chat-image{
+	border: 1px solid var(--primary);
+	border-radius: 5px;
+}
+
+
+.chat-button{
+	background: var(--primary);
+	color: white;
+	font-weight: 400;
+	font-size: 22px;
+	border: 1px solid var(--tertiary-fade50);
+}
+
+.chat-value{
+	color: white;
+	background: var(--secondary);
+	border-radius: 5px;
+	padding: 3px;
+	border:1px solid black;
+}
+
+.chat-crit-hit{
+
+}
+
+.chat-crit-miss{
+
 }
