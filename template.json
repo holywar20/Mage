@@ -15,6 +15,22 @@
 		},
 		"mage" :{
 			"templates" : ["common"],
+			"contestedStatusEffects" : {
+				"haste" : 0,
+				"regen" : 0,
+				"inspire": 0,
+				"enlighten" : 0,
+				"lucky" : 0,
+				"vigor" : 0
+			},
+			"binaryStatusEffects" : {
+				"blind" : false,
+				"hold" : false,
+				"bind" : false,
+				"stun" : false,
+				"charm" : false
+			},
+			"currentRollMode" : "public",
 			"currentTab" : "character",
 			"currentSkillTab" : "grit",
 			"weaponsets" : {

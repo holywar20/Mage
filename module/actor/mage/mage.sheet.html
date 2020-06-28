@@ -726,10 +726,82 @@
 
 	<div class="mods">
 		<div class="gen-header">
-			<div class="mod-header">Modifiers</div>
+			<div class="mod-header">Effects</div>
 		</div>
+
+		
 	<div class="grid-child">
-	
+		<section class="table">
+			<div class="row">
+				<div class="col">
+					Haste
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.haste" value="{{data.contestedStatusEffects.haste}}">
+				</div>
+				<div class="col">
+					Slow
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					Regen
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.regen" value="{{data.contestedStatusEffects.regen}}">
+				</div>
+				<div class="col">
+					Rot / Burn
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					Inspire
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.inspire" value="{{data.contestedStatusEffects.inspire}}">
+				</div>
+				<div class="col">
+					Oppress
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					Enlighten
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.enlighten" value="{{data.contestedStatusEffects.enlighten}}">
+				</div>
+				<div class="col">
+					Confuse
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					Vigor
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.vigor" value="{{data.contestedStatusEffects.vigor}}">
+				</div>
+				<div class="col">
+					Weak
+				</div>
+			</div>
+		</section>
+
+		<section class="table">	
+			<select value="currentRollMode">
+				{{#select currentRollMode}}
+				<option value="public">Public</option>
+				<option value="gm">Narrator</option>
+				<option value="self">Self</option>
+				{{/select}}
+			</select>
+		</section>
 	</div><!-- End of Grid Child-->
 	</div><!-- End of Mods-->
 </div>

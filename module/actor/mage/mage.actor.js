@@ -47,39 +47,53 @@ export class MageActor extends Actor{
 		if ( rollMode === "blindroll" ) chatData["blind"] = true;
 
 		// Create the chat message
-	return ChatMessage.create(chatData);
+		return ChatMessage.create(chatData);
 	}
-
-	async rollAttribute( attribute ){
-		console.log( this , attribute );
+	async rollSkill( dialogData , skill){
+		console.log( dialogData , skill );
 		const token = this.token;
 		const actor = this._id;
 		const name = this.name;
 
-		console.log("Rolling an attribute");
-
-		let traitValue = this.data.data.traits[attribute].value;
-		let traitParts = this.data.data.traitParts[attribute];
-		
-		if( traitValue <  1)
-			traitValue = 1;
-		//let longRollString = 
-		let rollString = `${traitValue}d10>7cs`;
-		
+		let rollString = `${totalDice}d10cs>=${dialogData.difficulty}`;
 		let roll = new Roll(rollString);
 		roll.roll();
-
-		console.log( roll );
 
 		let templateData = {
 			rollString : rollString, 
 			rollResult : roll._total,
-			traitValue : traitValue,
-			traitName : traitParts['name'],
-			traitIconPath : "systems/mage/icons/traits/"+traitParts['name']+".png"
+			roll : roll,
+			totalDice : totalDice,
+			rollName : traitParts['name'],
+			iconPage : "systems/mage/icons/skills/"+traitParts['name']+".png"
+		}
+	}
+
+	async rollAttribute( dialogData ){
+		// console.log( this , dialogData );
+		const token = this.token;
+		const actor = this._id;
+		const name = this.name;
+
+		let traitParts = this.data.data.traitParts[dialogData.idx];
+		let totalDice = +dialogData.baseDice + +dialogData.bonusDice
+
+		if( totalDice <  1){ totalDice = 1 };
+		//let longRollString = 
+		let rollString = `${totalDice}d10cs>=${dialogData.difficulty}`;
+		
+		let roll = new Roll(rollString);
+		roll.roll();
+
+		let templateData = {
+			rollString : rollString, 
+			rollResult : roll._total,
+			roll : roll,
+			totalDice : totalDice,
+			rollName : traitParts['name'],
+			iconPath : "systems/mage/icons/traits/"+traitParts['name']+".png"
 		}
 		
-	
 		let template = `systems/mage/chat/attribute.html`;
 		const html = await renderTemplate(template, templateData);
 
@@ -94,6 +108,10 @@ export class MageActor extends Actor{
 		}
 		
 		return ChatMessage.create( chatData );
+	}
+
+	_prepareSimpleTemplateData( rollString, rollName , iconPath ){
+	
 	}
 
 	_prepareItems( itemList ){

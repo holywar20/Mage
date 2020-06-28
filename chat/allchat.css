@@ -1,6 +1,6 @@
 #chat-log .message{
-	background: 
-		url('../img/sheets/chatscroll.png');
+	background: url('../img/sheets/chatscroll.png');
+	background-size: cover;
 	color: white;
 	border: 3px inset var(--primary);
 	border-radius: 0px 10px 10px 10px;

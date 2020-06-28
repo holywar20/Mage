@@ -1,0 +1,32 @@
+<form>
+	<div class="flex-row">
+		<div class="flex-2">
+			Difficulty
+		</div>
+		<div class="flex-1">
+			<input type="number" class="input-number" name="difficulty" value="{{difficulty}}">
+		</div>
+		<div class="flex-2">
+			Bonus Dice
+		</div>
+		<div class="flex-1">
+			<input type="number" class="input-number" name="bonusDice" value="{{bonusDice}}">
+		</div>
+	</div>
+
+	<div class="flex-row">
+		<div class="flex-1">
+			Broadcast
+		</div>
+		<div class="flex-1">
+			<select class="input-text input-wide" name="rollMode">
+				{{#select rollMode}}
+				<option value="public">Public</option>
+				<option value="self">Self</option>
+				<option value="gm">Narrator</option>
+				{{/select}}
+			</select>
+		</div>
+	</div>
+
+</form>

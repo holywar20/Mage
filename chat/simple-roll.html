@@ -2,24 +2,29 @@
 	
 	<div class="chat-row">
 		<div class="chat-cell-1">
-			<img class="chat-image" src="{{traitIconPath}}">
+			<img class="chat-image" src="{{iconPath}}">
 		</div>
 
 		<div class="chat-cell-3">
-			<div class="card-title">{{ traitName }}</div>
+			<div class="card-title">{{ rollName }}</div>
 			<div class="card-subtitle">
 				<span class="chat-value">{{ rollString }}</span>
 			</div>
 		</div>
+	</div>
 
-
+	<div class="chat-row">
+		<div class="chat-cell-1">
+			{{#each d10Dice}}
+				<span class="roll d10"></span>
+			{{/dice}}
+		</div>
 	</div>
 
 	<div class="chat-row-last">
-		
 		<div class="chat-cell-1">
 			<button class="chat-button">
-				{{ rollResult }}
+				{{ rollResult }} Successes
 			</button>
 		</div>
 	</div>

@@ -10,6 +10,10 @@ export class MageSheet extends ActorSheet {
 		});
 	}
 
+	DIALOG_PROTOTYPE = {
+		idx: "" , difficulty : 7 , baseDice : 0 ,bonusDice : 0 ,  rollTitle : "", playerTarget : "" ,  rollMode : "public" 
+	};
+
 	mySheetHtml = null
 	actorData = this.actor.data.data;
 
@@ -219,36 +223,48 @@ export class MageSheet extends ActorSheet {
 		let buttonRollName = event.currentTarget.getAttribute( this.CUNNING_SKILL_NAME );
 		let mySkill = this.actorData.skills.cunning[buttonRollName].value
 
-		if( mySkill < 1 ) { mySkill = 1; }
-
-		let roll = new Roll(`${mySkill}d10>cs`);
-		roll.roll();
-		roll.render();
-		roll.toMessage();
+		this._rollSkill( event, mySkill, buttonRollName );
 	}
 
 	async _willButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.WILL_SKILL_NAME );
 		let mySkill = this.actorData.skills.will[buttonRollName].value;
 
-		if( mySkill < 1 ) { mySkill = 1; }
-
-		let roll = new Roll(`${mySkill}d10>cs`);
-		roll.roll();
-		roll.render();
-		roll.toMessage();
+		this._rollSkill( event, mySkill, buttonRollName );
 	}
 
 	async _gritButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.GRIT_SKILL_NAME );
-		let mySkill = this.actorData.skills.grit[buttonRollName].value
+		let mySkill = this.actorData.skills.grit[buttonRollName];
 
-		if( mySkill < 1 ) { mySkill = 1; }
+		console.log( mySkill );
 
-		let roll = new Roll(`${mySkill}d10>cs`);
-		roll.roll();
-		roll.render();
-		roll.toMessage();
+		this._rollSkill( event, mySkill, buttonRollName );
+	}
+
+	async _rollSkill( event , mySkill, buttonName  ){
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+		dialogInitialData.idx = buttonName
+		dialogInitialData.rollTitle = mySkill.name; 
+		dialogInitialData.baseDice = mySkill.value;
+
+		const html = await renderTemplate(template, dialogInitialData);
+
+		new Dialog({
+			title: `${mySkill.name} Check`,
+			content: html,
+			default : "Roll",
+			buttons: {
+				Roll: {
+					label: `Roll ${mySkill.name} ( ${dialogInitialData.baseDice} )` ,
+					callback: ( data ) => { 
+						let newData = this._extractDataFromDialog( dialogInitialData, data );
+						this.actor.rollSkill( newData , mySkill ); 
+					}
+				}
+			}
+		}).render(true);
 	}
 
 	async _arcanaButtonClick( event ){
@@ -258,7 +274,7 @@ export class MageSheet extends ActorSheet {
 
 		if( myArcana < 1 ) { myArcana = 1; }
 
-		let roll = new Roll(`${myArcana}d10>7cs`);
+		let roll = new Roll(`${myArcana}d10>cs`);
 		roll.roll();
 		roll.render();
 		roll.toMessage();
@@ -267,10 +283,31 @@ export class MageSheet extends ActorSheet {
 	async _traitButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.TRAIT_NAME );
 		let myTrait = this.actorData.traits[buttonRollName].value;
+		let traitName = this.actorData.traitParts[buttonRollName].name;
 
-		if( myTrait < 1 ) { myTrait = 1; }
-		
-		this.actor.rollAttribute( buttonRollName );
+		// Render modal dialog
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+		dialogInitialData.rollTitle = traitName;
+		dialogInitialData.baseDice = myTrait;
+		dialogInitialData.idx = buttonRollName;
+
+		const html = await renderTemplate(template, dialogInitialData);
+
+		new Dialog({
+			title: `${traitName} Check`,
+			content: html,
+			default : "Roll",
+			buttons: {
+				Roll: {
+					label: `Roll ${traitName}` ,
+					callback: ( data ) => { 
+						let newData = this._extractDataFromDialog( dialogInitialData, data );
+						this.actor.rollAttribute( newData ); 
+					}
+				}
+			}
+		}).render(true);
 	}
 
 	_onSpellRoll( event ){
@@ -307,10 +344,21 @@ export class MageSheet extends ActorSheet {
 		let spellId = event.currentTarget.getAttribute( this.SPELL_MEMORIZE_NAME );
 		let spell = this.actor.getOwnedItem( spellId );
 		spell.update({'data.memorized.value' : !spell.data.data.memorized.value });
-
-		console.log( spell );
 	}
 
+	// this accepts whatever object flops out of a dialog box. 
+	_extractDataFromDialog( initialDialogData , data ){
+		let htmlFormControlsCollection = data[0].children[0].elements;
+
+		[...htmlFormControlsCollection].forEach( ( elem ) =>{
+			let name = elem.name;
+			let value = elem.value;
+
+			initialDialogData[name] = value;
+		});
+		
+		return initialDialogData;
+	}
 
 	/*	Item Dragging! 
 		html.find('li.item').each((i, li) => {
