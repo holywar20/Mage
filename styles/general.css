@@ -545,21 +545,70 @@ button.rotate-down{
 }
 
 
-.roll.d4 {
-	background-image: url("../icons/svg/d4-grey.svg");
+.roll-hit{
+	border: 1px solid lightgreen !important; 
 }
-.roll.d6 {
-	background-image: url("../icons/svg/d6-grey.svg");
+
+.roll-crit-hit{
+	border: 1px solid lightgreen !important; 
+	color: lightgreen !important;
+	text-shadow: 0 0 0.5em green, 0 0 0.5em green, 0 0 0.5em green;
 }
-.roll.d8 {
-	background-image: url("../icons/svg/d8-grey.svg");
+
+.roll-crit-miss{
+	border: 1px solid red !important; 
+	color: red !important;
+	text-shadow: 0 0 0.5em crimson, 0 0 0.5em crimson, 0 0 0.5em crimson;
 }
-.roll.d10 {
-	background-image: url("../icons/svg/d10-grey.svg");
+
+.die-list{
+	display: inline-flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
 }
-.roll.d12 {
-	background-image: url("../icons/svg/d12-grey.svg");
+
+.d4Roll, .d6Roll, .d8Roll, .d10Roll, .d12Roll, .d20Roll{
+	background-size: contain;
+	background-color: var(--secondary);
+	background-position: center;
+	background-repeat: no-repeat;
+
+	align-self: center;
+	min-width: 40px;
+	line-height: 25px;
+	text-align: center;
+	color: black;
+	border: 1px solid black;
+	margin: 3px;
+
+	border-radius: 5px;
+	font-size: 18px;
+	font-weight: 600;
 }
-.roll.d20 {
-	background-image: url("../icons/svg/d20-grey.svg");
+
+
+.d4Roll  {
+	background-image: url("../icons/dice/d4-grey.svg");
+}
+
+.d6Roll  {
+	background-image: url("../icons/dice/d6-grey.svg");
+}
+
+.d8Roll {
+	background-image: url("../icons/dice/d8-grey.svg");
+}
+
+.d10Roll  {
+	background-image: url("../icons/dice/d10-grey.svg");
+}
+
+.d12Roll  {
+	background-image: url("../icons/dice/d12-grey.svg");
+}
+
+.d20Roll {
+	background-image: url("../icons/dice/d20-grey.svg");
 }

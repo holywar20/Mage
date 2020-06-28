@@ -50,56 +50,71 @@ export class MageActor extends Actor{
 		return ChatMessage.create(chatData);
 	}
 	async rollSkill( dialogData , skill){
-		console.log( dialogData , skill );
-		const token = this.token;
-		const actor = this._id;
-		const name = this.name;
+		
+		let totalDice = +dialogData.baseDice + +dialogData.bonusDice;
+		let iconPath = "systems/mage/icons/skill-list/" + skill.name + ".png"
 
-		let rollString = `${totalDice}d10cs>=${dialogData.difficulty}`;
-		let roll = new Roll(rollString);
-		roll.roll();
+		let templateData = this._prepareSimpleTemplateData( totalDice, dialogData.difficulty, skill.name , iconPath);
+		let template = `systems/mage/chat/simple-roll.html`;
+		const html = await renderTemplate(template, templateData);
+		let chatData = this._prepareChatData( html );
 
-		let templateData = {
-			rollString : rollString, 
-			rollResult : roll._total,
-			roll : roll,
-			totalDice : totalDice,
-			rollName : traitParts['name'],
-			iconPage : "systems/mage/icons/skills/"+traitParts['name']+".png"
-		}
+		return ChatMessage.create( chatData );
+	}
+
+	async rollArcana( dialogData, arcana ){
+		let totalDice = +dialogData.baseDice + +dialogData.bonusDice;
+		let iconPath = "systems/mage/icons/arcana/" + arcana.name + ".png";
+
+		let templateData = this._prepareSimpleTemplateData( totalDice, dialogData.difficulty , arcana.name, iconPath );
+		let template = `systems/mage/chat/simple-roll.html`;
+		const html = await renderTemplate( template, templateData );
+		let chatData = this._prepareChatData( html );
+
+		return ChatMessage.create( chatData );
 	}
 
 	async rollAttribute( dialogData ){
 		// console.log( this , dialogData );
-		const token = this.token;
-		const actor = this._id;
-		const name = this.name;
-
 		let traitParts = this.data.data.traitParts[dialogData.idx];
 		let totalDice = +dialogData.baseDice + +dialogData.bonusDice
+		let iconPath = "systems/mage/icons/traits/" + traitParts.name + ".png"
 
-		if( totalDice <  1){ totalDice = 1 };
-		//let longRollString = 
-		let rollString = `${totalDice}d10cs>=${dialogData.difficulty}`;
+		let templateData = this._prepareSimpleTemplateData( totalDice, dialogData.difficulty, traitParts.name , iconPath);
+		let template = `systems/mage/chat/simple-roll.html`;
+		const html = await renderTemplate(template, templateData);
+		let chatData = this._prepareChatData( html );
 		
+		return ChatMessage.create( chatData );
+	}
+
+	_prepareSimpleTemplateData( totalDice, difficulty, rollName , iconPath ){
+		if( totalDice <  1){ totalDice = 1 };
+
+		let rollString = `${totalDice}d10cs>=${difficulty}x=10`;
 		let roll = new Roll(rollString);
 		roll.roll();
-
+		
 		let templateData = {
 			rollString : rollString, 
 			rollResult : roll._total,
 			roll : roll,
 			totalDice : totalDice,
-			rollName : traitParts['name'],
-			iconPath : "systems/mage/icons/traits/"+traitParts['name']+".png"
+			rollName : rollName,
+			iconPath : iconPath
 		}
-		
-		let template = `systems/mage/chat/attribute.html`;
-		const html = await renderTemplate(template, templateData);
 
+		return templateData;
+	}
+
+	_prepareChatData( chatMessageHtml ){
+		const token = this.token;
+		const actor = this._id;
+		const name = this.name;
+		
 		const chatData = {
 			user : game.user._id,
-			content : html,
+			content : chatMessageHtml,
 			speaker : {
 				actor: actor,
 				token: token,
@@ -107,11 +122,7 @@ export class MageActor extends Actor{
 			}
 		}
 		
-		return ChatMessage.create( chatData );
-	}
-
-	_prepareSimpleTemplateData( rollString, rollName , iconPath ){
-	
+		return chatData;
 	}
 
 	_prepareItems( itemList ){

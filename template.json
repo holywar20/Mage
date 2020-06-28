@@ -125,11 +125,11 @@
 					"athletics" 		: {"name" : "Athletics" 	, "tier" : 1 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 }
 				},
 				"cunning" : {
-					"piercing"			: {"name" : "Peircing" 		, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"piercing"			: {"name" : "Piercing" 		, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
 					"bows" 				: {"name" : "Bows" 			, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
 					"firearms" 			: {"name" : "Firearms" 		, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
 					"throwing" 			: {"name" : "Throwing" 		, "tier" : 2 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"duel-weilding"	: {"name" : "Duel-Weild" 	, "tier" : 2 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"duel-wielding"	: {"name" : "Duel-Wield" 	, "tier" : 2 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
 					"stealth" 			: {"name" : "Stealth" 		, "tier" : 1 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
 					"spot" 				: {"name" : "Spot" 			, "tier" : 1 , "trait" : "per", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
 					"listen" 			: {"name" : "Listen" 		, "tier" : 1 , "trait" : "per", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },

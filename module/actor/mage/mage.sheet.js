@@ -211,24 +211,21 @@ export class MageSheet extends ActorSheet {
 		let buttonRollName = event.currentTarget.getAttribute( this.SAVE_NAME );
 		let saveValue = this.actorData.defenses[buttonRollName].value;
 
-		if( saveValue < 1) { saveValue = 1; }
-
-		let roll = new Roll(`${saveValue}d10>cs`);
-		roll.roll();
-		roll.render();
-		roll.toMessage();
+		// TODO hook up to dialog
 	}
 
 	async _cunningButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.CUNNING_SKILL_NAME );
-		let mySkill = this.actorData.skills.cunning[buttonRollName].value
+		let mySkill = this.actorData.skills.cunning[buttonRollName]
+		console.log( mySkill  , buttonRollName  );
 
 		this._rollSkill( event, mySkill, buttonRollName );
 	}
 
 	async _willButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.WILL_SKILL_NAME );
-		let mySkill = this.actorData.skills.will[buttonRollName].value;
+		let mySkill = this.actorData.skills.will[buttonRollName];
+		console.log( mySkill  , buttonRollName );
 
 		this._rollSkill( event, mySkill, buttonRollName );
 	}
@@ -268,16 +265,32 @@ export class MageSheet extends ActorSheet {
 	}
 
 	async _arcanaButtonClick( event ){
-		console.log( event )
 		let buttonRollName = event.currentTarget.getAttribute( this.ARCANA_NAME );
-		let myArcana = this.actorData.arcana[buttonRollName].value;
+		let myArcana = this.actorData.arcana[buttonRollName];
 
-		if( myArcana < 1 ) { myArcana = 1; }
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
 
-		let roll = new Roll(`${myArcana}d10>cs`);
-		roll.roll();
-		roll.render();
-		roll.toMessage();
+		dialogInitialData.idx = buttonRollName;
+		dialogInitialData.rollTitle = "Arcana: " + myArcana.name;
+		dialogInitialData.baseDice = myArcana.value;
+
+		const html = await renderTemplate( template, dialogInitialData );
+
+		new Dialog({
+			title : `${dialogInitialData.rollTitle} Check`,
+			content : html,
+			default : "Roll",
+			buttons : {
+				Roll: {
+					label: `Roll ${myArcana.name}`,
+					callback: ( data ) => {
+						let newData = this._extractDataFromDialog( dialogInitialData, data );
+						this.actor.rollArcana( newData , myArcana );
+					}
+				}
+			}
+		}).render( true );
 	}
 
 	async _traitButtonClick( event ){

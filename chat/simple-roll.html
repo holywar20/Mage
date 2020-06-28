@@ -15,9 +15,17 @@
 
 	<div class="chat-row">
 		<div class="chat-cell-1">
-			{{#each d10Dice}}
-				<span class="roll d10"></span>
-			{{/dice}}
+			<div class="die-list">
+			{{#each roll.parts as |die outerIdx|}}
+				{{#each die.rolls as |dieRoll innerIdx|}}
+					<div class="d10Roll
+						{{#if_greater dieRoll.roll 7}} roll-hit {{/if_greater}} 
+						{{#if_greater dieRoll.roll 10}} roll-crit-hit {{/if_greater}} 
+						{{#if_equal dieRoll.roll 2}} roll-crit-miss {{/if_equal}}
+						">{{ dieRoll.roll }}</div>
+				{{/each}}
+			{{/each}}
+			</div>
 		</div>
 	</div>
 
