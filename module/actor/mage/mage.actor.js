@@ -38,6 +38,7 @@ export class MageActor extends Actor{
 		this._prepareItems( this.data.items );
 
 		this._calculateDerived( data );
+		this._calculateSaves( data );
 	}
 
 	async roll({configureDialog=true}={}) {
@@ -49,6 +50,23 @@ export class MageActor extends Actor{
 		// Create the chat message
 		return ChatMessage.create(chatData);
 	}
+
+	async rollWeapon( dialogData , weapon ){
+	
+	}
+
+	async rollSave( dialogData , save ){
+		let totalDice = +dialogData.baseDice + +dialogData.bonusDice;
+		let iconPath = "systems/mage/icons/other/" + save.name + ".png";
+
+		let templateData = this._prepareSimpleTemplateData( totalDice, dialogData.difficulty, save.name , iconPath);
+		let template = `systems/mage/chat/simple-roll.html`;
+		const html = await renderTemplate(template, templateData);
+		let chatData = this._prepareChatData( html );
+
+		return ChatMessage.create( chatData );
+	}
+
 	async rollSkill( dialogData , skill){
 		
 		let totalDice = +dialogData.baseDice + +dialogData.bonusDice;
@@ -75,7 +93,6 @@ export class MageActor extends Actor{
 	}
 
 	async rollAttribute( dialogData ){
-		// console.log( this , dialogData );
 		let traitParts = this.data.data.traitParts[dialogData.idx];
 		let totalDice = +dialogData.baseDice + +dialogData.bonusDice
 		let iconPath = "systems/mage/icons/traits/" + traitParts.name + ".png"
@@ -133,13 +150,17 @@ export class MageActor extends Actor{
 		
 		let [weapons , spells] = itemList.reduce( ( allArrays, item ) =>{
 			if( item.type === "spell" ) allArrays[1].push( item );
-			if( item.type === "weapon" ) allArrays[0].push( item );
+			if( item.type === "weapon" ) {
+				allArrays[0].push( item )
+			};
 
 			return allArrays;
 		} , [[], []] );
 
 		this.data.data.weapons = weapons;
 		this.data.data.spells = spells;
+
+		console.log('pushing weapons',  weapons );
 	}
 
 	_triangularNumberFormula( base , costMultiple ){
@@ -156,22 +177,24 @@ export class MageActor extends Actor{
 		for( let [ saveKey, skillGroup] of Object.entries( data.skills ) ){
 			
 			let saveTotal = 0;
-			if( saveKey =="cunning" ){ saveTotal = +data.trait.dex.value + +data.trait.per.value }
-			if( saveKey =="grit "){ saveTotal = +data.trait.str.value + +data.trait.cor.value }
-			if( saveKey =="will"){ saveTotal = +data.trait.cha.value + +data.trait.int.value }
+			if( saveKey =="cunning" ){ saveTotal = +data.traits.dex.value + +data.traits.per.value }
+			if( saveKey =="grit "){ saveTotal = +data.traits.str.value + +data.traits.cor.value }
+			if( saveKey =="will"){ saveTotal = +data.traits.cha.value + +data.traits.int.value }
 
 			let skillTotal = 0
 			for( let skill of Object.values( skillGroup ) ){
 				skillTotal += +skill.value
 			}
+
 			data.defenses[saveKey].base = +saveTotal + Math.trunc(skillTotal / 5 );
-			data.defenses[saveKey].value = data.defenses[saveKey].base + data.defenses[saveKey].bonus;
+			data.defenses[saveKey].value = data.defenses[saveKey].base + data.defenses[saveKey].bonus + +data.defenses[saveKey].equip + +data.defenses[saveKey].enchant;
 		}
 	}
 
 	_calculateDerived( data ){
 		// Calculate PAradox
 		// data.paradox.max = +data.mystictraits.physical + +data.mystictraits.mental;
+		// Calculate HP
 	}
 
 	_calculateArcana( data ){

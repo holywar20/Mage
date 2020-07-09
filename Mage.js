@@ -13,17 +13,16 @@ import { BaseItem } from './module/item/base.item.js';
 
 import { Loader } from './helpers/loaders.js';
 
-Hooks.once('init', async function(){
-	registerSettings();
-	// await preloadTemplates(); Add templates to preload. There shouldn't be that many.
-});
-
 /* ------------------------------------ */
 /* Initialize system					*/
 /* ------------------------------------ */
 Hooks.once('init', async function() {
 
 	/* First set my default, base level configs */
+	game.mage = {
+		rollMacro
+	};
+	
 	CONFIG.Actor.entityClass = MageActor;
 	CONFIG.Item.entityClass = BaseItem;
 
@@ -43,6 +42,11 @@ Hooks.once('init', async function() {
 	Items.registerSheet("mage" , SpellSheet ,{
 		types: ["spell"]
 	});
+
+	/* Create a mage namespace within the game global.
+		These are mostly meant to be globally executable commands */
+
+
 
 	// Register custom system settings
 	registerSettings();
@@ -87,7 +91,9 @@ Hooks.once('ready', function() {
 	//loader.loadCompendium( 'mage' , 'tradition' );
 	//loader.loadCompendium( 'mage' , 'weapon' );
 
-	Hooks.on("hotbarDrop" , ( bar, data, slot ) => createMacro( data, slot ) )
+	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
+		createMacro( data, slot );
+	} );
 });
 
 
@@ -99,7 +105,7 @@ async function createMacro( data , slot ){
 		return ui.notifications.warn("You can only create macro buttons for owned Items");
 	const item = data.data;
 
-	const command = `game.mage.rollItemMacro("${item.name}")`;
+	const command = `game.mage.rollMacro("${item.name}")`;
 	let macro = game.macros.entities.find( m => ( m.name === item.name ) && ( m.command === command) );
 
 	if(!macro){
@@ -115,11 +121,10 @@ async function createMacro( data , slot ){
 	game.user.assignHotbarMacro( macro, slot );
 }
 
-function rollItemMacro( name ){
+function rollMacro( name ){
 	const speaker = ChatMessage.getSpeaker();
 
-	console.log( name );
-	console.log( speaker );
+	console.log("Rolling an item");
 }
 
 /* Drawing stuff 

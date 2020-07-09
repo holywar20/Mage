@@ -101,6 +101,10 @@ hr.flaired-divider{
 }
 
 /* Flex */
+.flex{
+	display: flex;
+}
+
 .flex-row{
 	display: flex;
 	justify-content: space-between;
@@ -124,6 +128,7 @@ hr.flaired-divider{
 }
 
 .flex-justify-self-right{
+	width: 100%;
 	display: inline-flex;
 	justify-content: flex-end;
 }
@@ -250,6 +255,7 @@ hr.flaired-divider{
 	color: var(--tertiary);
 	padding: 3px;
 }
+
 
 
 
@@ -520,8 +526,8 @@ div.expanded{
 }
 
 div.expanded.open{
-	min-height:520px;
-	max-height:520px;
+	min-height:570px;
+	max-height:570px;
 	overflow-y: scroll;
 	transition: var(--animation);
 

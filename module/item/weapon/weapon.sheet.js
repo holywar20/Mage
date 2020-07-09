@@ -1,6 +1,8 @@
 export class WeaponSheet extends ItemSheet{
 	constructor(...args) {
 		let [item , options] = [...args];
+
+		// item.calculateStyles();
 		super( item , {
 			editable : true,
 			width : 400,
@@ -9,8 +11,8 @@ export class WeaponSheet extends ItemSheet{
 		});
 	}
 
-	stylePrototype = { "skill" : "blunt" , "dmgType" : "bashing" , "dmgTrait" : "str" , "hitTrait" : "str" , "total" : 0 }
-	implicitModPrototype = {"modType" : "allsaves" , "modValue" : "1" }
+	stylePrototype = { "skill" : null , "dmgType" : null , "dmgTrait" : null , "hitTrait" : null , "total" : 0 , "dmgRoll" : 0 , "dmgInterval" : 0}
+	implicitModPrototype = {"modType" : null , "modValue" : 1 }
 
 	ADD_STYLE_BUTTON_SELECTOR = 'button[add-style]';
 	DELETE_STYLE_ATTRIBUTE = "delete-style";
@@ -77,6 +79,7 @@ export class WeaponSheet extends ItemSheet{
 		
 		const newKey = this.randomKey();
 		const newStyle = {}
+
 		Object.assign( newStyle , this.stylePrototype )
 		this.weaponData.styles[newKey] = newStyle;
 

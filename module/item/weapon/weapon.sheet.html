@@ -66,7 +66,6 @@
 					<div class="col">&nbsp;</div>
 				</div>
 
-				
 				{{#each data.styles as |style id|}}
 				<div class="row">
 					<div class="col-center-align">
@@ -85,12 +84,15 @@
 					<div class="col">
 						<select class="input-text input-medium" name="data.styles.{{id}}.dmgType">
 							{{#select style.dmgType }}
+							<option value="">-- Celestial --</option>
 							<option value="solar">Solar</option>
 							<option value="banal">Banal</option>
 							<option value="lunar">Lunar</option>
+							<option value="">-- Elemental --</option>
 							<option value="thermal">Thermal</option>
 							<option value="electric">Electric</option>
 							<option value="toxic">Toxic</option>
+							<option value="">-- Celestial --</option>
 							<option value="bashing">Bashing</option>
 							<option value="piercing">Piercing</option>
 							<option value="slashing">Slashing</option>
@@ -127,6 +129,10 @@
 						</button>
 					</div>
 				</div>
+
+				<input type="hidden" name="data.styles.{{id}}.total" value="{{ style.total }}">
+				<input type="hidden" name="data.styles.{{id}}.dmgRoll" value="{{ style.dmgRoll }}">
+				<input type="hidden" name="data.styles.{{id}}.dmgInterval" value="{{ style.dmgInterval }}">
 				{{/each}}
 
 				<div class="row">

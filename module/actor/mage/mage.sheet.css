@@ -443,8 +443,10 @@ img.armor-equipment{
 }
 
 img.inventory-item{
+	border: 1px solid var(--primary);
 	border-radius: 5px;
-	padding: 0px;
+	padding: 4px;
+	margin: 4px;
 
 	width: 48px;
 	height: 48px;

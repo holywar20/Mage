@@ -630,29 +630,35 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Blunt</div>
-					<select class="input-text" name="data.resist.blunt" value="{{ data.resist.blunt }}">
+					<select class="input-text" name="data.resist.blunt">
+						{{#select data.resist.blunt}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Thermal</div>
-					<select class="input-text" name="data.resist.thermal" value="{{ data.resist.thermal }}">
+					<select class="input-text" name="data.resist.thermal">
+						{{#select data.resist.thermal}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Solar</div>
-					<select class="input-text" name="data.resist.solar" value="{{ data.resist.solar }}">
+					<select class="input-text" name="data.resist.solar">
+						{{#select data.resist.solar}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 			</div>
@@ -660,30 +666,36 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Peircing</div>
-					<select class="input-text" name="data.resist.piercing" value="{{ data.resist.piercing }}">
+					<select class="input-text" name="data.resist.piercing">
+						{{#select data.resist.piercing}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 			
 				<div class="col">
 					<div class="small-sub-header">Electric</div>
-					<select class="input-text" name="data.resist.electric" value="{{ data.resist.electric }}">
+					<select class="input-text" name="data.resist.electric">
+						{{#select data.resist.electric}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Lunar</div>
-					<select class="input-text" name="data.resist.lunar" value="{{ data.resist.lunar }}">
+					<select class="input-text" name="data.resist.lunar">
+						{{#select data.resist.lunar}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 			</div>
@@ -691,30 +703,36 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Slashing</div>
-					<select class="input-text" name="data.resist.slashing" value="{{ data.resist.slashing }}">
+					<select class="input-text" name="data.resist.slashing">
+						{{#select data.resist.slashing}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 			
 				<div class="col">
 					<div class="small-sub-header">Toxic</div>
-					<select class="input-text" name="data.resist.toxic" value="{{ data.resist.toxic }}">
+					<select class="input-text" name="data.resist.toxic">
+						{{#select data.resist.toxic}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Banal</div>
-					<select class="input-text" name="data.resist.banal" value="{{ data.resist.banal }}">
+					<select class="input-text" name="data.resist.banal">
+						{{#select data.resist.banal}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
 						<option value="1">Normal</option>
 						<option value="2">Weak</option>
+						{{/select}}
 					</select>
 				</div>
 			</div>
@@ -816,83 +834,82 @@
 
 		<div class="grid-child">
 			<div class="expandable">
-				<div button-expandable="stats" class="flex-row expandable-header 
-					{{#if_equal data.inventoryExpanded.stats true}}open{{/if_equal}}">
-					<div class="flex-1">Character</div>
-					<div class="flex-half flex-justify-self-right"></div>
-				</div>
-
-				<div expandable-data="stats" class="expanded 
-					{{#if_equal data.inventoryExpanded.stats true}}open{{/if_equal}}">
-					<section>
-						Stats!
-					</section>
-				</div>
-			</div><!-- End of Expandable Stats -->
-
-			<div class="expandable">
 				<div button-expandable="weapons" class="flex-row expandable-header {{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
 					<div class="flex-1">Weapons</div>
 					<div class="flex-half flex-justify-self-right"></div>
 				</div>
 
 				<div expandable-data="weapons" class="weapons-list expanded {{#if_equal data.inventoryExpanded.weapons true}}open{{/if_equal}}">
-					{{#each data.weapons as |weapon id| }}
-					<div weapon-drag data-item-id="{{weapon._id}}" class="flex-row">
-						<div class="flex-1">
-							<span><img class="inventory-item" src="{{weapon.img}}"></span>
+					<section class="table">
+						<div class="header-row skills-header">
+							<div class="col">Weapon</div>
+							<div class="col">Base Dmg</div>
+							<div class="col">Properties</div>
+							<div class="col">Styles</div>
+							<div class="col">&nbsp;</div>
 						</div>
-						<div class="flex-3">
-							<div>{{weapon.name}}</div>
-							<div class="small-text">{{ weapon.data.hands }} Handed</div>
-							<div class="small-text">{{ weapon.data.weaponType }}</div>
-						</div>
-						<div class="flex-1">
-							<div>{{ weapon.data.dmg }}</div>
-							<div>
-								Dmg
+						{{#each data.weapons as |weapon id| }}
+						<div weapon-drag data-item-id="{{weapon._id}}" class="row">
+							
+							<div class="col-left-align">
+								<div class="flex">
+									<img class="inventory-item" src="{{weapon.img}}">
+									<div>
+										<div>{{weapon.name}}</div>
+										<div class="small-text">{{ weapon.data.hands }} Handed {{ weapon.data.weaponType }}</div>
+									</div>
+								</div>
+								
 							</div>
-						</div>
-						<div class="flex-2">
-							{{#each weapon.data.implicitMods as |mod id|}}
+
+							<div class="col">
+								<div>{{ weapon.data.dmg }}</div>
+							</div>
+
+							<div class="col pad-4">
+								{{#each weapon.data.implicitMods as |mod id|}}
 								<div class="justify-content-between">
 									<span class="small-text">{{ mod.modType }}</span>
 									<span class="small-text">{{ mod.modValue }}</span>
 								</div>
-							{{/each}}
-						</div>
+								{{/each}}
+							</div>
 
-						<div class="flex-3">
-								{{#each weapon.data.styles as |weapon id|}}
-								<span>
-								<button class="btn btn-vitals btn">
+							<div class="col pad-4">
+								{{#each weapon.data.styles as |style id|}}
+								<div class="justify-content-between">
+									<span class="small-text">{{ style.skill }} ( {{ style.total }} )</span>
+									<span class="small-text">{{ style.dmgInterval }} {{ style.dmgType }}</span>
+								</div>
+								{{/each}}
+							</div>
+
+							<div class="col">
+								<div class="justify-content-between">
+									<div></div>
+									
+									<div>
+										<button edit-weapon="{{weapon._id}}" class="btn btn-icon btn-neutral">
+											<img src="systems/mage/img/icons/gear.png">
+										</button>
+										<button delete-weapon="{{weapon._id}}" class="btn btn-icon btn-warn">
+											<img src="systems/mage/img/icons/trash.png">
+										</button>
+									</div>
+								</div>
+								<button roll-weapon="{{weapon._id}}" class="btn btn-vitals btn">
 									<span class="inline-icon">🎲</span> {{ weapon.total }}
 								</button>
-								<div class="row-subtitle">{{ weapon.skill }}</div>
-								</span>
-								{{/each}}
+							</div>
 						</div>
+						{{/each}}
+					</section>
 
-						<div class="flex-1 justify-content-between">
-							<button edit-weapon="{{weapon._id}}" class="btn btn-icon btn-neutral">
-								<img src="systems/mage/img/icons/gear.png">
-							</button>
-							<button delete-weapon="{{weapon._id}}" class="btn btn-icon btn-warn">
-								<img src="systems/mage/img/icons/trash.png">
-							</button>
-						</div>
-					</div>
-					{{/each}}
-
-					<div class="flex-row">
-						<div></div>
-						<div class="align-right">
-							<button add-weapon class="btn btn-large btn-success">
+					<div class="flex-justify-self-right">
+						<button add-weapon class="btn btn-large btn-success">
 							<span>Add Weapon</span>
-							</button>
-						</div>
+						</button>
 					</div>
-
 				</div>
 	
 			</div><!-- End of expandable weapons-->

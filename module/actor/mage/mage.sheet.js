@@ -119,9 +119,43 @@ export class MageSheet extends ActorSheet {
 	_onWeaponDrag( event ){
 	
 	}
-
-
 	
+	async _onWeaponRoll( event ){
+		let weaponId = event.currentTarget.getAttribute( this.WEAPON_ROLL_NAME );
+		let myWeapon = this.actor.getOwnedItem( weaponId );
+
+		console.log( myWeapon );
+
+
+
+		let template = "systems/mage/dialogs/weapon-roll-dialog.html";
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+
+
+		
+		// dialogInitialData.idx = buttonRollName;
+		// dialogInitialData.rollTitle = save.name + " Save"; 
+		// dialogInitialData.baseDice = save.value;
+
+		const html = await renderTemplate( template, dialogInitialData );
+
+		new Dialog({
+			title: `Weapon Roll` ,
+			content : html ,
+			default : "Roll",
+			buttons : {
+				Roll : {
+					label: `Roll test`,
+					callback : ( data ) => {
+						let newData = this._extractDataFromDialog( dialogInitialData, data );
+						console.log("roll finished");
+						//this.actor.rollSave( newData, save );
+					}
+				}
+			}
+		}).render( true );
+	}
+
 	_onWeaponAdd( event ){
 		const itemData = {
 			name: `New Weapon`,
@@ -130,7 +164,6 @@ export class MageSheet extends ActorSheet {
 		}
 
 		const result = this.actor.createOwnedItem( itemData );
-		console.log( this.actor);
 	}
 
 	_onWeaponDelete( event ){
@@ -145,10 +178,6 @@ export class MageSheet extends ActorSheet {
 		console.log( weaponId );
 		let weapon = this.actor.getOwnedItem( weaponId );
 		weapon.sheet.render( true );
-	}
-
-	_onWeaponRoll( event ){
-		console.log("roll");
 	}
 
 	_changeMainTab = ( event ) => {
@@ -209,15 +238,39 @@ export class MageSheet extends ActorSheet {
 
 	async _saveButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.SAVE_NAME );
-		let saveValue = this.actorData.defenses[buttonRollName].value;
+		let save = this.actorData.defenses[buttonRollName];
 
-		// TODO hook up to dialog
+		console.log( save );
+
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+
+		dialogInitialData.idx = buttonRollName;
+		dialogInitialData.rollTitle = save.name + " Save"; 
+		dialogInitialData.baseDice = save.value;
+
+		const html = await renderTemplate( template, dialogInitialData );
+
+		new Dialog({
+			title: `${save.name}` ,
+			content : html ,
+			default : "Roll",
+			buttons : {
+				Roll : {
+					label: `Roll ${save.name}`,
+					callback : ( data ) => {
+						let newData = this._extractDataFromDialog( dialogInitialData, data );
+						this.actor.rollSave( newData, save );
+					}
+				}
+			}
+		}).render( true );
+
 	}
 
 	async _cunningButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.CUNNING_SKILL_NAME );
 		let mySkill = this.actorData.skills.cunning[buttonRollName]
-		console.log( mySkill  , buttonRollName  );
 
 		this._rollSkill( event, mySkill, buttonRollName );
 	}
@@ -225,7 +278,6 @@ export class MageSheet extends ActorSheet {
 	async _willButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.WILL_SKILL_NAME );
 		let mySkill = this.actorData.skills.will[buttonRollName];
-		console.log( mySkill  , buttonRollName );
 
 		this._rollSkill( event, mySkill, buttonRollName );
 	}
@@ -233,8 +285,6 @@ export class MageSheet extends ActorSheet {
 	async _gritButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.GRIT_SKILL_NAME );
 		let mySkill = this.actorData.skills.grit[buttonRollName];
-
-		console.log( mySkill );
 
 		this._rollSkill( event, mySkill, buttonRollName );
 	}

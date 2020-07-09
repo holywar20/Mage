@@ -56,9 +56,8 @@
 				"rweapon" : { "itemId" : null , "itemRef" : null, "type" : "weapon"},
 				"lweapon" : { "itemId" : null , "itemRef" : null, "type" : "weapon"}
 			},
-			"inventoryExpanded" : {
-				"stats" : true, 
-				"weapons" : false,
+			"inventoryExpanded" : { 
+				"weapons" : true,
 				"armor" : false,
 				"other" : false,
 				"assets" : false
@@ -76,9 +75,9 @@
 				"mental" : "" , "physical" : "" 
 			},
 			"defenses" : {
-				"grit" :	{ "name" : "Grit"  , "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
-				"Will" :	{ "name" : "Will"  , "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
-				"cunning":{ "name" : "Cunning" , "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 }
+				"grit" :	{ "name" : "Grit"  , "base": 0, "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
+				"will" :	{ "name" : "Will"  , "base": 0, "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 },
+				"cunning":{ "name" : "Cunning" , "base": 0, "equip" : 0, "enchant" : 0 , "value" : 0 , "bonus" : 0, "total" : 0 }
 			},
 			"resist" :{
 				"bashing" : 1 , "thermal" : 1 , "solar" : 1, "piercing" : 1 , "electric" : 1 , "lunar" : 1 , "slashing" : 1, "toxic" : 1, "banal" : 1 
@@ -182,12 +181,12 @@
 			"description": "unassigned"
 		},
 		"weapon":{
-			"dmg" : "",
+			"dmg" : "1d10",
 			"hands" : 1,
 			"weaponType" : "martial",
 			"styles" : {},
 			"implicitMods": {},
-			"description": "unassigned"
+			"description": "No description"
 		}
 	}
 }
