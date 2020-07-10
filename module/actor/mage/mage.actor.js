@@ -5,6 +5,8 @@ export class MageActor extends Actor{
 		super(...args);
 	}
 	
+	actorData = this.data.data;
+
 	ARCANA_MULTIPLE = 3;
 	ARCANA_SUPER = [ -5 , 5];
 	ARCANA_BASE = [ 0 , 5];
@@ -15,6 +17,10 @@ export class MageActor extends Actor{
 
 	SKILL_SUPER = [-5 , 5];
 	SKILL_BASE = [0, 5];
+
+	DIALOG_PROTOTYPE = {
+		idx: "" , difficulty : 7 , baseDice : 0 ,bonusDice : 0 ,  rollTitle : "", playerTarget : "" ,  rollMode : "public" 
+	};
 
 	prepareData(){
 		super.prepareData();
@@ -35,10 +41,10 @@ export class MageActor extends Actor{
 		this._calculateArcana( data );
 		this._calculateSkills( data );
 
-		this._prepareItems( this.data.items );
-
 		this._calculateDerived( data );
 		this._calculateSaves( data );
+
+		this._prepareItems();
 	}
 
 	async roll({configureDialog=true}={}) {
@@ -54,6 +60,33 @@ export class MageActor extends Actor{
 	async rollWeapon( dialogData , weapon ){
 	
 	}
+	
+	async rollSaveDialog( key ){
+		let saveData = this.actorData.defenses[key];
+
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+		dialogInitialData.rollTitle = saveData.name + " Save"; 
+		dialogInitialData.baseDice = saveData.value;
+		
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		const html = await renderTemplate( template, dialogInitialData );
+
+		new Dialog({
+			title: `${saveData.name}` ,
+			content : html ,
+			default : "Roll",
+			buttons : {
+				Roll : {
+					label: `Roll ${saveData.name}`,
+					callback : ( dialogUpdateData ) => {
+						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
+						this.rollSave( newData, saveData );
+					}
+				}
+			}
+		}).render( true );
+	}
+
 
 	async rollSave( dialogData , save ){
 		let totalDice = +dialogData.baseDice + +dialogData.bonusDice;
@@ -67,10 +100,35 @@ export class MageActor extends Actor{
 		return ChatMessage.create( chatData );
 	}
 
+	async rollSkillDialog( key , skillType ){
+		let skillData = this.actorData.skills[skillType][key];
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+		dialogInitialData.rollTitle = skillData.name + " Roll";
+		dialogInitialData.baseDice = skillData.value;
+
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		const html = await renderTemplate( template, dialogInitialData );
+
+		new Dialog({
+			title: `${skillData.name}`,
+			content : html,
+			default : "Roll",
+			buttons : {
+				Roll : {
+					label : `Roll ${skillData.name}`,
+					callback: ( dialogUpdateData ) => {
+						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
+						this.rollSkill( newData, skillData );
+					}
+				}
+			}
+		}).render( true );
+	}
+
 	async rollSkill( dialogData , skill){
 		
 		let totalDice = +dialogData.baseDice + +dialogData.bonusDice;
-		let iconPath = "systems/mage/icons/skill-list/" + skill.name + ".png"
+		let iconPath = "systems/mage/icons/skill-list/" + skill.name + ".png";
 
 		let templateData = this._prepareSimpleTemplateData( totalDice, dialogData.difficulty, skill.name , iconPath);
 		let template = `systems/mage/chat/simple-roll.html`;
@@ -78,6 +136,32 @@ export class MageActor extends Actor{
 		let chatData = this._prepareChatData( html );
 
 		return ChatMessage.create( chatData );
+	}
+
+	async rollArcanaDialog( key  ){
+		let arcanaData = this.actorData.arcana[key];
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+
+		dialogInitialData.rollTitle = arcanaData.name + " Roll";
+		dialogInitialData.baseDice = arcanaData.value;
+
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		const html = await renderTemplate( template, dialogInitialData );
+
+		new Dialog({
+			title: `${arcanaData.name}`,
+			content : html,
+			default : "Roll",
+			buttons : {
+				Roll : {
+					label : `Roll ${arcanaData.name}`,
+					callback: ( dialogUpdateData ) => {
+						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
+						this.rollArcana( newData, arcanaData );
+					}
+				}
+			}
+		}).render( true );
 	}
 
 	async rollArcana( dialogData, arcana ){
@@ -90,6 +174,35 @@ export class MageActor extends Actor{
 		let chatData = this._prepareChatData( html );
 
 		return ChatMessage.create( chatData );
+	}
+
+	async rollAttributeDialog( key ){
+		let template = "systems/mage/dialogs/basic-roll-dialog.html";
+		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
+		
+		let traitValue = this.actorData.traits[key].value;
+		let traitData = this.actorData.traitParts[key];
+
+		dialogInitialData.rollTitle = `${traitData.name}`;
+		dialogInitialData.baseDice = traitValue;
+		dialogInitialData.idx = key;
+
+		const html = await renderTemplate( template, dialogInitialData);
+
+		new Dialog({
+			title: `${traitData.name} Check`,
+			content: html,
+			default : "Roll",
+			buttons: {
+				Roll: {
+					label: `Roll ${traitData.name}` ,
+					callback: ( dialogUpdateData ) => { 
+						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
+						this.rollAttribute( newData ); 
+					}
+				}
+			}
+		}).render(true);
 	}
 
 	async rollAttribute( dialogData ){
@@ -142,13 +255,13 @@ export class MageActor extends Actor{
 		return chatData;
 	}
 
-	_prepareItems( itemList ){
+	_prepareItems(){
 		const inventory = {
 			weapons : { label : "Weapons" , type: "weapon" ,  items: [] },
 			spells : { label : "Spells" , type: "spell" , items: [] }
 		}
 		
-		let [weapons , spells] = itemList.reduce( ( allArrays, item ) =>{
+		let [weapons , spells] = this.data.items.reduce( ( allArrays, item ) =>{
 			if( item.type === "spell" ) allArrays[1].push( item );
 			if( item.type === "weapon" ) {
 				allArrays[0].push( item )
@@ -159,8 +272,6 @@ export class MageActor extends Actor{
 
 		this.data.data.weapons = weapons;
 		this.data.data.spells = spells;
-
-		console.log('pushing weapons',  weapons );
 	}
 
 	_triangularNumberFormula( base , costMultiple ){
@@ -279,5 +390,27 @@ export class MageActor extends Actor{
 				skill.super < this.SKILL_SUPER[0] ? skill.super = this.SKILL_SUPER[0] : false; 
 			}
 		}
+	}
+
+	/* 
+		kind of ugly, but this tricky bit of code extracts data from the finished dialog box. 
+		Shouldn't matter what kind of data is in the dialog, it should get it all with proper properties.
+
+		Note you pass in the initial data from the dialog as well. This is so you have populated defaults and
+		to enforce the same convention across anything that consumes the dialog. 
+
+		Careful editing this method, all dialogs and hence all rolls depend upon it.
+	*/
+	_extractDataFromDialog( initialDialogData , data ){
+		let htmlFormControlsCollection = data[0].children[0].elements;
+
+		[...htmlFormControlsCollection].forEach( ( elem ) =>{
+			let name = elem.name;
+			let value = elem.value;
+
+			initialDialogData[name] = value;
+		});
+		
+		return initialDialogData;
 	}
 }

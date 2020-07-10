@@ -18,9 +18,9 @@ import { Loader } from './helpers/loaders.js';
 /* ------------------------------------ */
 Hooks.once('init', async function() {
 
-	/* First set my default, base level configs */
+	/* First match in global methods for calling macros*/
 	game.mage = {
-		rollMacro
+		rollWeaponMacro , rollArcanaMacro, rollSaveMacro , rollTraitMacro , rollSpellMacro , rollSkillMacro, rollUtilityMacro
 	};
 	
 	CONFIG.Actor.entityClass = MageActor;
@@ -71,13 +71,18 @@ Hooks.once('setup', function() {
 
 	Handlebars.registerHelper('if_greater', function( a , b , opts){
 		if( a >= b ){
-		return opts.fn(this)
+			return opts.fn(this)
 		} else {
-		return opts.inverse(this)
+			return opts.inverse(this)
 		}
 	});
 
 	Handlebars.registerHelper('capitalize' , function( string , opts ){
+		if( string ){
+			return string[0].toUpperCase() +  string.slice(1);
+		} else {
+			return "";
+		}
 		
 	});
 });
@@ -92,72 +97,123 @@ Hooks.once('ready', function() {
 	//loader.loadCompendium( 'mage' , 'weapon' );
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
-		createMacro( data, slot );
-	} );
+		switch( data.type ){
+			case "Weapon" : createWeaponMacro( data, slot ); break;
+			case "Skill" : createSkillMacro( data, slot ); break;
+			case "Trait" : createTraitMacro( data, slot); break;
+			case "Spell" : createSpellMacro( data, slot ); break;
+			case "Arcana" : createArcanaMacro( data, slot ); break;
+			case "Utility" : createUtilityMacro( data, slot ); break;
+			case "Save" : createSaveMacro( data, slot); break; 
+		}
+	});
 });
 
+async function createSkillMacro( macroRequest , slot ){
+	const command = `game.mage.rollSkillMacro( '${macroRequest.key}' , '${macroRequest.actorId}' , '${macroRequest.skillType}')`;
 
-async function createMacro( data , slot ){
-	console.log( data , slot );
-	
-	if (data.type !== "Item") return;
-	if ( !("data" in data) ) 
-		return ui.notifications.warn("You can only create macro buttons for owned Items");
+	let macro = await Macro.create({
+		name: macroRequest.data.name,
+		type: "script",
+		img: `systems/mage/icons/skill-list/${macroRequest.data.name}.png`,
+		command: command
+	});
+	game.user.assignHotbarMacro( macro, slot );
+}
+
+function rollSkillMacro( key, actorId , skillType ){
+	let actor = game.actors.get( actorId );
+	actor.rollSkillDialog( key , skillType );
+}
+
+async function createWeaponMacro( macroRequest , slot ){	
 	const item = data.data;
 
-	const command = `game.mage.rollMacro("${item.name}")`;
-	let macro = game.macros.entities.find( m => ( m.name === item.name ) && ( m.command === command) );
-
-	if(!macro){
-		macro = await Macro.create({
-			name: item.name,
-			type: "script",
-			img: item.img,
-			command: command,
-			flags: { "mage.itemMacro": true }
-		})
-	}
+	const command = `game.mage.rollWeaponMacro("${item.name}")`;
+	macro = await Macro.create({
+		name: item.name,
+		type: "script",
+		img: item.img,
+		command: command,
+		flags: { "mage.itemMacro": true }
+	});
 
 	game.user.assignHotbarMacro( macro, slot );
 }
 
-function rollMacro( name ){
+function rollWeaponMacro(){
 	const speaker = ChatMessage.getSpeaker();
 
-	console.log("Rolling an item");
+	console.log("Rolling a weapon");
 }
 
-/* Drawing stuff 
-function drawingTest() {
-  const drawingsData = [];
-  for (let i = 0; i < 200; i++) {
-    drawingsData.push({
-      type: CONST.DRAWING_TYPES.RECTANGLE,
-      author: game.user._id,
-      x: i,
-      y: i,
-      width: 10,
-      height: 10,
-      fillType: CONST.DRAWING_FILL_TYPES.SOLID,
-      fillColor: game.user.color,
-      fillAlpha: 0.15,
-      flags: { testBox: true },
-    });
-  }
-  canvas.scene
-    .createManyEmbeddedEntities("Drawing", drawingsData)
-    .then((drawings) => {
-      let ids = [];
-      drawings.forEach((drawingObject) => {
-        ids.push(drawingObject._id);
-      });
-      canvas.scene
-        .deleteManyEmbeddedEntities("Drawing", ids)
-        .then(() => {
-          console.log("success");
-        })
-        .catch(() => {
-          console.log("error");
-        });
-    });
-}*/
+async function createSpellMacro( macroRequest, slot ){
+	console.log("creating a spell : ", macroRequest )
+}
+
+function rollSpellMacro(){
+	const speaker = ChatMessage.getSpeaker();
+
+	console.log("Rolling a spell");
+}
+
+async function createArcanaMacro( macroRequest, slot ){
+	const command = `game.mage.rollArcanaMacro( '${macroRequest.key}' , '${macroRequest.actorId}' )`;
+
+	let macro = await Macro.create({
+		name: macroRequest.data.name,
+		type: "script",
+		img: `systems/mage/icons/arcana/${macroRequest.data.name}.png`,
+		command: command
+	});
+	game.user.assignHotbarMacro( macro, slot );
+}
+
+function rollArcanaMacro( key, actorId ){
+	let actor = game.actors.get( actorId );
+	actor.rollArcanaDialog( key );
+}
+
+async function createTraitMacro( macroRequest, slot ){
+	const command = `game.mage.rollTraitMacro( '${macroRequest.key}' , '${macroRequest.actorId}' )`;
+
+	let macro = await Macro.create({
+		name: macroRequest.data.name,
+		type: "script",
+		img: `systems/mage/icons/traits/${macroRequest.data.name}.png`,
+		command: command
+	});
+	game.user.assignHotbarMacro( macro, slot );
+}
+
+function rollTraitMacro( key, actorId ){
+	let actor = game.actors.get( actorId );
+	actor.rollAttributeDialog( key );
+}
+
+async function createSaveMacro( macroRequest, slot ){
+	const command = `game.mage.rollSaveMacro( '${macroRequest.key}' , '${macroRequest.actorId}' )`;
+
+	let macro = await Macro.create({
+		name: macroRequest.data.name,
+		type: "script",
+		img: `systems/mage/icons/other/${macroRequest.data.name}.png`,
+		command: command
+	});
+	game.user.assignHotbarMacro( macro, slot );
+}
+
+function rollSaveMacro( key, actorId ){
+	let actor = game.actors.get( actorId );	
+	actor.rollSaveDialog( key );
+}
+
+async function createUtilityMacro( macroRequest, slot ){
+	const speaker = ChatMessage.getSpeaker();
+
+	console.log("Creating a utility macro" , macroRequest, slot );
+}
+
+function rollUtilityMacro( macroRequest , slot ){
+	
+}

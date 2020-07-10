@@ -22,25 +22,37 @@ export class MageSheet extends ActorSheet {
 	SKILL_TAB_BUTTONS = '.btn-skills-tab';
 	TAB_BUTTONS = '.btn-main-tab';
 
-	SKILL_INPUTS_SELECTOR = "input[skill-change]"
+	SKILL_INPUTS_SELECTOR = "input[skill-change]";
+	SKILL_DRAG = "div[skill-drag]";
+	SKILL_DRAG_NAME = "skill-drag";
+	SKILL_DRAG_TYPE = "skill-drag-type";
+
+	PARADOX_BUTTON = "";
+	WOUND_BUTTON = "";
+	UTILITY_DRAG = "div[utility-drag]";
+	UTILITY_DRAG_NAME = "utility-drag";
 
 	CUNNING_BUTTON_SELECTOR = "button[cunning-skill-name]";
 	CUNNING_SKILL_NAME = 'cunning-skill-name';
-	
 	WILL_BUTTON_SELECTOR = "button[will-skill-name]";
 	WILL_SKILL_NAME = 'will-skill-name'
-	
 	GRIT_BUTTON_SELECTOR = "button[grit-skill-name]";
 	GRIT_SKILL_NAME = 'grit-skill-name';
 
 	ARCANA_BUTTON_SELECTOR = 'button[arcana-name]';
 	ARCANA_NAME = 'arcana-name';
+	ARCANA_DRAG = 'div[arcana-drag]';
+	ARCANA_DRAG_NAME = 'arcana-drag';
 
 	TRAIT_BUTTON_SELECTOR = 'button[trait-name]';
-	TRAIT_NAME = 'trait-name'
+	TRAIT_NAME = 'trait-name';
+	TRAIT_DRAG = 'div[trait-drag]';
+	TRAIT_DRAG_NAME = 'trait-drag';
 
 	SAVE_BUTTON_SELECTOR = 'button[save-name]';
 	SAVE_NAME = 'save-name';
+	SAVE_DRAG = 'div[save-drag]';
+	SAVE_DRAG_NAME = 'save-drag';
 
 	TAB_BUTTON_SELECTOR = "button[selected]"
 
@@ -53,6 +65,7 @@ export class MageSheet extends ActorSheet {
 	SPELL_ROLL_NAME = "roll-spell";
 	SPELL_MEMORIZE = "button[memorize-spell]";
 	SPELL_MEMORIZE_NAME = "memorize-spell";
+	SPELL_DRAG = "div[spell-drag]"
 
 	/* Inventory Expandables */
 	INVENTORY_EXPANDABLE_BUTTON = "div[button-expandable]";
@@ -107,31 +120,124 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.WEAPON_EDIT ).click(this._onWeaponEdit.bind( this ) );
 		this.mySheetHtml.find( this.WEAPON_ROLL ).click(this._onWeaponRoll.bind( this ) );
 		
+
+		/* Dragging out of sheet */
+		// Any 'item' that is draggable, use core mechanism.
+		let weaponHandler = event => this._onDragStart( event );
 		this.mySheetHtml.find( this.WEAPON_DRAG ).each( ( i , element ) => {
-			let handler = event => this._onDragItemStart( event );
 			element.setAttribute("draggable", true);
-			element.addEventListener( "dragstart", handler, false);
+			element.addEventListener( "dragstart", weaponHandler, false);
 		});
 
+		let spellHandler = event => this._onDragStart( event );
+		this.mySheetHtml.find( this.SPELL_DRAG ).each( (i, element) =>{
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragstart" , handler, false );
+		});
+		
+
+		// Everything else needs to be custom.
+		let skillHandler = event => this._onDragSkillStart( event );
+		this.mySheetHtml.find( this.SKILL_DRAG ).each( ( i, element ) => {
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragstart" , skillHandler, false );
+		});
+
+		let saveHandler = event => this._onDragSaveStart( event );
+		this.mySheetHtml.find( this.SAVE_DRAG ).each( (i, element) =>{
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragstart" , saveHandler, false );
+		});
+
+		let traitHandler = event => this._onDragTraitStart( event );
+		this.mySheetHtml.find( this.TRAIT_DRAG ).each( (i, element) =>{
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragstart" , traitHandler, false );
+		});
+
+		let utilityHandler = event => this._onDragUtilityStart( event );
+		this.mySheetHtml.find( this.UTILITY_DRAG ).each( (i, element) =>{
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragstart" , utilityHandler, false );
+		});
+
+		let arcanaHandler = event => this._onDragArcanaStart( event );
+		this.mySheetHtml.find( this.ARCANA_DRAG ).each( (i, element) =>{
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragstart" , arcanaHandler, false );
+		});
 	}
 
-	/* Private methods. ( Not really private, because JS doesn't do that ) */
-	_onWeaponDrag( event ){
-	
+	/* Drag events. Need to load stuff into 'data' transfer. This gets picked up  by hooks in 'Mage.js' */
+	_onDragWeaponStart( event ){
+		const element = event.currentTarget;
+		const item = this.actor.getOwnedItem(li.dataset.itemId);
+		event.dataTransfer.setData("text/plain", JSON.stringify({
+			type: "Weapon", actorId: this.actor.id, data: item
+		}));
 	}
 	
+	_onDragSpellStart( event ){
+		const element = event.currentTarget;
+		const item = this.actor.getOwnedItem(li.dataset.itemId);
+		event.dataTransfer.setData( "text/plain", JSON.stringify({
+			type: "Spell", actorId: this.actor.id, data: item
+		}));
+	}
+
+	_onDragSkillStart( event ){
+		let skillName = event.currentTarget.getAttribute( this.SKILL_DRAG_NAME );
+		let skillType = event.currentTarget.getAttribute( this.SKILL_DRAG_TYPE );
+		let skill = this.actor.data.data.skills[skillType][skillName];
+		
+		let macroRequest = {
+			type : "Skill" ,
+			actorId : this.actor.id,
+			key : skillName,
+			skillType : skillType,
+			data : skill
+		}
+		event.dataTransfer.setData( "text/plain", JSON.stringify( macroRequest ) );
+	}
+
+	_onDragSaveStart( event ){
+		let save = event.currentTarget.getAttribute( this.SAVE_DRAG_NAME );
+		let saveData = this.actor.data.data.defenses[save];
+		this._prepareMacroAndSendRequest("Save" , save , saveData );
+	}
+
+	_onDragTraitStart( event ){
+		let trait = event.currentTarget.getAttribute( this.TRAIT_DRAG_NAME );
+		let traitData = this.actor.data.data.traitParts[trait]
+		this._prepareMacroAndSendRequest("Trait" , trait , traitData );
+	}
+
+	_onDragUtilityStart( event ){
+		const element = event.currentTarget;
+
+		const macroRequest = {
+			type : "Utility" ,
+			actorId : this.actor.id,
+			data : {
+				utilityName : 'cunning'
+			}
+		}
+
+		event.dataTransfer.setData( "text/plain", JSON.stringify( macroRequest) );
+	}
+
+	_onDragArcanaStart( event ){
+		let arcana = event.currentTarget.getAttribute( this.ARCANA_DRAG_NAME );
+		let arcanaData = this.actor.data.data.arcana[arcana];
+		this._prepareMacroAndSendRequest("Arcana" , arcana , arcanaData );
+	}
+
 	async _onWeaponRoll( event ){
 		let weaponId = event.currentTarget.getAttribute( this.WEAPON_ROLL_NAME );
 		let myWeapon = this.actor.getOwnedItem( weaponId );
 
-		console.log( myWeapon );
-
-
-
 		let template = "systems/mage/dialogs/weapon-roll-dialog.html";
 		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
-
-
 		
 		// dialogInitialData.idx = buttonRollName;
 		// dialogInitialData.rollTitle = save.name + " Save"; 
@@ -148,7 +254,6 @@ export class MageSheet extends ActorSheet {
 					label: `Roll test`,
 					callback : ( data ) => {
 						let newData = this._extractDataFromDialog( dialogInitialData, data );
-						console.log("roll finished");
 						//this.actor.rollSave( newData, save );
 					}
 				}
@@ -175,7 +280,6 @@ export class MageSheet extends ActorSheet {
 	_onWeaponEdit( event ){
 		event.preventDefault();
 		let weaponId = event.currentTarget.getAttribute( this.WEAPON_EDIT_NAME );
-		console.log( weaponId );
 		let weapon = this.actor.getOwnedItem( weaponId );
 		weapon.sheet.render( true );
 	}
@@ -232,150 +336,41 @@ export class MageSheet extends ActorSheet {
 			newExpandedInventory[type] = false;
 		}
 		newExpandedInventory[buttonData] = true;
-		console.log( newExpandedInventory );
 		this.actor.update({"data.inventoryExpanded" : newExpandedInventory });
 	}
 
 	async _saveButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.SAVE_NAME );
-		let save = this.actorData.defenses[buttonRollName];
-
-		console.log( save );
-
-		let template = "systems/mage/dialogs/basic-roll-dialog.html";
-		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
-
-		dialogInitialData.idx = buttonRollName;
-		dialogInitialData.rollTitle = save.name + " Save"; 
-		dialogInitialData.baseDice = save.value;
-
-		const html = await renderTemplate( template, dialogInitialData );
-
-		new Dialog({
-			title: `${save.name}` ,
-			content : html ,
-			default : "Roll",
-			buttons : {
-				Roll : {
-					label: `Roll ${save.name}`,
-					callback : ( data ) => {
-						let newData = this._extractDataFromDialog( dialogInitialData, data );
-						this.actor.rollSave( newData, save );
-					}
-				}
-			}
-		}).render( true );
-
+		this.actor.rollSaveDialog( buttonRollName )
 	}
 
 	async _cunningButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.CUNNING_SKILL_NAME );
-		let mySkill = this.actorData.skills.cunning[buttonRollName]
-
-		this._rollSkill( event, mySkill, buttonRollName );
+		this.actor.rollSkillDialog( buttonRollName , "cunning" );
 	}
 
 	async _willButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.WILL_SKILL_NAME );
-		let mySkill = this.actorData.skills.will[buttonRollName];
-
-		this._rollSkill( event, mySkill, buttonRollName );
+		this.actor.rollSkillDialog( buttonRollName , "will" );
 	}
 
 	async _gritButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.GRIT_SKILL_NAME );
-		let mySkill = this.actorData.skills.grit[buttonRollName];
-
-		this._rollSkill( event, mySkill, buttonRollName );
-	}
-
-	async _rollSkill( event , mySkill, buttonName  ){
-		let template = "systems/mage/dialogs/basic-roll-dialog.html";
-		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
-		dialogInitialData.idx = buttonName
-		dialogInitialData.rollTitle = mySkill.name; 
-		dialogInitialData.baseDice = mySkill.value;
-
-		const html = await renderTemplate(template, dialogInitialData);
-
-		new Dialog({
-			title: `${mySkill.name} Check`,
-			content: html,
-			default : "Roll",
-			buttons: {
-				Roll: {
-					label: `Roll ${mySkill.name} ( ${dialogInitialData.baseDice} )` ,
-					callback: ( data ) => { 
-						let newData = this._extractDataFromDialog( dialogInitialData, data );
-						this.actor.rollSkill( newData , mySkill ); 
-					}
-				}
-			}
-		}).render(true);
+		this.actor.rollSkillDialog( buttonRollName , "grit" );
 	}
 
 	async _arcanaButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.ARCANA_NAME );
-		let myArcana = this.actorData.arcana[buttonRollName];
-
-		let template = "systems/mage/dialogs/basic-roll-dialog.html";
-		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
-
-		dialogInitialData.idx = buttonRollName;
-		dialogInitialData.rollTitle = "Arcana: " + myArcana.name;
-		dialogInitialData.baseDice = myArcana.value;
-
-		const html = await renderTemplate( template, dialogInitialData );
-
-		new Dialog({
-			title : `${dialogInitialData.rollTitle} Check`,
-			content : html,
-			default : "Roll",
-			buttons : {
-				Roll: {
-					label: `Roll ${myArcana.name}`,
-					callback: ( data ) => {
-						let newData = this._extractDataFromDialog( dialogInitialData, data );
-						this.actor.rollArcana( newData , myArcana );
-					}
-				}
-			}
-		}).render( true );
+		this.actor.rollArcanaDialog( buttonRollName );
 	}
 
 	async _traitButtonClick( event ){
 		let buttonRollName = event.currentTarget.getAttribute( this.TRAIT_NAME );
-		let myTrait = this.actorData.traits[buttonRollName].value;
-		let traitName = this.actorData.traitParts[buttonRollName].name;
-
-		// Render modal dialog
-		let template = "systems/mage/dialogs/basic-roll-dialog.html";
-		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
-		dialogInitialData.rollTitle = traitName;
-		dialogInitialData.baseDice = myTrait;
-		dialogInitialData.idx = buttonRollName;
-
-		const html = await renderTemplate(template, dialogInitialData);
-
-		new Dialog({
-			title: `${traitName} Check`,
-			content: html,
-			default : "Roll",
-			buttons: {
-				Roll: {
-					label: `Roll ${traitName}` ,
-					callback: ( data ) => { 
-						let newData = this._extractDataFromDialog( dialogInitialData, data );
-						this.actor.rollAttribute( newData ); 
-					}
-				}
-			}
-		}).render(true);
+		this.actor.rollAttributeDialog( buttonRollName );
 	}
 
 	_onSpellRoll( event ){
 		event.preventDefault();
-		console.log("rolling!");
 	}
 
 	_onSpellAdd( event ){
@@ -386,7 +381,6 @@ export class MageSheet extends ActorSheet {
 		}
 
 		const result = this.actor.createOwnedItem( itemData );
-		console.log( this.actor);
 	}
 
 	_onSpellEdit( event ){
@@ -423,25 +417,14 @@ export class MageSheet extends ActorSheet {
 		return initialDialogData;
 	}
 
-	/*	Item Dragging! 
-		html.find('li.item').each((i, li) => {
-		if ( li.classList.contains("inventory-header") ) return;
-		li.setAttribute("draggable", true);
-		li.addEventListener("dragstart", handler, false);
-	});
-		
-		new Dialog({
-			title: `${buttonRollName} Check`,
-			content: `<p>What type of arcana check?</p>`,
-			buttons: {
-				test: {
-					label: "Ability Test",
-					callback: () => { console.log("Ability!")}
-				},
-				save: {
-					label: "Saving Throw",
-					callback: () => { console.log("Save!") }
-				}
-			}
-		}).render(true);*/
+	_prepareMacroAndSendRequest( type , key, data ){
+		let macroRequest = {
+			type : type ,
+			actorId : this.actor.id,
+			key : key,
+			data : data
+		}
+
+		event.dataTransfer.setData( "text/plain", JSON.stringify( macroRequest) );
+	}
 }

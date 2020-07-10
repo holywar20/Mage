@@ -98,7 +98,7 @@
 	<div class="grid-child">
 	<div class="flex-row">
 
-		<div class="trait-box flex-row">
+		<div class="trait-box flex-row" trait-drag="str">
 			<div class="flex-col">
 
 				<div class="trait-header-margin"><h4 class="sub-header">Strength</h4></div>
@@ -132,7 +132,7 @@
 			</div>
 		</div>
 
-		<div class="trait-box flex-row">
+		<div class="trait-box flex-row" trait-drag="dex">
 			<div class="flex-col">
 
 				<div><h4 class="sub-header">Dexerity</h4></div>
@@ -169,7 +169,7 @@
 			</div>
 		</div>
 
-		<div class="trait-box flex-row">
+		<div class="trait-box flex-row" trait-drag="per">
 			<div class="flex-col">
 
 				<div><h4 class="sub-header">Perception</h4></div>
@@ -205,7 +205,7 @@
 			</div>
 		</div>
 		
-		<div class="trait-box flex-row">
+		<div class="trait-box flex-row" trait-drag="int">
 			<div class="flex-col">
 
 				<div><h4 class="sub-header">Intelligence</h4></div>
@@ -242,7 +242,7 @@
 			</div>
 		</div>
 		
-		<div class="trait-box flex-row">
+		<div class="trait-box flex-row" trait-drag="cha">
 		<div class="flex-col">
 
 			<div><h4 class="sub-header">Charisma</h4></div>
@@ -280,7 +280,7 @@
 		</div>
 		</div>
 
-		<div class="trait-box flex-row">
+		<div class="trait-box flex-row" trait-drag="cor">
 			<div class="flex-col">
 
 				<div><h4 class="sub-header">Courage</h4></div>
@@ -374,14 +374,14 @@
 				<div class="col">Paradox Roll</div>
 			</div>
 
-			<div class="row">
+			<div class="row" utility-drag>
 				<div class="col-center-align">
 					<button wound-button class="btn btn-vitals">
 						<span class="inline-icon">&#127922;</span>
 					</button>
 				</div>
 
-				<div class="col">
+				<div class="col" utility-drag>
 					<button paradox-button class="btn btn-vitals">
 						<span class="inline-icon">&#127922;</span>
 					{{ data.paradox.current }}</button>
@@ -400,7 +400,7 @@
 			</div>
 
 			{{#each data.defenses as |defense id|}}
-			<div class="row">
+			<div class="row" save-drag="{{id}}">
 				<div class="col-lead-short">{{ defense.name }}</div>
 				<div class="col"><input class="input-number" type="number" name="data.defenses.{{id}}.equip" value="{{ defense.equip }}"></div>
 				<div class="col"><input class="input-number" type="number" name="data.defenses.{{id}}.enchant" value="{{ defense.enchant }}"></div>
@@ -447,7 +447,7 @@
 
 		{{#if_equal data.currentSkillTab "grit" }}
 			{{#each data.skills.grit as |skill id|}}
-			<div class="row">
+			<div class="row" skill-drag="{{id}}" skill-drag-type="grit">
 				<div class="col">{{ name }}</div>
 				<div class="col small-text">
 					{{ skill.trait }}
@@ -470,7 +470,7 @@
 
 		{{#if_equal data.currentSkillTab "cunning" }}
 			{{#each data.skills.cunning as |skill id|}}
-			<div class="row">
+			<div class="row" skill-drag="{{id}}" skill-drag-type="cunning">
 				<div class="col">{{ name }}</div>
 				<div class="col small-text">
 					{{ trait }}
@@ -493,7 +493,7 @@
 
 		{{#if_equal data.currentSkillTab "will" }}
 			{{#each data.skills.will as |skill id|}}
-			<div class="row">
+			<div class="row" skill-drag="{{id}}" skill-drag-type="will">
 				<div class="col">{{ skill.name }}</div>
 				<div class="col small-text">
 					{{ skill.trait }}
@@ -536,21 +536,21 @@
 
 			<div class="row">
 				<div class="col">Goverance</div>
-				<div class="col">
+				<div class="col" arcana-drag="time">
 					<div class="small-sub-header">Time</div>
 					<button arcana-name="time" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.time.value }}
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" arcana-drag="space">
 					<div class="small-sub-header">Space</div>
 					<button arcana-name="space" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.space.value }}
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" arcana-drag="entropy">
 					<div class="small-sub-header">Entropy</div>
 					<button arcana-name="entropy" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
@@ -561,21 +561,21 @@
 
 			<div class="row">
 				<div class="col">Patterns</div>
-				<div class="col">
+				<div class="col" arcana-drag="matter">
 					<div class="small-sub-header">Matter</div>
 					<button arcana-name="matter" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.matter.value }}
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" arcana-drag="life">
 					<div class="small-sub-header">Life</div>
 					<button arcana-name="life" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.life.value }}
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" arcana-drag="">
 					<div class="small-sub-header">Spirit</div>
 					<button arcana-name="spirit" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
@@ -586,21 +586,21 @@
 
 			<div class="row">
 				<div class="col">Essence</div>
-				<div class="col">
+				<div class="col" arcana-drag="mind">
 					<div class="small-sub-header">Mind</div>
 					<button arcana-name="mind" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.mind.value }}
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" arcana-drag="prime">
 					<div class="small-sub-header">Prime</div>
 					<button arcana-name="prime" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.prime.value }}
 					</button>
 				</div>
-				<div class="col">
+				<div class="col" arcana-drag="force">
 					<div class="small-sub-header">Forces</div>
 					<button arcana-name="force" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
@@ -856,7 +856,7 @@
 									<img class="inventory-item" src="{{weapon.img}}">
 									<div>
 										<div>{{weapon.name}}</div>
-										<div class="small-text">{{ weapon.data.hands }} Handed {{ weapon.data.weaponType }}</div>
+										<div class="small-text">{{ weapon.data.hands }} Handed {{ capitalize weapon.data.weaponType }}</div>
 									</div>
 								</div>
 								
@@ -869,7 +869,7 @@
 							<div class="col pad-4">
 								{{#each weapon.data.implicitMods as |mod id|}}
 								<div class="justify-content-between">
-									<span class="small-text">{{ mod.modType }}</span>
+									<span class="small-text">{{ capitalize mod.modType }}</span>
 									<span class="small-text">{{ mod.modValue }}</span>
 								</div>
 								{{/each}}
@@ -878,8 +878,8 @@
 							<div class="col pad-4">
 								{{#each weapon.data.styles as |style id|}}
 								<div class="justify-content-between">
-									<span class="small-text">{{ style.skill }} ( {{ style.total }} )</span>
-									<span class="small-text">{{ style.dmgInterval }} {{ style.dmgType }}</span>
+									<span class="small-text">{{ capitalize style.skill }} ( {{ style.total }} )</span>
+									<span class="small-text">{{ style.dmgInterval }} {{ capitalize style.dmgType }} Dmg</span>
 								</div>
 								{{/each}}
 							</div>
@@ -1149,7 +1149,7 @@
 		<div class="grid-child">
 			{{#each data.spells as |spell id|}}
 			<div class="one-third-element">
-				<div class="flex-row mini-card-top">
+				<div class="flex-row mini-card-top" spell-drag>
 					<div>
 						<button roll-spell="{{spell._id}}" class="btn btn-spellroll">
 							<img src="{{spell.img}}">

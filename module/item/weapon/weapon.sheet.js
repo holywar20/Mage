@@ -1,3 +1,5 @@
+import { WEAPON_UTILITY } from "../weapon/weapon.utility.js";
+
 export class WeaponSheet extends ItemSheet{
 	constructor(...args) {
 		let [item , options] = [...args];
@@ -11,7 +13,6 @@ export class WeaponSheet extends ItemSheet{
 		});
 	}
 
-	stylePrototype = { "skill" : null , "dmgType" : null , "dmgTrait" : null , "hitTrait" : null , "total" : 0 , "dmgRoll" : 0 , "dmgInterval" : 0}
 	implicitModPrototype = {"modType" : null , "modValue" : 1 }
 
 	ADD_STYLE_BUTTON_SELECTOR = 'button[add-style]';
@@ -78,9 +79,8 @@ export class WeaponSheet extends ItemSheet{
 		event.preventDefault();
 		
 		const newKey = this.randomKey();
-		const newStyle = {}
+		const newStyle = makeNewStyle();
 
-		Object.assign( newStyle , this.stylePrototype )
 		this.weaponData.styles[newKey] = newStyle;
 
 		return this.item.update({ "styles" : this.weaponData.styles });
