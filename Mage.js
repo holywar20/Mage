@@ -77,13 +77,79 @@ Hooks.once('setup', function() {
 		}
 	});
 
+	Handlebars.registerHelper('if_less', function( a , b , opts){
+		if( a <= b ){
+			return opts.fn(this)
+		} else {
+			return opts.inverse(this)
+		}
+	});
+
 	Handlebars.registerHelper('capitalize' , function( string , opts ){
 		if( string ){
 			return string[0].toUpperCase() +  string.slice(1);
 		} else {
 			return "";
 		}
+	});
+
+	Handlebars.registerHelper('roll_success' , function ( success , opts ){
+		let type = "Miss!"
+		switch( true ){
+			case ( success > 15 ):
+				type = "Legendary!"; break;
+			case( success >= 10 ):
+				type = "Heroic!"; break;
+			case( success >= 5 ):
+				type = "Epic!"; break;
+			case( success >= 1 ):
+				type = "Hit!";
+		}
+
+		return type;
+	});
+
+	Handlebars.registerHelper( 'get_die_css_classes' , function( faces, roll, opts ) {
+		let classArray = [];
 		
+		switch( true ){
+			case( faces == '20'):
+				classArray.push( 'd20Roll' ); break;
+			case( faces == '12'):
+				classArray.push( 'd12Roll'); break;
+			case( faces == '10'):
+				classArray.push( 'd10Roll'); break;
+			case( faces == '8'):
+				classArray.push( 'd8Roll'); break;
+			case( faces == '6'):
+				classArray.push( 'd6Roll'); break;
+			case( faces == '4'):
+				classArray.push( 'd4Roll'); break;
+			case( true ):
+				classArray.push('d20Roll'); break; // D20 is default background for random dice.
+		}
+
+		switch( true ){
+			case( faces == roll ):
+				classArray.push('roll-crit-hit'); break;
+			case( faces == 1 ):
+				classArray.push('roll-crit-miss'); break;
+		}
+
+		let classes = classArray.join(' ');
+		return classes;
+	});
+
+	Handlebars.registerHelper( 'get_dmg_css_classes' , function ( dmgtype , options ){
+	
+	});
+
+	Handlebars.registerHelper('is_between', function( test , val1, val2 , opts ){
+		if( test >= val1 && test <= val2 ){
+			return opts.fn( this );
+		} else {
+			return opts.inverse( this );
+		}
 	});
 });
 
@@ -97,14 +163,18 @@ Hooks.once('ready', function() {
 	//loader.loadCompendium( 'mage' , 'weapon' );
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
+		console.log( data );
 		switch( data.type ){
-			case "Weapon" : createWeaponMacro( data, slot ); break;
 			case "Skill" : createSkillMacro( data, slot ); break;
 			case "Trait" : createTraitMacro( data, slot); break;
-			case "Spell" : createSpellMacro( data, slot ); break;
 			case "Arcana" : createArcanaMacro( data, slot ); break;
 			case "Utility" : createUtilityMacro( data, slot ); break;
-			case "Save" : createSaveMacro( data, slot); break; 
+			case "Save" : createSaveMacro( data, slot); break;
+
+			case "Item":
+				if( data.data.type == "weapon" ) createWeaponMacro( data, slot );
+				if( data.data.type == "spell" ) createSpellMacro( data, slot ); 
+			break;
 		}
 	});
 });
@@ -127,10 +197,12 @@ function rollSkillMacro( key, actorId , skillType ){
 }
 
 async function createWeaponMacro( macroRequest , slot ){	
-	const item = data.data;
-
-	const command = `game.mage.rollWeaponMacro("${item.name}")`;
-	macro = await Macro.create({
+	const item = macroRequest.data;
+	
+	console.log( macroRequest );
+	
+	const command = `game.mage.rollWeaponMacro("${item._id}")`;
+	let macro = await Macro.create({
 		name: item.name,
 		type: "script",
 		img: item.img,
@@ -141,10 +213,21 @@ async function createWeaponMacro( macroRequest , slot ){
 	game.user.assignHotbarMacro( macro, slot );
 }
 
-function rollWeaponMacro(){
+function rollWeaponMacro( itemId ){
 	const speaker = ChatMessage.getSpeaker();
+	
+	console.log( itemId );
+	
+	let weapon = game.items.get( itemId );
 
-	console.log("Rolling a weapon");
+	
+
+	if( weapon ){
+		console.log( weapon );
+	} else {
+		console.log( null );
+	}
+	
 }
 
 async function createSpellMacro( macroRequest, slot ){

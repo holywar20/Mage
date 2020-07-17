@@ -12,25 +12,18 @@
 			</div>
 
 			<section class="table">
-				<div class="tight-row">
-					<div class="col">Dmg</div>
+				<div class="row">
+					<div class="col">Base Dmg</div>
 					<div class="col-left-align">
-					<input class="input-text input-large" name="data.dmg" value="{{ data.dmg }}"></div>
-				</div>
-
-				<div class="tight-row">
-					<div class="col">Hands</div>
+						<input class="input-text input-large" name="data.dmg" value="{{ data.dmg }}">
+					</div>
+					<div class="col row-leader">Range</div>
 					<div class="col-left-align">
-					<select class="input-text input-large" name="data.hands">
-						{{#select data.hands }}
-						<option value="1">1-Handed</option>
-						<option value="2">2-Handed</option>
-						{{/select}}
-					</select>
+						<input type="number" value="{{data.range}}" name="data.range" class="input-number">
 					</div>
 				</div>
 
-				<div class="tight-row">
+				<div class="row">
 					<div class="col">Type</div>
 					<div class="col-left-align">
 						<select class="input-text input-medium" name="data.weaponType">
@@ -40,11 +33,30 @@
 							<option value="finesse">Finesse</option>
 							<option value="heavy">Heavy</option>
 							{{/select }}
-						</select>  <i>( AP 
-							{{#if_equal data.weaponType "heavy" }} 3 {{/if_equal}} 
-							{{#if_equal data.weaponType "finesse"}} 2 {{/if_equal}} 
-							{{#if_equal data.weaponType "martial"}} 2 {{/if_equal}} )</i>
+						</select>
 					</div>
+
+					<div class="col row-leader">Hands</div>
+					<div class="col">
+						<select class="input-text input-medium" name="data.hands">
+							{{#select data.hands }}
+							<option value="1">1-Handed</option>
+							<option value="2">2-Handed</option>
+							{{/select}}
+						</select>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col">AP</div>
+					<div class="col-left-align">
+						<input type="number" class="input-number" value="{{ data.AP }}" name="data.AP">
+					</div>
+					<div class="col">
+						<button test-roll class="btn btn-vitals">Roll</button>
+					</div>
+					<div class="col"></div>
 				</div>
 			</section>
 		</div>
@@ -55,7 +67,7 @@
 
 			<section class="table">
 				<div class="row">
-					<div class="col">Styles</div>
+					<div class="detail-header">Styles</div>
 				</div> 
 
 				<div class="header-row">
@@ -63,6 +75,7 @@
 					<div class="col">Dmg Type</div>
 					<div class="col">Dmg Trait</div>
 					<div class="col">Hit Trait</div>
+					<div class="col">Dmg</div>
 					<div class="col">&nbsp;</div>
 				</div>
 
@@ -124,18 +137,22 @@
 						</select>
 					</div>
 					<div class="col">
+						{{ style.dmgInterval }}
+					</div>
+					<div class="col">
 						<button delete-style="{{id}}" class="btn btn-icon btn-warn">
 							<img src="systems/mage/img/icons/trash.png">
 						</button>
 					</div>
 				</div>
-
+				<!-- Need this extra shit here because it gets run over when data is syncing. Ugly, but it fixes worse bugs ... so.-->
 				<input type="hidden" name="data.styles.{{id}}.total" value="{{ style.total }}">
 				<input type="hidden" name="data.styles.{{id}}.dmgRoll" value="{{ style.dmgRoll }}">
 				<input type="hidden" name="data.styles.{{id}}.dmgInterval" value="{{ style.dmgInterval }}">
 				{{/each}}
 
 				<div class="row">
+					<div class="col"></div>
 					<div class="col"></div>
 					<div class="col"></div>
 					<div class="col"></div>
@@ -149,58 +166,122 @@
 
 			</section>
 
-			<section class="table">
-				<div class="row">
-					<div class="col">Modifiers</div>
-				</div> 
-
-				<div class="header-row">
-					<div class="col">Mod</div>
-					<div class="col">Value</div>
-					<div class="col">&nbsp;</div>
-				</div>
-
-				{{#each data.implicitMods as |mod id| }}
-				<div class="row">
-					<div class="col">
-						<select class="input-text input-large" name="data.implicitMods.{{id}}.modType">
-							{{#select mod.modType}}
-							<option value="allSaves">All Saves</option>
-							<option value="reach">Reach</option>
-							<option value="damage">Damage</option>
-							{{/select}}
-						</select>
+			<div class="flex">
+				<section class="table">
+					<div class="row">
+						<div class="detail-header">Extra Rolls</div>
 					</div>
-					<div class="col">
-						<input class="input-text input-large" name="data.implicitMods.{{id}}.modValue" value="{{ mod.modValue }}">
+
+					<div class="header-row">
+						<div class="col">Name</div>
+						<div class="col">Roll</div>
+						<div class="col"></div>
 					</div>
-					<div class="col">
-						<button delete-mod="{{id}}" class="btn btn-icon btn-warn">
-							<img src="systems/mage/img/icons/trash.png">
+
+					{{#each data.extraRolls as |roll id|}}
+					<div class="row">
+						<div class="col">
+							<input class="input-text input-medium" name="data.extraRolls.{{id}}.rollSource" value="{{roll.rollSource}}">
+						</div>
+						<div class="col">
+							<input class="input-text input-medium" name="data.extraRolls.{{id}}.rollString" value="{{roll.rollString}}">
+						</div>
+						<div class="col">
+							<button delete-roll="{{id}}" class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/trash.png">
+							</button>
+						</div>
+					</div>
+					{{/each}}
+
+					<div class="row">
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col">
+							<button add-roll class="btn btn-icon btn-success">
+								<img src="systems/mage/img/icons/add-row.png">
+							</button>
+						</div>
+					</div>
+					
+				</section>
+
+				<section class="table">
+					<div class="row">
+						<div class="detail-header">Modifiers</div>
+					</div> 
+
+					<div class="header-row">
+						<div class="col">Mod</div>
+						<div class="col">Source</div>
+						<div class="col">Value</div>
+						<div class="col">&nbsp;</div>
+					</div>
+
+					{{#each data.implicitMods as |mod id| }}
+					<div class="row">
+						<div class="col">
+							<select class="input-text input-medium" name="data.implicitMods.{{id}}.modType">
+								{{#select mod.modType}}
+								<option value="allSaves">All Saves</option>
+								<option value="reach">Reach</option>
+								<option value="damage">Damage</option>
+								{{/select}}
+							</select>
+						</div>
+						<div class="col">
+							<input class="input-text input-medium" name="data.implicitMods.{{id}}.modSource" value="{{mod.modSource}}"> 
+						</div>
+
+						<div class="col">
+							<input class="input-number" type="number" name="data.implicitMods.{{id}}.modValue" value="{{ mod.modValue }}">
+						</div>
+						<div class="col">
+							<button delete-mod="{{id}}" class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/trash.png">
+							</button>
+						</div>
+					</div>
+					{{/each}}
+
+					<div class="row">
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<button add-mod class="btn btn-icon btn-success">
+							<img src="systems/mage/img/icons/add-row.png">
 						</button>
 					</div>
-				</div>
-				{{/each}}
+				</section>
+			</div>
+		
 
-				<div class="row">
-					<div class="col"></div>
-					<div class="col"></div>
-					<button add-mod class="btn btn-icon btn-success">
-						<img src="systems/mage/img/icons/add-row.png">
-					</button>
-				</div>
-			</section>
-
-			<section class="table">
-				<div class="row">
-					<div class="col">Description</div>
-				</div>
-				<div class="row">
-					<div class="col">
-						<textarea class="textarea-medium" name="data.description">{{ data.description }}</textarea>
+			<div class="flex">
+				<section class="table">
+					<div class="row">
+						<div class="detail-header">Description</div>
 					</div>
-				</div>
-			</section>
+					<div class="row">
+						<div class="col">
+							<textarea class="textarea-medium" name="data.description">{{ data.description }}</textarea>
+						</div>
+					</div>
+				</section>
+
+				<section class="table">
+					<div class="row">
+						<div class="detail-header">Roll Notes</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<textarea class="textarea-medium" name="data.rollNotes">{{ data.rollNotes }}</textarea>
+						</div>
+					</div>
+				</section>
+			</div>
+
+
+
 
 			
 		</div>

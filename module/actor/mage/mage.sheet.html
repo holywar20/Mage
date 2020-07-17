@@ -843,7 +843,6 @@
 					<section class="table">
 						<div class="header-row skills-header">
 							<div class="col">Weapon</div>
-							<div class="col">Base Dmg</div>
 							<div class="col">Properties</div>
 							<div class="col">Styles</div>
 							<div class="col">&nbsp;</div>
@@ -857,13 +856,10 @@
 									<div>
 										<div>{{weapon.name}}</div>
 										<div class="small-text">{{ weapon.data.hands }} Handed {{ capitalize weapon.data.weaponType }}</div>
+										<div class="small-text">{{ weapon.data.dmg }} - ( 2 AP )</div>
 									</div>
 								</div>
 								
-							</div>
-
-							<div class="col">
-								<div>{{ weapon.data.dmg }}</div>
 							</div>
 
 							<div class="col pad-4">

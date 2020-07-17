@@ -1,8 +1,8 @@
 .weapons-form{
 	background: no-repeat url('../../../img/sheets/background.jpg');
 	
-	min-width: 370px;
-	max-width: 370px;
+	min-width: 470px;
+	max-width: 470px;
 	
 	color: var(--base-text-color);
 }
@@ -42,5 +42,14 @@
 	grid-column-start: 1;
 	grid-column-end: 3;
 }
+
+.detail-header{
+	text-align: center;
+	font-size: 1.1em;
+	color: white;
+	background: var(--primary-fade50);
+	border-radius: 5px 5px 0px 0px;
+	padding: 3px;
+	}
 
 

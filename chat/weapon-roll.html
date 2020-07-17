@@ -1,3 +1,77 @@
 <div class="chat-card">
-	Rolling a weapon
+	<div class="chat-row">
+		<div class="chat-cell-1">
+			<img class="chat-image" src="{{iconPath}}">
+		</div>
+
+		<div class="chat-cell-3">
+			<div class="card-title">{{ rollName }}</div>
+			<div class="card-subtitle">
+				<span class="chat-value">{{ rollString }}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="chat-row">
+		<div class="chat-cell-1">
+			<div class="die-list">
+			{{#each roll.parts as |die outerIdx|}}
+				{{#each die.rolls as |dieRoll innerIdx|}}
+					<div class="d10Roll
+						{{#if_greater dieRoll.roll 7}} roll-hit {{/if_greater}} 
+						{{#if_greater dieRoll.roll 10}} roll-crit-hit {{/if_greater}} 
+						{{#if_equal dieRoll.roll 1}} roll-crit-miss {{/if_equal}}
+						">{{ dieRoll.roll }}</div>
+				{{/each}}
+			{{/each}}
+			</div>
+		</div>
+	</div>
+
+	<div class="chat-row">
+		<div class="chat-cell-1">
+			<button class="chat-button">
+				<span class="chat-hit-description
+				{{#if_less rollResult 0}} chat-miss-description {{/if_less}}
+				{{#is_between rollResult 5 9}} chat-epic-description {{/is_between}}
+				{{#is_between rollResult 10 14}} chat-heroic-description {{/is_between}}
+				{{#if_greater rollResult 15 }} chat-legendary-description {{/if_greater}}
+				">
+					{{#roll_success rollResult}}{{/roll_success}} ( {{ rollResult }} )
+				</span>
+			</button>
+		</div>
+	</div>
+
+	{{#if_greater rollResult "1"}}
+	<div class="chat-row">
+		<div class="chat-cell-1">
+			<div class="card-subtitle">
+				<span class="chat-value">{{ dmgRoll._total }}</span>
+				<span>{{ capitalize style.dmgType }} Dmg</span>
+			</div>
+		</div>
+		<div class="chat-cell-1">
+			<div class="card-subtitle">
+				<span class="chat-value">{{ dmgRollString }}</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="chat-row">
+		{{#each dmgRoll.dice as | die outerIdx|}}
+			{{#each die.rolls as | rollObj rollIdx| }}
+			<div class="{{#get_die_css_classes die.faces rollObj.roll 2}}{{/get_die_css_classes}}">{{ rollObj.roll }}</div>
+			{{/each}}
+		{{/each}}
+	</div>
+	{{/if_greater }}
+
+	{{#if rollNotes }}
+		<div class="chat-row">
+			<div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{{rollNotes}}}
+			</div>
+		</div>
+	{{/if}}
 </div>

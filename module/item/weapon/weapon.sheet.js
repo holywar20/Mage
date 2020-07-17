@@ -1,19 +1,18 @@
 import { WEAPON_UTILITY } from "../weapon/weapon.utility.js";
-
 export class WeaponSheet extends ItemSheet{
 	constructor(...args) {
 		let [item , options] = [...args];
 
-		// item.calculateStyles();
 		super( item , {
 			editable : true,
-			width : 400,
+			width : 490,
 			height: 600 ,
 			resizable: true
 		});
 	}
 
-	implicitModPrototype = {"modType" : null , "modValue" : 1 }
+	implicitModPrototype = {"modType" : null , "modValue" : 1 , "modSource" : 0 }
+	extraRollPrototype = { "rollSource" : null , "rollString"  : null }
 
 	ADD_STYLE_BUTTON_SELECTOR = 'button[add-style]';
 	DELETE_STYLE_ATTRIBUTE = "delete-style";
@@ -22,6 +21,12 @@ export class WeaponSheet extends ItemSheet{
 	ADD_MOD_BUTTON_SELECTOR = "button[add-mod]";
 	DELETE_MOD_ATTRIBUTE = "delete-mod";
 	DELETE_MOD_BUTTON_SELECTOR = "button[delete-mod]";
+
+	ADD_EXTRA_ROLL_BUTTON_SELECTOR = "button[add-roll]"
+	DELETE_EXTRA_ROLL_ATTRIBUTE = "delete-roll"
+	DELETE_EXTRA_ROLL_BUTTON_SELECTOR = "button[delete-roll]"
+
+	TEST_ROLL_BUTTON = "button[test-roll]"
 
 	mySheetHtml = null
 	weapon = this.object;
@@ -42,6 +47,11 @@ export class WeaponSheet extends ItemSheet{
 
 		this.mySheetHtml.find( this.ADD_STYLE_BUTTON_SELECTOR ).click( this._addStyleEvent.bind( this ) );
 		this.mySheetHtml.find( this.DELETE_STYLE_BUTTON_SELECTOR ).click( this._deleteStyleEvent.bind( this ) );
+
+		this.mySheetHtml.find( this.ADD_EXTRA_ROLL_BUTTON_SELECTOR ).click( this._addRollEvent.bind( this ) );
+		this.mySheetHtml.find( this.DELETE_EXTRA_ROLL_BUTTON_SELECTOR ).click( this._deleteRollEvent.bind( this ) );
+
+		this.mySheetHtml.find( this.TEST_ROLL_BUTTON ).click( this._testRollWeapon.bind( this ) );
 	}
 
 	/*getData(){
@@ -75,11 +85,34 @@ export class WeaponSheet extends ItemSheet{
 		//super._updateObject(event, formData);
 	//}
 
+	_testRollWeapon( event ){
+		this.weapon.rollRedirect();
+	}
+
+	_addRollEvent( event ){
+		event.preventDefault();
+		const newKey = this.randomKey();
+		const newRoll = {};
+		Object.assign( newRoll, this.extraRollPrototype );
+
+		this.weaponData.extraRolls[newKey] = newRoll;
+
+		return this.item.update({"extraRolls" : this.weaponData.extraRolls })
+	}
+
+	async _deleteRollEvent( event ){
+		event.preventDefault();
+		await this._onSubmit( event );
+
+		const targetKey = event.currentTarget.getAttribute( this.DELETE_EXTRA_ROLL_ATTRIBUTE);
+		return this.item.update({ [`data.extraRolls.-=${targetKey}`] : null });
+	}
+
 	_addStyleEvent( event ){
 		event.preventDefault();
 		
 		const newKey = this.randomKey();
-		const newStyle = makeNewStyle();
+		const newStyle = WEAPON_UTILITY.makeNewStyle();
 
 		this.weaponData.styles[newKey] = newStyle;
 

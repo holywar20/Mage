@@ -118,7 +118,7 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.WEAPON_ADD ).click(this._onWeaponAdd.bind( this ) );
 		this.mySheetHtml.find( this.WEAPON_DELETE ).click(this._onWeaponDelete.bind( this ) );
 		this.mySheetHtml.find( this.WEAPON_EDIT ).click(this._onWeaponEdit.bind( this ) );
-		this.mySheetHtml.find( this.WEAPON_ROLL ).click(this._onWeaponRoll.bind( this ) );
+		this.mySheetHtml.find( this.WEAPON_ROLL ).click(this._onWeaponRollClick.bind( this ) );
 		
 
 		/* Dragging out of sheet */
@@ -132,7 +132,7 @@ export class MageSheet extends ActorSheet {
 		let spellHandler = event => this._onDragStart( event );
 		this.mySheetHtml.find( this.SPELL_DRAG ).each( (i, element) =>{
 			element.setAttribute("draggable" , true );
-			element.addEventListener("dragstart" , handler, false );
+			element.addEventListener("dragstart" , spellHandler, false );
 		});
 		
 
@@ -232,33 +232,10 @@ export class MageSheet extends ActorSheet {
 		this._prepareMacroAndSendRequest("Arcana" , arcana , arcanaData );
 	}
 
-	async _onWeaponRoll( event ){
+	async _onWeaponRollClick( event ){
 		let weaponId = event.currentTarget.getAttribute( this.WEAPON_ROLL_NAME );
 		let myWeapon = this.actor.getOwnedItem( weaponId );
-
-		let template = "systems/mage/dialogs/weapon-roll-dialog.html";
-		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
-		
-		// dialogInitialData.idx = buttonRollName;
-		// dialogInitialData.rollTitle = save.name + " Save"; 
-		// dialogInitialData.baseDice = save.value;
-
-		const html = await renderTemplate( template, dialogInitialData );
-
-		new Dialog({
-			title: `Weapon Roll` ,
-			content : html ,
-			default : "Roll",
-			buttons : {
-				Roll : {
-					label: `Roll test`,
-					callback : ( data ) => {
-						let newData = this._extractDataFromDialog( dialogInitialData, data );
-						//this.actor.rollSave( newData, save );
-					}
-				}
-			}
-		}).render( true );
+		myWeapon.rollRedirect( this.actor );
 	}
 
 	_onWeaponAdd( event ){

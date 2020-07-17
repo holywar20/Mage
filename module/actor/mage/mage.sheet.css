@@ -174,8 +174,8 @@
 
 .btn-skills, .btn-arcana , .btn-vitals{
 	/* super specific styling to force everything to line up in containing elements */
-	max-width: 50px;
-	width:50px;
+	max-width: 60px;
+	width:60px;
 	height: 28px;
 	margin-top: 1px;
 	line-height: 14px;

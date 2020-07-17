@@ -47,20 +47,6 @@ export class MageActor extends Actor{
 		this._prepareItems();
 	}
 
-	async roll({configureDialog=true}={}) {
-	// Toggle default roll mode
-		let rollMode = game.settings.get("core", "rollMode");
-		if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData["whisper"] = ChatMessage.getWhisperIDs("GM");
-		if ( rollMode === "blindroll" ) chatData["blind"] = true;
-
-		// Create the chat message
-		return ChatMessage.create(chatData);
-	}
-
-	async rollWeapon( dialogData , weapon ){
-	
-	}
-	
 	async rollSaveDialog( key ){
 		let saveData = this.actorData.defenses[key];
 
@@ -72,12 +58,12 @@ export class MageActor extends Actor{
 		const html = await renderTemplate( template, dialogInitialData );
 
 		new Dialog({
-			title: `${saveData.name}` ,
+			title: `${saveData.name} Save` ,
 			content : html ,
 			default : "Roll",
 			buttons : {
 				Roll : {
-					label: `Roll ${saveData.name}`,
+					label: `Roll ${saveData.name} ( ${saveData.value} )`,
 					callback : ( dialogUpdateData ) => {
 						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
 						this.rollSave( newData, saveData );
@@ -110,12 +96,12 @@ export class MageActor extends Actor{
 		const html = await renderTemplate( template, dialogInitialData );
 
 		new Dialog({
-			title: `${skillData.name}`,
+			title: `${skillData.name}`, 
 			content : html,
 			default : "Roll",
 			buttons : {
 				Roll : {
-					label : `Roll ${skillData.name}`,
+					label : `Roll ${skillData.name} ( ${skillData.value} )`,
 					callback: ( dialogUpdateData ) => {
 						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
 						this.rollSkill( newData, skillData );
@@ -154,7 +140,7 @@ export class MageActor extends Actor{
 			default : "Roll",
 			buttons : {
 				Roll : {
-					label : `Roll ${arcanaData.name}`,
+					label : `Roll ${arcanaData.name} (${arcanaData.value} )`,
 					callback: ( dialogUpdateData ) => {
 						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
 						this.rollArcana( newData, arcanaData );
@@ -195,10 +181,10 @@ export class MageActor extends Actor{
 			default : "Roll",
 			buttons: {
 				Roll: {
-					label: `Roll ${traitData.name}` ,
+					label: `Roll ${traitData.name} ( ${traitValue} )` ,
 					callback: ( dialogUpdateData ) => { 
 						let newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
-						this.rollAttribute( newData ); 
+						this.rollAttribute( newData );
 					}
 				}
 			}
@@ -221,7 +207,7 @@ export class MageActor extends Actor{
 	_prepareSimpleTemplateData( totalDice, difficulty, rollName , iconPath ){
 		if( totalDice <  1){ totalDice = 1 };
 
-		let rollString = `${totalDice}d10cs>=${difficulty}x=10`;
+		let rollString = `${totalDice}d10x=10cs>=${difficulty}`;
 		let roll = new Roll(rollString);
 		roll.roll();
 		
@@ -256,6 +242,15 @@ export class MageActor extends Actor{
 	}
 
 	_prepareItems(){
+
+		// first lets make sure all updates are updated with any new values they should have.
+		if( this.items ){
+			this.items.forEach( ( item ) => {
+				item.itemCalculations();
+			});
+		}
+
+		/* Note we are ONLY copying the data into a data field for easy looping here */
 		const inventory = {
 			weapons : { label : "Weapons" , type: "weapon" ,  items: [] },
 			spells : { label : "Spells" , type: "spell" , items: [] }

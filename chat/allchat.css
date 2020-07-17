@@ -36,6 +36,10 @@
 	padding: 3px;
 }
 
+.chat-row:last-child{
+	border-bottom: 0px;
+}
+
 .chat-row-last{
 	display: flex;
 	border-bottom: none;
@@ -84,11 +88,11 @@
 
 
 .chat-button{
-	background: var(--primary);
+	background: var(--secondary-fade50);
 	color: white;
 	font-weight: 400;
 	font-size: 22px;
-	border: 1px solid var(--tertiary-fade50);
+	border: 1px solid black;
 }
 
 .chat-value{
@@ -97,12 +101,96 @@
 	border-radius: 5px;
 	padding: 3px;
 	border:1px solid black;
+	text-shadow: 0px 0px 5px black;
 }
 
-.chat-crit-hit{
-
+.chat-hit-description{
+	font-weight: bolder;
+	font-size: 1.1em;
+	color: var(--success);
 }
 
-.chat-crit-miss{
+.chat-epic-description{
+	color: var(--epic-success);
+}
 
+.chat-heroic-description{
+	color: var(--heroic-success);
+}
+
+.chat-legendary-description{
+	color: var(--legendary-success);
+}
+
+.chat-miss-description{
+	color: var(--fail);
+}
+
+
+
+.roll-hit{
+	border: 1px solid lightgreen !important; 
+}
+
+.roll-crit-hit{
+	border: 1px solid lightgreen !important; 
+	color: lightgreen !important;
+	text-shadow: 0 0 0.5em green, 0 0 0.5em green, 0 0 0.5em green;
+}
+
+.roll-crit-miss{
+	border: 1px solid red !important; 
+	color: red !important;
+	text-shadow: 0 0 0.5em crimson, 0 0 0.5em crimson, 0 0 0.5em crimson;
+}
+
+.die-list{
+	display: inline-flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.d4Roll, .d6Roll, .d8Roll, .d10Roll, .d12Roll, .d20Roll{
+	background-size: contain;
+	background-color: var(--secondary);
+	background-position: center;
+	background-repeat: no-repeat;
+
+	min-width: 40px;
+	line-height: 25px;
+	text-align: center;
+	color: black;
+	border: 1px solid black;
+	margin: 3px;
+
+	border-radius: 5px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+
+.d4Roll  {
+	background-image: url("../icons/dice/d4-grey.svg");
+}
+
+.d6Roll  {
+	background-image: url("../icons/dice/d6-grey.svg");
+}
+
+.d8Roll {
+	background-image: url("../icons/dice/d8-grey.svg");
+}
+
+.d10Roll  {
+	background-image: url("../icons/dice/d10-grey.svg");
+}
+
+.d12Roll  {
+	background-image: url("../icons/dice/d12-grey.svg");
+}
+
+.d20Roll {
+	background-image: url("../icons/dice/d20-grey.svg");
 }

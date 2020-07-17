@@ -1,22 +1,40 @@
 export const WEAPON_UTILITY = {
+	makeWeaponRollNotes( extraRolls , notes ){
+		for( const x in extraRolls ){
+			try{
+				let thisRoll = new Roll( extraRolls[x].rollString );
+				thisRoll.roll();
+
+				let target = "{" + extraRolls[x].rollSource + "}";
+				let rollText = "<span class='chat-value'>" + thisRoll._total + "</span>";
+				notes = notes.replace( target , rollText );
+			} catch {
+				// TODO show an alert.
+			}
+		}
+		
+		return notes;
+	},
+	
 	calculateStyles( dmg , myStyles , actor = null ){
 		
 		for( let id in myStyles ){
 			let hitSubtotal = 0;
 			let dmgSubtotal = 0;
 			
-			if( this.actor ){
+			if( actor ){
 				if( myStyles[id].hitTrait ){
-					hitSubtotal = actor.traits[myStyles[id].hitTrait].value;
+					hitSubtotal = actor.data.data.traits[myStyles[id].hitTrait].value;
 				}
 				
 				if( myStyles[id].dmgTrait ){
-					dmgSubtotal = actor.traits[myStyles[id].dmgTrait].value;
+					dmgSubtotal = actor.data.data.traits[myStyles[id].dmgTrait].value;
 				}
 			}
 
+			myStyles[id].dmgBonus = dmgSubtotal;
 			myStyles[id].dmgRoll = dmg + "+" + dmgSubtotal;
-			myStyles[id].totalDice = hitSubtotal // TODO - potentially more complex data
+			myStyles[id].total = hitSubtotal; // TODO - potentially more complex data
 
 			let dmgString = dmg;
 			// TODO - add a check for 'xxdxx and discard the rest';
@@ -37,6 +55,7 @@ export const WEAPON_UTILITY = {
 			"dmgTrait" : null , 
 			"hitTrait" : null , 
 			"total" : 0 , 
+			"dmgBonus" : 0,
 			"dmgRoll" : 0 , 
 			"dmgInterval" : 0
 		}

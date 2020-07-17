@@ -183,10 +183,14 @@
 		"weapon":{
 			"dmg" : "1d10",
 			"hands" : 1,
+			"range" : 0,
 			"weaponType" : "martial",
+			"ap" : 2,
 			"styles" : {},
 			"implicitMods": {},
-			"description": "No description"
+			"extraRolls" : {},
+			"rollNotes" : null,
+			"description": null
 		}
 	}
 }
