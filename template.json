@@ -107,7 +107,7 @@
 				"force" 			: { "name": "Force"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
 				"life" 			: { "name": "Life"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
 				"spirit" 		: { "name": "Spirit"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
-				"space"			: { "name": "space" 	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
+				"space"			: { "name": "Space" 	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} ,
 				"prime" 			: { "name": "Prime"	, "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0}
 			},
 			"skills" : {
@@ -159,15 +159,18 @@
 			"googleDocPath": ""
 		},
 		"spell" : {
-			"editable" : false,
+			"rollNotes": "",
 			"effects" :{},
-			"spheres" : {},
+			"rollArcana" : false,
+			"spheres" : {
+				"life" : 1
+			},
 			"memorized" : {
 				"value" : false , "number" : 0
 			},
 			"arcana" : 0,
 			"vulgarity" : "never",
-			"paradox" : 0,
+			"paradox" : 1,
 			"range": {
 				"num" : 0 , "type" : "hexes"
 			},
@@ -175,7 +178,7 @@
 				"num" : 0 , "type" : "self" , "num2" : 0
 			},
 			"duration" : {
-				"num" : 0 , "type" : ""
+				"num" : 0 , "type" : "rounds"
 			},
 			"spellType" : "simple",
 			"description": "unassigned"
@@ -189,8 +192,8 @@
 			"styles" : {},
 			"implicitMods": {},
 			"extraRolls" : {},
-			"rollNotes" : null,
-			"description": null
+			"rollNotes" : "",
+			"description": ""
 		}
 	}
 }

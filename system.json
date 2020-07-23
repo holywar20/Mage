@@ -37,13 +37,14 @@
 		"./module/item/tradition/tradition.sheet.css"
 	],
 	"socket": true,
+	"initiative" : "1d10 + @traits.per.value",
 	"gridDistance": 1,
 	"gridUnits": "Hex",
 	"primaryTokenAttribute": null,
 	"secondaryTokenAttribute": null,
-	"minimumCoreVersion": "0.5.0",
-	"compatibleCoreVersion": "0.5.5",
-	"url": "",
-	"manifest": "",
+	"minimumCoreVersion": "0.6.5",
+	"compatibleCoreVersion": "0.6.5",
+	"url": "https://github.com/holywar20/Mage",
+	"manifest": "https://raw.githubusercontent.com/holywar20/Mage/master/system.json",
 	"download": ""
 }

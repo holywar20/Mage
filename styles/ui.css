@@ -22,3 +22,35 @@ button.dialog-button{
 p.notes{
 	color: white;
 }
+
+input[type="text"] , select{
+	width: 2em;
+	height: 2em;
+
+	text-align: center;
+
+	border-radius: 5px;
+	border: 1px solid var(--secondary);
+
+	transition: var(--animation); 
+
+	color: white;
+}
+
+input[type="text"]:focus , select:focus{
+	outline:none;
+	border-radius: 10px;
+
+	background-color: var(--selected);
+
+	box-shadow: 
+		2px 3px 5px var(--tertiary),
+		1px 1px 2px var(--tertiary);
+	border: 1px solid var(--tertiary);
+}
+
+textarea{/* Defaults for UI to better deal with black background */
+	color: white;
+	border: 1px solid var(--primary);
+	border-radius: 5px;
+}

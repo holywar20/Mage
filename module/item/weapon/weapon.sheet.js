@@ -22,11 +22,11 @@ export class WeaponSheet extends ItemSheet{
 	DELETE_MOD_ATTRIBUTE = "delete-mod";
 	DELETE_MOD_BUTTON_SELECTOR = "button[delete-mod]";
 
-	ADD_EXTRA_ROLL_BUTTON_SELECTOR = "button[add-roll]"
-	DELETE_EXTRA_ROLL_ATTRIBUTE = "delete-roll"
-	DELETE_EXTRA_ROLL_BUTTON_SELECTOR = "button[delete-roll]"
+	ADD_EXTRA_ROLL_BUTTON_SELECTOR = "button[add-roll]";
+	DELETE_EXTRA_ROLL_ATTRIBUTE = "delete-roll";
+	DELETE_EXTRA_ROLL_BUTTON_SELECTOR = "button[delete-roll]";
 
-	TEST_ROLL_BUTTON = "button[test-roll]"
+	TEST_ROLL_BUTTON = "button[test-roll]";
 
 	mySheetHtml = null
 	weapon = this.object;

@@ -47,6 +47,8 @@ export class MageActor extends Actor{
 		this._prepareItems();
 	}
 
+	
+
 	async rollSaveDialog( key ){
 		let saveData = this.actorData.defenses[key];
 
@@ -202,6 +204,16 @@ export class MageActor extends Actor{
 		let chatData = this._prepareChatData( html );
 		
 		return ChatMessage.create( chatData );
+	}
+
+	findSkill( skillName ){
+		let mySkill = null;
+
+		if( this.data.data.skills.grit[skillName] ){ mySkill = this.data.data.skills.grit[skillName] }
+		if( this.data.data.skills.cunning[skillName] ){ mySkill = this.data.data.skills.cunning[skillName] }
+		if( this.data.data.skills.will[skillName]){ mySkill = this.data.data.skills.will[skillName] }
+
+		return mySkill
 	}
 
 	_prepareSimpleTemplateData( totalDice, difficulty, rollName , iconPath ){

@@ -95,9 +95,9 @@ export class BaseItem extends Item{
 
 		let dmgString = `${style.dmgRoll}`;
 		
-		if( toHitRoll._total >= 5 ){ dmgString = dmgString  ` + ${this.data.data.dmg}`; }
-		if( toHitRoll._total >= 10 ){ dmgString = dmgString ` + ${style.dmgBonus}`; }
-		if( toHitRoll._total >= 15 ){ dmgString = dmgString ` + ${style.dmgRoll}`; }
+		if( toHitRoll._total >= 5 ){ dmgString = dmgString +` + ${this.data.data.dmg}`; }
+		if( toHitRoll._total >= 10 ){ dmgString = dmgString +` + ${style.dmgBonus}`; }
+		if( toHitRoll._total >= 15 ){ dmgString = dmgString +` + ${style.dmgRoll}`; }
 
 		let dmgRoll = new Roll( dmgString );
 		dmgRoll.roll();

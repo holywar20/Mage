@@ -6,6 +6,18 @@
 	color: var(--base-text-color);
 }
 
+.character-icon{
+	width: 90px;
+	border:1px solid var(--primary-fade50);
+	border-radius: 5px;
+}
+
+.mage-icon{
+	width: 200px;
+	border:1px solid var(--primary-fade50);
+	border-radius: 5px;
+}
+
 .paper-doll{
 	text-align: center;
 }
@@ -106,7 +118,7 @@
 
 .character-container{
 	grid-template-columns : 350px 300px 250px;
-	grid-template-rows : 100px 220px 210px 200px;
+	grid-template-rows : 120px 220px 210px 200px;
 }
 
 .header{

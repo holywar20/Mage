@@ -26,6 +26,14 @@ export const WEAPON_UTILITY = {
 				if( myStyles[id].hitTrait ){
 					hitSubtotal = actor.data.data.traits[myStyles[id].hitTrait].value;
 				}
+
+				if( myStyles[id].skill ){
+					let mySkill = actor.findSkill(myStyles[id].skill );
+
+					if( mySkill ){
+						hitSubtotal += +mySkill.value;
+					}
+				}
 				
 				if( myStyles[id].dmgTrait ){
 					dmgSubtotal = actor.data.data.traits[myStyles[id].dmgTrait].value;
@@ -40,7 +48,7 @@ export const WEAPON_UTILITY = {
 			// TODO - add a check for 'xxdxx and discard the rest';
 			let [pre , suf] = dmgString.split( "d" );
 			suf = ( +suf * +pre ) + +dmgSubtotal;
-			pre = ( +pre ) + dmgSubtotal;
+			pre = ( +pre ) + +dmgSubtotal;
 			
 			myStyles[id].dmgInterval = `${pre} - ${suf}`;
 		}

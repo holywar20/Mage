@@ -41,7 +41,7 @@
 
 	--fail: rgb( 200, 20 , 20 );
 	--success : rgb( 30, 200, 30);
-	--epic-success : rgb(58, 100, 214);
+	--epic-success : rgb(0, 225, 247 );
 	--heroic-success : rgb(202, 104, 202);
 	--legendary-success: rgb(225, 235, 141);
 
@@ -152,10 +152,12 @@ hr.flaired-divider{
 
 .flex-3-quarters{
 	flex-grow: .75;
+	width: 0;
 }
 
 .flex-quarter{
 	flex-grow: .25;
+	width: 0;
 }
 
 .flex-1{
@@ -215,6 +217,8 @@ hr.flaired-divider{
 	
 	padding-left: 2px;
 	padding-right: 3px;
+
+	line-height: 25px;
 }
 
 .header-row , .row-title{
@@ -254,6 +258,13 @@ hr.flaired-divider{
 	vertical-align: middle;
 	border-radius: 5px;
 }
+
+span.right-align{
+	text-align: right;
+	font-size:.9em;
+	color: var(--tertiary);
+}
+
 
 .tight-row .col:first-child{
 	text-align: left;
@@ -318,6 +329,12 @@ input[type=number]::-webkit-outer-spin-button {
 input[disabled]{
 	color: white;
 	background-color: var(--input-background);
+}
+
+input[type="checkbox"]{
+	background-color: var(--input-background);
+	width: 15px;
+	height: 15px;
 }
 
 input{
@@ -396,6 +413,7 @@ input{
 	transition: var(--animation); 
 }
 
+
 .input-bigly{
 	font-size: 2.0em;
 	font-weight: 900;
@@ -456,7 +474,7 @@ span.inline-icon{
 .btn-icon{
 	width: 24px;
 	height: 24px;
-	padding: 0px;
+	padding: 3px;
 	line-height: 32px;
 	display: inline-flex;
 	justify-content: center;
@@ -556,3 +574,7 @@ button.rotate-down{
 .pad-4{
 	padding: 4px;
 }
+
+
+
+/* Checkbox crazyness */

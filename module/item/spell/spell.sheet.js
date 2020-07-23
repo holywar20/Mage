@@ -4,9 +4,9 @@ export class SpellSheet extends ItemSheet{
 		let [item , options] = [...args];
 		super( item , {
 			editable : true,
-			width : 500,
-			height: 600 ,
-			resizable: false
+			width : 480,
+			height: 560 ,
+			resizable: true
 		});
 	}
 

@@ -199,9 +199,10 @@ function rollSkillMacro( key, actorId , skillType ){
 async function createWeaponMacro( macroRequest , slot ){	
 	const item = macroRequest.data;
 	
-	console.log( macroRequest );
-	
-	const command = `game.mage.rollWeaponMacro("${item._id}")`;
+	const command = `game.mage.rollWeaponMacro("${item._id}" , "${macroRequest.actorId}")`;
+
+	console.log( item , item._id );
+
 	let macro = await Macro.create({
 		name: item.name,
 		type: "script",
@@ -213,21 +214,14 @@ async function createWeaponMacro( macroRequest , slot ){
 	game.user.assignHotbarMacro( macro, slot );
 }
 
-function rollWeaponMacro( itemId ){
-	const speaker = ChatMessage.getSpeaker();
-	
-	console.log( itemId );
-	
-	let weapon = game.items.get( itemId );
-
-	
-
-	if( weapon ){
-		console.log( weapon );
-	} else {
-		console.log( null );
+function rollWeaponMacro( itemId , actorId ){
+	let actor = game.actors.get( actorId );
+	if( actor ){
+		let weapon = actor.getOwnedItem( itemId );
+		if( weapon ){
+			weapon.rollRedirect();
+		}
 	}
-	
 }
 
 async function createSpellMacro( macroRequest, slot ){

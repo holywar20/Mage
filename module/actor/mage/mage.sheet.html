@@ -28,64 +28,81 @@
 <div id="character" class="tab character-container character-tab">
 	<div class="header grid-child">
 		<div class="flex-row">
-			<img src="systems/Mage/img/sheets/MageLogo.png">
-			<section class="table">
-				<div class="row">
-					<div class="col">Character</div>
-					<div class="col-left-align">
-						<input name="name" value="{{ actor.name }}" class="input-text input-wide">
-					</div>
-				</div>
 
-				<div class="row">
-					<div class="col">Tradition</div>
-					<div class="col-left-align">
-						<select name="data.tradition" class="input-text input-wide">
-							{{#select data.tradition }}
-							<option value=""></option>
-							<option value="">-- Artifice</option>
-							<option value="SOCEITY">Soceity of Ether</option>
-							<option value="BELARUS">Belarus Clan</option>
-							<option value="SOLIFICATI">Solificati</option>
-							<option value="VOID">Void Engineers</option>
-							<option value="">-- Theurgy</option>
-							<option value="ORDER">Order of Hermes</option>
-							<option value="STIGMATA">Stigmata Cabal</option>
-							<option value="TAFTANI">Taftani</option>
-							<option value="VAULDERMEN">Vauldermen</option>
-							<option value="">-- Conviction</option>
-							<option value="CULT">Cult of Grammaticus</option>
-							<option value="ONIBABA">Onibaba</option>
-							<option value="CELESTIAL">Celestial Chorus</option>
-							<option value="EUTHANATOS">Euthanatos</option>
-							<option value="BROTHERHOOD">Brotherhood of the Rule</option>
-							{{/select }}
-						</select>
+			<div class="flex-1">
+				<img class="character-icon" data-edit="img" src="{{ actor.img }}">
+			</div>
+
+			<div class="flex-3">
+				<section class="table">
+					<div class="row">
+						<div class="col">Character</div>
+						<div class="col-left-align">
+							<input name="name" value="{{ actor.name }}" class="input-text input-wide">
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col">Mystic Traits</div>
-					<div class="col-left-align">
-						<select name="data.mystictraits.mental" class="input-text">
-							{{#select data.mystictraits.mental }}
-							<option value=""> -- </option>
-							<option value="int">Intelligence</option>
-							<option value="cor">Courage</option>
-							<option value="per">Perception</option>
-							{{/select }}
-						</select>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<select name="data.mystictraits.physical"  class="input-text">
-							{{#select data.mystictraits.physical }}
-							<option value=""> -- </option>
-							<option value="str">Strength</option>
-							<option value="dex">Dexerity</option>
-							<option value="cha">Charisma</option>
-							{{/select}}
-						</select>
+
+					<div class="row">
+						<div class="col">Tradition</div>
+						<div class="col-left-align">
+							<select name="data.tradition" class="input-text input-wide">
+								{{#select data.tradition }}
+								<option value=""></option>
+								<option value="">-- Artifice</option>
+								<option value="SOCEITY">Soceity of Ether</option>
+								<option value="BELARUS">Belarus Clan</option>
+								<option value="SOLIFICATI">Solificati</option>
+								<option value="VOID">Void Engineers</option>
+								<option value="">-- Theurgy</option>
+								<option value="ORDER">Order of Hermes</option>
+								<option value="STIGMATA">Stigmata Cabal</option>
+								<option value="TAFTANI">Taftani</option>
+								<option value="VAULDERMEN">Vauldermen</option>
+								<option value="">-- Conviction</option>
+								<option value="CULT">Cult of Grammaticus</option>
+								<option value="ONIBABA">Onibaba</option>
+								<option value="CELESTIAL">Celestial Chorus</option>
+								<option value="EUTHANATOS">Euthanatos</option>
+								<option value="BROTHERHOOD">Brotherhood of the Rule</option>
+								{{/select }}
+							</select>
+						</div>
 					</div>
-				</div>
-			</section>
+
+					<div class="row">
+						<div class="col">Mystic Physical</div>
+						<div class="col-left-align">
+							<select name="data.mystictraits.physical"  class="input-text input-wide">
+								{{#select data.mystictraits.physical }}
+								<option value=""> -- </option>
+								<option value="str">Strength</option>
+								<option value="dex">Dexerity</option>
+								<option value="cha">Charisma</option>
+								{{/select}}
+							</select>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col">Mystic Mental</div>
+						<div class="col-left-align">
+							<select name="data.mystictraits.mental" class="input-text input-wide">
+								{{#select data.mystictraits.mental }}
+								<option value=""> -- </option>
+								<option value="int">Intelligence</option>
+								<option value="cor">Courage</option>
+								<option value="per">Perception</option>
+								{{/select }}
+							</select>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<div class="flex-2">
+				<img class="mage-icon" src="systems/Mage/img/sheets/MageLogo.png">
+			</div>
 		</div>
 	</div> <!-- End pf Header-->
 
@@ -450,7 +467,7 @@
 			<div class="row" skill-drag="{{id}}" skill-drag-type="grit">
 				<div class="col">{{ name }}</div>
 				<div class="col small-text">
-					{{ skill.trait }}
+					{{ capitalize skill.trait }}
 				</div>
 				<div class="col">
 					<input type="number" name="data.skills.grit.{{id}}.equip" value="{{ skill.equip }}" class="input-number">
@@ -471,9 +488,9 @@
 		{{#if_equal data.currentSkillTab "cunning" }}
 			{{#each data.skills.cunning as |skill id|}}
 			<div class="row" skill-drag="{{id}}" skill-drag-type="cunning">
-				<div class="col">{{ name }}</div>
+				<div class="col">{{ skill.name }}</div>
 				<div class="col small-text">
-					{{ trait }}
+					{{ capitalize skill.trait }}
 				</div>
 				<div class="col">
 					<input type="number" name="data.skills.cunning.{{id}}.equip" value="{{ skill.equip }}" class="input-number">
@@ -496,7 +513,7 @@
 			<div class="row" skill-drag="{{id}}" skill-drag-type="will">
 				<div class="col">{{ skill.name }}</div>
 				<div class="col small-text">
-					{{ skill.trait }}
+					{{ capitalize skill.trait }}
 				</div>
 				<div class="col">
 					<input type="number" name="data.skills.will.{{id}}.equip" value="{{ skill.equip }}" class="input-number">
@@ -630,7 +647,7 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Blunt</div>
-					<select class="input-text" name="data.resist.blunt">
+					<select class="input-text input-medium" name="data.resist.blunt">
 						{{#select data.resist.blunt}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -641,7 +658,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Thermal</div>
-					<select class="input-text" name="data.resist.thermal">
+					<select class="input-text input-medium" name="data.resist.thermal">
 						{{#select data.resist.thermal}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -652,7 +669,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Solar</div>
-					<select class="input-text" name="data.resist.solar">
+					<select class="input-text input-medium" name="data.resist.solar">
 						{{#select data.resist.solar}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -666,7 +683,7 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Peircing</div>
-					<select class="input-text" name="data.resist.piercing">
+					<select class="input-text input-medium" name="data.resist.piercing">
 						{{#select data.resist.piercing}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -678,7 +695,7 @@
 			
 				<div class="col">
 					<div class="small-sub-header">Electric</div>
-					<select class="input-text" name="data.resist.electric">
+					<select class="input-text input-medium" name="data.resist.electric">
 						{{#select data.resist.electric}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -689,7 +706,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Lunar</div>
-					<select class="input-text" name="data.resist.lunar">
+					<select class="input-text input-medium" name="data.resist.lunar">
 						{{#select data.resist.lunar}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -703,7 +720,7 @@
 			<div class="resist-row">
 				<div class="col">
 					<div class="small-sub-header">Slashing</div>
-					<select class="input-text" name="data.resist.slashing">
+					<select class="input-text input-medium" name="data.resist.slashing">
 						{{#select data.resist.slashing}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -715,7 +732,7 @@
 			
 				<div class="col">
 					<div class="small-sub-header">Toxic</div>
-					<select class="input-text" name="data.resist.toxic">
+					<select class="input-text input-medium" name="data.resist.toxic">
 						{{#select data.resist.toxic}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>
@@ -726,7 +743,7 @@
 				</div>
 				<div class="col">
 					<div class="small-sub-header">Banal</div>
-					<select class="input-text" name="data.resist.banal">
+					<select class="input-text input-medium" name="data.resist.banal">
 						{{#select data.resist.banal}}
 						<option value="0">Immune</option>
 						<option value=".5">Resist</option>

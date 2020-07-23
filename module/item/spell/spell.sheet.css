@@ -13,4 +13,14 @@
 	height: 128px;
 
 	border: 1px solid var(--primary);
+	border-radius: 5px;
+}
+
+.detail-header{
+	text-align: center;
+	font-size: 1.1em;
+	color: white;
+	background: var(--primary-fade50);
+	border-radius: 5px 5px 0px 0px;
+	padding: 3px;
 }
