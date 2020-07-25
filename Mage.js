@@ -52,8 +52,7 @@ Hooks.once('init', async function() {
 	registerSettings();
 	
 	// Preload Handlebars templates
-	// await preloadTemplates();
-	
+	await preloadTemplates();
 });
 
 /* ------------------------------------ */

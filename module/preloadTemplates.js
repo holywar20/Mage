@@ -1,7 +1,7 @@
 export const preloadTemplates = async function() {
 	const templatePaths = [
-		'systems/Mage/templates/mage.html'
+		'systems/mage/partials/effect-selector.html' // A selector for adding effects in repeating groups
 	];
 
-	return loadTemplates();
+	return loadTemplates( templatePaths );
 }

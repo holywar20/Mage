@@ -460,8 +460,8 @@ img.inventory-item{
 	padding: 4px;
 	margin: 4px;
 
-	width: 48px;
-	height: 48px;
+	width: 72px;
+	height: 72px;
 }
 
 .weapons-list .flex-row div{
@@ -470,4 +470,62 @@ img.inventory-item{
 
 .weapons-list .flex-row:nth-child(even){
 	background-color: var(--gray-fade25);
+}
+
+.damage-display, 
+.status-display,
+.healing-display,
+.resist-display,
+.bonus-display{
+	font-size:.8em;
+	text-align: right;
+}
+
+
+.damage-display span, 
+.status-display span,
+.healing-display span,
+.resist-display span,
+.bonus-display span{
+	font-size:1.0em;
+}
+
+
+.display-creation-tooltip{
+	border: 1px solid var(--tertiary-fade50);
+	color: var(--fail);
+	background-color: var(--gray-fade50);
+	border-radius: 5px;
+	margin-left: 15px;
+	padding: 5px;
+	font-size: .8em;
+}
+
+.mini-card-top{
+	border-radius: 10px 10px 0px 0px;
+	background-color: var(--gray-fade50);
+	border: 1px solid var(--primary-fade50);
+	border-bottom: 0px;
+	padding: 3px;
+}
+
+.mini-card-bottom{
+	border-radius: 0px;
+	background-color: var(--gray-fade25);
+	padding: 3px;
+}
+
+.mini-card-mid{
+	border: 1px solid var(--primary-fade50);
+	background-color: var(--gray-fade50);
+	height: 35px;
+	padding:5px;
+}
+
+.spell-effect-list{
+	line-height: 25px;
+}
+
+.spell-count-container{
+	height: 32px;
 }

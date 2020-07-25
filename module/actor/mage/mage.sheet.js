@@ -347,7 +347,10 @@ export class MageSheet extends ActorSheet {
 	}
 
 	_onSpellRoll( event ){
-		event.preventDefault();
+		let spellIdId = event.currentTarget.getAttribute( this.WEAPON_ROLL_NAME );
+		let myWeapon = this.actor.getOwnedItem( spellIdId );
+		console.log( myWeapon );
+		//myWeapon.rollRedirect( this.actor );
 	}
 
 	_onSpellAdd( event ){

@@ -1,0 +1,110 @@
+<select name="data.effects.{{id}}.subtype" class="input-text input-medium">
+	{{#select effect.subtype}}
+		{{#if_equal effect.type "damage"}}
+		<option value="">-- Physical --</option>
+		<option value="bashing">Bashing</option>
+		<option value="peircing">Peircing</option>
+		<option value="slashing">Slashing</option>
+		<option value="">-- Elemental --</option>
+		<option value="toxic">Toxic</option>
+		<option value="thermal">Thermal</option>
+		<option value="electric">Electric</option>
+		<option value="">-- Celestial --</option>
+		<option value="solar">Solar</option>
+		<option value="lunar">Lunar</option>
+		<option value="banal">Banal</option>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "resist"}}
+		<option value="">-- Physical --</option>
+		<option value="bashing">Bashing</option>
+		<option value="peircing">Peircing</option>
+		<option value="slashing">Slashing</option>
+		<option value="">-- Elemental --</option>
+		<option value="toxic">Toxic</option>
+		<option value="thermal">Thermal</option>
+		<option value="electric">Electric</option>
+		<option value="">-- Celestial --</option>
+		<option value="solar">Solar</option>
+		<option value="lunar">Lunar</option>
+		<option value="banal">Banal</option>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "healing"}}
+		<option value=""></option>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "status"}}
+		<option value="">--</option>
+		<option value="">-- Contested --</option>
+		<option value="haste">Haste</option>
+		<option value="slow">Slow</option>
+		<option value="enlighten">Enlighten</option>
+		<option value="confuse">Confuse</option>
+		<option value="inspire">Inspire</option>
+		<option value="oppress">Oppress</option>
+		<option value="regen">Regen</option>
+		<option value="rot">Rot/Burn</option>
+		<option value="vigor">Vigor</option>
+		<option value="enfeeble">Enfeeble</option>
+		<option value="">-- Immediate --</option>
+		<option value="knockback">Knockback</option>
+		<option value="disarm">Disarm</option>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "bonus"}}
+		<option value="">-- Vitals --</option>
+		<option value="hp">Hit Points</option>
+		<option value="armor">Armor</option>
+		<option value="barrier">Barrier</option>
+		<option value="allSaves">All Saves</option>
+		<option value="will">Will</option>
+		<option value="cunning">Cunning</option>
+		<option value="grit">Grit</option>
+		<option value="">-- Trait--</option>
+		<option value="str">Strength</option>
+		<option value="per">Perception</option>
+		<option value="dex">Dexerity</option>
+		<option value="cor">Courage</option>
+		<option value="int">Intelligence</option>
+		<option value="cha">Charisma</option>
+		<option value="">-- Skills --</option>
+		<option value="academics">Academics</option>
+		<option value="athletics">Athletics</option>
+		<option value="bladed">Bladed</option>
+		<option value="blunt">Blunt</option>
+		<option value="bows">Bows</option>
+		<option value="carry">Carry</option>
+		<option value="concentration">Concentration</option>
+		<option value="cosmology">Cosmology</option>
+		<option value="craft">Craft</option>
+		<option value="deception">Deception</option>
+		<option value="duel-wielding">Dual-Wield</option>
+		<option value="empathy">Empathy</option>
+		<option value="endurance">Endurance</option>
+		<option value="firearms">Firearms</option>
+		<option value="investigation">Investigation</option>
+		<option value="larceny">Larceny</option>
+		<option value="leadership">Leadership</option>
+		<option value="listen">Listen</option>
+		<option value="mechanics">Mechanics</option>
+		<option value="piercing">Piercing</option>
+		<option value="shields">Shields</option>
+		<option value="spot">Spot</option>
+		<option value="stealth">Stealth</option>
+		<option value="survival">Survival</option>
+		<option value="throwing">Throwing</option>
+		<option value="two-handed">Two-Handed</option>
+		<option value="wand">Wand</option>
+		<option value="witchsight">Witchsight</option>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "utility"}}
+		<option value=""></option>
+		<option value="dispel">Dispel</option>
+		<option value="counter">Counterspell</option>
+		<option value="detection">Detection</option>
+		{{/if_equal}}
+
+	{{/select}}
+</select>

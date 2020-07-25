@@ -23,7 +23,7 @@ export class SpellSheet extends ItemSheet{
 	DELETE_SPHERE_ATTRIBUTE = 'delete-sphere';
 	DELETE_SPHERE_BUTTON_SELECTOR = 'button[delete-sphere]'
 
-	mySheetHtml = null
+	mySheetHtml = null;
 	spell = this.object;
 	spellData = this.object.data.data;
 

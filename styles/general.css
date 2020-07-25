@@ -58,6 +58,7 @@
 div.gen-header{
 	font-size: 1.4em;
 	background : none;
+	display: flex;
 }
 
 hr.flaired-divider{ 
@@ -93,19 +94,7 @@ hr.flaired-divider{
 	margin: 3px;
 }
 
-.mini-card-top{
-	border-radius: 10px 10px 0px 0px;
-	background-color: var(--gray-fade50);
-	border: 1px solid var(--primary-fade50);
-	border-bottom: 0px;
-	padding: 3px;
-}
 
-.mini-card-bottom{
-	border-radius: 0px;
-	background-color: var(--gray-fade25);
-	padding: 3px;
-}
 
 /* Flex */
 .flex{
@@ -218,7 +207,7 @@ hr.flaired-divider{
 	padding-left: 2px;
 	padding-right: 3px;
 
-	line-height: 25px;
+	line-height: 15px;
 }
 
 .header-row , .row-title{
@@ -265,7 +254,6 @@ span.right-align{
 	color: var(--tertiary);
 }
 
-
 .tight-row .col:first-child{
 	text-align: left;
 	width: 60px;
@@ -274,14 +262,15 @@ span.right-align{
 	padding: 3px;
 }
 
-
-
-
-.col {
+.col, .col-bordered {
 	display: table-cell;
 	text-align: center;
-	vertical-align: middle;
 	border-radius: 5px;
+	vertical-align: top;
+}
+
+.col-bordered{
+	border: 1px solid var(--secondary-fade50); 
 }
 
 .col-center-focus{
@@ -303,15 +292,17 @@ span.right-align{
 .col-left-align{
 	display: table-cell;
 	text-align: left;
-	vertical-align: middle;
 	border-radius: 5px;
 }
 
 /* Inputs & Selects */
 span.non-input-number{
-	background-color: var(--secondary);
-	padding: 0px 5px 0px 5px;
+	background-color: var(--secondary-fade50);
+	color: var(--tertiary);
+	padding: 3px 5px 3px 5px;
 	border-radius: 5px;
+	border: 1px solid black;
+	font-size:.8em;
 }
 
 
@@ -505,13 +496,15 @@ span.inline-icon{
 .justify-content-between{
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 span.tag{
-	background-color: var(--secondary);
+	background-color: var(--secondary-fade50);
 	border: 1px solid black;
-	border-radius: 5px;
-	padding: 3px;
+	border-radius: 10px;
+	padding: 5px;
+	font-size:.75em;
 }
 
 span.damage-display{
@@ -574,7 +567,3 @@ button.rotate-down{
 .pad-4{
 	padding: 4px;
 }
-
-
-
-/* Checkbox crazyness */

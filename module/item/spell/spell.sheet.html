@@ -43,12 +43,15 @@
 						&nbsp;&nbsp;
 						<span class="right-align">Roll Arcana?</span>
 						&nbsp;
-					</div>
-					<div class="col">
-						<span class="checkbox-container">
-							<input type="checkbox">
-							<span class="checkmark"></span>
-						</span>
+						{{#if spell.data.memorized.value }}
+							<button roll-arcana-switch="{{spell._id}}" class="btn btn-icon btn-neutral">
+								<img src="systems/mage/img/icons/die.png">
+							</button>
+						{{else}}
+							<button roll-arcana-switch="{{spell._id}}" class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/die.png">
+							</button>
+						{{/if}}
 					</div>
 				</div>
 
@@ -202,34 +205,21 @@
 					<div class="col">
 						<select name="data.effects.{{id}}.type" class="input-text  input-medium">
 						{{#select effect.type}}
+							<option value=""></option>
 							<option value="damage">Damage</option>
 							<option value="healing">Healing</option>
 							<option value="resist">Resist</option>
 							<option value="status">Status Effect</option>
-							<option value="status">Bonus</option>
+							<option value="bonus">Bonus</option>
+							<option value="utility">Utility</option>
 						{{/select}}
 						<select>
 					</div>
+
 					<div class="col">
-						<!-- TODO Select bonus -->
-						<!-- -->
-						<select name="data.effects.{{id}}.subtype" class="input-text  input-medium">
-						{{#select effect.subtype}}
-							<option value="">-- Physical --</option>
-							<option value="bashing">Bashing</option>
-							<option value="peircing">Peircing</option>
-							<option value="slashing">Slashing</option>
-							<option value="">-- Elemental --</option>
-							<option value="toxic">Toxic</option>
-							<option value="thermal">Thermal</option>
-							<option value="electric">Electric</option>
-							<option value="">-- Celestial --</option>
-							<option value="solar">Solar</option>
-							<option value="lunar">Lunar</option>
-							<option value="banal">Banal</option>
-						{{/select}}
-						</select>
+						{{> "systems/mage/partials/effect-selector.html" effect=effect id=id}}
 					</div>
+
 					<div class="col">
 						<input class="input-number" name="data.effects.{{id}}.num" value="{{effect.num}}">
 					</div>

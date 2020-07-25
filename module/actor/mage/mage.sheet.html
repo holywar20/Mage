@@ -867,52 +867,60 @@
 						{{#each data.weapons as |weapon id| }}
 						<div weapon-drag data-item-id="{{weapon._id}}" class="row">
 							
-							<div class="col-left-align">
+							<div class="col-bordered">
 								<div class="flex">
 									<img class="inventory-item" src="{{weapon.img}}">
-									<div>
-										<div>{{weapon.name}}</div>
-										<div class="small-text">{{ weapon.data.hands }} Handed {{ capitalize weapon.data.weaponType }}</div>
-										<div class="small-text">{{ weapon.data.dmg }} - ( 2 AP )</div>
+									<div style="width: 100%">
+										<div class="pad-4">{{weapon.name}}</div>
+										<div class="small-text pad-4">{{ weapon.data.hands }} Handed {{ capitalize weapon.data.weaponType }}</div>
+										<div class="pad-4">
+											<span class="non-input-number">{{ weapon.data.dmg }} Dmg</span>
+											<span class="non-input-number">{{ weapon.data.ap }} AP</span>
+										</div>
 									</div>
 								</div>
 								
 							</div>
 
-							<div class="col pad-4">
+							<div class="col-bordered pad-4">
 								{{#each weapon.data.implicitMods as |mod id|}}
-								<div class="justify-content-between">
-									<span class="small-text">{{ capitalize mod.modType }}</span>
-									<span class="small-text">{{ mod.modValue }}</span>
+								<div class="justify-content-between pad-4">
+									<span>{{ capitalize mod.modType }}</span>
+									<span class="non-input-number">{{ mod.modValue }}</span>
 								</div>
 								{{/each}}
 							</div>
 
-							<div class="col pad-4">
+							<div class="col-bordered pad-4">
 								{{#each weapon.data.styles as |style id|}}
-								<div class="justify-content-between">
-									<span class="small-text">{{ capitalize style.skill }} ( {{ style.total }} )</span>
-									<span class="small-text">{{ style.dmgInterval }} {{ capitalize style.dmgType }} Dmg</span>
+								<div class="justify-content-between pad-4">
+									<div>
+										<span>{{ capitalize style.skill }}</span>
+										<span class="non-input-number">{{ style.total }}</span>
+									</div>
+									<div>
+										<span class="non-input-number">{{ style.dmgInterval }}</span>
+										<span class="non-input-number">{{ capitalize style.dmgType }}</span>
+									</div>
+									
 								</div>
 								{{/each}}
 							</div>
 
-							<div class="col">
-								<div class="justify-content-between">
-									<div></div>
-									
-									<div>
-										<button edit-weapon="{{weapon._id}}" class="btn btn-icon btn-neutral">
-											<img src="systems/mage/img/icons/gear.png">
-										</button>
-										<button delete-weapon="{{weapon._id}}" class="btn btn-icon btn-warn">
-											<img src="systems/mage/img/icons/trash.png">
-										</button>
-									</div>
+							<div class="col-bordered">
+								<div>
+									<button edit-weapon="{{weapon._id}}" class="btn btn-icon btn-neutral">
+										<img src="systems/mage/img/icons/gear.png">
+									</button>
+									<button delete-weapon="{{weapon._id}}" class="btn btn-icon btn-warn">
+										<img src="systems/mage/img/icons/trash.png">
+									</button>
 								</div>
-								<button roll-weapon="{{weapon._id}}" class="btn btn-vitals btn">
-									<span class="inline-icon">🎲</span> {{ weapon.total }}
-								</button>
+								<div>
+									<button roll-weapon="{{weapon._id}}" class="btn btn-vitals btn">
+										<span class="inline-icon">🎲</span> {{ weapon.total }}
+									</button>
+								</div>
 							</div>
 						</div>
 						{{/each}}
@@ -1162,20 +1170,53 @@
 		<div class="grid-child">
 			{{#each data.spells as |spell id|}}
 			<div class="one-third-element">
-				<div class="flex-row mini-card-top" spell-drag>
+				<div class="flex mini-card-top" spell-drag>
 					<div>
-						<button roll-spell="{{spell._id}}" class="btn btn-spellroll">
-							<img src="{{spell.img}}">
-						</button>
+						<img class="inventory-item" src="{{spell.img}}">
+						<div class="justify-content-between spell-count-container">
+							<div>
+								{{#if spell.data.memorized.value }}
+									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
+										<img src="systems/mage/img/icons/memorize.png">
+									</button>
+								{{else}}
+									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-warn">
+										<img src="systems/mage/img/icons/memorize.png">
+									</button>
+								{{/if}}
+							</div>
+							<div>
+								{{#if spell.data.memorized.value }}
+									<span class="row-subtitle">#</span>
+									<input class="input-number" name="data.spells.{{id}}.memorized.num" value="{{spell.data.memorized.num}}">
+								{{/if}}
+							</div>
+						</div>
 					</div>
 					<div class="flex-3">
-						{{ spell.name }}</span><br>
-						<span class="row-subtitle">{{ spell.data.spellType }}</span><br>
-						<span class="row-subtitle">
-						{{#each spell.data.spheres as |sphere id|}}
-							<span class="tag">{{ sphere.type }} {{ sphere.num }}</span>
-						{{/each}}
-						</span>
+						<div>
+							<b>{{ spell.name }}</b>
+						</div>
+						
+						<div>
+							<span class="small-text">{{ capitalize spell.data.spellType }} Spell</span>
+						</div>
+
+						<div class="justify-content-between">
+							<span class="row-subtitle">Vulgarity</span>
+							<span class="non-input-number">{{ capitalize spell.data.vulgarity }}</span>
+						</div>
+
+						<div class="justify-content-between">
+							<span class="row-subtitle">Paradox</span>
+							<span class="non-input-number">{{ spell.data.paradox }}</span>
+						</div>
+
+						<div class="justify-content-between">
+							<span class="row-subtitle">Arcana</span>
+							<span class="non-input-number">{{ spell.data.arcana }}</span>
+						</div>
+
 					</div>
 					<div class="flex-2">
 						<div class="justify-content-between">
@@ -1191,60 +1232,104 @@
 								</button>
 							</span>
 						</div>
-
-						<div class="justify-content-between">
-							<div>
-								{{#if spell.data.memorized.value }}
-									Count:
-									<input class="input-number" name="data.spells.{{id}}.memorized.num" value="{{spell.memorized.num}}">
-								{{/if}}
-							</div>
-							<span class="row-title">
-								{{#if spell.data.memorized.value }}
-									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
-										<img src="systems/mage/img/icons/memorize.png">
-									</button>
-								{{else}}
-									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-warn">
-										<img src="systems/mage/img/icons/memorize.png">
-									</button>
-								{{/if}}
-							</span>
-						</div>
 					</div>
 				</div>
 
-				<div class="flex-row mini-card-bottom">
-					<div class="flex-1">
+				<div class="mini-card-mid justify-content-between">
+					<div>
+						{{#each spell.data.spheres as |sphere id|}}
+						<span class="tag">{{ capitalize sphere.type }} {{ sphere.num }}</span>
+						{{/each}}
+					</div>
+
+					<div>
+						<button class="btn btn-arcana">Cast</button>
+					</div>
+				</div>
+
+				<div class="flex mini-card-bottom">
+					<div class="flex-3-quarters pad-4 spell-effect-list">
 						<div class="justify-content-between">
-							<span class="row-subtitle">&nbsp;Vulgarity</span>
-							<span class="span-non-input-number">{{ spell.data.vulgarity }}</span>
+							<span class="row-subtitle">&nbsp;Range</span>
+							<span>
+								{{#if_greater spell.data.range.num 1}}
+								<span class="non-input-number">{{ spell.data.range.num }}</span>
+								{{/if_greater}}
+								<span class="non-input-number">{{ capitalize spell.data.range.type }}</span>
+							</span>
 						</div>
 
 						<div class="justify-content-between">
-							<span class="row-subtitle">&nbsp;Paradox</span>
-							<span class="span-non-input-number">{{ spell.data.paradox }}</span>
+							<span class="row-subtitle">&nbsp;Targets</span>
+							<span>
+								{{#if_greater spell.data.range.num 1}}
+								<span class="non-input-number">{{ spell.data.targets.num }}</span>
+								{{/if_greater}}
+								<span class="non-input-number">{{ spell.data.targets.type }}</span>
+							</span>
+							
 						</div>
 
 						<div class="justify-content-between">
-							<span class="row-subtitle">&nbsp;&nbsp;&nbsp;Arcana</span>
-							<span class="span-non-input-number">{{ spell.data.arcana }}</span>
+							<span class="row-subtitle">&nbsp;Duration</span>
+							<span>
+								{{#if_greater spell.data.range.num 1}}
+								<span class="non-input-number">{{ spell.data.duration.num }}</span>
+								{{/if_greater}}
+								<span class="non-input-number">{{ spell.data.duration.type }}</span>
+							</span>
 						</div>
 					</div>
 
-					<div class="flex-2 align-right">
+					<div class="flex-1 align-right pad-4 spell-effect-list">
 						{{#each spell.data.effects as |effect id|}}
-							
-
 							{{#if_equal effect.type "damage" }}
-								<span class="damage-display">Deals {{ effect.num }} {{ effect.subtype }} Dmg</span>
+								<div class="damage-display">
+									Deals 
+										<span class="non-input-number">{{ effect.num }}</span> 
+										<span class="non-input-number">{{ capitalize effect.subtype }}</span>
+									Dmg
+								</div>
 							{{/if_equal}}
 
 							{{#if_equal effect.type "status" }}
-								<span></span>
+								<div class="status-display">
+									Inflicts 
+										<span class="non-input-number">{{ effect.num }}</span>x 
+										<span class="non-input-number">{{ capitalize effect.subtype }}</span>
+								</div>
 							{{/if_equal}}
 
-							
+							{{#if_equal effect.type "healing" }}
+								<div class="healing-display">
+									Heals 
+										<span class="non-input-number">{{ effect.num }}</span> 
+										<span class="non-input-number">HP</span>
+								</div>
+							{{/if_equal}}
+
+							{{#if_equal effect.type "resist"}}
+								<div class="resist-display">
+									Resist
+									<span class="non-input-number">{{ capitalize effect.subtype }}</span>
+								</div>
+							{{/if_equal}}
+
+							{{#if_equal effect.type "bonus"}}
+								<div class="bonus-display">
+									Add <span class="non-input-number">{{ effect.num}}</span> to <span class="non-input-number">{{ capitalize effect.subtype }}</span>
+								</div>
+							{{/if_equal}}
+
+							{{#if_equal effect.type "utility"}}
+								{{#if_equal effect.subType "dispel"}}
+								Dispels Enchantment
+								{{/if_equal}}
+
+								{{#if_equal effect.subType "counter"}}
+								Counterspell
+								{{/if_equal}}
+							{{/if_equal}}
 						{{/each}}
 						</table>
 					</div>
@@ -1310,18 +1395,18 @@
 	<div class="trait-points">
 		<div class="gen-header">
 			<div class="traits-header">Traits</div>
+			<!-- this is absolutely positioned -->
+			{{#if_greater data.creation.traits data.cp.traits }}
+				<div class="display-creation-tooltip">
+					Unspent Trait CP: {{ data.creation.traits }}
+				</div>
+			{{/if_greater }}
 		</div>
 
 	<div class="grid-child">
 		<section class="table">
 			<div class="header-row traits-header">
-				<div class="col">
-					{{#if_greater data.creation.traits data.cp.traits }}
-						<div class="display-good">
-							Creation : {{ data.creation.traits }}
-						</div>
-					{{/if_greater }}
-				</div>
+				<div class="col"></div>
 				<div class="col">Trait</div>
 				<div class="col">Super</div>
 				<div class="col">Total</div>
@@ -1358,17 +1443,16 @@
 	<div class="arcana-points">
 		<div class="gen-header">
 			<div class="arcana-header">Arcana</div>
+			{{#if_greater data.creation.arcana data.cp.arcana }}
+				<div class="display-creation-tooltip">
+					Unspent Arcana CP: {{ data.creation.arcana }}
+				</div>
+			{{/if_greater }}
 		</div>
 	<div class="grid-child">
 		<section class="table">
 			<div class="header-row arcana-header">
-				<div class="col">
-					{{#if_greater data.creation.arcana data.cp.arcana }}
-						<div class="display-good">
-							Creation : {{ data.creation.arcana }}
-						</div>
-					{{/if_greater }}
-				</div>
+				<div class="col"></div>
 				<div class="col">Arcana</div>
 				<div class="col">Super</div>
 				<div class="col">Total</div>
@@ -1410,18 +1494,17 @@
 	<div class="skill-points">
 		<div class="gen-header">
 			<div class="skills-header">Skills</div>
+			{{#if_greater data.creation.skills data.cp.skills }}
+				<div class="display-creation-tooltip">
+					Unspent Skill CP : {{ data.creation.skills }}
+				</div>
+			{{/if_greater }}
 		</div>
 		
 
 	<div class="grid-child">
-	<div>
-	{{#if_greater data.creation.skills data.cp.skills }}
-		<div class="display-good">
-			Creation : {{ data.creation.skills }}
-		</div>
-	{{/if_greater }}
-	</div>
-	<div class="flex-row">
+	<div></div>
+	<div class="flex">
 		<div class="flex2">
 		<section class="table">
 			<div class="header-row skills-header">
