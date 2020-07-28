@@ -60,31 +60,6 @@ export class WeaponSheet extends ItemSheet{
 		return data;
 	}*/
 
-	/*_updateObject(event, formData) {
-		console.log( formData );
-		/*let useArray = Object.entries(formData).filter( element => element[0].startsWith("data.use"));
-		
-		if( useArray ){
-			let newData = []
-			useArray.forEach( ( element ) =>{
-				let [ keyParts , value ] = element;
-				console.log(keyParts , value );
-				let [ unused1, unused2 , index, prop ] = keyParts.split(".");
-				
-				if( !newData[index] )
-					newData[index] = {};
-
-				newData[index][prop] = value;
-			});
-			formData["data.use"] = newData;
-
-			//super._updateObject(event, formData);
-		}
-		console.log( formData );*/
-		
-		//super._updateObject(event, formData);
-	//}
-
 	_testRollWeapon( event ){
 		this.weapon.rollRedirect();
 	}

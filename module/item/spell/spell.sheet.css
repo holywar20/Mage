@@ -23,4 +23,7 @@
 	background: var(--primary-fade50);
 	border-radius: 5px 5px 0px 0px;
 	padding: 3px;
+	border: 1px solid var(--tertiary-fade50);
+	margin-left: 10px;
+	margin-right: 10px;
 }

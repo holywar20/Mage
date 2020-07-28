@@ -15,7 +15,6 @@
 						<input name="name" value="{{ item.name }}"class="input-text">
 					</div>
 					<div class="col"></div>
-					<div class="col"></div>
 				</div>
 
 				<div class="row">
@@ -32,10 +31,32 @@
 						</select>
 					</div>
 					<div class="col"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-lead-short">Memorized</div>
+					<div class="col-left-align">
+						<input name="data.memorized.number" value="{{data.memorized.number}}" class="input-number">
+					</div>
 					<div class="col"></div>
 				</div>
 
 				<div class="row">
+					<div class="col-lead-short">Vulgarity</div>
+					<div class="col-left-align">
+						<select name="data.vulgarity" class="input-text input-medium">
+						{{#select data.vulgarity }}
+							<option value="never">Never</option>
+							<option value="coincidental">Coincidental</option>
+							<option value="witness">Witness</option>
+							<option value="always">Always</option>
+						{{/select}}
+						</select>
+					</div>
+					<div class="col"></div>
+				</div>
+
+				<div class="row arcana-row-height-fix">
 					<div class="col">Arcana</div>
 					<div class="col-left-align">
 						&nbsp;&nbsp;
@@ -43,7 +64,7 @@
 						&nbsp;&nbsp;
 						<span class="right-align">Roll Arcana?</span>
 						&nbsp;
-						{{#if spell.data.memorized.value }}
+						{{#if data.rollArcana }}
 							<button roll-arcana-switch="{{spell._id}}" class="btn btn-icon btn-neutral">
 								<img src="systems/mage/img/icons/die.png">
 							</button>
@@ -53,25 +74,7 @@
 							</button>
 						{{/if}}
 					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-lead-short">Vulgarity</div>
-					<div class="col-left-align">
-						<select name="data.vulgarity" class="input-text  input-medium">
-						{{#select data.vulgarity }}
-							<option value="never">Never</option>
-							<option value="coincidental">Coincidental</option>
-							<option value="witness">Witness</option>
-							<option value="always">Always</option>
-						{{/select}}
-						</select>
-					</div>
-
-					<div class="col">
-						<button test-roll class="btn btn-vitals">Roll</button>
-					</div>
-					<div class="col"></div>
+					<div class="col"><button test-roll class="btn btn-vitals">Roll</button></div>
 				</div>
 
 
@@ -145,13 +148,21 @@
 					
 					<div class="col-lead-short">
 						{{#if_equal data.targets.type "line"}}
-						Width
+						Line Width
+						{{/if_equal }}
+
+						{{#if_equal data.targets.type "cone"}}
+						Cone Width
 						{{/if_equal }}
 					</div>
 
 					<div class="col-left-align">
 						{{#if_equal data.targets.type "line"}}
-						<input name="data.targets.num2" class="input-number">
+						<input name="data.targets.num2" value="{{data.targets.num2}}" class="input-number">
+						{{/if_equal}}
+
+						{{#if_equal data.targets.type "cone"}}
+						<input name="data.targets.num2" value="{{data.targets.num2}}" class="input-number">
 						{{/if_equal}}
 					</div>
 
@@ -190,9 +201,8 @@
 
 	<div class="flex">
 		<div class="flex-2">
+			<div class="detail-header">Effects</div>
 			<section class="table">
-				<div class="detail-header">Effects</div>
-
 				<div class="header-row">
 					<div class="col">Type</div>
 					<div class="col">Subtype</div>

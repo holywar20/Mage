@@ -101,7 +101,7 @@
 			</div>
 
 			<div class="flex-2">
-				<img class="mage-icon" src="systems/Mage/img/sheets/MageLogo.png">
+				<img class="mage-icon" src="systems/mage/img/sheets/MageLogo.png">
 			</div>
 		</div>
 	</div> <!-- End pf Header-->
@@ -869,7 +869,7 @@
 							
 							<div class="col-bordered">
 								<div class="flex">
-									<img class="inventory-item" src="{{weapon.img}}">
+									<img class="inventory-item" src="{{weapon.img}}" weapon-drag data-item-id="{{weapon._id}}" >
 									<div style="width: 100%">
 										<div class="pad-4">{{weapon.name}}</div>
 										<div class="small-text pad-4">{{ weapon.data.hands }} Handed {{ capitalize weapon.data.weaponType }}</div>
@@ -1170,25 +1170,20 @@
 		<div class="grid-child">
 			{{#each data.spells as |spell id|}}
 			<div class="one-third-element">
-				<div class="flex mini-card-top" spell-drag>
+				<div class="flex mini-card-top" spell-drag data-item-id="{{spell._id}}">
 					<div>
-						<img class="inventory-item" src="{{spell.img}}">
+						<img class="inventory-item" src="{{spell.img}}" spell-drag data-item-id="{{spell._id}}">
 						<div class="justify-content-between spell-count-container">
 							<div>
 								{{#if spell.data.memorized.value }}
 									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
 										<img src="systems/mage/img/icons/memorize.png">
 									</button>
+									x {{spell.data.memorized.number}}
 								{{else}}
 									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-warn">
 										<img src="systems/mage/img/icons/memorize.png">
 									</button>
-								{{/if}}
-							</div>
-							<div>
-								{{#if spell.data.memorized.value }}
-									<span class="row-subtitle">#</span>
-									<input class="input-number" name="data.spells.{{id}}.memorized.num" value="{{spell.data.memorized.num}}">
 								{{/if}}
 							</div>
 						</div>
@@ -1237,13 +1232,15 @@
 
 				<div class="mini-card-mid justify-content-between">
 					<div>
-						{{#each spell.data.spheres as |sphere id|}}
+						{{#each spell.data.spheres as |sphere sphereId|}}
 						<span class="tag">{{ capitalize sphere.type }} {{ sphere.num }}</span>
 						{{/each}}
 					</div>
 
 					<div>
-						<button class="btn btn-arcana">Cast</button>
+						{{#if_greater spell.data.arcana 1}}
+						<button roll-spell="{{spell._id}}" class="btn btn-arcana">Cast</button>
+						{{/if_greater}}
 					</div>
 				</div>
 

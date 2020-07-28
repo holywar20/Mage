@@ -1,0 +1,95 @@
+<div class="chat-card">
+	<div class="chat-row">
+		<div class="chat-cell-1">
+			<img class="chat-image" src="{{spellData.img}}">
+		</div>
+		<div class="chat-cell-3">
+			<div class="card-title">{{ spellData.name }}</div>
+			<div class="card-subtitle">
+				<div>
+					<span class="chat-value">{{ capitalize spellData.data.spellType }}</span>
+					<span class="chat-value">{{ capitalize spellData.data.vulgarity }} Vulgar</span>
+				</div>
+
+				<div>
+					<span class="chat-value">Arcana {{ spellData.data.arcana }}</span>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="chat-row">
+		<div class="chat-cell-1 cell-center">
+			<span class="meta-data-title">Targets</span>
+			<div>
+				<span class="chat-value">{{ spellData.data.targets.num }}
+					{{#if_greater spellData.data.targets.num2 1}}
+					x {{ spellData.data.targets.num2 }}
+					{{/if_greater}}
+					{{ capitalize spellData.data.targets.type }}
+				</span>
+			</div>
+		</div>
+
+		<div class="chat-cell-1 cell-center">
+			<span class="meta-data-title">Duration</span>
+			<div>
+				<span class="chat-value">
+					{{#if_greater spellData.data.duration.num 1}}
+						{{ spellData.data.duration.num }}
+					{{/if_greater}}
+				{{ capitalize spellData.data.duration.type }}
+				</span>
+			</div>
+		</div>
+
+		<div class="chat-cell-1 cell-center">
+			<span class="meta-data-title">Range</span>
+			<div>
+				<span class="chat-value">
+				{{#if_greater spellData.data.range.num 1}}
+					{{ spellData.data.range.num 1 }}
+				{{/if_greater}}
+				{{ capitalize spellData.data.range.type }}
+				</span>
+			</div>
+		</div>
+	</div>
+
+	{{#if arcanaRoll}}
+	<div class="chat-row">
+		<div class="chat-cell-1">
+			<div class="card-subtitle">
+				Arcana Roll : <span class="chat-value">{{ arcanaRoll._total }}</span>
+			</div>
+		</div>
+		<div class="chat-cell-1">
+			<div class="card-subtitle">
+				<span class="chat-value">{{ arcanaRollString }}</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="chat-row">
+		{{#each arcanaRoll.dice as | die outerIdx |}}
+			{{#each die.rolls as | rollObj rollIdx | }}
+			<div class="{{#get_die_css_classes die.faces rollObj.roll 2}}{{/get_die_css_classes}}">{{ rollObj.roll }}</div>
+			{{/each}}
+		{{/each}}
+	</div>
+	{{/if}}
+
+	{{#each spellData.data.effects as | effect id |}}
+	<div class="chat-row">
+		{{#if_equal effect.type "damage"}}
+		Deals <span class="chat-value">{{ effect.num }}</span>
+		<span class="chat-value">{{ capitalize effect.subtype }}</span> Damage
+		{{/if_equal}}
+	</div>
+	{{/each}}
+
+	{{#if spellData.data.rollNotes }}
+		{{spellData.data.rollNotes}}
+	{{/if}}
+</div>

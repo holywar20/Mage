@@ -34,6 +34,8 @@
 	display: flex;
 	border-bottom: 1px solid var(--tertiary-fade50);
 	padding: 3px;
+	line-height:24px;
+	align-items: center;
 }
 
 .chat-row:last-child{
@@ -44,6 +46,10 @@
 	display: flex;
 	border-bottom: none;
 	padding: 3px;
+}
+
+.cell-center{
+	text-align : center
 }
 
 .chat-cell-1{
@@ -126,6 +132,9 @@
 	color: var(--fail);
 }
 
+.meta-data-title{
+	color: var(--tertiary);
+}
 
 
 .roll-hit{

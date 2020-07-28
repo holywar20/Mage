@@ -5,7 +5,7 @@ export class SpellSheet extends ItemSheet{
 		super( item , {
 			editable : true,
 			width : 480,
-			height: 560 ,
+			height: 660 ,
 			resizable: true
 		});
 	}
@@ -22,6 +22,8 @@ export class SpellSheet extends ItemSheet{
 	ADD_SPHERE_BUTTON_SELECTOR ='button[add-sphere]';
 	DELETE_SPHERE_ATTRIBUTE = 'delete-sphere';
 	DELETE_SPHERE_BUTTON_SELECTOR = 'button[delete-sphere]'
+
+	ROLL_ARCANA_SWITCH = "button[roll-arcana-switch]"
 
 	mySheetHtml = null;
 	spell = this.object;
@@ -41,6 +43,8 @@ export class SpellSheet extends ItemSheet{
 
 		this.mySheetHtml.find( this.ADD_SPHERE_BUTTON_SELECTOR ).click( this._addSphereEvent.bind(this) );
 		this.mySheetHtml.find( this.DELETE_SPHERE_BUTTON_SELECTOR ).click( this._deleteSphereEvent.bind(this) );
+	
+		this.mySheetHtml.find( this.ROLL_ARCANA_SWITCH ).click( this._arcanaRollSwitchEvent.bind( this ) );
 	}
 
 	_addEffectEvent( event ){
@@ -76,13 +80,20 @@ export class SpellSheet extends ItemSheet{
 	}
 
 	async _deleteSphereEvent( event ){
-		console.log('deleting!');
-		
 		event.preventDefault();
 		await this._onSubmit( event );
 
 		const targetKey = event.currentTarget.getAttribute( this.DELETE_SPHERE_ATTRIBUTE );
 		return this.item.update({ [`data.spheres.-=${targetKey}`] : null });
+	}
+
+	async _arcanaRollSwitchEvent( event ){
+		event.preventDefault();
+
+		console.log( this.spellData );
+		let newValue = !this.spellData.rollArcana;
+
+		return this.item.update({ "data.rollArcana" : newValue });
 	}
 
 	randomKey() {

@@ -1,4 +1,5 @@
 import { WEAPON_UTILITY } from "../item/weapon/weapon.utility.js";
+import { SPELL_UTILITY } from "../item/spell/spell.utility.js";
 
 export class BaseItem extends Item{
 	constructor( ...args ){
@@ -27,11 +28,15 @@ export class BaseItem extends Item{
 		if( this.data.type === "weapon" ){
 			this.data.data.styles = WEAPON_UTILITY.calculateStyles( this.data.data.dmg, this.data.data.styles , myActor );
 		}
+
+		if( this.data.type === "spell" ){
+			this.data.data.arcana = SPELL_UTILITY.calculateArcana( this.data.data , myActor );
+		}
 	}
 
 	rollRedirect(){
 		if( this.data.type === "weapon" ){ this._rollWeaponDialog(); }
-		//if( this.data.type === "spell" ){ this._rollWeaponDialog(); }
+		if( this.data.type === "spell" ){ this._rollSpellDialog(); }
 	}
 
 	async _rollWeaponDialog(){
@@ -121,7 +126,64 @@ export class BaseItem extends Item{
 	}
 
 	async _rollSpellDialog(){
+		const template = "systems/mage/dialogs/spell-roll-dialog.html";
+		
+		let dialogInitialData = {
+			idx: "" , 
+			difficulty : 7 , 
+			bonusDice : 0 ,
+			baseDice : this.data.data.arcana, 
+			rollTitle : this.data.name , 
+			playerTarget : "" ,  
+			rollMode : "public"
+		}
 
+		const html = await renderTemplate( template, dialogInitialData );
+		let newData = null;
+
+		let button = {
+			'Cast' : {
+				label : `Cast ${this.data.name}`,
+				callback : ( dialogUpdateData ) => {
+					newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
+					newData.rollTitle = `${this.data.name}`;
+					this.rollSpellRoll( newData );
+				}
+			}
+		}
+
+		new Dialog({
+			title : `Cast ${this.data.name}` ,  content : html , buttons : button, default : 'Cast'
+		}).render( true );
+	}
+
+	async rollSpellRoll( dialogData ){
+		let totalDice = +this.data.data.arcana + +dialogData.bonusDice;
+
+		let templateData = this._prepareSpellRollTemplateData( totalDice , dialogData.difficulty );
+		let template = "systems/mage/chat/spell-roll.html";
+
+		const html = await renderTemplate( template, templateData );
+		let chatData = this._prepareChatData( html );
+
+		return ChatMessage.create( chatData );
+	}
+
+	_prepareSpellRollTemplateData( totalDice , difficulty ){
+		let templateData = {
+			spellData : this.data,
+			difficulty : difficulty,
+			arcanaRoll : null,
+			arcanaRollString : null
+		}
+
+		if( this.data.data.rollArcana ){
+			templateData.arcanaRollString = `${totalDice}d10x=10cs>=${difficulty}`;
+			templateData.arcanaRoll = new Roll( templateData.arcanaRollString );
+			templateData.arcanaRoll.roll();
+		}
+
+		return templateData
 	}
 
 	_prepareChatData( chatMessageHtml ){

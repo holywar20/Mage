@@ -66,6 +66,7 @@ export class MageSheet extends ActorSheet {
 	SPELL_MEMORIZE = "button[memorize-spell]";
 	SPELL_MEMORIZE_NAME = "memorize-spell";
 	SPELL_DRAG = "div[spell-drag]"
+	SPELL_IMG_DRAG = "img[spell-drag]";
 
 	/* Inventory Expandables */
 	INVENTORY_EXPANDABLE_BUTTON = "div[button-expandable]";
@@ -81,7 +82,8 @@ export class MageSheet extends ActorSheet {
 	WEAPON_EDIT_NAME = "edit-weapon";
 	WEAPON_ROLL = "button[roll-weapon]";
 	WEAPON_ROLL_NAME = "roll-weapon";
-	WEAPON_DRAG = "div[weapon-drag]"
+	WEAPON_DRAG = "div[weapon-drag]";
+	WEAPON_IMG_DRAG = "img[weapon-drag]";
 
 	/* Overrides */
 	get template() {
@@ -128,13 +130,21 @@ export class MageSheet extends ActorSheet {
 			element.setAttribute("draggable", true);
 			element.addEventListener( "dragstart", weaponHandler, false);
 		});
+		this.mySheetHtml.find( this.WEAPON_IMG_DRAG ).each( ( i , element ) =>{
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragStart" , weaponHandler , false );
+		});
+
 
 		let spellHandler = event => this._onDragStart( event );
 		this.mySheetHtml.find( this.SPELL_DRAG ).each( (i, element) =>{
 			element.setAttribute("draggable" , true );
 			element.addEventListener("dragstart" , spellHandler, false );
 		});
-		
+		this.mySheetHtml.find( this.SPELL_IMG_DRAG ).each( (i , element ) =>{
+			element.setAttribute("draggable" , true );
+			element.addEventListener("dragStart" , spellHandler , false );
+		});
 
 		// Everything else needs to be custom.
 		let skillHandler = event => this._onDragSkillStart( event );
@@ -347,10 +357,9 @@ export class MageSheet extends ActorSheet {
 	}
 
 	_onSpellRoll( event ){
-		let spellIdId = event.currentTarget.getAttribute( this.WEAPON_ROLL_NAME );
-		let myWeapon = this.actor.getOwnedItem( spellIdId );
-		console.log( myWeapon );
-		//myWeapon.rollRedirect( this.actor );
+		let spellId = event.currentTarget.getAttribute( this.SPELL_ROLL_NAME );
+		let mySpell = this.actor.getOwnedItem( spellId );
+		mySpell.rollRedirect( this.actor );
 	}
 
 	_onSpellAdd( event ){

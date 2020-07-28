@@ -26,7 +26,7 @@ export class MageActor extends Actor{
 		super.prepareData();
 		const data = this.data.data;
 		/* Make sure player data isn't stupid */
-		//this._sanitizeCharacterData( data );
+		// this._sanitizeCharacterData( data ); TODO - data sanitization not working for ... reasons.
 
 		/* Calculate costs & total values first. */
 		this._calculateTotalsAndCosts( data );
@@ -321,12 +321,18 @@ export class MageActor extends Actor{
 		if( data.mystictraits.mental ){ traitBonus += +data.traits[data.mystictraits.mental].value; }
 		if( data.mystictraits.physical ){ traitBonus += +data.traits[data.mystictraits.physical].value; }
 
-		if( traitBonus > 0 ){
-			traitBonus = Math.trunc( traitBonus / 2 );
-		}
-
 		for( let sphere of Object.values( data.arcana ) ){
-			sphere.value = +traitBonus + +sphere.total;
+			let potentialValue  = +traitBonus + +sphere.total - 5;
+			
+			if( potentialValue <= 0 ){
+				potentialValue = 1; // Value for a valid sphere should always be at least 1 Arcana.
+			}
+
+			if( sphere.base == 0 ){ // You have arcana zero in any sphere that doesn't at least have a level of 1.
+				potentialValue = 0;
+			}
+
+			sphere.value = potentialValue;
 		}
 	}
 

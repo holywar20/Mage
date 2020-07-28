@@ -162,7 +162,6 @@ Hooks.once('ready', function() {
 	//loader.loadCompendium( 'mage' , 'weapon' );
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
-		console.log( data );
 		switch( data.type ){
 			case "Skill" : createSkillMacro( data, slot ); break;
 			case "Trait" : createTraitMacro( data, slot); break;
@@ -199,8 +198,6 @@ async function createWeaponMacro( macroRequest , slot ){
 	const item = macroRequest.data;
 	
 	const command = `game.mage.rollWeaponMacro("${item._id}" , "${macroRequest.actorId}")`;
-
-	console.log( item , item._id );
 
 	let macro = await Macro.create({
 		name: item.name,

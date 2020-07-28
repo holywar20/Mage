@@ -529,3 +529,7 @@ img.inventory-item{
 .spell-count-container{
 	height: 32px;
 }
+
+.arcana-row-height-fix{
+	line-height: 25px;
+}
