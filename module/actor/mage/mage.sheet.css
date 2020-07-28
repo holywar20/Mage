@@ -476,7 +476,8 @@ img.inventory-item{
 .status-display,
 .healing-display,
 .resist-display,
-.bonus-display{
+.bonus-display,
+.utility-display{
 	font-size:.8em;
 	text-align: right;
 }
@@ -486,7 +487,8 @@ img.inventory-item{
 .status-display span,
 .healing-display span,
 .resist-display span,
-.bonus-display span{
+.bonus-display span,
+.utility-display span{
 	font-size:1.0em;
 }
 

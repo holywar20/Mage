@@ -47,8 +47,6 @@ export class MageActor extends Actor{
 		this._prepareItems();
 	}
 
-	
-
 	async rollSaveDialog( key ){
 		let saveData = this.actorData.defenses[key];
 
@@ -282,6 +280,7 @@ export class MageActor extends Actor{
 	}
 
 	_triangularNumberFormula( base , costMultiple ){
+		console.log( base , costMultiple );
 		return ( ( +base * ( +base + 1 ) ) / 2 ) * +costMultiple;
 	}
 
@@ -348,24 +347,44 @@ export class MageActor extends Actor{
 	}
 
 	_calculateGlobalCosts( data ){
-		data.cp.spent = data.cp.traits + data.cp.skills + data.cp.arcana;
+		/* first calculate creation offsets */
+		data.creation.spentSkills = data.cp.skills;
+		if( data.creation.spentSkills > data.creation.skills )
+			data.creation.spentSkills = data.creation.skills;
+		data.creation.unspentSkills = data.creation.skills - data.creation.spentSkills;
+
+		data.creation.spentTraits = data.cp.traits;
+		if( data.creation.spentTraits > data.creation.traits )
+			data.creation.spentTraits = data.creation.traits;
+		data.creation.unspentTraits = data.creation.traits - data.creation.spentTraits;
+
+		data.creation.spentArcana = data.cp.arcana;
+		if( data.creation.spentArcana > data.creation.arcana )
+			data.creation.spentArcana = data.creation.arcana;
 		
+		data.creation.unspentArcana = data.creation.arcana - data.creation.spentArcana;
+
+		console.log( data.creation );
+
+		data.cp.spent = ( data.cp.traits - data.creation.traits ) + ( data.cp.skills - data.creation.skills ) + ( data.cp.arcana - data.creation.arcana );
+		if( data.cp.spent < 0 )
+			data.cp.spent = 0;
 	}
 
 	_calculateTotalsAndCosts( data ){
 		let sphereCumulative = 0;
 		for( let sphere of Object.values( data.arcana ) ){
 			sphere.total = +sphere.base + +sphere.super;
-			sphere.cost = this._triangularNumberFormula( sphere.base , this.ARCANA_MULTIPLE );
-			sphereCumulative += sphere.cost;
+			sphere.cost = this._triangularNumberFormula( +sphere.base , 3 );
+			sphereCumulative = +sphereCumulative + +sphere.cost;
 		}
 		data.cp.arcana = sphereCumulative;
 
 		let traitCumulative = 0;
 		for( let trait of Object.values( data.traitParts ) ){
 			trait.total = +trait.base + +trait.super;
-			trait.cost = this._triangularNumberFormula( trait.base , this.TRAIT_MULTIPLE );
-			traitCumulative += trait.cost;
+			trait.cost = this._triangularNumberFormula( +trait.base , 4 );
+			traitCumulative = +traitCumulative +  +trait.cost;
 		}
 		data.cp.traits = traitCumulative;
 
@@ -373,11 +392,13 @@ export class MageActor extends Actor{
 		for( let skillGroup of Object.values( data.skills) ){
 			for( let skill of Object.values( skillGroup ) ){
 				skill.total = +skill.base + +skill.super;
-				skill.cost = this._triangularNumberFormula( skill.base , skill.tier );
-				skillCumulative += skill.cost;
+				skill.cost = this._triangularNumberFormula( +skill.base , +skill.tier );
+				skillCumulative = +skillCumulative + +skill.cost;
 			}
 		}
 		data.cp.skills = skillCumulative;
+
+		console.log( data.cp );
 	}
 
 	_sanitizeCharacterData( data ){

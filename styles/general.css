@@ -266,11 +266,11 @@ span.right-align{
 	display: table-cell;
 	text-align: center;
 	border-radius: 5px;
-	vertical-align: top;
 }
 
 .col-bordered{
-	border: 1px solid var(--secondary-fade50); 
+	border: 1px solid var(--secondary-fade50);
+	vertical-align: top; /* Not sure why we need this, but a specific element in weapons won't display right unless we force it ).*/ 
 }
 
 .col-center-focus{

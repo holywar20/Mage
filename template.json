@@ -89,7 +89,9 @@
 				"remaining": 0 , "spent" : 0 , "trained" : 0 , "earned" : 0 , "skills" : 0 , "traits" : 0 ,  "arcana" : 0 , "feats" : 0 
 			},
 			"creation":{
-				"skills" : 45 , "traits" : 60 , "arcana" : 90 , "spentSkills" : 0 , "spentTraits" : 0 , "spentArcana" : 0
+				"skills" : 45 , "traits" : 60 , "arcana" : 90 , 
+				"spentSkills" : 0 , "spentTraits" : 0 , "spentArcana" : 0 , 
+				"unspentSkills" : 45,  "unspentTraits" : 60 , "unspentArcana" : 90 
 			},
 			"traitParts" : {
 				"str" : { "name" : "Strength", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },

@@ -1319,13 +1319,19 @@
 							{{/if_equal}}
 
 							{{#if_equal effect.type "utility"}}
-								{{#if_equal effect.subType "dispel"}}
-								Dispels Enchantment
-								{{/if_equal}}
+								<div class="utility-display">
+									{{#if_equal effect.subtype "dispel"}}
+									<span class="non-input-number">Dispels Enchantment</span>
+									{{/if_equal}}
 
-								{{#if_equal effect.subType "counter"}}
-								Counterspell
-								{{/if_equal}}
+									{{#if_equal effect.subtype "counterspell"}}
+									<span class="non-input-number">Counterspell</span>
+									{{/if_equal}}
+
+									{{#if_equal effect.subType "detection"}}
+									<span class="non-input-number">Detection Spell</span>
+									{{/if_equal}}
+								</div>
 							{{/if_equal}}
 						{{/each}}
 						</table>
@@ -1393,9 +1399,9 @@
 		<div class="gen-header">
 			<div class="traits-header">Traits</div>
 			<!-- this is absolutely positioned -->
-			{{#if_greater data.creation.traits data.cp.traits }}
+			{{#if_greater data.creation.unspentTraits 1 }}
 				<div class="display-creation-tooltip">
-					Unspent Trait CP: {{ data.creation.traits }}
+					Unspent Trait CP: {{ data.creation.unspentTraits }}
 				</div>
 			{{/if_greater }}
 		</div>
@@ -1440,9 +1446,9 @@
 	<div class="arcana-points">
 		<div class="gen-header">
 			<div class="arcana-header">Arcana</div>
-			{{#if_greater data.creation.arcana data.cp.arcana }}
+			{{#if_greater data.creation.unspentArcana 1 }}
 				<div class="display-creation-tooltip">
-					Unspent Arcana CP: {{ data.creation.arcana }}
+					Unspent Arcana CP: {{ data.creation.unspentArcana }}
 				</div>
 			{{/if_greater }}
 		</div>
@@ -1491,9 +1497,9 @@
 	<div class="skill-points">
 		<div class="gen-header">
 			<div class="skills-header">Skills</div>
-			{{#if_greater data.creation.skills data.cp.skills }}
+			{{#if_greater data.creation.unspentSkills 1 }}
 				<div class="display-creation-tooltip">
-					Unspent Skill CP : {{ data.creation.skills }}
+					Unspent Skill CP : {{ data.creation.unspentSkills }}
 				</div>
 			{{/if_greater }}
 		</div>

@@ -64,7 +64,7 @@ export class BaseItem extends Item{
 				label : `${s.skill}: ${dice}x Dice ${s.dmgInterval} ${s.dmgType} dmg`,
 				callback : ( dialogUpdateData ) => {
 					newData = this._extractDataFromDialog( dialogInitialData, dialogUpdateData );
-					newData.rollTitle = `${this.name} ( ${s.skill} )`;
+					newData.rollTitle = `${this.name}`;
 					this.rollWeaponRoll( newData , s );
 				}
 			}
@@ -82,8 +82,6 @@ export class BaseItem extends Item{
 		let template = "systems/mage/chat/weapon-roll.html";
 
 		templateData.style = style;
-
-		console.log( templateData );
 
 		const html = await renderTemplate( template, templateData );
 		let chatData = this._prepareChatData( html );

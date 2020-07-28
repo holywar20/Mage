@@ -49,7 +49,7 @@
 			<div>
 				<span class="chat-value">
 				{{#if_greater spellData.data.range.num 1}}
-					{{ spellData.data.range.num 1 }}
+					{{ spellData.data.range.num }}
 				{{/if_greater}}
 				{{ capitalize spellData.data.range.type }}
 				</span>
@@ -80,14 +80,61 @@
 	</div>
 	{{/if}}
 
+	<div class="chat-row-column">
 	{{#each spellData.data.effects as | effect id |}}
-	<div class="chat-row">
 		{{#if_equal effect.type "damage"}}
-		Deals <span class="chat-value">{{ effect.num }}</span>
-		<span class="chat-value">{{ capitalize effect.subtype }}</span> Damage
+		<div class="card-center-data">
+			Deals <span class="chat-value">{{ effect.num }}</span>
+			<span class="chat-value">{{ capitalize effect.subtype }}</span> Damage<br>
+		</div>
 		{{/if_equal}}
-	</div>
+
+		{{#if_equal effect.type "healing"}}
+		<div class="card-center-data">
+			Heals <span class="chat-value">{{ effect.num }}</span> HP
+		</div>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "resist"}}
+		<div class="card-center-data">
+			{{#if_equal effect.num 2}}
+			Resistant to <span class="chat-value">{{ capitalize effect.subtype }}</span> Damage
+			{{/if_equal}}
+
+			{{#if_equal effect.num 3}}
+			Immune to <span class="chat-value">{{ capitalize effect.subtype }}</span> Damage
+			{{/if_equal}}
+
+			{{#if_equal effect.num 0}}
+			Aggravated to <span class="chat-value">{{ capitalize effect.subtype }}</span> Damage
+			{{/if_equal}}
+		</div>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "status"}}
+			<div class="card-center-data">
+				Inflicts <span class="chat-value">
+					{{#if_greater effect.num 1}} {{ effect.num }} x {{/if_greater}} 
+					{{ capitalize effect.subtype }}
+				</span>
+			</div>
+		{{/if_equal}}
+
+
+		{{#if_equal effect.type "utility"}}
+			<div class="card-center-data">
+				This spell is a <span class="chat-value">{{ capitalize effect.subtype }}</span> magic
+			</div>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "bonus"}}
+			<div class="card-center-data">
+				Grants <span class="chat-value">{{ effect.num }}</span> bonus to <span class="chat-value">{{ capitalize effect.subtype }}</span>
+			</div>
+		{{/if_equal}}
+
 	{{/each}}
+	</div>
 
 	{{#if spellData.data.rollNotes }}
 		{{spellData.data.rollNotes}}
