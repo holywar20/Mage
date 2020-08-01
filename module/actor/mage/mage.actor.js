@@ -317,7 +317,25 @@ export class MageActor extends Actor{
 	}
 
 	_calculateDerived( data ){
-		// console.log( data );
+		data.hp.max = 10 + ( +data.traits.str.value * 3 );
+		
+		// Get default values, because sometimes these might be null;
+		let phys = 0;
+		if( data.mystictraits.physical )
+			phys = data.traits[data.mystictraits.physical].value;
+		console.log(data);
+		let men = 0;
+		if( data.mystictraits.mental )
+			men = data.traits[data.mystictraits.mental].value;
+
+		let cpParadoxBonus = 0;
+		if( data.cp.spent == 0 ){
+			cpParadoxBonus = 0;
+		} else {
+			cpParadoxBonus = Math.round( data.cp.spent / 10 );
+		}
+
+		data.paradox.max = +phys + +men + +cpParadoxBonus;
 	}
 
 	_calculateArcana( data ){
