@@ -162,6 +162,11 @@ Hooks.once('ready', function() {
 	//loader.loadCompendium( 'mage' , 'weapon' );
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
+		if( bar.id == "custom-hotbar" ){
+			ui.notifications.warn("You cannot add a macro to the Narrator's HotBar!");
+			return null;
+		}
+		
 		switch( data.type ){
 			case "Skill" : createSkillMacro( data, slot ); break;
 			case "Trait" : createTraitMacro( data, slot); break;
@@ -206,6 +211,7 @@ async function createWeaponMacro( macroRequest , slot ){
 		command: command,
 		flags: { "mage.itemMacro": true }
 	});
+	console.log( game.user );
 
 	game.user.assignHotbarMacro( macro, slot );
 }
@@ -216,18 +222,42 @@ function rollWeaponMacro( itemId , actorId ){
 		let weapon = actor.getOwnedItem( itemId );
 		if( weapon ){
 			weapon.rollRedirect();
+		} else {
+			ui.notifications.warn("Can't find this weapon. It has likely been deleted. Remove this macro and create a new one.");
 		}
+	} else {
+		ui.notifications.warn("Cant find this actor. It's likely been deleted or the id has changed. You may need to recreate this macro.");
 	}
 }
 
 async function createSpellMacro( macroRequest, slot ){
-	console.log("creating a spell : ", macroRequest )
+	const item = macroRequest.data;
+	
+	const command = `game.mage.rollSpellMacro("${item._id}" , "${macroRequest.actorId}")`;
+
+	let macro = await Macro.create({
+		name: item.name,
+		type: "script",
+		img: item.img,
+		command: command,
+		flags: { "mage.itemMacro": true }
+	});
+
+	game.user.assignHotbarMacro( macro, slot );
 }
 
-function rollSpellMacro(){
-	const speaker = ChatMessage.getSpeaker();
-
-	console.log("Rolling a spell");
+function rollSpellMacro( itemId, actorId ){
+	let actor = game.actors.get( actorId );
+	if( actor ){
+		let spell = actor.getOwnedItem( itemId );
+		if( spell ){
+			spell.rollRedirect();
+		} else {
+			ui.notifications.warn("Can't find this spell. It has likely been deleted or the ID has changed. Remove this macro and create a new one.");
+		}
+	} else {
+		ui.notifications.warn("Cant find this actor. It's likely been deleted or the id has changed. You may need to recreate this macro.");
+	}
 }
 
 async function createArcanaMacro( macroRequest, slot ){

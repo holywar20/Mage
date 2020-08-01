@@ -341,7 +341,8 @@ input{
 }
 
 .textarea-medium,
-.textarea-small
+.textarea-small,
+.textarea-big
 {
 	color: white;
 	background-color: var(--input-background);
@@ -364,11 +365,16 @@ input{
 	min-width:150px;
 }
 
+.textarea-big{
+	width: 95%;
+	height: 500px;
+}
 
 .input-text:focus,
 .input-number:focus,
 .textarea-medium:focus,
-.textarea-small :focus
+.textarea-small:focus,
+.textarea-big:focus
 {
 	outline:none;
 	border-radius: 10px;

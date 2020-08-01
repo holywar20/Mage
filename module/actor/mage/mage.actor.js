@@ -275,12 +275,20 @@ export class MageActor extends Actor{
 			return allArrays;
 		} , [[], []] );
 
+		this.data.data.memorized = 0;
+		spells.forEach( ( spell ) => {
+			if( spell.data.memorized.value ){
+				this.data.data.memorized = this.data.data.memorized + +spell.data.memorized.number;
+			}
+		});
+
+		this.data.data.remainingMemorized = 30 - this.data.data.memorized;
+
 		this.data.data.weapons = weapons;
 		this.data.data.spells = spells;
 	}
 
 	_triangularNumberFormula( base , costMultiple ){
-		console.log( base , costMultiple );
 		return ( ( +base * ( +base + 1 ) ) / 2 ) * +costMultiple;
 	}
 
@@ -309,9 +317,7 @@ export class MageActor extends Actor{
 	}
 
 	_calculateDerived( data ){
-		// Calculate PAradox
-		// data.paradox.max = +data.mystictraits.physical + +data.mystictraits.mental;
-		// Calculate HP
+		// console.log( data );
 	}
 
 	_calculateArcana( data ){
@@ -364,8 +370,6 @@ export class MageActor extends Actor{
 		
 		data.creation.unspentArcana = data.creation.arcana - data.creation.spentArcana;
 
-		console.log( data.creation );
-
 		data.cp.spent = ( data.cp.traits - data.creation.traits ) + ( data.cp.skills - data.creation.skills ) + ( data.cp.arcana - data.creation.arcana );
 		if( data.cp.spent < 0 )
 			data.cp.spent = 0;
@@ -397,8 +401,6 @@ export class MageActor extends Actor{
 			}
 		}
 		data.cp.skills = skillCumulative;
-
-		console.log( data.cp );
 	}
 
 	_sanitizeCharacterData( data ){

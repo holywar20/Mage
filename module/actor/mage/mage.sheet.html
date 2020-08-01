@@ -948,7 +948,9 @@
 					{{#if_equal data.inventoryExpanded.armor true}}open{{/if_equal}}
 					">
 					<section>
-						Armor
+						<textarea class="textarea-big" name="data.equipmentTextNotes" value="{{data.equipmentTextNotes}}">
+						
+						</textarea>
 					</section>
 				</div>
 			</div>
@@ -1137,11 +1139,12 @@
 
 	<div class="spellbook-sort-grid">
 		<div class="gen-header">
-			<div class="spellbook-sort-header">Sort</div>
+			<div class="spellbook-sort-header">Hand</div>
 		</div>
 
-		<div class="grid-child">
-		
+		<div class="grid-child justify-content-between">
+			<button class="btn btn-arcana btn-tall" new-hand>New Hand</button>
+			<button class="btn btn-arcana btn-tall" new-draw>Draw Card</button>
 		</div>
 	</div>
 
@@ -1153,11 +1156,11 @@
 		<div class="grid-child">
 			<div class="justify-content-between">
 				<span>Memorized</span>
-				<span class="non-input-number">0</span>
+				<span class="non-input-number">{{ data.memorized }}</span>
 			</div>
 			<div class="justify-content-between">
 				<span>Remaining</span>
-				<span class="non-input-number">0</span>
+				<span class="non-input-number">{{ data.remainingMemorized }}</span>
 			</div>
 		</div>
 	</div>
@@ -1259,10 +1262,12 @@
 						<div class="justify-content-between">
 							<span class="row-subtitle">&nbsp;Targets</span>
 							<span>
-								{{#if_greater spell.data.range.num 1}}
-								<span class="non-input-number">{{ spell.data.targets.num }}</span>
-								{{/if_greater}}
-								<span class="non-input-number">{{ spell.data.targets.type }}</span>
+								<span class="non-input-number">
+									{{#if_greater spell.data.range.num 1}}
+										{{ spell.data.targets.num }}&nbsp;
+									{{/if_greater}}
+									{{ capitalize spell.data.targets.type }}
+								</span>
 							</span>
 							
 						</div>
@@ -1273,7 +1278,7 @@
 								{{#if_greater spell.data.range.num 1}}
 								<span class="non-input-number">{{ spell.data.duration.num }}</span>
 								{{/if_greater}}
-								<span class="non-input-number">{{ spell.data.duration.type }}</span>
+								<span class="non-input-number">{{ capitalize spell.data.duration.type }}</span>
 							</span>
 						</div>
 					</div>
@@ -1341,7 +1346,7 @@
 			{{/each}}
 
 			<div class="one-third-element">
-				<button add-spell class="btn btn-large btn-success">
+				<button add-spell class="btn btn-large btn-arcana">
 					<span>Add New Spell</span>
 				</button>
 			</div>

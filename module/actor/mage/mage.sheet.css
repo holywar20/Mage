@@ -57,7 +57,7 @@
 
 /* Spell book */
 .spell-book-container{
-	grid-template-columns: 385px 385px 130px;
+	grid-template-columns: 600px 170px 130px;
 	grid-template-rows:100px 700px;
 }
 
@@ -534,4 +534,8 @@ img.inventory-item{
 
 .arcana-row-height-fix{
 	line-height: 25px;
+}
+
+.btn-tall{
+	height: 40px;
 }

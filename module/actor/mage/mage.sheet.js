@@ -67,6 +67,8 @@ export class MageSheet extends ActorSheet {
 	SPELL_MEMORIZE_NAME = "memorize-spell";
 	SPELL_DRAG = "div[spell-drag]"
 	SPELL_IMG_DRAG = "img[spell-drag]";
+	SPELL_NEW_DRAW = "button[new-draw]";
+	SPELL_NEW_HAND = "button[new-hand]";
 
 	/* Inventory Expandables */
 	INVENTORY_EXPANDABLE_BUTTON = "div[button-expandable]";
@@ -122,6 +124,8 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.WEAPON_EDIT ).click(this._onWeaponEdit.bind( this ) );
 		this.mySheetHtml.find( this.WEAPON_ROLL ).click(this._onWeaponRollClick.bind( this ) );
 		
+		this.mySheetHtml.find( this.SPELL_NEW_DRAW ).click( this._drawNewCardClick.bind( this ) );
+		this.mySheetHtml.find( this.SPELL_NEW_HAND ).click( this._drawNewHandClick.bind( this ) );
 
 		/* Dragging out of sheet */
 		// Any 'item' that is draggable, use core mechanism.
@@ -290,6 +294,14 @@ export class MageSheet extends ActorSheet {
 	_changeSkillTab = ( event ) => {
 		let tabName = event.currentTarget.getAttribute( this.TAB_NAME );
 		this.actor.update({"data.currentSkillTab" : tabName });
+	}
+
+	async _drawNewHandClick( event ){
+		console.log( 'new hand!' , event );
+	}
+
+	async _drawNewCardClick( event ){
+		console.log( 'new card!' , event );
 	}
 
 	/* Bit complicated, but needed to do some hacky crap to get handlebars to update right. 

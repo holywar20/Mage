@@ -62,6 +62,9 @@
 				"other" : false,
 				"assets" : false
 			},
+			"memorized" : 0 ,
+			"remainingMemorized" : 30,
+			"equipmentTextNotes" : "Enter any extra non-weapon equipment or other notes here",
 			"spells" : [],
 			"weapons": [],
 			"armoritems" : [],
@@ -89,9 +92,9 @@
 				"remaining": 0 , "spent" : 0 , "trained" : 0 , "earned" : 0 , "skills" : 0 , "traits" : 0 ,  "arcana" : 0 , "feats" : 0 
 			},
 			"creation":{
-				"skills" : 45 , "traits" : 60 , "arcana" : 90 , 
+				"skills" : 60 , "traits" : 80 , "arcana" : 30 , 
 				"spentSkills" : 0 , "spentTraits" : 0 , "spentArcana" : 0 , 
-				"unspentSkills" : 45,  "unspentTraits" : 60 , "unspentArcana" : 90 
+				"unspentSkills" : 60,  "unspentTraits" : 80 , "unspentArcana" : 30 
 			},
 			"traitParts" : {
 				"str" : { "name" : "Strength", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
@@ -179,10 +182,10 @@
 				"num" : 0 , "type" : "self" , "num2" : 0
 			},
 			"duration" : {
-				"num" : 0 , "type" : "rounds"
+				"num" : 0 , "type" : "immediate"
 			},
 			"spellType" : "simple",
-			"description": "unassigned"
+			"description": ""
 		},
 		"weapon":{
 			"dmg" : "1d10",
