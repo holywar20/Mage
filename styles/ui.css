@@ -54,3 +54,27 @@ textarea{/* Defaults for UI to better deal with black background */
 	border: 1px solid var(--primary);
 	border-radius: 5px;
 }
+
+.journal-sheet form input{
+	width: 100%;
+	text-align: left;
+}
+
+/* Removes the 'remove' button from macro list to make it at least a bit cleaner to handle macro/creation destruction */
+li.macro #context-menu li.context-item:nth-child( 2 ){
+	display : none;
+}
+
+/* Styling for Card Draws & custom macro bar*/
+#custom-hotbar .macro{
+	flex: 0 0 80px !important;
+	height: 80px !important;
+}
+
+#custom-hotbar #custom-macro-list{
+	flex: 0 0 802px !important;
+}
+
+#custom-hotbar img{
+	width: 100% !important;
+}

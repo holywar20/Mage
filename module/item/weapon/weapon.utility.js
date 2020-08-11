@@ -16,15 +16,16 @@ export const WEAPON_UTILITY = {
 		return notes;
 	},
 	
-	calculateStyles( dmg , myStyles , actor = null ){
-		
+	calculateStyles( weapon , actor = null ){
+		let myStyles = weapon.data.data.styles;
+
 		for( let id in myStyles ){
-			let hitSubtotal = 0;
+			let hitSubtotal = weapon.data.data.diceBonus;
 			let dmgSubtotal = 0;
-			
+
 			if( actor ){
 				if( myStyles[id].hitTrait ){
-					hitSubtotal = actor.data.data.traits[myStyles[id].hitTrait].value;
+					hitSubtotal = +hitSubtotal + +actor.data.data.traits[myStyles[id].hitTrait].value;
 				}
 
 				if( myStyles[id].skill ){
@@ -40,11 +41,24 @@ export const WEAPON_UTILITY = {
 				}
 			}
 
+			// Calculate Two Handed Damage
+			if( weapon.data.data.hands == 2 ){
+				let twoHandedSkill = actor.data.data.skills.grit['two-handed'].value;
+				let twoHandedDamage = 0;
+				if( twoHandedSkill > dmgSubtotal ){
+					twoHandedDamage = +dmgSubtotal
+				} else {
+					twoHandedDamage = +twoHandedSkill;
+				}
+
+				dmgSubtotal = +dmgSubtotal + +twoHandedDamage;
+			}
+
 			myStyles[id].dmgBonus = dmgSubtotal;
-			myStyles[id].dmgRoll = dmg + "+" + dmgSubtotal;
+			myStyles[id].dmgRoll = weapon.data.data.dmg + "+" + dmgSubtotal;
 			myStyles[id].total = hitSubtotal; // TODO - potentially more complex data
 
-			let dmgString = dmg;
+			let dmgString = weapon.data.data.dmg;
 			// TODO - add a check for 'xxdxx and discard the rest';
 			let [pre , suf] = dmgString.split( "d" );
 			suf = ( +suf * +pre ) + +dmgSubtotal;

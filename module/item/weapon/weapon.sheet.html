@@ -3,6 +3,7 @@
 <div class="weapon-container">
 	<div class="weapon-image">
 		<img class="weapon-img" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+		<button test-roll class="btn btn-vitals">Roll</button>
 	</div>
 
 	<div class="weapon-title">
@@ -15,11 +16,29 @@
 				<div class="row">
 					<div class="col">Base Dmg</div>
 					<div class="col-left-align">
-						<input class="input-text input-large" name="data.dmg" value="{{ data.dmg }}">
+						<input class="input-text input-medium" name="data.dmg" value="{{ data.dmg }}">
 					</div>
 					<div class="col row-leader">Range</div>
 					<div class="col-left-align">
 						<input type="number" value="{{data.range}}" name="data.range" class="input-number">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">Hands</div>
+					<div class="col-left-align">
+						<select class="input-text input-medium" name="data.hands">
+							{{#select data.hands }}
+							<option value="1">1-Handed</option>
+							<option value="2">2-Handed</option>
+							<option value="0">Hands Free</option>
+							{{/select}}
+						</select>
+					</div>
+
+					<div class="col row-leader">Dice Bonus</div>
+					<div class="col-left-align">
+						<input type="number" class="input-number" value="{{data.diceBonus}}" name="data.diceBonus">
 					</div>
 				</div>
 
@@ -32,18 +51,43 @@
 							<option value="martial">Martial</option>
 							<option value="finesse">Finesse</option>
 							<option value="heavy">Heavy</option>
+							<option value="pistol">Firearm</option>
+							<option value="bow">Bow</option>
 							{{/select }}
 						</select>
 					</div>
+					<div class="col row-leader">
+						Equipped?
+					</div>
+					<div class="col-left-align">
+						{{#if data.equipped }}
+							<button set-equipped class="btn btn-icon btn-success">
+								<img src="systems/mage/img/icons/checkmark.png">
+							</button>
+						{{else}}
+							<button set-equipped class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/x-mark.png">
+							</button>
+						{{/if}}
+					</div>
+				</div>
 
-					<div class="col row-leader">Hands</div>
-					<div class="col">
-						<select class="input-text input-medium" name="data.hands">
-							{{#select data.hands }}
-							<option value="1">1-Handed</option>
-							<option value="2">2-Handed</option>
-							{{/select}}
-						</select>
+				<div class="row">
+					<div class="col">Carry Weight</div>
+					<div class="col-left-align">
+						<input type="number" class="input-number" value="{{data.carryWeight}}" name="data.carryWeight">
+					</div>
+					<div class="col row-leader">Carried?</div>
+					<div class="col-left-align">
+						{{#if data.carried }}
+							<button  set-carried class="btn btn-icon btn-success">
+								<img src="systems/mage/img/icons/checkmark.png">
+							</button>
+						{{else}}
+							<button  set-carried class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/x-mark.png">
+							</button>
+						{{/if}}
 					</div>
 
 				</div>
@@ -51,12 +95,26 @@
 				<div class="row">
 					<div class="col">AP</div>
 					<div class="col-left-align">
-						<input type="number" class="input-number" value="{{ data.AP }}" name="data.AP">
+						<input type="number" class="input-number" value="{{ data.ap }}" name="data.ap">
 					</div>
-					<div class="col">
-						<button test-roll class="btn btn-vitals">Roll</button>
+					<div class="col row-leader">
+						{{#if_equal data.hands 1}}
+						Dual-Wield?
+						{{/if_equal}}
 					</div>
-					<div class="col"></div>
+					<div class="col-left-align">
+						{{#if_equal data.hands 1}}
+							{{#if data.duals }}
+								<button  set-duals class="btn btn-icon btn-success">
+									<img src="systems/mage/img/icons/checkmark.png">
+								</button>
+							{{else}}
+								<button  set-duals class="btn btn-icon btn-warn">
+									<img src="systems/mage/img/icons/x-mark.png">
+								</button>
+							{{/if}}
+						{{/if_equal}}
+					</div>
 				</div>
 			</section>
 		</div>

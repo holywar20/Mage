@@ -40,7 +40,7 @@
 
 
 	--fail: rgb( 200, 20 , 20 );
-	--success : rgb( 30, 200, 30);
+	--success : rgb( 1, 157, 1);
 	--epic-success : rgb(0, 225, 247 );
 	--heroic-success : rgb(202, 104, 202);
 	--legendary-success: rgb(225, 235, 141);
@@ -235,6 +235,7 @@ hr.flaired-divider{
 	font-size: .9em;
 	color: var(--tertiary);
 	padding: 3px;
+	vertical-align: middle;
 }
 
 .col-lead-short{
@@ -476,11 +477,14 @@ span.inline-icon{
 	display: inline-flex;
 	justify-content: center;
 	align-self: center;
+	margin: 3px;
+	box-shadow: 2px 2px var(--primary-fade50);
 }
 
 .btn-icon img{
 	width: 16px;
 	height: 16px;
+	border: unset;
 }
 
 .btn-warn{

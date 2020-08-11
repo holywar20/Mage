@@ -28,6 +28,8 @@ export class MageActor extends Actor{
 		/* Make sure player data isn't stupid */
 		// this._sanitizeCharacterData( data ); TODO - data sanitization not working for ... reasons.
 
+		this._fixData( data );
+
 		/* Calculate costs & total values first. */
 		this._calculateTotalsAndCosts( data );
 		
@@ -45,6 +47,88 @@ export class MageActor extends Actor{
 		this._calculateSaves( data );
 
 		this._prepareItems();
+	}
+
+	drawNewHand(){
+		
+		if( this.actorData.memorized != 20 ){
+			let chatData = this._prepareChatData( `${this.data.name} cannot draw a card until they have memorized exactly 20 spells.` );
+			ChatMessage.create( chatData );
+			return null;
+		}
+
+		// Clear the macro bar of all cards.
+		for( let x = 1; x <= 5; x++ ){
+			ui.customHotbar.populator.chbUnsetMacro( x );
+		}
+
+		// Now clean out the dictionary
+		this.actorData.drawnCards.forEach( ( ele ) => {
+			game.macros.remove( ele );
+		});
+		this.actorData.drawnCards = [];
+
+		// Select a specific card to draw.
+		let allRolls = new Roll('5d20');
+		allRolls.roll();
+		let results = allRolls._dice[0].rolls;
+
+		// Then for each result, draw a hand.
+		let assignToSlot = 1;
+		results.forEach( ( result ) =>{ 
+			this.drawNewCard( result.roll , assignToSlot );
+			assignToSlot++;
+		});
+	}
+
+	async narratorDraw(){
+		// Not sure how to do this yet. Might test a new display panel;
+	}
+
+	async drawNewCard( cardNum = 0 , slot = null ){
+		console.log( this.actorData );
+		if( this.actorData.memorized != 20 ){
+			let chatData = this._prepareChatData( `${this.data.name} cannot draw a card until they have memorized exactly 20 spells.` );
+			ChatMessage.create( chatData );
+			return null;
+		}
+
+		if( !cardNum ){
+			let roll = new Roll('1d20');
+			roll.roll();
+			cardNum = roll._result;
+		}
+
+		let count = 0;
+		let selectedSpell = null;
+		for( const id in this.actorData.deck ){
+			count = count + +this.actorData.deck[id].data.memorized.number;
+
+			if( count < cardNum ){
+				continue;
+			} else {
+				selectedSpell = this.actorData.deck[id];
+				break;
+			}
+		}
+
+		if( slot == null ){ // If we are not hard coding a slot, replace a random spell.
+			slot = Math.floor( Math.random() * 5 );
+		}
+
+		let macro = await Macro.create({
+			name : selectedSpell.name,
+			type : "script", 
+			img : selectedSpell.img,
+			command : `game.mage.rollSpellMacro( "${selectedSpell._id}" , "${ this.data._id }" )`,
+			flags: { "mage.itemMacro": true }
+		});
+
+		this.actorData.drawnCards.push( macro.id );
+
+		ui.customHotbar.populator.chbSetMacro( macro.id , slot );
+		ui.customHotbar.render();
+		Hooks.callAll("customHotbarAssignComplete");
 	}
 
 	async rollSaveDialog( key ){
@@ -71,6 +155,13 @@ export class MageActor extends Actor{
 				}
 			}
 		}).render( true );
+	}
+
+	/* Method for short term data fixes so old actors don't break. */
+	_fixData( data ){
+		data.creation.traits = 60; // Changed traits for 80 to 60.
+		data.remainingMemorized = 20; // Setting memorized remaining to 20, for 5% chance for a card to draw.
+		data.drawnCards = [];
 	}
 
 
@@ -276,13 +367,15 @@ export class MageActor extends Actor{
 		} , [[], []] );
 
 		this.data.data.memorized = 0;
+		this.data.data.deck = {}
 		spells.forEach( ( spell ) => {
 			if( spell.data.memorized.value ){
 				this.data.data.memorized = this.data.data.memorized + +spell.data.memorized.number;
+				this.data.data.deck[spell._id] = spell;
 			}
 		});
 
-		this.data.data.remainingMemorized = 30 - this.data.data.memorized;
+		this.data.data.remainingMemorized = 20 - this.data.data.memorized;
 
 		this.data.data.weapons = weapons;
 		this.data.data.spells = spells;
@@ -317,8 +410,10 @@ export class MageActor extends Actor{
 	}
 
 	_calculateDerived( data ){
-		data.hp.max = 10 + ( +data.traits.str.value * 3 );
-		
+		data.health = 10 + ( +data.traits.str.value * 3 + +data.skills.grit.endurance.value * 1 );
+		data.hp.max = data.health
+		// use EXP to calculate additional health
+
 		// Get default values, because sometimes these might be null;
 		let phys = 0;
 		if( data.mystictraits.physical )
@@ -329,11 +424,26 @@ export class MageActor extends Actor{
 			men = data.traits[data.mystictraits.mental].value;
 
 		let cpParadoxBonus = 0;
+		let carryBonus = 0;
+		let concentrationBonus = 0;
+
 		if( data.cp.spent == 0 ){
+			concentrationBonus = 0;
 			cpParadoxBonus = 0;
+			carryBonus = 0;
 		} else {
 			cpParadoxBonus = Math.round( data.cp.spent / 10 );
+			carryBonus = Math.round( data.cp.spent / 50 );
+			concentrationBonus = Math.round( data.cp.spent );
 		}
+
+		if( !data.carry )
+			data.carry = {"current" : 0 , "bonus" : 0 , "max": 0 }
+		data.carry.max = +data.skills.grit.carry.value + data.traits.str.value + 3;
+
+		if( !data.concentration )
+			data.concentration = {"current" : 0 , "bonus" : 0 , "max": 0 }
+		data.concentration.max = +data.skills.grit.concentration.value + +data.traits.int.value + 1;
 
 		data.paradox.max = +phys + +men + +cpParadoxBonus;
 	}
@@ -391,6 +501,10 @@ export class MageActor extends Actor{
 		data.cp.spent = ( data.cp.traits - data.creation.traits ) + ( data.cp.skills - data.creation.skills ) + ( data.cp.arcana - data.creation.arcana );
 		if( data.cp.spent < 0 )
 			data.cp.spent = 0;
+
+		data.cp.total = +data.cp.journals + +data.cp.games + +data.cp.props + +data.cp.training;
+		if( data.cp.spent > data.cp.total )
+			ui.notifications.warn( this.data.name + " has spent more Character points than the he/she has!");
 	}
 
 	_calculateTotalsAndCosts( data ){

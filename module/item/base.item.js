@@ -26,7 +26,7 @@ export class BaseItem extends Item{
 			myActor = this.options.actor;
 
 		if( this.data.type === "weapon" ){
-			this.data.data.styles = WEAPON_UTILITY.calculateStyles( this.data.data.dmg, this.data.data.styles , myActor );
+			this.data.data.styles = WEAPON_UTILITY.calculateStyles( this , myActor );
 		}
 
 		if( this.data.type === "spell" ){

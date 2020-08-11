@@ -297,11 +297,11 @@ export class MageSheet extends ActorSheet {
 	}
 
 	async _drawNewHandClick( event ){
-		console.log( 'new hand!' , event );
+		this.actor.drawNewHand();
 	}
 
 	async _drawNewCardClick( event ){
-		console.log( 'new card!' , event );
+		this.actor.drawNewCard();
 	}
 
 	/* Bit complicated, but needed to do some hacky crap to get handlebars to update right. 

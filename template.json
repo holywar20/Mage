@@ -15,6 +15,8 @@
 		},
 		"mage" :{
 			"templates" : ["common"],
+			"hp": { "value" : 0 , "max" : 0, "min" : 10  , "tempmax" : 0 , "tempmin" :0 },
+			"paradox" :{ "value" : 0 , "max" : 0, "min" : 10  , "tempmax" : 0 , "tempmin" :0 },
 			"contestedStatusEffects" : {
 				"haste" : 0,
 				"regen" : 0,
@@ -63,14 +65,15 @@
 				"assets" : false
 			},
 			"memorized" : 0 ,
-			"remainingMemorized" : 30,
+			"remainingMemorized" : 20,
 			"equipmentTextNotes" : "Enter any extra non-weapon equipment or other notes here",
 			"spells" : [],
 			"weapons": [],
 			"armoritems" : [],
 			"items" : [],
 			"tradition" : "0",
-			"exp" : 0 ,
+			"deck" : {},
+			"drawnCards" : [],
 			"spec" : {
 				"survival": "","academics": "", "craft" : "" , "occult" : "", "cosmology" : ""
 			},
@@ -85,16 +88,17 @@
 			"resist" :{
 				"bashing" : 1 , "thermal" : 1 , "solar" : 1, "piercing" : 1 , "electric" : 1 , "lunar" : 1 , "slashing" : 1, "toxic" : 1, "banal" : 1 
 			},
-			"paradox" :{ "current" : 0 , "bonus" : 0, "max" : 10 },
+			"carry" : { "current" : 0  , "bonus" : 0, "max" : 0 },
+			"concentration" : {"current" : 0 , "bonus" : 0 , "max": 0 },
 			"armor" : { "current" : 0 , "bonus" : 0, "max" : 0 },
-			"hp": { "current" : 0 , "bonus" : 0 , "max" : 10 },
+			"health" : 10,
 			"cp": {
-				"remaining": 0 , "spent" : 0 , "trained" : 0 , "earned" : 0 , "skills" : 0 , "traits" : 0 ,  "arcana" : 0 , "feats" : 0 
+				"total" : 0, "remaining": 0 , "journals" : 0 , "props": 0, "spent" : 0 , "trained" : 0 , "skills" : 0 , "traits" : 0 ,  "arcana" : 0 , "feats" : 0 
 			},
 			"creation":{
-				"skills" : 60 , "traits" : 80 , "arcana" : 30 , 
+				"skills" : 60 , "traits" : 60 , "arcana" : 30 , 
 				"spentSkills" : 0 , "spentTraits" : 0 , "spentArcana" : 0 , 
-				"unspentSkills" : 60,  "unspentTraits" : 80 , "unspentArcana" : 30 
+				"unspentSkills" : 60,  "unspentTraits" : 60 , "unspentArcana" : 30 
 			},
 			"traitParts" : {
 				"str" : { "name" : "Strength", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
@@ -189,6 +193,11 @@
 		},
 		"weapon":{
 			"dmg" : "1d10",
+			"diceBonus" : 0,
+			"duals" : 0,
+			"equipped" : 0,
+			"carried" :  1,
+			"carryWeight" : 1,
 			"hands" : 1,
 			"range" : 0,
 			"weaponType" : "martial",

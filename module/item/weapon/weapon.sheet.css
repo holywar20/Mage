@@ -10,6 +10,7 @@
 .weapon-img{
 	width: 128px;
 	height: 128px;
+	object-fit: contain;
 }
 
 .weapon-container{
@@ -17,11 +18,14 @@
 	
 	display: grid;
 	grid-template-columns: 130px auto;
-	grid-template-rows: 130px auto;
+	grid-template-rows: 180px auto;
 }
 
 .weapon-image{
 	border: 1px solid var(--primary);
+	border-radius: 5px;
+	max-height: 135px;
+	align-self: center;
 
 	grid-row-start: 1;
 	grid-row-end:  2;

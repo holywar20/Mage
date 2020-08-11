@@ -28,6 +28,10 @@ export class WeaponSheet extends ItemSheet{
 
 	TEST_ROLL_BUTTON = "button[test-roll]";
 
+	TOGGLE_EQUIPPED = "button[set-equipped]";
+	TOGGLE_CARRIED = "button[set-carried]";
+	TOGGLE_DUALS = "button[set-duals]";
+
 	mySheetHtml = null
 	weapon = this.object;
 	weaponData = this.object.data.data;
@@ -52,6 +56,10 @@ export class WeaponSheet extends ItemSheet{
 		this.mySheetHtml.find( this.DELETE_EXTRA_ROLL_BUTTON_SELECTOR ).click( this._deleteRollEvent.bind( this ) );
 
 		this.mySheetHtml.find( this.TEST_ROLL_BUTTON ).click( this._testRollWeapon.bind( this ) );
+
+		this.mySheetHtml.find( this.TOGGLE_EQUIPPED ).click( this._toggleEquipped.bind( this ) );
+		this.mySheetHtml.find( this.TOGGLE_CARRIED ).click( this._toggleCarried.bind( this ) );
+		this.mySheetHtml.find( this.TOGGLE_DUALS ).click( this._toggleDuals.bind( this ) );
 	}
 
 	/*getData(){
@@ -59,6 +67,45 @@ export class WeaponSheet extends ItemSheet{
 
 		return data;
 	}*/
+
+	async _toggleDuals( event ){
+		let duals = null;
+		
+		console.log( 'duals');
+		if( this.object.data.data.duals ){
+			duals = 0;
+		} else {
+			duals = 1;
+		}
+
+		return this.item.update({"data.duals" : duals });
+	}
+
+	async _toggleEquipped( event ){
+		event.preventDefault();
+
+		let equipped = null;
+		if( this.object.data.data.equipped ){
+			equipped = 0;
+		} else {
+			equipped = 1;
+		}
+
+		return this.item.update({"data.equipped" : equipped });
+	}
+
+	async _toggleCarried( event ){
+		event.preventDefault();
+		
+		let carried = null;
+		if( this.object.data.data.carried ){
+			carried = 0;
+		} else {
+			carried = 1;
+		}
+		
+		return this.item.update({"data.carried" : carried});
+	}
 
 	_testRollWeapon( event ){
 		this.weapon.rollRedirect();

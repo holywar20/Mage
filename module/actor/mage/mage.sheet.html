@@ -355,10 +355,10 @@
 			<div class="row">
 				<div class="col-lead-short">Health</div>
 				<div class="col">
-					<input name="data.hp.bonus" value="{{ data.hp.bonus }}" class="input-number" type="number">
+					<input name="data.hp.temp" value="{{ data.hp.temp }}" class="input-number" type="number">
 				</div>
 				<div class="col">
-					<input name="data.hp.current" value="{{ data.hp.current }}" class="input-number" type="number">
+					<input name="data.hp.value" value="{{ data.hp.value }}" class="input-number" type="number">
 					/ <span>{{ data.hp.max }}</span> 
 				</div>
 			</div>
@@ -369,18 +369,40 @@
 					<input name="data.armor.bonus" value="{{ data.armor.bonus }}" class="input-number" type="number">
 				</div>
 				<div class="col">
-					<input name="data.armor.current" value="{{ data.armor.current }}" class="input-number" type="number"> 
+					<input name="data.armor.value" value="{{ data.armor.value }}" class="input-number" type="number"> 
 					<span> / {{ data.armor.max }}</span>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-lead-short">Paradox</div>
-				<div class="col"><input name="data.paradox.bonus" value="{{data.paradox.bonus}}" class="input-number" type="number"></div>
 				<div class="col">
-					<input name="data.paradox.current" value="{{ data.paradox.current }}" class="input-number" type="number">
+					<input name="data.paradox.bonus" value="{{data.paradox.bonus}}" class="input-number" type="number">
+				</div>
+				<div class="col">
+					<input name="data.paradox.value" value="{{ data.paradox.value }}" class="input-number" type="number">
 					<span> / {{ data.paradox.max }}</span> 
 					</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lead-short">Carry</div>
+				<div class="col">
+					<input name="data.carry.bonus" value="{{data.carry.bonus}}" class="input-number" type="number">
+				</div>
+				<div class="col">
+					<span class="non-input-number">{{ data.carry.max }}</span>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lead-short">Concen.</div>
+				<div class="col">
+					<input name="data.concentration.bonus" value="{{data.concentration.bonus}}" class="input-number" type="number">
+				</div>
+				<div class="col">
+					<span class="non-input-number">{{ data.concentration.max }}</span>
+				</div>
 			</div>
 
 		</section>
@@ -768,74 +790,95 @@
 	<div class="grid-child">
 		<section class="table">
 			<div class="row">
-				<div class="col">
-					Haste
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.haste 1}}success-text{{/if_greater}}">Haste</span>
 				</div>
 				<div class="col">
 					<input class="input-number" name="data.contestedStatusEffects.haste" value="{{data.contestedStatusEffects.haste}}">
 				</div>
 				<div class="col">
-					Slow
+					<span class="{{#if_less data.contestedStatusEffects.haste -1}}warn-text{{/if_less}}">Slow</span>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col">
-					Regen
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.regen 1}}success-text{{/if_greater}}">Regen</span>
 				</div>
 				<div class="col">
 					<input class="input-number" name="data.contestedStatusEffects.regen" value="{{data.contestedStatusEffects.regen}}">
 				</div>
 				<div class="col">
-					Rot / Burn
+					<span class="{{#if_less data.contestedStatusEffects.regen -1}}warn-text{{/if_less}}">Rot / Burn</span>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col">
-					Inspire
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.inspire 1}}success-text{{/if_greater}}">Inspire</span>
 				</div>
 				<div class="col">
 					<input class="input-number" name="data.contestedStatusEffects.inspire" value="{{data.contestedStatusEffects.inspire}}">
 				</div>
 				<div class="col">
-					Oppress
+					<span class="{{#if_less data.contestedStatusEffects.inspire -1}}warn-text{{/if_less}}">Oppress</span>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col">
-					Enlighten
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.enlighten 1}}success-text{{/if_greater}}">Enlighten</span>
 				</div>
 				<div class="col">
 					<input class="input-number" name="data.contestedStatusEffects.enlighten" value="{{data.contestedStatusEffects.enlighten}}">
 				</div>
 				<div class="col">
-					Confuse
+					<span class="{{#if_less data.contestedStatusEffects.enlighten -1}}warn-text{{/if_less}}">Confuse</span>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col">
-					Vigor
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.vigor 1}}success-text{{/if_greater}}">Vigor</span>
 				</div>
 				<div class="col">
 					<input class="input-number" name="data.contestedStatusEffects.vigor" value="{{data.contestedStatusEffects.vigor}}">
 				</div>
 				<div class="col">
-					Weak
+					<span class="{{#if_less data.contestedStatusEffects.vigor -1}}warn-text{{/if_less}}">Weak</span>
 				</div>
 			</div>
-		</section>
 
+			<div class="row">
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.lucky 1}}success-text{{/if_greater}}">Lucky</span>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.lucky" value="{{data.contestedStatusEffects.lucky}}">
+				</div>
+				<div class="col">
+					<span class="{{#if_less data.contestedStatusEffects.lucky -1}}warn-text{{/if_less}}">Unlucky</span>
+				</div>
+
+			</div>
+		</section>
+		<hr class="flaired-divider">
 		<section class="table">	
-			<select value="currentRollMode">
-				{{#select currentRollMode}}
-				<option value="public">Public</option>
-				<option value="gm">Narrator</option>
-				<option value="self">Self</option>
-				{{/select}}
-			</select>
+			<div class="header-row">
+				<div class="col">Effect</div>
+				<div class="col">Subtype</div>
+				<div class="col">Source</div>
+				<div class="col">Value</div>
+			</div>
+
+			<div class="row">
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col">
+					<button class="btn"
+				</div>
+			</div>
 		</section>
 	</div><!-- End of Grid Child-->
 	</div><!-- End of Mods-->
@@ -948,8 +991,8 @@
 					{{#if_equal data.inventoryExpanded.armor true}}open{{/if_equal}}
 					">
 					<section>
-						<textarea class="textarea-big" name="data.equipmentTextNotes" value="{{data.equipmentTextNotes}}">
-						
+						<textarea class="textarea-big" name="data.equipmentTextNotes">
+							{{data.equipmentTextNotes}}
 						</textarea>
 					</section>
 				</div>
@@ -1179,10 +1222,11 @@
 						<div class="justify-content-between spell-count-container">
 							<div>
 								{{#if spell.data.memorized.value }}
-									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-neutral">
+									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-success">
 										<img src="systems/mage/img/icons/memorize.png">
 									</button>
-									x {{spell.data.memorized.number}}
+									x 
+									<span class="non-input-number">{{spell.data.memorized.number}}</span>
 								{{else}}
 									<button memorize-spell="{{spell._id}}" class="btn btn-icon btn-warn">
 										<img src="systems/mage/img/icons/memorize.png">
@@ -1346,7 +1390,7 @@
 			{{/each}}
 
 			<div class="one-third-element">
-				<button add-spell class="btn btn-large btn-arcana">
+				<button add-spell class="btn btn-large btn-success">
 					<span>Add New Spell</span>
 				</button>
 			</div>
@@ -1368,35 +1412,46 @@
 		<div>
 		<section class="table">
 			<div class="header-row">
-				<div class="col">Reamining</div>
-				<div class="col">Spent</div>
+				<div class="col">Journals</div>
+				<div class="col">Blanket</div>
+				<div class="col">Props</div>
+				<div class="col">Training</div>
 				<div class="col">Total</div>
-				<div class="col">Earned</div>
-				<div class="col">Trained</div>
 			</div>
 
 			<div class="clean-row">
-				<div class="col"><div class="cp-calculated-display">{{ data.cp.remaining }}</div></div>
-				<div class="col"><div class="cp-calculated-display">{{ data.cp.spent }}</div></div>
-				<div class="col"><div class="cp-calculated-display">{{ data.cp.trained }}</div></div>
-				<div class="col"><div class="cp-calculated-display">{{ data.cp.earned }}</div></div>
-				<div class="col"><div class="cp-calculated-display">{{ data.cp.trained }}</div></div>
+				<div class="col pad-4">
+					<input type="number" class="input-number" name="data.cp.journals" value="{{data.cp.journals}}">
+				</div>
+				<div class="col pad-4">
+					<input type="number" class="input-number" name="data.cp.games" value="{{data.cp.games}}">
+				</div>
+				<div class="col pad-4">
+					<input type="number" class="input-number" name="data.cp.props" value="{{data.cp.props}}">
+				</div>
+				<div class="col pad-4">
+					<input type="number" class="input-number" name="data.cp.training" value="{{data.cp.training}}">
+				</div>
+				<div class="col pad-4">
+					<span class="cp-calculated-display 
+						{{#if_greater data.cp.spent data.cp.total}}
+							display-bad
+						{{/if_greater}}
+						{{#if_greater data.cp.total data.cp.spent}}
+							display-good
+						{{/if_greater}}
+					">
+						{{ data.cp.spent }}
+					</span>
+					&nbsp;of&nbsp;
+					<span class="cp-calculated-display">
+						{{ data.cp.total }}
+					</span>
+				</div>
 			</div>
 		</section>
 	</div>
-		<!--			<section class="table">
-				<div class="header-row">
-					<div class="col">Games</div>
-				</div>
-
-				<div class="row">
-					<div class="col">
-					{{#each data.exp }}
-						{{@index}}: <input class="input-number" type="number" name="blanket" value="{{ blanket }}">
-					{{/each}}
-					</div>
-				</div>
-			</section> -->
+	
 	</div> <!-- End of grid child-->
 	</div> <!-- End of Character Points -->
 	

@@ -13,6 +13,9 @@ import { BaseItem } from './module/item/base.item.js';
 
 import { Loader } from './helpers/loaders.js';
 
+// Not screwing with this for now, but I really need to make a card draw module.
+//import { HandDisplay } from './module/handdisplay/handdisplay.js';
+
 /* ------------------------------------ */
 /* Initialize system					*/
 /* ------------------------------------ */
@@ -162,14 +165,14 @@ Hooks.once('ready', function() {
 	//loader.loadCompendium( 'mage' , 'weapon' );
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
-		if( bar.id == "custom-hotbar" ){
-			ui.notifications.warn("You cannot add a macro to the Narrator's HotBar!");
+		if( bar.id == "custom-hotbar" && !game.user.isGM ){ // GM does what he wants.
 			return null;
+			// Disable hotdropping for custom macros
 		}
 		
 		switch( data.type ){
 			case "Skill" : createSkillMacro( data, slot ); break;
-			case "Trait" : createTraitMacro( data, slot); break;
+			case "Trait" : createTraitMacro( data, slot ); break;
 			case "Arcana" : createArcanaMacro( data, slot ); break;
 			case "Utility" : createUtilityMacro( data, slot ); break;
 			case "Save" : createSaveMacro( data, slot); break;
@@ -180,7 +183,44 @@ Hooks.once('ready', function() {
 			break;
 		}
 	});
+
+	initCustomGlobalMacros();
 });
+
+async function initCustomGlobalMacros(){
+	var thisPlayer = game.user.character;
+
+	if( game.user.isGM ){
+		//return null; // Narrators don't need this shit.
+	}
+
+	if( !thisPlayer ){
+		ui.notifications.warn( game.user.name + " does not have an actor assigned. Not creating player macros." );
+		return null;
+	}
+	
+	let macros = {}
+	macros.will = await Macro.create({
+		name : 'Will Save', type : "script", img : `systems/mage/icons/other/Will.png`,
+		command : `game.mage.rollSaveMacro( 'will' , '${thisPlayer._id}' )`
+	});
+
+	macros.cunning = await Macro.create({
+		name : 'Cunning Save', type : "script", img : `systems/mage/icons/other/Cunning.png`,
+		command : `game.mage.rollSaveMacro( 'cunning' , '${thisPlayer._id}' )`
+	});
+
+	macros.grit = await Macro.create({
+		name : 'Grit Save' , type : "script", img : `systems/mage/icons/other/Grit.png`,
+		command : `game.mage.rollSaveMacro('grit' , ${thisPlayer._id} )`
+	});
+	
+	ui.customHotbar.populator.chbSetMacro( macros.will.id , 8 );
+	ui.customHotbar.populator.chbSetMacro( macros.cunning.id, 9 );
+	ui.customHotbar.populator.chbSetMacro( macros.grit.id , 10 );
+	ui.customHotbar.render();
+	Hooks.callAll("customHotbarAssignComplete");
+}
 
 async function createSkillMacro( macroRequest , slot ){
 	const command = `game.mage.rollSkillMacro( '${macroRequest.key}' , '${macroRequest.actorId}' , '${macroRequest.skillType}')`;
