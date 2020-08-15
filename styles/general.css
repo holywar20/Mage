@@ -12,7 +12,7 @@
 	--input-background : rgba(20,20,20, .8);
 
 	--gray-fade25: rgba(50, 30, 50, 0.50);
-	--gray-fade50: rgba(20,20,20, .75);
+	--gray-fade50: rgba(20,20,20, .90);
 
 	--primary				: rgba(133, 18 ,87 ,1);
 	--primary-fade50 		: rgba(133, 18 , 87 ,.5);
@@ -314,9 +314,10 @@ select{
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
-	-webkit-appearance: none; 
+	-webkit-appearance: none;
 	margin: 0; 
 }
+
 
 input[disabled]{
 	color: white;

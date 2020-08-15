@@ -76,16 +76,20 @@ export class MageActor extends Actor{
 		// Then for each result, draw a hand.
 		let assignToSlot = 1;
 		results.forEach( ( result ) =>{ 
-			this.drawNewCard( result.roll , assignToSlot );
+			this.drawNewCard( result.roll , assignToSlot , true );
 			assignToSlot++;
 		});
+
+		let chatData = this._prepareChatData( `${this.data.name} has drawn a new hand.` );
+		ChatMessage.create( chatData );
+		ui.customHotbar.render();
 	}
 
 	async narratorDraw(){
 		// Not sure how to do this yet. Might test a new display panel;
 	}
 
-	async drawNewCard( cardNum = 0 , slot = null ){
+	async drawNewCard( cardNum = 0 , slot = null , isNewHand= false){
 		console.log( this.actorData );
 		if( this.actorData.memorized != 20 ){
 			let chatData = this._prepareChatData( `${this.data.name} cannot draw a card until they have memorized exactly 20 spells.` );
@@ -112,8 +116,23 @@ export class MageActor extends Actor{
 			}
 		}
 
-		if( slot == null ){ // If we are not hard coding a slot, replace a random spell.
-			slot = Math.floor( Math.random() * 5 );
+		if( slot == null ){
+			// First, verify that we have an empty slot available
+			for( const index in ui.customHotbar.macros ){
+				if( index > 4 )
+					break; // Only do up to the 5th card in the bar. 
+				
+				if( ui.customHotbar.macros[index].macro ){
+					continue; // Macro exists, move on.
+				} else {
+					slot = index;// Macro space is open, so put new macro there. 
+					break;
+				}
+			}
+
+			if( slot == null ){ // free slot isn't found, so randomize that shit.
+				slot = Math.floor( Math.random() * 5 );
+			}
 		}
 
 		let macro = await Macro.create({
@@ -125,9 +144,17 @@ export class MageActor extends Actor{
 		});
 
 		this.actorData.drawnCards.push( macro.id );
-
 		ui.customHotbar.populator.chbSetMacro( macro.id , slot );
-		ui.customHotbar.render();
+		
+
+		if( isNewHand ){
+			// Don't need to do anything extra here. Just let NewHand call do all the messaging.
+		} else {
+			let chatData = this._prepareChatData( `${this.data.name} has drawn a new card.` );
+			ChatMessage.create( chatData );
+			ui.customHotbar.render(); // Only force rerender if just drawing a single card.
+		}
+
 		Hooks.callAll("customHotbarAssignComplete");
 	}
 

@@ -1,10 +1,18 @@
 .spell-form{
 	background: no-repeat url('../../../img/sheets/background.jpg');
+	background-size: cover;
+	background-position: center;
 	color: var(--base-text-color);
 }
 
+.spell-button-container{
+	padding: 5px;
+	text-align: center;
+}
+
+
 .spell-container{
-	background-color: var(--gray-fade50);
+	/*background-color: var(--gray-fade50);*/
 	min-height: 500px;
 }
 

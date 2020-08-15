@@ -1,8 +1,8 @@
 
 
 ol.directory-list{
-	background-color: var(--grey-fade20);
-} 
+	background-color: black;
+}
 
 .window-app .window-content{
 	background: black;
@@ -66,15 +66,54 @@ li.macro #context-menu li.context-item:nth-child( 2 ){
 }
 
 /* Styling for Card Draws & custom macro bar*/
+
+#custom-hotbar{
+	bottom: 600px !important;
+	right: 315px !important;
+	left: unset !important;
+	width: 65px !important;
+}
+
 #custom-hotbar .macro{
-	flex: 0 0 80px !important;
-	height: 80px !important;
+	flex: 0 0 55px !important;
+	height: 55px !important;
+	width: 55px !important;
+	margin: 1px !important;
 }
 
 #custom-hotbar #custom-macro-list{
-	flex: 0 0 802px !important;
+	flex: 0 0 752px !important;
+	border: 0px solid blue !important;
+	width: 65px !important;
+	max-width: 65px !important;
+	margin: 1px;
+	flex-direction: column;
 }
 
 #custom-hotbar img{
 	width: 100% !important;
+	border: unset !important;
+	border-radius: 20px !important;
 }
+
+#custom-hotbar .macro{
+	border-radius: 20px !important;
+}
+
+#custom-hotbar-directory-controls{
+	display: none;
+}
+
+#custom-action-bar{
+	background: var(--primary-fade50);
+	max-width: 70px;
+	padding: 4px;
+	border: 1px solid var(--tertiary);
+	border-radius: 10px;
+}
+
+.compendium .directory-list .directory-item{
+	background-color: lightgray !important;
+	color: black !important;
+}
+

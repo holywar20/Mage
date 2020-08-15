@@ -1,5 +1,6 @@
 .mage-form{
-	background: no-repeat url('../../../img/sheets/background.jpg');
+	background: no-repeat url('../../../img/sheets/sun.jpg');
+	background-size: cover;
 	min-height: 800px;
 	min-width: 950px;
 	max-width: 950px;
@@ -31,8 +32,6 @@
 
 /* Grid */
 .character-container, .equipment-container, .development-container, .spell-book-container{
-	background-color: rgba( 0 , 0 ,0 , .75);
-
 	display: grid;
 }
 

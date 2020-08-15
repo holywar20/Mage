@@ -21,9 +21,17 @@ import { Loader } from './helpers/loaders.js';
 /* ------------------------------------ */
 Hooks.once('init', async function() {
 
-	/* First match in global methods for calling macros*/
+	/* First attack methods for calling macros into a global namespace */
 	game.mage = {
-		rollWeaponMacro , rollArcanaMacro, rollSaveMacro , rollTraitMacro , rollSpellMacro , rollSkillMacro, rollUtilityMacro
+		rollWeaponMacro , 
+		rollArcanaMacro, 
+		rollSaveMacro , 
+		rollTraitMacro , 
+		rollSpellMacro , 
+		rollSkillMacro, 
+		rollUtilityMacro,
+		rollNewHandMacro,
+		rollNewCardMacro
 	};
 	
 	CONFIG.Actor.entityClass = MageActor;
@@ -45,11 +53,6 @@ Hooks.once('init', async function() {
 	Items.registerSheet("mage" , SpellSheet ,{
 		types: ["spell"]
 	});
-
-	/* Create a mage namespace within the game global.
-		These are mostly meant to be globally executable commands */
-
-
 
 	// Register custom system settings
 	registerSettings();
@@ -142,10 +145,6 @@ Hooks.once('setup', function() {
 		return classes;
 	});
 
-	Handlebars.registerHelper( 'get_dmg_css_classes' , function ( dmgtype , options ){
-	
-	});
-
 	Handlebars.registerHelper('is_between', function( test , val1, val2 , opts ){
 		if( test >= val1 && test <= val2 ){
 			return opts.fn( this );
@@ -163,6 +162,7 @@ Hooks.once('ready', function() {
 	var loader = new Loader();
 	//loader.loadCompendium( 'mage' , 'tradition' );
 	//loader.loadCompendium( 'mage' , 'weapon' );
+	// loader.loadSpellTSVData();
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
 		if( bar.id == "custom-hotbar" && !game.user.isGM ){ // GM does what he wants.
@@ -194,6 +194,10 @@ async function initCustomGlobalMacros(){
 		//return null; // Narrators don't need this shit.
 	}
 
+	// Loop through each element of macro directory, 
+	// see if something named for this exists in a hot bar
+	// If not, delete it. Otherwise leave it be.
+
 	if( !thisPlayer ){
 		ui.notifications.warn( game.user.name + " does not have an actor assigned. Not creating player macros." );
 		return null;
@@ -212,14 +216,28 @@ async function initCustomGlobalMacros(){
 
 	macros.grit = await Macro.create({
 		name : 'Grit Save' , type : "script", img : `systems/mage/icons/other/Grit.png`,
-		command : `game.mage.rollSaveMacro('grit' , ${thisPlayer._id} )`
+		command : `game.mage.rollSaveMacro('grit' , '${thisPlayer._id}' )`
 	});
 	
 	ui.customHotbar.populator.chbSetMacro( macros.will.id , 8 );
 	ui.customHotbar.populator.chbSetMacro( macros.cunning.id, 9 );
 	ui.customHotbar.populator.chbSetMacro( macros.grit.id , 10 );
-	ui.customHotbar.render();
+	
+	macros.newHand = await Macro.create({
+		name : 'New Hand' , type : "script", img : `systems/mage/icons/other/Drawhand.png`,
+		command : `game.mage.rollNewHandMacro( '${thisPlayer._id}' )`
+	});
+
+	macros.drawCard = await Macro.create({
+		name : 'Draw Card' , type : "script", img : `systems/mage/icons/other/Drawone.png`,
+		command : `game.mage.rollNewCardMacro( '${thisPlayer._id}' )`
+	});
+
 	Hooks.callAll("customHotbarAssignComplete");
+	ui.customHotbar.populator.chbSetMacro( macros.drawCard.id , 6 );
+	ui.customHotbar.populator.chbSetMacro( macros.newHand.id , 7 );
+
+	ui.customHotbar.render();
 }
 
 async function createSkillMacro( macroRequest , slot ){
@@ -351,9 +369,18 @@ function rollSaveMacro( key, actorId ){
 	actor.rollSaveDialog( key );
 }
 
+async function rollNewHandMacro( actorId ){
+	let actor = await game.actors.get( actorId );
+	actor.drawNewHand();
+}
+
+async function rollNewCardMacro( actorId ){
+	let actor = await game.actors.get( actorId );
+	actor.drawNewCard();
+}
+
 async function createUtilityMacro( macroRequest, slot ){
 	const speaker = ChatMessage.getSpeaker();
-
 	console.log("Creating a utility macro" , macroRequest, slot );
 }
 

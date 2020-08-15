@@ -4,19 +4,15 @@
 <div class="flex">
 	<div class="flex-3-quarters">
 		<img class="spell-img" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+		<div class="spell-button-container">
+			<button test-roll class="btn btn-vitals">Roll</button>
+		</div>
 	</div>
 
 	<div class="flex-2">
 		<div class="grid-child">
+			<input name="name" value="{{ item.name }}"class="input-text">
 			<section class="table">
-				<div class="row">
-					<div class="col">Name</div>
-					<div class="col-left-align">
-						<input name="name" value="{{ item.name }}"class="input-text">
-					</div>
-					<div class="col"></div>
-				</div>
-
 				<div class="row">
 					<div class="col">Type</div>
 					<div class="col-left-align">
@@ -31,6 +27,7 @@
 						</select>
 					</div>
 					<div class="col"></div>
+					<div class="col"></div>
 				</div>
 
 				<div class="row">
@@ -38,7 +35,17 @@
 					<div class="col-left-align">
 						<input name="data.memorized.number" value="{{data.memorized.number}}" class="input-number">
 					</div>
-					<div class="col"></div>
+					<div class="col-lead-short">Defense</div>
+					<div class="col-left-align">
+						<select name="data.defense" class="input-text input-medium">
+						{{#select data.defense }}
+							<option value="none">None</option>
+							<option value="grit">Grit</option>
+							<option value="will">Will</option>
+							<option value="cunning">Cunning</option>
+						{{/select}}
+						</select>
+					</div>
 				</div>
 
 				<div class="row">
@@ -53,17 +60,22 @@
 						{{/select}}
 						</select>
 					</div>
-					<div class="col"></div>
+					<div class="col-lead-short">Paradox</div>
+					<div class="col-left-align">
+						<input type="number" class="input-number" name="data.paradox" value="{{data.paradox}}">
+					</div>
 				</div>
 
 				<div class="row arcana-row-height-fix">
 					<div class="col">Arcana</div>
 					<div class="col-left-align">
-						&nbsp;&nbsp;
-						<span class="non-input-number">{{ data.arcana }}</span>
-						&nbsp;&nbsp;
-						<span class="right-align">Roll Arcana?</span>
 						&nbsp;
+						<span class="non-input-number">{{ data.arcana }}</span>
+					</div>
+					<div class="col-lead-short">
+						<span class="right-align">Roll?</span>
+					</div>
+					<div class="col-lead-short">
 						{{#if data.rollArcana }}
 							<button roll-arcana-switch="{{spell._id}}" class="btn btn-icon btn-success">
 								<img src="systems/mage/img/icons/checkmark.png">
@@ -74,10 +86,7 @@
 							</button>
 						{{/if}}
 					</div>
-					<div class="col"><button test-roll class="btn btn-vitals">Roll</button></div>
 				</div>
-
-
 			</section>
 		</div>
 	</div><!-- End of Flex-2 -->
@@ -112,7 +121,7 @@
 					<div class="col-left-align">
 						<input name="data.targets.num" value="{{data.targets.num}}" class="input-number">
 					</div>
-					<div class="col-left-align">					
+					<div class="col-left-align">
 						<select name="data.targets.type" class="input-text input-medium">
 							{{#select data.targets.type}}
 							<option value="self">Self</option>
@@ -137,7 +146,7 @@
 					<div class="col-left-align">
 						<select class="input-text  input-medium" name="data.duration.type">
 							{{#select data.duration.type}}
-								<option value="immediate"></option>
+								<option value="immediate">Immediate</option>
 								<option value="rounds">Rounds</option>
 								<option value="hours">Hours</option>
 								<option value="days">Days</option>
@@ -167,7 +176,7 @@
 						{{/if_equal}}
 					</div>
 
-					<div class="col"
+					<div class="col"></div>
 				</div>
 
 			</section>

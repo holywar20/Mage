@@ -1,24 +1,28 @@
 .weapons-form{
-	background: no-repeat url('../../../img/sheets/background.jpg');
-	
+	background: no-repeat url('../../../img/sheets/weaponbackground.jpg');
+	background-size: contain;
 	min-width: 470px;
 	max-width: 470px;
 	
 	color: var(--base-text-color);
 }
 
+.roll-button-container{
+	text-align: center;
+	padding: 5px;
+}
+
 .weapon-img{
 	width: 128px;
 	height: 128px;
 	object-fit: contain;
+	border: unset;
 }
 
 .weapon-container{
-	background-color: rgba( 0 , 0 ,0 , .75);
-	
 	display: grid;
 	grid-template-columns: 130px auto;
-	grid-template-rows: 180px auto;
+	grid-template-rows: 210px auto;
 }
 
 .weapon-image{

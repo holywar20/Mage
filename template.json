@@ -169,6 +169,7 @@
 		},
 		"spell" : {
 			"filteredInList" : false,
+			"defense" : "none",
 			"rollNotes": "",
 			"effects" :{},
 			"rollArcana" : false,

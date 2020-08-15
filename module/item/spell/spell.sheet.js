@@ -5,7 +5,7 @@ export class SpellSheet extends ItemSheet{
 		super( item , {
 			editable : true,
 			width : 480,
-			height: 660 ,
+			height: 600 ,
 			resizable: true
 		});
 	}

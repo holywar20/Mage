@@ -13,17 +13,65 @@
 		"path": "./packs/traditions/traditions.db",
 		"entity": "Item"
 	} , {
-		"name" : "spell" ,
-		"label" : "Known Magics",
-		"system" : "mage",
-		"path" : "./packs/spells/spells.db",
-		"entity": "Item"
-	} , {
 		"name" : "weapon",
 		"label" : "Basic Weapons",
 		"system" : "mage",
 		"path" : "./packs/weapons/weapons.db",
 		"entity" : "Item"
+	} , {
+		"name" : "matter" ,
+		"label" : "Spells - Matter",
+		"system" : "mage",
+		"path" : "./packs/spells/matter.db",
+		"entity": "Item"
+	} , {
+		"name" : "time" ,
+		"label" : "Spells - Time",
+		"system" : "mage",
+		"path" : "./packs/spells/time.db",
+		"entity": "Item"
+	} , {
+		"name" : "space" ,
+		"label" : "Spells - Space",
+		"system" : "mage",
+		"path" : "./packs/spells/space.db",
+		"entity": "Item"
+	} , {
+		"name" : "entropy" ,
+		"label" : "Spells - Entropy",
+		"system" : "mage",
+		"path" : "./packs/spells/entropy.db",
+		"entity": "Item"
+	} , {
+		"name" : "life" ,
+		"label" : "Spells - Life",
+		"system" : "mage",
+		"path" : "./packs/spells/life.db",
+		"entity": "Item"
+	} , {
+		"name" : "spirit" ,
+		"label" : "Spells - Spirit",
+		"system" : "mage",
+		"path" : "./packs/spells/spirit.db",
+		"entity": "Item"
+	} , {
+		"name" : "mind" ,
+		"label" : "Spells - Mind",
+		"system" : "mage",
+		"path" : "./packs/spells/mind.db",
+		"entity": "Item"
+	} , {
+		"name" : "prime" ,
+		"label" : "Spells - Prime",
+		"system" : "mage",
+		"path" : "./packs/spells/prime.db",
+		"entity": "Item"
+	} , {
+		"name" : "force" ,
+		"label" : "Spells - Forces",
+		"system" : "mage",
+		"path" : "./packs/spells/force.db",
+		"entity": "Item"
 	}],
 	"styles": [
 		"./styles/ui.css",
