@@ -11,7 +11,7 @@
 	width: 128px;
 	border:1px solid var(--primary-fade50);
 	border-radius: 5px;
-	max-height: 128px;
+	max-height: 96px;
 	object-fit: contain;
 }
 

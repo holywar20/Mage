@@ -423,23 +423,40 @@ export class MageActor extends Actor{
 			
 			let saveTotal = 0;
 			if( saveKey =="cunning" ){ saveTotal = +data.traits.dex.value + +data.traits.per.value }
-			if( saveKey =="grit "){ saveTotal = +data.traits.str.value + +data.traits.cor.value }
+			if( saveKey =="grit"){ saveTotal = +data.traits.str.value + +data.traits.cor.value }
 			if( saveKey =="will"){ saveTotal = +data.traits.cha.value + +data.traits.int.value }
 
 			let skillTotal = 0
 			for( let skill of Object.values( skillGroup ) ){
-				skillTotal += +skill.value
+				skillTotal += +skill.base
 			}
 
 			data.defenses[saveKey].base = +saveTotal + Math.trunc(skillTotal / 5 );
-			data.defenses[saveKey].value = data.defenses[saveKey].base + data.defenses[saveKey].bonus + +data.defenses[saveKey].equip + +data.defenses[saveKey].enchant;
+			console.log( data.defenses[saveKey] );
+			data.defenses[saveKey].value = data.defenses[saveKey].base + +data.defenses[saveKey].bonus + +data.defenses[saveKey].equip + +data.defenses[saveKey].enchant;
 		}
 	}
 
 	_calculateDerived( data ){
-		data.health = 10 + ( +data.traits.str.value * 3 + +data.skills.grit.endurance.value * 1 );
+		let cpParadoxBonus = 0;
+		let carryBonus = 0;
+		let concentrationBonus = 0;
+		let hpBonusMultiple = 0;
+
+		if( data.cp.spent == 0 ){
+			concentrationBonus = 0;
+			cpParadoxBonus = 0;
+			carryBonus = 0;
+			hpBonus = 0;
+		} else {
+			cpParadoxBonus = Math.round( data.cp.spent / 10 );
+			carryBonus = Math.round( data.cp.spent / 50 );
+			concentrationBonus = Math.round( data.cp.spent / 50 );
+			hpBonusMultiple = data.cp.spend / 50;
+		}
+		
+		data.health = Math.round( 10 + ( +data.traits.str.value * 3 + +data.skills.grit.endurance.value * 2 ) * 1 + +hpBonusMultiple );
 		data.hp.max = data.health
-		// use EXP to calculate additional health
 
 		// Get default values, because sometimes these might be null;
 		let phys = 0;
@@ -450,27 +467,13 @@ export class MageActor extends Actor{
 		if( data.mystictraits.mental )
 			men = data.traits[data.mystictraits.mental].value;
 
-		let cpParadoxBonus = 0;
-		let carryBonus = 0;
-		let concentrationBonus = 0;
-
-		if( data.cp.spent == 0 ){
-			concentrationBonus = 0;
-			cpParadoxBonus = 0;
-			carryBonus = 0;
-		} else {
-			cpParadoxBonus = Math.round( data.cp.spent / 10 );
-			carryBonus = Math.round( data.cp.spent / 50 );
-			concentrationBonus = Math.round( data.cp.spent );
-		}
-
 		if( !data.carry )
 			data.carry = {"current" : 0 , "bonus" : 0 , "max": 0 }
 		data.carry.max = +data.skills.grit.carry.value + data.traits.str.value + 3;
 
 		if( !data.concentration )
 			data.concentration = {"current" : 0 , "bonus" : 0 , "max": 0 }
-		data.concentration.max = +data.skills.grit.concentration.value + +data.traits.int.value + 1;
+		data.concentration.max = +data.skills.grit.concentration.value + +data.traits.int.value + 3;
 
 		data.paradox.max = +phys + +men + +cpParadoxBonus;
 	}
@@ -530,8 +533,10 @@ export class MageActor extends Actor{
 			data.cp.spent = 0;
 
 		data.cp.total = +data.cp.journals + +data.cp.games + +data.cp.props + +data.cp.training;
-		if( data.cp.spent > data.cp.total )
-			ui.notifications.warn( this.data.name + " has spent more Character points than the he/she has!");
+		if( data.cp.spent > data.cp.total ){
+			// ui.notifications.warn( this.data.name + " has spent more Character points than the he/she has!");
+		}
+			
 	}
 
 	_calculateTotalsAndCosts( data ){

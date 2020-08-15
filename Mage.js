@@ -162,7 +162,7 @@ Hooks.once('ready', function() {
 	var loader = new Loader();
 	//loader.loadCompendium( 'mage' , 'tradition' );
 	//loader.loadCompendium( 'mage' , 'weapon' );
-	// loader.loadSpellTSVData();
+	loader.loadSpellTSVData();
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
 		if( bar.id == "custom-hotbar" && !game.user.isGM ){ // GM does what he wants.
