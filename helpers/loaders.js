@@ -52,7 +52,7 @@ export class Loader{
 
 				// Now we pop the data into proper JSON data that matches the template
 				for( const sphere in spellData ){
-					spellData[sphere].forEach( ( spell , idx ) =>{						
+					spellData[sphere].forEach( ( spell , idx ) => {
 						
 						if( trackthis ){
 							console.log( spell );

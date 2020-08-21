@@ -14,6 +14,10 @@ export class MageSheet extends ActorSheet {
 		idx: "" , difficulty : 7 , baseDice : 0 ,bonusDice : 0 ,  rollTitle : "", playerTarget : "" ,  rollMode : "public" 
 	};
 
+	ENCHANTMENT_PROTOTYPE = {
+		"source" : "" , "type" : "damage" , "subtype" : "thermal" , "value": 0, "duration" : 0 , "power" : 0
+	}
+
 	mySheetHtml = null
 	actorData = this.actor.data.data;
 
@@ -87,6 +91,11 @@ export class MageSheet extends ActorSheet {
 	WEAPON_DRAG = "div[weapon-drag]";
 	WEAPON_IMG_DRAG = "img[weapon-drag]";
 
+	/* Enchantments */
+	ENCHANTMENT_ADD = "button[add-enchant]";
+	ENCHANTMENT_ADD_NAME = "add-enchant";
+	ENCHANTMENT_DELETE = "button[delete-enchant]";
+
 	/* Overrides */
 	get template() {
 		return "systems/mage/module/actor/mage/mage.sheet.html"
@@ -115,6 +124,8 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.SPELL_DELETE ).click( this._onSpellDelete.bind( this ) );
 		this.mySheetHtml.find( this.SPELL_ROLL ).click( this._onSpellRoll.bind( this ) );
 		this.mySheetHtml.find( this.SPELL_MEMORIZE ).click( this._onSpellMemorize.bind( this ) );
+		this.mySheetHtml.find( this.SPELL_NEW_DRAW ).click( this._drawNewCardClick.bind( this ) );
+		this.mySheetHtml.find( this.SPELL_NEW_HAND ).click( this._drawNewHandClick.bind( this ) );
 
 		/* Item Inventory */
 		this.mySheetHtml.find( this.INVENTORY_EXPANDABLE_BUTTON ).click( this._onInventoryExpand.bind(this) );
@@ -124,8 +135,10 @@ export class MageSheet extends ActorSheet {
 		this.mySheetHtml.find( this.WEAPON_EDIT ).click(this._onWeaponEdit.bind( this ) );
 		this.mySheetHtml.find( this.WEAPON_ROLL ).click(this._onWeaponRollClick.bind( this ) );
 		
-		this.mySheetHtml.find( this.SPELL_NEW_DRAW ).click( this._drawNewCardClick.bind( this ) );
-		this.mySheetHtml.find( this.SPELL_NEW_HAND ).click( this._drawNewHandClick.bind( this ) );
+		/* Enchantments */
+		this.mySheetHtml.find( this.ENCHANTMENT_ADD ).click( this._onEnchantmentAdd.bind( this ) );
+		this.mySheetHtml.find( this.ENCHANTMENT_DELETE ).click( this._onEnchantmentDelete.bind( this) );
+		
 
 		/* Dragging out of sheet */
 		// Any 'item' that is draggable, use core mechanism.
@@ -181,6 +194,15 @@ export class MageSheet extends ActorSheet {
 			element.addEventListener("dragstart" , arcanaHandler, false );
 		});
 	}
+
+	_onEnchantmentAdd( event ){
+		console.log( 'adding enchamtment' );
+	}
+
+	_onEnchantmentDelete( event ){
+		console.log( 'deleting enchantment' );
+	}
+	
 
 	/* Drag events. Need to load stuff into 'data' transfer. This gets picked up  by hooks in 'Mage.js' */
 	_onDragWeaponStart( event ){

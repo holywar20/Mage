@@ -152,6 +152,18 @@ Hooks.once('setup', function() {
 			return opts.inverse( this );
 		}
 	});
+
+	Handlebars.registerHelper('stat_display' , function ( val, greatTest , lessTest,  opts ){
+		console.log( val , greatTest, lessTest );
+		
+		if( val > greatTest ){
+			return "success-text";
+		}
+
+		if( val < lessTest ){
+			return "warn-text";
+		}
+	});
 });
 
 /* ------------------------------------ */
@@ -162,7 +174,7 @@ Hooks.once('ready', function() {
 	var loader = new Loader();
 	//loader.loadCompendium( 'mage' , 'tradition' );
 	//loader.loadCompendium( 'mage' , 'weapon' );
-	loader.loadSpellTSVData();
+	//loader.loadSpellTSVData();
 
 	Hooks.on("hotbarDrop" , ( bar, data, slot ) => { 
 		if( bar.id == "custom-hotbar" && !game.user.isGM ){ // GM does what he wants.

@@ -120,30 +120,18 @@
 
 				<div class="trait-header-margin"><h4 class="sub-header">Strength</h4></div>
 				<div class="big-trait-container">
-					<input disabled class="input-trait-subscript" value="{{ data.traitParts.str.base }}">
+					<input disabled class="input-trait-subscript" value="{{ data.traitParts.str.value }}">
 					<button trait-name="str" class="btn btn-medium btn-traits">
-					<span class="inline-icon">&#127922;</span>
-					{{ data.traits.str.value }}
+						<span class="inline-icon">&#127922;</span>
+						<span class="{{#stat_display data.traitParts.str.total data.traitParts.str.value data.traitParts.str.value }}{{/stat_display}}">
+							{{ data.traitParts.str.total }}
+						</span>
 					</button>
 				</div>
 
 				<div class="small-header flex-row">
-					<div>&nbsp;Temp</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.str.temp" 
-						value="{{ data.traitParts.str.temp }}"></div>
-				</div>
-
-				<div class="small-header flex-row striped">
-					<div>&nbsp;Sustain</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.str.sustained" 
-						value="{{ data.traitParts.str.sustained }}"></div>
-				</div>
-
-				<div class="small-header flex-row">
-					<div>&nbsp;Perm</div>
-					<div><input type="number" value="{{ data.traitParts.str.perm }}" class="input-number" type="number"></div>
+					<div>&nbsp;Bonus</div>
+					<div><input type="number" name="data.traitParts.str.perm" value="{{ data.traitParts.str.perm }}" class="input-number" type="number"></div>
 				</div>
 				
 			</div>
@@ -154,30 +142,18 @@
 
 				<div><h4 class="sub-header">Dexerity</h4></div>
 				<div class="big-trait-container">
-					<input name="data.traitParts.dex.base" value="{{ data.traitParts.dex.base }}" disabled class="input-trait-subscript">
+					<input disabled class="input-trait-subscript" value="{{ data.traitParts.dex.value }}" >
 					<button trait-name="dex" class="btn btn-medium btn-traits">
-					<span class="inline-icon">&#127922;</span>
-					{{ data.traits.dex.value }}
+						<span class="inline-icon">&#127922;</span>
+						<span class="{{#stat_display data.traitParts.dex.total data.traitParts.dex.value data.traitParts.dex.value }}{{/stat_display}}">
+							{{ data.traitParts.dex.total }}
+						</span>
+					
 					</button>
 				</div>
 
 				<div class="small-header flex-row">
-					<div>&nbsp;Temp</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.dex.temp"
-						value="{{ data.traitParts.dex.temp }}" >
-						</div>
-				</div>
-
-				<div class="small-header flex-row striped">
-					<div>&nbsp;Sustain</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.dex.sustained"
-						value="{{ data.traitParts.dex.sustained }}"></div>
-				</div>
-
-				<div class="small-header flex-row">
-					<div>&nbsp;Perm</div>
+					<div>&nbsp;Bonus</div>
 					<div><input class="input-number" type="number"
 						name="data.traitParts.dex.perm"
 						value="{{ data.traitParts.dex.perm }}"></div>
@@ -191,29 +167,17 @@
 
 				<div><h4 class="sub-header">Perception</h4></div>
 				<div class="big-trait-container">
-					<input name="data.traitParts.per.base" value="{{ data.traitParts.per.base }}" disabled class="input-trait-subscript">
+					<input value="{{ data.traitParts.per.value }}" disabled class="input-trait-subscript">
 					<button trait-name="per" class="btn btn-medium btn-traits">
-					<span class="inline-icon">&#127922;</span>
-					{{ data.traits.per.value }}
+						<span class="inline-icon">&#127922;</span>
+						<span class="{{#stat_display data.traitParts.per.total data.traitParts.per.value data.traitParts.per.value }}{{/stat_display}}">
+							{{ data.traitParts.per.total }}
+						</span>
 					</button>
 				</div>
 
 				<div class="small-header flex-row">
-					<div>&nbsp;Temp</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.per.temp"
-						value="{{ data.traitParts.per.temp }}"></div>
-				</div>
-
-				<div class="small-header flex-row striped">
-					<div>&nbsp;Sustain</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.per.sustained"
-						value="{{ data.traitParts.per.sustained }}"></div>
-				</div>
-
-				<div class="small-header flex-row">
-					<div>&nbsp;Perm</div>
+					<div>&nbsp;Bonus</div>
 					<div><input class="input-number" type="number"
 						name="data.traitParts.per.perm"
 						value="{{ data.traitParts.per.perm }}"></div>
@@ -221,36 +185,27 @@
 				
 			</div>
 		</div>
-		
+
+	</div><!-- End of first row.-->
+
+	<div class="flex-row">
+
 		<div class="trait-box flex-row" trait-drag="int">
 			<div class="flex-col">
 
 				<div><h4 class="sub-header">Intelligence</h4></div>
 				<div class="big-trait-container">
-					<input 
-						name="data.traitParts.int.base" 
-						value="{{ data.traitParts.int.base }}" disabled class="input-trait-subscript">
+					<input value="{{ data.traitParts.int.value }}" disabled class="input-trait-subscript">
 					<button trait-name="int" class="btn btn-medium btn-traits">
-					<span class="inline-icon">&#127922;</span>
-					{{ data.traits.int.value }}</button>
+						<span class="inline-icon">&#127922;</span>
+						<span class="{{#stat_display data.traitParts.int.total data.traitParts.int.value data.traitParts.int.value }}{{/stat_display}}">
+							{{ data.traitParts.int.total }}
+						</span>
+					</button>
 				</div>
 
 				<div class="small-header flex-row">
-					<div>&nbsp;Temp</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.int.temp"
-						value="{{ data.traitParts.int.temp }}"></div>
-				</div>
-
-				<div class="small-header flex-row striped">
-					<div>&nbsp;Sustain</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.int.sustained"
-						value="{{ data.traitParts.int.sustained }}"></div>
-				</div>
-
-				<div class="small-header flex-row">
-					<div>&nbsp;Perm</div>
+					<div>&nbsp;Bonus</div>
 					<div><input class="input-number" type="number" 
 						name="data.traitParts.int.perm"
 						value="{{ data.traitParts.int.perm }}"></div>
@@ -264,31 +219,17 @@
 
 			<div><h4 class="sub-header">Charisma</h4></div>
 			<div class="big-trait-container">
-				<input disabled class="input-trait-subscript"
-					name="data.traitParts.cha.base"
-					value="{{ data.traitParts.cha.base }}">
+				<input value="{{ data.traitParts.cha.value }}" disabled class="input-trait-subscript">
 				<button trait-name="cha" class="btn btn-medium btn-traits">
 					<span class="inline-icon">&#127922;</span>
-					{{ data.traits.cha.value }}
+					<span class="{{#stat_display data.traitParts.cha.total data.traitParts.cha.value data.traitParts.cha.value }}{{/stat_display}}">
+						{{ data.traitParts.cha.total }}
+					</span>
 				</button>
 			</div>
 
 			<div class="small-header flex-row">
-				<div>&nbsp;Temp</div>
-				<div><input class="input-number" type="number"
-					name="data.traitParts.cha.temp"
-					value="{{ data.traitParts.cha.temp }}"></div>
-			</div>
-
-			<div class="small-header flex-row striped">
-				<div>&nbsp;Sustain</div>
-				<div><input class="input-number" type="number" 
-					name="data.traitParts.cha.sustained"
-					value="{{ data.traitParts.cha.sustained }}"></div>
-			</div>
-
-			<div class="small-header flex-row">
-				<div>&nbsp;Perm</div>
+				<div>&nbsp;Bonus</div>
 				<div><input class="input-number" type="number" 
 					name="data.traitParts.cha.perm"
 					value="{{ data.traitParts.cha.perm }}"></div>
@@ -302,29 +243,17 @@
 
 				<div><h4 class="sub-header">Courage</h4></div>
 				<div class="big-trait-container">
-					<input name="data.traitParts.cor.base" value="{{ data.traitParts.cor.base }}" disabled class="input-trait-subscript">
+					<input value="{{ data.traitParts.cor.value }}" disabled class="input-trait-subscript">
 					<button trait-name="cor" class="btn btn-medium btn-traits">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.traits.cor.value }}
+						<span class="{{#stat_display data.traitParts.cor.total data.traitParts.cor.value data.traitParts.core.value }}{{/stat_display}}">
+							{{ data.traitParts.cor.total }}
+						</span>
 					</button>
 				</div>
 
 				<div class="small-header flex-row">
-					<div>&nbsp;Temp</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.cor.temp" 
-						value="{{ data.traitParts.cor.temp }}"></div>
-				</div>
-
-				<div class="small-header flex-row striped">
-					<div>&nbsp;Sustain</div>
-					<div><input class="input-number" type="number"
-						name="data.traitParts.cor.sustained" 
-						value="{{ data.traitParts.cor.sustained }}"></div>
-				</div>
-
-				<div class="small-header flex-row">
-					<div>&nbsp;Perm</div>
+					<div>&nbsp;Bonus</div>
 					<div><input class="input-number" type="number"
 						name="data.traitParts.cor.perm"
 						value="{{ data.traitParts.cor.perm }}"></div>
@@ -332,10 +261,8 @@
 					
 			</div>
 		</div>
-
 	
-	
-	</div>
+	</div><!-- End of second row.-->
 	</div> <!-- End of grid child -->
 	</div> <!-- End of traits -->
 
@@ -347,61 +274,76 @@
 	<div class="grid-child">
 		<section class="table">
 			<div class="header-row vitals-header">
-				<div class="col-lead-short"></div>
+				<div class="col"></div>
 				<div class="col">Bonus</div>
 				<div class="col">Current / Max</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lead-short">Health</div>
+				<div class="col">Health</div>
 				<div class="col">
-					<input name="data.hp.temp" value="{{ data.hp.temp }}" class="input-number" type="number">
+					<input name="data.hp.bonus" value="{{ data.hp.bonus }}" class="input-number" type="number">
 				</div>
 				<div class="col">
-					<input name="data.hp.value" value="{{ data.hp.value }}" class="input-number" type="number">
+					<input name="data.hp.current" value="{{ data.hp.current }}" class="input-number" type="number">
 					/ <span>{{ data.hp.max }}</span> 
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lead-short">Armor</div>
-				<div class="col">
-					<input name="data.armor.bonus" value="{{ data.armor.bonus }}" class="input-number" type="number">
-				</div>
-				<div class="col">
-					<input name="data.armor.value" value="{{ data.armor.value }}" class="input-number" type="number"> 
-					<span> / {{ data.armor.max }}</span>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lead-short">Paradox</div>
+				<div class="col">Paradox</div>
 				<div class="col">
 					<input name="data.paradox.bonus" value="{{data.paradox.bonus}}" class="input-number" type="number">
 				</div>
 				<div class="col">
-					<input name="data.paradox.value" value="{{ data.paradox.value }}" class="input-number" type="number">
+					<input name="data.paradox.current" value="{{ data.paradox.current }}" class="input-number" type="number">
 					<span> / {{ data.paradox.max }}</span> 
 					</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lead-short">Carry</div>
+				<div class="col">Carry</div>
 				<div class="col">
 					<input name="data.carry.bonus" value="{{data.carry.bonus}}" class="input-number" type="number">
 				</div>
 				<div class="col">
+					<span class="non-input-number">{{ data.carry.current }}</span> /
 					<span class="non-input-number">{{ data.carry.max }}</span>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lead-short">Concen.</div>
+				<div class="col-lead-short">Concentration</div>
 				<div class="col">
 					<input name="data.concentration.bonus" value="{{data.concentration.bonus}}" class="input-number" type="number">
 				</div>
 				<div class="col">
+					<span class="non-input-number">{{ data.concentration.current }}</span> /
 					<span class="non-input-number">{{ data.concentration.max }}</span>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Action Points</div>
+				<div class="col">
+					<input name="data.actionPoints.bonus" value="{{data.actionPoints.bonus}}" class="input-number" type="number">
+				</div>
+
+				<div class="col">
+					<span class="non-input-number">{{ data.actionPoints.current }}</span> /
+					<span class="non-input-number">{{ data.actionPoints.max }}</span> 
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">Movement</div>
+				<div class="col">
+					<input name="data.movement.bonus" value="{{data.movement.bonus}}" class="input-number" type="number">
+				</div>
+
+				<div class="col">
+					<span class="non-input-number">{{ data.movement.current }}</span> /
+					<span class="non-input-number">{{ data.movement.max }}</span>
 				</div>
 			</div>
 
@@ -453,6 +395,85 @@
 			{{/each}}
 			
 		</section>
+
+		<section class="table">
+			<div class="header-row vitals-header">
+				<div class="col">Positive</div>
+				<div class="col">Value</div>
+				<div class="col">Negative</div>
+			</div>
+
+			<div class="row">
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.haste 1}}success-text{{/if_greater}}">Haste</span>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.haste" value="{{data.contestedStatusEffects.haste}}">
+				</div>
+				<div class="col">
+					<span class="{{#if_less data.contestedStatusEffects.haste -1}}warn-text{{/if_less}}">Slow</span>
+				</div>
+			</div> <!-- End of Haste/ Slow -->
+
+			<div class="row">
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.regen 1}}success-text{{/if_greater}}">Regen</span>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.regen" value="{{data.contestedStatusEffects.regen}}">
+				</div>
+				<div class="col">
+					<span class="{{#if_less data.contestedStatusEffects.regen -1}}warn-text{{/if_less}}">Rot / Burn</span>
+				</div>
+			</div> <!-- End of Regen / Rot -->
+
+			<div class="row">
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.inspire 1}}success-text{{/if_greater}}">Inspire</span>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.inspire" value="{{data.contestedStatusEffects.inspire}}">
+				</div>
+				<div class="col">
+					<span class="{{#if_less data.contestedStatusEffects.inspire -1}}warn-text{{/if_less}}">Oppress</span>
+				</div>
+			</div> <!-- End of Inspire / Oppress -->
+
+			<div class="row">
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.enlighten 1}}success-text{{/if_greater}}">Enlighten</span>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.enlighten" value="{{data.contestedStatusEffects.enlighten}}">
+				</div>
+				<div class="col">
+					<span class="{{#if_less data.contestedStatusEffects.enlighten -1}}warn-text{{/if_less}}">Confuse</span>
+				</div>
+			</div> <!-- End of Enlighten / Confuse -->
+
+			<div class="row">
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.vigor 1}}success-text{{/if_greater}}">Vigor</span>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.vigor" value="{{data.contestedStatusEffects.vigor}}">
+				</div>
+				<div class="col">
+					<span class="{{#if_less data.contestedStatusEffects.vigor -1}}warn-text{{/if_less}}">Weak</span>
+				</div>
+			</div> <!-- End of Vigor / Weak-->
+
+			<div class="row">
+				<div class="col-no-leader">
+					<span class="{{#if_greater data.contestedStatusEffects.lucky 1}}success-text{{/if_greater}}">Lucky</span>
+				</div>
+				<div class="col">
+					<input class="input-number" name="data.contestedStatusEffects.lucky" value="{{data.contestedStatusEffects.lucky}}">
+				</div>
+				<div class="col">
+					<span class="{{#if_less data.contestedStatusEffects.lucky -1}}warn-text{{/if_less}}">Unlucky</span>
+			</div> <!-- End of Lucky / Unlucky -->
+		</section>
 	</div> <!-- End of Grid child -->
 	</div> <!-- end of Vitals -->
 
@@ -500,7 +521,9 @@
 				<div class="col">
 					<button grit-skill-name="{{ id }}" class="btn btn-skills">
 						<span class="inline-icon">&#127922;</span>
-						{{ skill.value }}
+						<span class="{{#stat_display skill.total skill.traitValue skill.traitValue}}{{/stat_display}}">
+						{{ skill.total }}
+						</span>
 					</button>
 				</div>
 			</div>
@@ -521,9 +544,11 @@
 					<input type="number" name="data.skills.cunning.{{id}}.enchant" value="{{ skill.enchant }}" class="input-number">
 				</div>
 				<div class="col">
-					<button cunning-skill-name="{{ id }}" class="btn btn-skills">
+					<button grit-skill-name="{{ id }}" class="btn btn-skills">
 						<span class="inline-icon">&#127922;</span>
-						{{ skill.value }}
+						<span class="{{#stat_display skill.total skill.traitValue skill.traitValue}}{{/stat_display}}">
+						{{ skill.total }}
+						</span>
 					</button>
 				</div>
 			</div>
@@ -544,9 +569,11 @@
 					<input type="number" name="data.skills.will.{{id}}.enchant" value="{{ skill.enchant }}" class="input-number">
 				</div>
 				<div class="col">
-					<button will-skill-name="{{ id }}" class="btn btn-skills">
+					<button grit-skill-name="{{ id }}" class="btn btn-skills">
 						<span class="inline-icon">&#127922;</span>
-						{{ skill.value }}
+						<span class="{{#stat_display skill.traitValue skill.total skill.total}}{{/stat_display}}">
+						{{ skill.total }}
+						</span>
 					</button>
 				</div>
 			</div>
@@ -633,17 +660,17 @@
 					</button>
 				</div>
 				<div class="col" arcana-drag="prime">
-					<div class="small-sub-header">Prime</div>
-					<button arcana-name="prime" class="btn btn-arcana">
-						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.prime.value }}
-					</button>
-				</div>
-				<div class="col" arcana-drag="force">
 					<div class="small-sub-header">Forces</div>
 					<button arcana-name="force" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
 						{{ data.arcana.force.value }}
+					</button>
+				</div>
+				<div class="col" arcana-drag="force">
+					<div class="small-sub-header">Prime</div>
+					<button arcana-name="prime" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
+						{{ data.arcana.prime.value }}
 					</button>
 				</div>
 			</div>
@@ -781,107 +808,65 @@
 	
 	</div><!-- End of Resistance Header -->
 
-	<div class="mods">
+	<div class="enchantments">
 		<div class="gen-header">
-			<div class="mod-header">Effects</div>
+			<div class="enchantments-header">Enchants</div>
 		</div>
-
-		
-	<div class="grid-child">
-		<section class="table">
-			<div class="row">
-				<div class="col-no-leader">
-					<span class="{{#if_greater data.contestedStatusEffects.haste 1}}success-text{{/if_greater}}">Haste</span>
-				</div>
-				<div class="col">
-					<input class="input-number" name="data.contestedStatusEffects.haste" value="{{data.contestedStatusEffects.haste}}">
-				</div>
-				<div class="col">
-					<span class="{{#if_less data.contestedStatusEffects.haste -1}}warn-text{{/if_less}}">Slow</span>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-no-leader">
-					<span class="{{#if_greater data.contestedStatusEffects.regen 1}}success-text{{/if_greater}}">Regen</span>
-				</div>
-				<div class="col">
-					<input class="input-number" name="data.contestedStatusEffects.regen" value="{{data.contestedStatusEffects.regen}}">
-				</div>
-				<div class="col">
-					<span class="{{#if_less data.contestedStatusEffects.regen -1}}warn-text{{/if_less}}">Rot / Burn</span>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-no-leader">
-					<span class="{{#if_greater data.contestedStatusEffects.inspire 1}}success-text{{/if_greater}}">Inspire</span>
-				</div>
-				<div class="col">
-					<input class="input-number" name="data.contestedStatusEffects.inspire" value="{{data.contestedStatusEffects.inspire}}">
-				</div>
-				<div class="col">
-					<span class="{{#if_less data.contestedStatusEffects.inspire -1}}warn-text{{/if_less}}">Oppress</span>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-no-leader">
-					<span class="{{#if_greater data.contestedStatusEffects.enlighten 1}}success-text{{/if_greater}}">Enlighten</span>
-				</div>
-				<div class="col">
-					<input class="input-number" name="data.contestedStatusEffects.enlighten" value="{{data.contestedStatusEffects.enlighten}}">
-				</div>
-				<div class="col">
-					<span class="{{#if_less data.contestedStatusEffects.enlighten -1}}warn-text{{/if_less}}">Confuse</span>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-no-leader">
-					<span class="{{#if_greater data.contestedStatusEffects.vigor 1}}success-text{{/if_greater}}">Vigor</span>
-				</div>
-				<div class="col">
-					<input class="input-number" name="data.contestedStatusEffects.vigor" value="{{data.contestedStatusEffects.vigor}}">
-				</div>
-				<div class="col">
-					<span class="{{#if_less data.contestedStatusEffects.vigor -1}}warn-text{{/if_less}}">Weak</span>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-no-leader">
-					<span class="{{#if_greater data.contestedStatusEffects.lucky 1}}success-text{{/if_greater}}">Lucky</span>
-				</div>
-				<div class="col">
-					<input class="input-number" name="data.contestedStatusEffects.lucky" value="{{data.contestedStatusEffects.lucky}}">
-				</div>
-				<div class="col">
-					<span class="{{#if_less data.contestedStatusEffects.lucky -1}}warn-text{{/if_less}}">Unlucky</span>
+		<div class="grid-child">
+			<section class="table">
+				<div class="header-row arcana-header">
+					<div class="col">Source</div>
+					<div class="col">Type</div>
+					<div class="col">Subtype</div>
+					<div class="col">Value</div>
+					<div class="col">Turns</div>
+					<div class="col">Power</div>
+					<div class="col"></div>
 				</div>
 
-			</div>
-		</section>
-		<hr class="flaired-divider">
-		<section class="table">	
-			<div class="header-row">
-				<div class="col">Effect</div>
-				<div class="col">Subtype</div>
-				<div class="col">Source</div>
-				<div class="col">Value</div>
-			</div>
-
-			<div class="row">
-				<div class="col"></div>
-				<div class="col"></div>
-				<div class="col"></div>
-				<div class="col">
-					<button class="btn"
+				{{#each data.enchants.temp as |enchant id| }}
+				<div class="row">
+					<div class="col">
+						{{ enchant.source }}
+					</div>
+					<div class="col">
+						{{ enchant.type }}
+					</div>
+					<div class="col">
+						{{ enchant.subtype }}
+					</div>
+					<div class="col">
+						{{ enchant.value }}
+					</div>
+					<div class="col">
+						{{ enchant.duration }}
+					</div>
+					<div class="col">
+						{{ enchant.power }}
+					</div>
+					<div class="col">
+						<button delete-enchant="{{id}}" class="btn btn-icon btn-warn">
+							<img src="systems/mage/img/icons/trash.png">
+						</button>
+					</div>
 				</div>
-			</div>
-		</section>
-	</div><!-- End of Grid Child-->
-	</div><!-- End of Mods-->
+				{{/each}}
+
+				<div class="row">
+					<div class="col">
+						<button add-enchant="true" class="btn btn-icon btn-success">
+							<img src="systems/mage/img/icons/add-row.png">
+						</button>
+					</div>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col"></div>
+				</div>
+			</section>
+		</div>
+	</div>
 </div>
 {{/if_equal}}
 
@@ -1571,7 +1556,10 @@
 		<div class="flex2">
 		<section class="table">
 			<div class="header-row skills-header">
-				<div class="col">Grit</div>
+				<div class="col">
+					<span class="table-name-in-table"></span>
+					Grit
+				</div>
 				<div class="col">Trait</div>
 				<div class="col">Skill</div>
 				<div class="col">Super</div>
@@ -1605,7 +1593,11 @@
 
 		<section class="table">
 			<div class="header-row skills-header">
-				<div class="col">Cunning</div>
+				<div class="col">
+					<span class="table-name-in-table">
+						Cunning
+					</span>
+				</div>
 				<div class="col">Trait</div>
 				<div class="col">Skill</div>
 				<div class="col">Super</div>
@@ -1652,7 +1644,11 @@
 		<div class="flex2">
 		<section class="table">
 			<div class="header-row skills-header">
-				<div class="col">Will</div>
+				<div class="col">
+					<span class="table-name-in-table">
+						Will
+					</span>
+				</div>
 				<div class="col">Trait</div>
 				<div class="col">Skill</div>
 				<div class="col">Super</div>

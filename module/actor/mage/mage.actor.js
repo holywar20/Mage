@@ -7,6 +7,15 @@ export class MageActor extends Actor{
 	
 	actorData = this.data.data;
 
+	PARADOX_THRESHOLDS = {
+		MINOR_BOON : -5 ,
+		TRIVAL_BOON : 1,
+		NO_EFFECT : 0,
+		MINOR : 5,
+		MAJOR : 10 ,
+		CATASTROPHIC : 15
+	}
+
 	ARCANA_MULTIPLE = 3;
 	ARCANA_SUPER = [ -5 , 5];
 	ARCANA_BASE = [ 0 , 5];
@@ -90,7 +99,6 @@ export class MageActor extends Actor{
 	}
 
 	async drawNewCard( cardNum = 0 , slot = null , isNewHand= false){
-		console.log( this.actorData );
 		if( this.actorData.memorized != 20 ){
 			let chatData = this._prepareChatData( `${this.data.name} cannot draw a card until they have memorized exactly 20 spells.` );
 			ChatMessage.create( chatData );
@@ -121,7 +129,7 @@ export class MageActor extends Actor{
 			for( const index in ui.customHotbar.macros ){
 				if( index > 4 )
 					break; // Only do up to the 5th card in the bar. 
-				
+
 				if( ui.customHotbar.macros[index].macro ){
 					continue; // Macro exists, move on.
 				} else {
@@ -143,15 +151,17 @@ export class MageActor extends Actor{
 			flags: { "mage.itemMacro": true }
 		});
 
-		this.actorData.drawnCards.push( macro.id );
-		ui.customHotbar.populator.chbSetMacro( macro.id , slot );
-		
-
 		if( isNewHand ){
-			// Don't need to do anything extra here. Just let NewHand call do all the messaging.
+			this.actorData.drawnCards.push( macro.id );
+			ui.customHotbar.populator.chbSetMacro( macro.id , slot );
 		} else {
 			let chatData = this._prepareChatData( `${this.data.name} has drawn a new card.` );
+			slot = +slot + 1; // fix for an index by one error for new cards
 			ChatMessage.create( chatData );
+
+			this.actorData.drawnCards.push( macro.id );
+			ui.customHotbar.populator.chbSetMacro( macro.id , slot );
+			
 			ui.customHotbar.render(); // Only force rerender if just drawing a single card.
 		}
 
@@ -186,9 +196,18 @@ export class MageActor extends Actor{
 
 	/* Method for short term data fixes so old actors don't break. */
 	_fixData( data ){
-		data.creation.traits = 60; // Changed traits for 80 to 60.
-		data.remainingMemorized = 20; // Setting memorized remaining to 20, for 5% chance for a card to draw.
-		data.drawnCards = [];
+		data.hp.current = 10;
+		data.hp.max = 10;
+		data.paradox.current = 5;
+		data.paradox.max = 3;
+		data.carry.current = 3;
+		data.carry.max = 3;
+		data.concentration.current = 0;
+		data.concentration.max = 3;
+		data.actionPoints.current = 0;
+		data.actionPoints.max = 3;
+		data.movement.current = 6;
+		data.movement.max = 6;
 	}
 
 
@@ -284,7 +303,7 @@ export class MageActor extends Actor{
 		let template = "systems/mage/dialogs/basic-roll-dialog.html";
 		let dialogInitialData = {...this.DIALOG_PROTOTYPE}
 		
-		let traitValue = this.actorData.traits[key].value;
+		let traitValue = this.actorData.traitParts[key].value;
 		let traitData = this.actorData.traitParts[key];
 
 		dialogInitialData.rollTitle = `${traitData.name}`;
@@ -312,7 +331,7 @@ export class MageActor extends Actor{
 	async rollAttribute( dialogData ){
 		let traitParts = this.data.data.traitParts[dialogData.idx];
 		let totalDice = +dialogData.baseDice + +dialogData.bonusDice
-		let iconPath = "systems/mage/icons/traits/" + traitParts.name + ".png"
+		let iconPath = "systems/mage/icons/traitParts/" + traitParts.name + ".png"
 
 		let templateData = this._prepareSimpleTemplateData( totalDice, dialogData.difficulty, traitParts.name , iconPath);
 		let template = `systems/mage/chat/simple-roll.html`;
@@ -414,7 +433,8 @@ export class MageActor extends Actor{
 
 	_calculateTraits( data ){
 		for( let [traitKey, trait] of Object.entries( data.traitParts ) ){
-			data.traits[traitKey].value = +trait.base + +trait.temp + +trait.sustained + +trait.perm;
+			data.traitParts[traitKey].value = +trait.base + +trait.super;
+			data.traitParts[traitKey].total = +data.traitParts[traitKey].value + +trait.perm;
 		}
 	}
 
@@ -422,9 +442,9 @@ export class MageActor extends Actor{
 		for( let [ saveKey, skillGroup] of Object.entries( data.skills ) ){
 			
 			let saveTotal = 0;
-			if( saveKey =="cunning" ){ saveTotal = +data.traits.dex.value + +data.traits.per.value }
-			if( saveKey =="grit"){ saveTotal = +data.traits.str.value + +data.traits.cor.value }
-			if( saveKey =="will"){ saveTotal = +data.traits.cha.value + +data.traits.int.value }
+			if( saveKey =="cunning" ){ saveTotal = +data.traitParts.dex.value + +data.traitParts.per.value }
+			if( saveKey =="grit"){ saveTotal = +data.traitParts.str.value + +data.traitParts.cor.value }
+			if( saveKey =="will"){ saveTotal = +data.traitParts.cha.value + +data.traitParts.int.value }
 
 			let skillTotal = 0
 			for( let skill of Object.values( skillGroup ) ){
@@ -432,7 +452,6 @@ export class MageActor extends Actor{
 			}
 
 			data.defenses[saveKey].base = +saveTotal + Math.trunc(skillTotal / 5 );
-			console.log( data.defenses[saveKey] );
 			data.defenses[saveKey].value = data.defenses[saveKey].base + +data.defenses[saveKey].bonus + +data.defenses[saveKey].equip + +data.defenses[saveKey].enchant;
 		}
 	}
@@ -443,46 +462,43 @@ export class MageActor extends Actor{
 		let concentrationBonus = 0;
 		let hpBonusMultiple = 0;
 
-		if( data.cp.spent == 0 ){
-			concentrationBonus = 0;
-			cpParadoxBonus = 0;
-			carryBonus = 0;
-			hpBonus = 0;
-		} else {
+		if( data.cp.spent != 0 ){
 			cpParadoxBonus = Math.round( data.cp.spent / 10 );
 			carryBonus = Math.round( data.cp.spent / 50 );
 			concentrationBonus = Math.round( data.cp.spent / 50 );
-			hpBonusMultiple = data.cp.spend / 50;
+			
+			if( data.cp.spent == 0 ){
+				hpBonusMultiple = 0;
+			} else {
+				hpBonusMultiple = data.cp.spent / 100;
+			}
 		}
-		
-		data.health = Math.round( 10 + ( +data.traits.str.value * 3 + +data.skills.grit.endurance.value * 2 ) * 1 + +hpBonusMultiple );
-		data.hp.max = data.health
+
+		console.log( data.traitParts.str.value , hpBonusMultiple , data.hp.bonus );
+		data.hp.max = Math.round( 15 + ( (+data.traitParts.str.value * 2) + +data.skills.grit.endurance.value * 2 ) * (1 + +hpBonusMultiple) ) + +data.hp.bonus;
 
 		// Get default values, because sometimes these might be null;
 		let phys = 0;
 		if( data.mystictraits.physical )
-			phys = data.traits[data.mystictraits.physical].value;
-		console.log(data);
+			phys = data.traitParts[data.mystictraits.physical].value;
+
 		let men = 0;
 		if( data.mystictraits.mental )
-			men = data.traits[data.mystictraits.mental].value;
+			men = data.traitParts[data.mystictraits.mental].value;
 
-		if( !data.carry )
-			data.carry = {"current" : 0 , "bonus" : 0 , "max": 0 }
-		data.carry.max = +data.skills.grit.carry.value + data.traits.str.value + 3;
+		data.carry.max = +data.skills.grit.carry.value + +data.traitParts.str.value + 3;
+		data.concentration.max = +data.skills.grit.concentration.value + +data.traitParts.int.value + 3;
+		data.paradox.max = +phys + +men + +cpParadoxBonus + 5;
 
-		if( !data.concentration )
-			data.concentration = {"current" : 0 , "bonus" : 0 , "max": 0 }
-		data.concentration.max = +data.skills.grit.concentration.value + +data.traits.int.value + 3;
-
-		data.paradox.max = +phys + +men + +cpParadoxBonus;
+		console.log( data.paradox );
+		console.log( data.hp );
 	}
 
 	_calculateArcana( data ){
 		let traitBonus = 0;
 
-		if( data.mystictraits.mental ){ traitBonus += +data.traits[data.mystictraits.mental].value; }
-		if( data.mystictraits.physical ){ traitBonus += +data.traits[data.mystictraits.physical].value; }
+		if( data.mystictraits.mental ){ traitBonus += +data.traitParts[data.mystictraits.mental].value; }
+		if( data.mystictraits.physical ){ traitBonus += +data.traitParts[data.mystictraits.physical].value; }
 
 		for( let sphere of Object.values( data.arcana ) ){
 			let potentialValue  = +traitBonus + +sphere.total - 5;
@@ -503,32 +519,38 @@ export class MageActor extends Actor{
 		for( let skillGroup of Object.values( data.skills) ){
 			for( let skill of Object.values( skillGroup ) ){
 
-				// When a skill doesn't have a trait, it's a -- line instead. Ugly, but better than making a new field.
-				let traitValue = skill.trait == "--" ? 0 : data.traits[skill.trait].value
-				skill.value = +traitValue + +skill.equip + +skill.enchant + +skill.total;
+				// When a skill doesn't have a trait, it's a '-- ' instead. Ugly, but better than making a new field.
+				let traitNumber = skill.trait == "--" ? 0 : data.traitParts[skill.trait].total
+				skill.value = +skill.base + +skill.super;
+				skill.traitValue = +skill.value + +traitNumber;
+				skill.total = +skill.equip + +skill.enchant + +skill.traitValue;
 			}
 		}
 	}
 
 	_calculateGlobalCosts( data ){
 		/* first calculate creation offsets */
+		
+		console.log( data.creation );
+		console.log( data.cp );
+		
+
 		data.creation.spentSkills = data.cp.skills;
 		if( data.creation.spentSkills > data.creation.skills )
 			data.creation.spentSkills = data.creation.skills;
-		data.creation.unspentSkills = data.creation.skills - data.creation.spentSkills;
+		data.creation.unspentSkills = +data.creation.skills - +data.creation.spentSkills;
 
-		data.creation.spentTraits = data.cp.traits;
+		data.creation.spentTraits = data.cp.traitParts;
 		if( data.creation.spentTraits > data.creation.traits )
 			data.creation.spentTraits = data.creation.traits;
-		data.creation.unspentTraits = data.creation.traits - data.creation.spentTraits;
+		data.creation.unspentTraits = +data.creation.traits - +data.creation.spentTraits;
 
 		data.creation.spentArcana = data.cp.arcana;
 		if( data.creation.spentArcana > data.creation.arcana )
 			data.creation.spentArcana = data.creation.arcana;
-		
-		data.creation.unspentArcana = data.creation.arcana - data.creation.spentArcana;
+		data.creation.unspentArcana = +data.creation.arcana - +data.creation.spentArcana;
 
-		data.cp.spent = ( data.cp.traits - data.creation.traits ) + ( data.cp.skills - data.creation.skills ) + ( data.cp.arcana - data.creation.arcana );
+		data.cp.spent = ( +data.cp.traits - +data.creation.traits ) + ( +data.cp.skills - +data.creation.skills ) + ( +data.cp.arcana - +data.creation.arcana );
 		if( data.cp.spent < 0 )
 			data.cp.spent = 0;
 
@@ -554,7 +576,7 @@ export class MageActor extends Actor{
 			trait.cost = this._triangularNumberFormula( +trait.base , 4 );
 			traitCumulative = +traitCumulative +  +trait.cost;
 		}
-		data.cp.traits = traitCumulative;
+		data.cp.traitParts = traitCumulative;
 
 		let skillCumulative = 0;
 		for( let skillGroup of Object.values( data.skills) ){

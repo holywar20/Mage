@@ -188,6 +188,7 @@ hr.flaired-divider{
 .table {
 	display: table;
 	padding: 0px;
+	padding-top: 3px;
 	margin: 0px;
 	width: 100%;
 	border-radius: 5px;
@@ -303,10 +304,8 @@ span.non-input-number{
 	padding: 3px 5px 3px 5px;
 	border-radius: 5px;
 	border: 1px solid black;
-	font-size:.8em;
+	font-size:1em;
 }
-
-
 
 select{
 	font-size:.8em;
@@ -577,4 +576,25 @@ button.rotate-down{
 
 .pad-4{
 	padding: 4px;
+}
+
+
+/* Text */
+span.success-text{
+	color: var(--success);
+	text-shadow: 0px 0px 5px var(--tertiary-fade50) , 1px 1px 1px black;
+	font-weight: 800;
+	font-size: 1.1em;
+}
+
+span.warn-text{
+	color: rgba( 210 , 15, 15);
+	text-shadow: 0px 0px 5px var(--tertiary-fade50) , 1px 1px 1px black;
+	font-weight: 800;
+font-size: 1.1em;
+}
+
+span.table-name-in-table{
+	font-size: 1.2em;
+	font-weight: bold;
 }

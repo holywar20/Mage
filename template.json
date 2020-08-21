@@ -1,22 +1,15 @@
 {
 	"Actor":{
 		"types" : ["mage"],
-		"templates" : {
-			"common" : {
-				"traits" : {
-					"str" : { "value" : 0 } ,
-					"int" : { "value" : 0 } ,
-					"cha" : { "value" : 0 } ,
-					"per" : { "value" : 0 } ,
-					"dex" : { "value" : 0 } ,
-					"cor" : { "value" : 0 }
-				}
-			}
-		},
+		"templates" : {},
 		"mage" :{
-			"templates" : ["common"],
-			"hp": { "value" : 0 , "max" : 0, "min" : 10  , "tempmax" : 0 , "tempmin" :0 },
-			"paradox" :{ "value" : 0 , "max" : 0, "min" : 10  , "tempmax" : 0 , "tempmin" :0 },
+			"templates" : [],
+			"hp" 					: { "current" : 0, "bonus" : 0 ,"max" : 0 },
+			"paradox" 			: { "current" : 0, "bonus" : 0 ,"max" : 0 },
+			"carry" 				: { "current" : 0, "bonus" : 0, "max" : 3 },
+			"concentration" 	: { "current" : 0, "bonus" : 0, "max" : 3 },
+			"actionPoints" 	: { "current" : 0, "bonus" : 0, "max" : 3 },
+			"movement"			: { "current" : 0, "bonus" : 0, "max" : 6 },
 			"contestedStatusEffects" : {
 				"haste" : 0,
 				"regen" : 0,
@@ -72,8 +65,7 @@
 			"armoritems" : [],
 			"items" : [],
 			"tradition" : "0",
-			"deck" : {},
-			"drawnCards" : [],
+			"enchants" : {},
 			"spec" : {
 				"survival": "","academics": "", "craft" : "" , "occult" : "", "cosmology" : ""
 			},
@@ -88,10 +80,6 @@
 			"resist" :{
 				"bashing" : 1 , "thermal" : 1 , "solar" : 1, "piercing" : 1 , "electric" : 1 , "lunar" : 1 , "slashing" : 1, "toxic" : 1, "banal" : 1 
 			},
-			"carry" : { "current" : 0  , "bonus" : 0, "max" : 0 },
-			"concentration" : {"current" : 0 , "bonus" : 0 , "max": 0 },
-			"armor" : { "current" : 0 , "bonus" : 0, "max" : 0 },
-			"health" : 10,
 			"cp": {
 				"total" : 0, "remaining": 0 , "journals" : 0 , "props": 0, "spent" : 0 , "trained" : 0 , "skills" : 0 , "traits" : 0 ,  "arcana" : 0 , "feats" : 0 
 			},
@@ -101,12 +89,12 @@
 				"unspentSkills" : 60,  "unspentTraits" : 60 , "unspentArcana" : 30 
 			},
 			"traitParts" : {
-				"str" : { "name" : "Strength", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
-				"dex" : { "name" : "Dexerity", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
-				"per" : { "name" : "Perception", 	"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
-				"int" : { "name" : "Intelligence", 	"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
-				"cor" : { "name" : "Courage", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 }, 
-				"cha" : { "name" : "Charisma", 		"base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 }
+				"str" : { "name" : "Strength", 		"value" : 0 , "base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
+				"dex" : { "name" : "Dexerity", 		"value" : 0 , "base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
+				"per" : { "name" : "Perception", 	"value" : 0 , "base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
+				"int" : { "name" : "Intelligence", 	"value" : 0 , "base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 },
+				"cor" : { "name" : "Courage", 		"value" : 0 , "base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 }, 
+				"cha" : { "name" : "Charisma", 		"value" : 0 , "base" : 0 , "super" : 0, "sustained" : 0, "temp" : 0 , "perm" : 0, "total" : 0 , "cost" : 0 }
 			},
 			"arcana" : {
 				"entropy" 		: { "name": "Entropy", "value" : 0 , "base" : 0 , "super" : 0 , "total" : 0 , "cost" : 0} , 
@@ -121,39 +109,39 @@
 			},
 			"skills" : {
 				"grit": {
-					"bladed" 			: {"name" : "Bladed" 		, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"blunt" 				: {"name" : "Blunt" 			, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"survival" 			: {"name" : "Survival" 		, "tier" : 2 , "trait" : "cor", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"witchsight"		: {"name" : "Witchsight" 	, "tier" : 2 , "trait" : "cor", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"concentration"	: {"name" : "Concentration", "tier" : 2 , "trait" : "cor", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"carry" 				: {"name" : "Carry" 			, "tier" : 2 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"two-handed" 		: {"name" : "2-handed" 		, "tier" : 2 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"shields" 			: {"name" : "Shields" 		, "tier" : 2 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"endurance" 		: {"name" : "Endurance" 	, "tier" : 1 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"athletics" 		: {"name" : "Athletics" 	, "tier" : 1 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 }
+					"bladed" 			: {"name" : "Bladed" 		 , "traitValue" : 0, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"blunt" 				: {"name" : "Blunt" 			 , "traitValue" : 0, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"survival" 			: {"name" : "Survival" 		 , "traitValue" : 0, "tier" : 2 , "trait" : "cor", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"witchsight"		: {"name" : "Witchsight" 	 , "traitValue" : 0, "tier" : 2 , "trait" : "cor", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"concentration"	: {"name" : "Concentration" , "traitValue" : 0, "tier" : 2 , "trait" : "cor", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"carry" 				: {"name" : "Carry" 			 , "traitValue" : 0, "tier" : 2 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"two-handed" 		: {"name" : "2-handed" 		 , "traitValue" : 0, "tier" : 2 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"shields" 			: {"name" : "Shields" 		 , "traitValue" : 0, "tier" : 2 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"endurance" 		: {"name" : "Endurance" 	 , "traitValue" : 0, "tier" : 1 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"athletics" 		: {"name" : "Athletics" 	 , "traitValue" : 0, "tier" : 1 , "trait" : "str", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 }
 				},
 				"cunning" : {
-					"piercing"			: {"name" : "Piercing" 		, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"bows" 				: {"name" : "Bows" 			, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"firearms" 			: {"name" : "Firearms" 		, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"throwing" 			: {"name" : "Throwing" 		, "tier" : 2 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"duel-wielding"	: {"name" : "Duel-Wield" 	, "tier" : 2 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"stealth" 			: {"name" : "Stealth" 		, "tier" : 1 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"spot" 				: {"name" : "Spot" 			, "tier" : 1 , "trait" : "per", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"listen" 			: {"name" : "Listen" 		, "tier" : 1 , "trait" : "per", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"larceny" 			: {"name" : "Larceny" 		, "tier" : 1 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 }
+					"piercing"			: {"name" : "Piercing" 		 , "traitValue" : 0, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"bows" 				: {"name" : "Bows" 			 , "traitValue" : 0, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"firearms" 			: {"name" : "Firearms" 		 , "traitValue" : 0, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"throwing" 			: {"name" : "Throwing" 		 , "traitValue" : 0, "tier" : 2 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"duel-wielding"	: {"name" : "Duel-Wield" 	 , "traitValue" : 0, "tier" : 2 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"stealth" 			: {"name" : "Stealth" 		 , "traitValue" : 0, "tier" : 1 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"spot" 				: {"name" : "Spot" 			 , "traitValue" : 0, "tier" : 1 , "trait" : "per", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"listen" 			: {"name" : "Listen" 		 , "traitValue" : 0, "tier" : 1 , "trait" : "per", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"larceny" 			: {"name" : "Larceny" 		 , "traitValue" : 0, "tier" : 1 , "trait" : "dex", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 }
 				},
 				"will": {
-					"wand" 				: {"name" : "Wand" 			, "tier" : 3 , "trait" : "--", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"investigation"	: {"name" : "Investigation", "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"occult" 			: {"name" : "Occult" 		, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"cosmology" 		: {"name" : "Cosmology"		, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"mechanics" 		: {"name" : "Mechanics"		, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"craft"				: {"name" : "Craft" 			, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"academics" 		: {"name" : "Academics" 	, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"leadership" 		: {"name" : "Leadership"	, "tier" : 1 , "trait" : "cha", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"empathy" 			: {"name" : "Empathy" 		, "tier" : 1 , "trait" : "cha", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
-					"deception" 		: {"name" : "Deception" 	, "tier" : 1 , "trait" : "cha", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 }
+					"wand" 				: {"name" : "Wand" 			 , "traitValue" : 0, "tier" : 3 , "trait" : "--" , "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"investigation"	: {"name" : "Investigation" , "traitValue" : 0, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"occult" 			: {"name" : "Occult" 		 , "traitValue" : 0, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"cosmology" 		: {"name" : "Cosmology"		 , "traitValue" : 0, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"mechanics" 		: {"name" : "Mechanics"		 , "traitValue" : 0, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"craft"				: {"name" : "Craft" 			 , "traitValue" : 0, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"academics" 		: {"name" : "Academics" 	 , "traitValue" : 0, "tier" : 2 , "trait" : "int", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"leadership" 		: {"name" : "Leadership"	 , "traitValue" : 0, "tier" : 1 , "trait" : "cha", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"empathy" 			: {"name" : "Empathy" 		 , "traitValue" : 0, "tier" : 1 , "trait" : "cha", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 },
+					"deception" 		: {"name" : "Deception" 	 , "traitValue" : 0, "tier" : 1 , "trait" : "cha", "value" : 0 ,  "equip" : 0 ,  "enchant" : 0 , "base" : 0 , "super" : 0 ,"total" : 0 , "cost": 0 }
 				}
 			}
 		}

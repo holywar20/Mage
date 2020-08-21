@@ -17,6 +17,7 @@
 	height: 128px;
 	object-fit: contain;
 	border: unset;
+	background: var(--secondary-fade50);
 }
 
 .weapon-container{
