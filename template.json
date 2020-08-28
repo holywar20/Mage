@@ -64,8 +64,8 @@
 			"weapons": [],
 			"armoritems" : [],
 			"items" : [],
+			"enchants" : [],
 			"tradition" : "0",
-			"enchants" : {},
 			"spec" : {
 				"survival": "","academics": "", "craft" : "" , "occult" : "", "cosmology" : ""
 			},

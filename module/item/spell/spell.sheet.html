@@ -237,11 +237,11 @@
 					</div>
 
 					<div class="col">
-						{{> "systems/mage/partials/effect-selector.html" effect=effect id=id}}
+						{{> "systems/mage/partials/effect-selector.html" effect=effect id=id beginkey="data.effect" endkey="subtype"}}
 					</div>
 
 					<div class="col">
-						<input class="input-number" name="data.effects.{{id}}.num" value="{{effect.num}}">
+						<input type="number"  class="input-number" name="data.effects.{{id}}.num" value="{{effect.num}}">
 					</div>
 					<div class="col">
 						<button delete-effect="{{id}}" class="btn btn-icon btn-warn">

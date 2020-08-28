@@ -14,10 +14,6 @@ export class MageSheet extends ActorSheet {
 		idx: "" , difficulty : 7 , baseDice : 0 ,bonusDice : 0 ,  rollTitle : "", playerTarget : "" ,  rollMode : "public" 
 	};
 
-	ENCHANTMENT_PROTOTYPE = {
-		"source" : "" , "type" : "damage" , "subtype" : "thermal" , "value": 0, "duration" : 0 , "power" : 0
-	}
-
 	mySheetHtml = null
 	actorData = this.actor.data.data;
 
@@ -93,8 +89,10 @@ export class MageSheet extends ActorSheet {
 
 	/* Enchantments */
 	ENCHANTMENT_ADD = "button[add-enchant]";
-	ENCHANTMENT_ADD_NAME = "add-enchant";
+	ENCHANTMENT_DELETE_NAME = "delete-enchant";
 	ENCHANTMENT_DELETE = "button[delete-enchant]";
+	ENCHANTMENT_APPLY_SELF = "button[set-self]";
+	ENCHANTMENT_APPLY_SELF_ID = "set-self";
 
 	/* Overrides */
 	get template() {
@@ -138,6 +136,7 @@ export class MageSheet extends ActorSheet {
 		/* Enchantments */
 		this.mySheetHtml.find( this.ENCHANTMENT_ADD ).click( this._onEnchantmentAdd.bind( this ) );
 		this.mySheetHtml.find( this.ENCHANTMENT_DELETE ).click( this._onEnchantmentDelete.bind( this) );
+		this.mySheetHtml.find( this.ENCHANTMENT_APPLY_SELF ).click( this._onEnchantmentApplySelfToggle.bind( this ) );
 		
 
 		/* Dragging out of sheet */
@@ -195,12 +194,37 @@ export class MageSheet extends ActorSheet {
 		});
 	}
 
-	_onEnchantmentAdd( event ){
-		console.log( 'adding enchamtment' );
+	async _onEnchantmentAdd( event ){
+		event.preventDefault();
+
+		const newKey = this.randomKey();
+		const newEnchantment = {};
+
+		Object.assign( newEnchantment , this.actor.ENCHANTMENT_PROTOTYPE );
+		let newEnchants = JSON.parse(JSON.stringify(this.actor.data.data.enchants));
+		newEnchants[newKey] = newEnchantment;
+
+		let x = await this.actor.update({[`data.enchants`] : newEnchants });
+		this.actor.render();
 	}
 
-	_onEnchantmentDelete( event ){
-		console.log( 'deleting enchantment' );
+	async _onEnchantmentDelete( event ){
+		event.preventDefault();
+		await this._onSubmit( event );
+
+		const targetKey = event.currentTarget.getAttribute( this.ENCHANTMENT_DELETE_NAME );
+		return this.actor.update({ [`data.enchants.-=${targetKey}`] : null });
+	}
+
+	async _onEnchantmentApplySelfToggle( event ){
+		event.preventDefault();
+		await this._onSubmit( event );
+
+		const targetKey = event.currentTarget.getAttribute( this.ENCHANTMENT_APPLY_SELF_ID );
+		const newValue = !this.actorData.enchants[targetKey].applySelf;
+
+		await this.actor.update({ [`data.enchants.${targetKey}.applySelf`] : newValue });
+		this.actor.render();
 	}
 	
 
@@ -400,7 +424,7 @@ export class MageSheet extends ActorSheet {
 		const itemData = {
 			name: `New Spell`,
 			type: "spell",
-			data : {}
+			data : {} // TODO populate some defaults
 		}
 
 		const result = this.actor.createOwnedItem( itemData );
@@ -450,4 +474,8 @@ export class MageSheet extends ActorSheet {
 
 		event.dataTransfer.setData( "text/plain", JSON.stringify( macroRequest) );
 	}
+
+	randomKey() {
+		return Math.floor( Math.random() * 10000000 );  
+	} 
 }

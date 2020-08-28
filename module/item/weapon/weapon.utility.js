@@ -25,7 +25,7 @@ export const WEAPON_UTILITY = {
 
 			if( actor ){
 				if( myStyles[id].hitTrait ){
-					hitSubtotal = +hitSubtotal + +actor.data.data.traits[myStyles[id].hitTrait].value;
+					hitSubtotal = +hitSubtotal + +actor.data.data.traitParts[myStyles[id].hitTrait].total;
 				}
 
 				if( myStyles[id].skill ){
@@ -37,7 +37,7 @@ export const WEAPON_UTILITY = {
 				}
 				
 				if( myStyles[id].dmgTrait ){
-					dmgSubtotal = actor.data.data.traits[myStyles[id].dmgTrait].value;
+					dmgSubtotal = actor.data.data.traitParts[myStyles[id].dmgTrait].total;
 				}
 			}
 
@@ -54,6 +54,18 @@ export const WEAPON_UTILITY = {
 				dmgSubtotal = +dmgSubtotal + +twoHandedDamage;
 			}
 
+			// Calculate dual weidling
+			if( weapon.data.data.hands == 1 && weapon.data.data.duals ){
+				let dualWieldSkill = actor.data.data.skills.cunning['duel-wielding'].value;
+				let penalty = +dualWieldSkill - 5;
+
+				hitSubtotal = hitSubtotal + penalty;
+				if( hitSubtotal < 1 )
+					hitSubtotal = 1;
+
+				dmgSubtotal = dmgSubtotal + penalty;
+			}
+
 			myStyles[id].dmgBonus = dmgSubtotal;
 			myStyles[id].dmgRoll = weapon.data.data.dmg + "+" + dmgSubtotal;
 			myStyles[id].total = hitSubtotal; // TODO - potentially more complex data
@@ -64,6 +76,9 @@ export const WEAPON_UTILITY = {
 			suf = ( +suf * +pre ) + +dmgSubtotal;
 			pre = ( +pre ) + +dmgSubtotal;
 			
+			if( pre < 1 )
+				pre = 1;
+
 			myStyles[id].dmgInterval = `${pre} - ${suf}`;
 		}
 

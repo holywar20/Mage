@@ -1,5 +1,7 @@
-<select name="data.effects.{{id}}.subtype" class="input-text input-medium">
+<select name="{{beginkey}}.{{id}}.{{endkey}}" class="input-text input-medium">
 	{{#select effect.subtype}}
+		<option value=""> -- </option>
+		
 		{{#if_equal effect.type "damage"}}
 		<option value="">-- Physical --</option>
 		<option value="bashing">Bashing</option>
@@ -31,11 +33,10 @@
 		{{/if_equal}}
 
 		{{#if_equal effect.type "healing"}}
-		<option value=""></option>
+		<option value="">No options</option>
 		{{/if_equal}}
 
 		{{#if_equal effect.type "status"}}
-		<option value="">--</option>
 		<option value="">-- Contested --</option>
 		<option value="haste">Haste</option>
 		<option value="slow">Slow</option>
@@ -50,10 +51,10 @@
 		<option value="">-- Immediate --</option>
 		<option value="knockback">Knockback</option>
 		<option value="disarm">Disarm</option>
+		<option value="charmed">Charm</option>
 		{{/if_equal}}
 
-		{{#if_equal effect.type "bonus"}}
-		<option value="">-- Vitals --</option>
+		{{#if_equal effect.type "vitals"}}
 		<option value="hp">Hit Points</option>
 		<option value="armor">Armor</option>
 		<option value="barrier">Barrier</option>
@@ -63,14 +64,18 @@
 		<option value="grit">Grit</option>
 		<option value="reach">Reach</option>
 		<option value="movement">Movement</option>
-		<option value="">-- Trait--</option>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "traits"}}
 		<option value="str">Strength</option>
 		<option value="per">Perception</option>
 		<option value="dex">Dexerity</option>
 		<option value="cor">Courage</option>
 		<option value="int">Intelligence</option>
 		<option value="cha">Charisma</option>
-		<option value="">-- Skills --</option>
+		{{/if_equal}}
+
+		{{#if_equal effect.type "skills"}}
 		<option value="academics">Academics</option>
 		<option value="athletics">Athletics</option>
 		<option value="bladed">Bladed</option>
@@ -100,6 +105,20 @@
 		<option value="wand">Wand</option>
 		<option value="witchsight">Witchsight</option>
 		{{/if_equal}}
+		
+		{{#if_equal effect.type "arcana"}}
+		<option value="time">Time</option>
+		<option value="space">Space</option>
+		<option value="entropy">Entropy</option>
+		<option value="matter">Matter</option>
+		<option value="life">Life</option>
+		<option value="spirit">Spirit</option>
+		<option value="mind">Mind</option>
+		<option value="force">Forces</option>
+		<option value="prime">Prime</option>
+		<option value="allArcana">All Arcana</option>
+		{{/if_equal}}
+		
 
 		{{#if_equal effect.type "utility"}}
 		<option value=""></option>
@@ -107,6 +126,5 @@
 		<option value="counter">Counterspell</option>
 		<option value="detection">Detection</option>
 		{{/if_equal}}
-
 	{{/select}}
 </select>

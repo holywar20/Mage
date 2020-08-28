@@ -154,7 +154,6 @@ Hooks.once('setup', function() {
 	});
 
 	Handlebars.registerHelper('stat_display' , function ( val, greatTest , lessTest,  opts ){
-		console.log( val , greatTest, lessTest );
 		
 		if( val > greatTest ){
 			return "success-text";

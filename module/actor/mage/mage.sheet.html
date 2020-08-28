@@ -606,21 +606,27 @@
 					<div class="small-sub-header">Time</div>
 					<button arcana-name="time" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.time.value }}
+						<span class="{{#stat_display data.arcana.time.total data.arcana.time.value data.arcana.time.value}}{{/stat_display}}">
+						{{ data.arcana.time.total }}
+						</span>
 					</button>
 				</div>
 				<div class="col" arcana-drag="space">
 					<div class="small-sub-header">Space</div>
 					<button arcana-name="space" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.space.value }}
+						<span class="{{#stat_display data.arcana.space.total data.arcana.space.value data.arcana.space.value}}{{/stat_display}}">
+						{{ data.arcana.space.total }}
+						</span>
 					</button>
 				</div>
 				<div class="col" arcana-drag="entropy">
 					<div class="small-sub-header">Entropy</div>
 					<button arcana-name="entropy" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.entropy.value }}
+						<span class="{{#stat_display data.arcana.entropy.total data.arcana.entropy.value data.arcana.entropy.value}}{{/stat_display}}">
+						{{ data.arcana.entropy.total }}
+						</span>
 					</button>
 				</div>
 			</div>
@@ -631,21 +637,27 @@
 					<div class="small-sub-header">Matter</div>
 					<button arcana-name="matter" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.matter.value }}
+						<span class="{{#stat_display data.arcana.matter.total data.arcana.matter.value data.arcana.matter.value}}{{/stat_display}}">
+						{{ data.arcana.matter.total }}
+						</span>
 					</button>
 				</div>
 				<div class="col" arcana-drag="life">
 					<div class="small-sub-header">Life</div>
 					<button arcana-name="life" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.life.value }}
+						<span class="{{#stat_display data.arcana.life.total data.arcana.life.value data.arcana.life.value}}{{/stat_display}}">
+						{{ data.arcana.life.total }}
+						</span>
 					</button>
 				</div>
 				<div class="col" arcana-drag="">
 					<div class="small-sub-header">Spirit</div>
 					<button arcana-name="spirit" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.spirit.value }}
+						<span class="{{#stat_display data.arcana.spirit.total data.arcana.spirit.value data.arcana.spirit.value}}{{/stat_display}}">
+						{{ data.arcana.spirit.total }}
+						</span>
 					</button>
 				</div>
 			</div>
@@ -656,21 +668,27 @@
 					<div class="small-sub-header">Mind</div>
 					<button arcana-name="mind" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.mind.value }}
-					</button>
-				</div>
-				<div class="col" arcana-drag="prime">
-					<div class="small-sub-header">Forces</div>
-					<button arcana-name="force" class="btn btn-arcana">
-						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.force.value }}
+						<span class="{{#stat_display data.arcana.mind.total data.arcana.mind.value data.arcana.mind.value}}{{/stat_display}}">
+						{{ data.arcana.mind.total }}
+						</span>
 					</button>
 				</div>
 				<div class="col" arcana-drag="force">
+					<div class="small-sub-header">Forces</div>
+					<button arcana-name="force" class="btn btn-arcana">
+						<span class="inline-icon">&#127922;</span>
+						<span class="{{#stat_display data.arcana.force.total data.arcana.force.value data.arcana.force.value}}{{/stat_display}}">
+						{{ data.arcana.force.total }}
+						</span>
+					</button>
+				</div>
+				<div class="col" arcana-drag="prime">
 					<div class="small-sub-header">Prime</div>
 					<button arcana-name="prime" class="btn btn-arcana">
 						<span class="inline-icon">&#127922;</span>
-						{{ data.arcana.prime.value }}
+						<span class="{{#stat_display data.arcana.prime.total data.arcana.prime.value data.arcana.prime.value}}{{/stat_display}}">
+						{{ data.arcana.prime.total }}
+						</span>
 					</button>
 				</div>
 			</div>
@@ -810,40 +828,74 @@
 
 	<div class="enchantments">
 		<div class="gen-header">
-			<div class="enchantments-header">Enchants</div>
+			<div class="enchantments-header">Bonuses</div>
+			<button add-enchant="true" class="btn btn-icon btn-success">
+				<img src="systems/mage/img/icons/add-row.png">
+			</button>
 		</div>
 		<div class="grid-child">
 			<section class="table">
 				<div class="header-row arcana-header">
 					<div class="col">Source</div>
+					<div class="col">Apply?</div>
 					<div class="col">Type</div>
 					<div class="col">Subtype</div>
 					<div class="col">Value</div>
-					<div class="col">Turns</div>
-					<div class="col">Power</div>
+					<div class="col">Duration</div>
+					<div class="col">Arcana</div>
+					<div class="col">Concen.</div>
 					<div class="col"></div>
 				</div>
 
-				{{#each data.enchants.temp as |enchant id| }}
+				
+				{{#each data.enchants as |enchant id| }}
 				<div class="row">
 					<div class="col">
-						{{ enchant.source }}
+						<input class="input-text input-wide" value="{{ enchant.source }}" name="data.enchants.{{id}}.source">
 					</div>
 					<div class="col">
-						{{ enchant.type }}
+						{{#if enchant.applySelf }}
+							<button set-self="{{id}}" class="btn btn-icon btn-success">
+									<img src="systems/mage/img/icons/checkmark.png">
+							</button>
+						{{else}}
+							<button set-self="{{id}}" class="btn btn-icon btn-warn">
+								<img src="systems/mage/img/icons/x-mark.png">
+							</button>
+						{{/if}}
 					</div>
 					<div class="col">
-						{{ enchant.subtype }}
+						<select name="data.enchants.{{id}}.type" class="input-text  input-medium">
+						{{#select enchant.type}}
+							<option value=""></option>
+							<option value="damage">Damage</option>
+							<option value="healing">Healing</option>
+							<option value="resist">Resist</option>
+							<option value="status">Status Effect</option>
+							<option value="utility">Utility</option>
+							<option value="vitals">Bonus Vitals</option>
+							<option value="traits">Bonus Traits</option>
+							<option value="skills">Bonus Skills</option>
+							<option value="arcana">Bonus Arcana</option>
+						{{/select}}
+						<select>
 					</div>
 					<div class="col">
-						{{ enchant.value }}
+						{{> "systems/mage/partials/effect-selector.html" effect=enchant id=id beginkey="data.enchants" endkey="subtype"}}
 					</div>
 					<div class="col">
-						{{ enchant.duration }}
+						<input type="number" class="input-number" value="{{enchant.value}}" name="data.enchants.{{id}}.value">
 					</div>
 					<div class="col">
-						{{ enchant.power }}
+						<input type="number" class="input-number" value="{{ enchant.duration }}" name="data.enchants.{{id}}.duration">
 					</div>
+					<div class="col">
+						<input type="number" class="input-number" value="{{ enchant.arcana }}" name="data.enchants.{{id}}.arcana">
+					</div>
+					<div class="col">
+						<input type="number" class="input-number" value="{{ enchant.concentrate }}" name="data.enchants.{{id}}.concentrate">
+					</div>
+
 					<div class="col">
 						<button delete-enchant="{{id}}" class="btn btn-icon btn-warn">
 							<img src="systems/mage/img/icons/trash.png">
@@ -854,15 +906,8 @@
 
 				<div class="row">
 					<div class="col">
-						<button add-enchant="true" class="btn btn-icon btn-success">
-							<img src="systems/mage/img/icons/add-row.png">
-						</button>
+						
 					</div>
-					<div class="col"></div>
-					<div class="col"></div>
-					<div class="col"></div>
-					<div class="col"></div>
-					<div class="col"></div>
 				</div>
 			</section>
 		</div>

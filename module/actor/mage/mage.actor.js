@@ -31,8 +31,13 @@ export class MageActor extends Actor{
 		idx: "" , difficulty : 7 , baseDice : 0 ,bonusDice : 0 ,  rollTitle : "", playerTarget : "" ,  rollMode : "public" 
 	};
 
+	ENCHANTMENT_PROTOTYPE = {
+		"source" : "effect name" , "type" : "damage" , "subtype" : "thermal" , "value": 0, "duration" : 0 , "arcana" : 0 , "concentrate" : 0 , "applySelf" : 0
+	}
+
 	prepareData(){
 		super.prepareData();
+
 		const data = this.data.data;
 		/* Make sure player data isn't stupid */
 		// this._sanitizeCharacterData( data ); TODO - data sanitization not working for ... reasons.
@@ -52,10 +57,109 @@ export class MageActor extends Actor{
 		this._calculateArcana( data );
 		this._calculateSkills( data );
 
+		this._addEnchantsToCore( data ); // Calculate JUST trait, skill & Arcana bonus's from equipment & enchantments
+
 		this._calculateDerived( data );
 		this._calculateSaves( data );
 
+		this._addEnchantsToDerived( data ); // Calculate saves, derived stats and Resistance levels
+
 		this._prepareItems();
+
+	}
+
+	_addEnchantsToCore( data ){
+		// Loop through equipment
+		//		Add equipment bonus to traits
+		//		Add equipment bonus to skills
+		//		Add equipment bonus to Arcana
+
+		for( let key in data.weapons ){
+			for ( let innerKey in data.weapons[key] ){
+			
+			}
+		}
+		
+		for( let key in data.enchants ){
+			if( data.enchants[key].applySelf ){
+				switch( data.enchants[key].type ){
+				case "traits" : 
+					this._applyTraitsBonus( data, data.enchants[key].subtype , data.enchants[key].value );
+					break;
+				case "skills" : 
+					this._applySkillsBonus( data, data.enchants[key].subtype, data.enchants[key].value );
+					break;
+				case "arcana" : 
+					this._applyArcanaBonus( data, data.enchants[key].subtype , data.enchants[key].value );
+					break;
+				}
+			}
+		}
+	}
+
+	_applyVitalsBonus( data, target, value ){
+		if( !target || !value ){
+			return;
+		}
+
+		switch( target ){
+		
+
+
+		}
+
+	}
+
+	_applyArcanaBonus( data , arcanaName, value ){
+		if( !arcanaName || !value ){
+			return;
+		}
+
+		console.log( arcanaName );
+
+		if( arcanaName == "allArcana"){
+			console.log('hitting them all!');
+			for( let key in data.arcana ){
+				console.log( data.arcana , key );
+				data.arcana[key].total = +data.arcana[key].total + +value;
+			}
+		} else {
+			let myArcana = data.arcana[arcanaName];
+			myArcana.total = +myArcana.total + +value;
+		}
+	}
+
+	_applyTraitsBonus( data , trait, value ){
+		if( !trait || !value ){
+			return;
+		}
+
+		let newTotal = +data.traitParts[trait].total + +value;
+		data.traitParts[trait].total = newTotal;
+	}
+
+	_applySkillsBonus( data, skillName , value ){
+		if( !skillName || !value ){
+			return;
+		}
+
+		let foundSkill = this.findSkill( skillName );
+		if(!foundSkill ){
+			return;
+		}
+
+		foundSkill.total = +foundSkill.total + +value;
+	}
+
+	_addEnchantsToDerived( data ){
+		for( let key in data.enchants ){
+			switch( data.enchants[key].type ){
+				case "damage" : break;
+				case "resist" : break;
+				case "healing" : break;
+				case "status" : break;
+			}
+		}
 	}
 
 	drawNewHand(){
@@ -196,6 +300,14 @@ export class MageActor extends Actor{
 
 	/* Method for short term data fixes so old actors don't break. */
 	_fixData( data ){
+
+		if( !data.enchants ){
+			console.log("ENCHANTS NOT FOUND! PUTTING IN DEFAULT VALUE");
+			data.enchants = [];
+		}
+		//breakThisPage();
+
+		//console.log( this.data.name );
 		data.hp.current = 10;
 		data.hp.max = 10;
 		data.paradox.current = 5;
@@ -403,15 +515,19 @@ export class MageActor extends Actor{
 			spells : { label : "Spells" , type: "spell" , items: [] }
 		}
 		
-		let [weapons , spells] = this.data.items.reduce( ( allArrays, item ) =>{
-			if( item.type === "spell" ) allArrays[1].push( item );
-			if( item.type === "weapon" ) {
-				allArrays[0].push( item )
+		let [weapons , spells ] = this.data.items.reduce( ( allArrays, item ) =>{
+			if( item.type === "spell" ) { 
+				allArrays[1].push( item );
+			};
+			
+			if( item.type === "weapon" ) { 
+				allArrays[0].push( item );
 			};
 
 			return allArrays;
 		} , [[], []] );
 
+		// Calculate memorized and build a deck.
 		this.data.data.memorized = 0;
 		this.data.data.deck = {}
 		spells.forEach( ( spell ) => {
@@ -421,6 +537,7 @@ export class MageActor extends Actor{
 			}
 		});
 
+		
 		this.data.data.remainingMemorized = 20 - this.data.data.memorized;
 
 		this.data.data.weapons = weapons;
@@ -474,7 +591,6 @@ export class MageActor extends Actor{
 			}
 		}
 
-		console.log( data.traitParts.str.value , hpBonusMultiple , data.hp.bonus );
 		data.hp.max = Math.round( 15 + ( (+data.traitParts.str.value * 2) + +data.skills.grit.endurance.value * 2 ) * (1 + +hpBonusMultiple) ) + +data.hp.bonus;
 
 		// Get default values, because sometimes these might be null;
@@ -486,12 +602,12 @@ export class MageActor extends Actor{
 		if( data.mystictraits.mental )
 			men = data.traitParts[data.mystictraits.mental].value;
 
-		data.carry.max = +data.skills.grit.carry.value + +data.traitParts.str.value + 3;
-		data.concentration.max = +data.skills.grit.concentration.value + +data.traitParts.int.value + 3;
-		data.paradox.max = +phys + +men + +cpParadoxBonus + 5;
+		data.carry.max = +data.skills.grit.carry.value + +data.traitParts.str.total + +3 +data.carry.bonus;
+		data.concentration.max = +data.skills.grit.concentration.value + +data.traitParts.int.total + +3 +data.concentration.bonus;
+		data.paradox.max = +phys + +men + +cpParadoxBonus + +5;
+		data.actionPoints.max = +data.actionPoints.bonus + +data.actionPoints.bonus;
 
-		console.log( data.paradox );
-		console.log( data.hp );
+		data.carry.current = 0;
 	}
 
 	_calculateArcana( data ){
@@ -531,10 +647,6 @@ export class MageActor extends Actor{
 	_calculateGlobalCosts( data ){
 		/* first calculate creation offsets */
 		
-		console.log( data.creation );
-		console.log( data.cp );
-		
-
 		data.creation.spentSkills = data.cp.skills;
 		if( data.creation.spentSkills > data.creation.skills )
 			data.creation.spentSkills = data.creation.skills;
