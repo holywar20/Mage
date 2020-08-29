@@ -324,32 +324,33 @@ export class MageActor extends Actor{
 	_fixData( data ){
 
 		if( !data.enchants ){
-			console.log("ENCHANTS NOT FOUND! PUTTING IN DEFAULT VALUE");
 			data.enchants = [];
 		}
-		//breakThisPage();
 
-		//console.log( this.data.name );
-		data.hp.current = 10;
+		if(!data.hp ){ data.hp = {} }
 		data.hp.baseValue = 10;
 		data.hp.max = 10;
 
-		data.paradox.current = 5;
+		if( !data.paradox ){ data.paradox = {} }
 		data.paradox.baseValue = 5;
 		data.paradox.max = 3;
 
+		if(!data.hp){ data.ph = {} }
 		data.carry.current = 0;
 		data.carry.baseValue = 3;
 		data.carry.max = 3;
 
+		if(!data.concentration){ data.concentration = {}; }
 		data.concentration.baseValue = 3;
 		data.concentration.current = 0;
 		data.concentration.max = 3;
 
+		if( !data.actionPoints ){ data.actionPoints = {}; }
 		data.actionPoints.current = 0;
 		data.actionPoints.baseValue = 3;
 		data.actionPoints.max = 3;
 
+		if( !data.movement ){ data.movement = {}; }
 		data.movement.current = 6;
 		data.movement.baseValue = 3;
 		data.movement.max = 6;
@@ -584,7 +585,7 @@ export class MageActor extends Actor{
 	_calculateTraits( data ){
 		for( let [traitKey, trait] of Object.entries( data.traitParts ) ){
 			data.traitParts[traitKey].value = +trait.base + +trait.super;
-			data.traitParts[traitKey].total = +data.traitParts[traitKey].value + +trait.perm;
+			data.traitParts[traitKey].total = +data.traitParts[traitKey].value;
 		}
 	}
 
@@ -601,7 +602,7 @@ export class MageActor extends Actor{
 				skillTotal += +skill.base
 			}
 
-			data.defenses[saveKey].base = +saveTotal + Math.trunc(skillTotal / 5 );
+			data.defenses[saveKey].base = +saveTotal + Math.trunc( skillTotal / 5 );
 			data.defenses[saveKey].value = data.defenses[saveKey].base + +data.defenses[saveKey].bonus + +data.defenses[saveKey].equip + +data.defenses[saveKey].enchant;
 		}
 	}

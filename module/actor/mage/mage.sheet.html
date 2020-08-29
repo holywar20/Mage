@@ -1090,18 +1090,18 @@
 		
 		<div class="grid-child">
 			<div class="paper-doll">
-				<img src="systems/mage/img/sheets/paper-doll.png">
+				<img src="{{ actor.img }}">
 
 				<div class="armor-set-container">
 					<div class="flex-row">
 						<div class="flex-1"></div>
 						<div class="flex-1">
 							<img class="armor-equipment" src="systems/mage/icons/items/equipment/cloak-fur.jpg"><br>
-							<span class="small-text">Helmet</span>
+							<span class="non-input-number small-text">Helmet</span>
 						</div>
 						<div class="flex-1">
 							<img class="armor-equipment" src="systems/mage/icons/items/equipment/cowl.jpg"><br>
-							<span class="small-text">Neck</span>
+							<span class="non-input-number small-text">Neck</span>
 						</div>
 					</div>
 
@@ -1109,22 +1109,22 @@
 						<div class="flex-1"></div>
 						<div class="flex-1">
 							<img class="armor-equipment" src="systems/mage/icons/items/armor/halfplate.png"><br>
-							<span class="small-text">Armor</span>
+							<span class="non-input-number small-text">Armor</span>
 						</div>
 						<div class="flex-1">
 							<img class="armor-equipment" src="systems/mage/icons/items/jewelry/ring-eye.jpg"><br>
-							<span class="small-text">Right Ring</span>
+							<span class="non-input-number small-text">Right Ring</span>
 						</div>
 					</div>
 
 					<div class="flex-row">
 						<div class="flex-1">
 							<img class="armor-equipment" src="systems/mage/icons/items/jewelry/ring-gold.jpg"><br>
-							<span class="small-text">Left Ring</span>
+							<span class="non-input-number small-text">Left Ring</span>
 						</div>
 						<div class="flex-1">
 							<img class="armor-equipment" src="systems/mage/icons/items/jewelry/ring-gold.jpg"><br>
-							<span class="small-text">Belt</span>
+							<span class="non-input-number small-text">Belt</span>
 						</div>
 						<div class="flex-1">
 							
@@ -1135,7 +1135,7 @@
 						<div class="flex-1"></div>
 						<div class="flex-1">
 							<img class="armor-equipment" src="systems/mage/icons/items/equipment/boots.png"><br>
-							<span class="small-text">Boots</span>
+							<span class="non-input-number small-text">Boots</span>
 						</div>
 						<div class="flex-1"></div>
 					</div>
@@ -1339,7 +1339,7 @@
 				<div class="flex mini-card-bottom">
 					<div class="flex-3-quarters pad-4 spell-effect-list">
 						<div class="justify-content-between">
-							<span class="row-subtitle">&nbsp;Range</span>
+							<span class="row-subtitle">Range</span>
 							<span>
 								{{#if_greater spell.data.range.num 1}}
 								<span class="non-input-number">{{ spell.data.range.num }}</span>
@@ -1349,7 +1349,7 @@
 						</div>
 
 						<div class="justify-content-between">
-							<span class="row-subtitle">&nbsp;Targets</span>
+							<span class="row-subtitle">Target</span>
 							<span>
 								<span class="non-input-number">
 									{{#if_greater spell.data.range.num 1}}
@@ -1362,7 +1362,7 @@
 						</div>
 
 						<div class="justify-content-between">
-							<span class="row-subtitle">&nbsp;Duration</span>
+							<span class="row-subtitle">Dur.</span>
 							<span>
 								{{#if_greater spell.data.range.num 1}}
 								<span class="non-input-number">{{ spell.data.duration.num }}</span>
