@@ -88,7 +88,7 @@ export class MageActor extends Actor{
 		data.traitParts.cha.total = +data.traitParts.cha.total + +data.contestedStatusEffects.vigor;
 
 		// Enlighten / Confusion
-		data.traitParts.int.total = +data.traitParts.cha.total + +data.contestedStatusEffects.enlighten;
+		data.traitParts.int.total = +data.traitParts.int.total + +data.contestedStatusEffects.enlighten;
 		data.traitParts.cor.total = +data.traitParts.cor.total + +data.contestedStatusEffects.enlighten;
 		data.traitParts.per.total = +data.traitParts.per.total + +data.contestedStatusEffects.enlighten;
 	}
@@ -100,25 +100,25 @@ export class MageActor extends Actor{
 		//		Add equipment bonus to Arcana
 
 		for( let key in data.weapons ){
-			for ( let innerKey in data.weapons[key] ){
-			
-			}
+			//for ( let innerKey in data.weapons[key] ){
+			//
+			//}
 		}
 		
 		for( let key in data.enchants ){
-			if( data.enchants[key].applySelf ){
-				switch( data.enchants[key].type ){
-				case "traits" : 
-					this._applyTraitsBonus( data, data.enchants[key].subtype , data.enchants[key].value );
-					break;
-				case "skills" : 
-					this._applySkillsBonus( data, data.enchants[key].subtype, data.enchants[key].value );
-					break;
-				case "arcana" : 
-					this._applyArcanaBonus( data, data.enchants[key].subtype , data.enchants[key].value );
-					break;
-				}
-			}
+			//if( data.enchants[key].applySelf ){
+			//	switch( data.enchants[key].type ){
+			//	case "traits" : 
+			//		this._applyTraitsBonus( data, data.enchants[key].subtype , data.enchants[key].value );
+			//		break;
+			//	case "skills" : 
+			//		this._applySkillsBonus( data, data.enchants[key].subtype, data.enchants[key].value );
+			//		break;
+			//	case "arcana" : 
+			//		this._applyArcanaBonus( data, data.enchants[key].subtype , data.enchants[key].value );
+			//		break;
+			//	}
+			//}
 		}
 	}
 
@@ -330,10 +330,12 @@ export class MageActor extends Actor{
 		if(!data.hp ){ data.hp = {} }
 		data.hp.baseValue = 10;
 		data.hp.max = 10;
+		if(!data.hp.current){ data.hp.current = 0 }
 
 		if( !data.paradox ){ data.paradox = {} }
 		data.paradox.baseValue = 5;
 		data.paradox.max = 3;
+		if(!data.paradox.current){ data.paradox.current = 0}
 
 		if(!data.hp){ data.ph = {} }
 		data.carry.current = 0;
@@ -584,6 +586,7 @@ export class MageActor extends Actor{
 
 	_calculateTraits( data ){
 		for( let [traitKey, trait] of Object.entries( data.traitParts ) ){
+			console.log( trait );
 			data.traitParts[traitKey].value = +trait.base + +trait.super;
 			data.traitParts[traitKey].total = +data.traitParts[traitKey].value;
 		}
@@ -686,13 +689,13 @@ export class MageActor extends Actor{
 
 	_calculateGlobalCosts( data ){
 		/* first calculate creation offsets */
-		
+
 		data.creation.spentSkills = data.cp.skills;
 		if( data.creation.spentSkills > data.creation.skills )
 			data.creation.spentSkills = data.creation.skills;
 		data.creation.unspentSkills = +data.creation.skills - +data.creation.spentSkills;
 
-		data.creation.spentTraits = data.cp.traitParts;
+		data.creation.spentTraits = data.cp.traits;
 		if( data.creation.spentTraits > data.creation.traits )
 			data.creation.spentTraits = data.creation.traits;
 		data.creation.unspentTraits = +data.creation.traits - +data.creation.spentTraits;
@@ -710,7 +713,6 @@ export class MageActor extends Actor{
 		if( data.cp.spent > data.cp.total ){
 			// ui.notifications.warn( this.data.name + " has spent more Character points than the he/she has!");
 		}
-			
 	}
 
 	_calculateTotalsAndCosts( data ){
@@ -728,7 +730,7 @@ export class MageActor extends Actor{
 			trait.cost = this._triangularNumberFormula( +trait.base , 4 );
 			traitCumulative = +traitCumulative +  +trait.cost;
 		}
-		data.cp.traitParts = traitCumulative;
+		data.cp.traits = traitCumulative;
 
 		let skillCumulative = 0;
 		for( let skillGroup of Object.values( data.skills) ){

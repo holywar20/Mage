@@ -862,63 +862,6 @@
 					<div class="col"></div>
 				</div>
 
-				
-				{{#each data.enchants as |enchant id| }}
-				<div class="row">
-					<div class="col">
-						<input class="input-text input-wide" value="{{ enchant.source }}" name="data.enchants.{{id}}.source">
-					</div>
-					<div class="col">
-						{{#if enchant.applySelf }}
-							<button set-self="{{id}}" class="btn btn-icon btn-success">
-									<img src="systems/mage/img/icons/checkmark.png">
-							</button>
-						{{else}}
-							<button set-self="{{id}}" class="btn btn-icon btn-warn">
-								<img src="systems/mage/img/icons/x-mark.png">
-							</button>
-						{{/if}}
-					</div>
-					<div class="col">
-						<select name="data.enchants.{{id}}.type" class="input-text  input-medium">
-						{{#select enchant.type}}
-							<option value=""></option>
-							<option value="damage">Damage</option>
-							<option value="healing">Healing</option>
-							<option value="resist">Resist</option>
-							<option value="status">Status Effect</option>
-							<option value="utility">Utility</option>
-							<option value="vitals">Bonus Vitals</option>
-							<option value="traits">Bonus Traits</option>
-							<option value="skills">Bonus Skills</option>
-							<option value="arcana">Bonus Arcana</option>
-						{{/select}}
-						<select>
-					</div>
-					<div class="col">
-						{{> "systems/mage/partials/effect-selector.html" effect=enchant id=id beginkey="data.enchants" endkey="subtype"}}
-					</div>
-					<div class="col">
-						<input type="number" class="input-number" value="{{enchant.value}}" name="data.enchants.{{id}}.value">
-					</div>
-					<div class="col">
-						<input type="number" class="input-number" value="{{ enchant.duration }}" name="data.enchants.{{id}}.duration">
-					</div>
-					<div class="col">
-						<input type="number" class="input-number" value="{{ enchant.arcana }}" name="data.enchants.{{id}}.arcana">
-					</div>
-					<div class="col">
-						<input type="number" class="input-number" value="{{ enchant.concentrate }}" name="data.enchants.{{id}}.concentrate">
-					</div>
-
-					<div class="col">
-						<button delete-enchant="{{id}}" class="btn btn-icon btn-warn">
-							<img src="systems/mage/img/icons/trash.png">
-						</button>
-					</div>
-				</div>
-				{{/each}}
-
 				<div class="row">
 					<div class="col">
 						

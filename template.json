@@ -4,8 +4,8 @@
 		"templates" : {},
 		"mage" :{
 			"templates" : [],
-			"hp" 					: { "current" : 0, "baseValue" : 0 , "bonus" : 0 ,"max" : 0 },
-			"paradox" 			: { "current" : 0, "baseValue" : 0 , "bonus" : 0 ,"max" : 0 },
+			"hp" 					: { "value" : 0, "min": 0, "baseValue" : 0 , "bonus" : 0 ,"max" : 0 },
+			"paradox" 			: { "value" : 0, "min": 0, "baseValue" : 0 , "bonus" : 0 ,"max" : 0 },
 			"carry" 				: { "current" : 0, "baseValue" : 3 , "bonus" : 0, "max" : 3 },
 			"concentration" 	: { "current" : 0, "baseValue" : 3 , "bonus" : 0, "max" : 3 },
 			"actionPoints" 	: { "current" : 0, "baseValue" : 3 , "bonus" : 0, "max" : 3 },
