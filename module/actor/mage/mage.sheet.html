@@ -246,7 +246,7 @@
 					<input value="{{ data.traitParts.cor.value }}" disabled class="input-trait-subscript">
 					<button trait-name="cor" class="btn btn-medium btn-traits">
 						<span class="inline-icon">&#127922;</span>
-						<span class="{{#stat_display data.traitParts.cor.total data.traitParts.cor.value data.traitParts.core.value }}{{/stat_display}}">
+						<span class="{{#stat_display data.traitParts.cor.total data.traitParts.cor.value data.traitParts.co.value }}{{/stat_display}}">
 							{{ data.traitParts.cor.total }}
 						</span>
 					</button>
@@ -308,7 +308,10 @@
 				</div>
 				<div class="col">
 					<span class="non-input-number">{{ data.carry.current }}</span> /
-					<span class="non-input-number">{{ data.carry.max }}</span>
+					<span class="non-input-number">
+						<span class="{{#stat_display data.carry.max data.carry.baseValue data.carry.baseValue}}{{/stat_display}}">
+						{{ data.carry.max }}
+						</span>
 				</div>
 			</div>
 
@@ -319,7 +322,11 @@
 				</div>
 				<div class="col">
 					<span class="non-input-number">{{ data.concentration.current }}</span> /
-					<span class="non-input-number">{{ data.concentration.max }}</span>
+					<span class="non-input-number">
+						<span class="{{#stat_display data.concentration.max data.concentration.baseValue data.concentration.baseValue}}{{/stat_display}}">
+						{{ data.concentration.max }}
+						</span>
+					</span>
 				</div>
 			</div>
 
@@ -331,7 +338,11 @@
 
 				<div class="col">
 					<span class="non-input-number">{{ data.actionPoints.current }}</span> /
-					<span class="non-input-number">{{ data.actionPoints.max }}</span> 
+					<span class="non-input-number">
+						<span class="{{#stat_display data.actionPoints.max 3 3}}{{/stat_display}}">
+						{{ data.actionPoints.max }}
+						</span>
+					</span> 
 				</div>
 			</div>
 
@@ -343,7 +354,11 @@
 
 				<div class="col">
 					<span class="non-input-number">{{ data.movement.current }}</span> /
-					<span class="non-input-number">{{ data.movement.max }}</span>
+					<span class="non-input-number">
+						<span class="{{#stat_display data.movement.max 6 6}}{{/stat_display}}">
+						{{ data.movement.max }}
+						</span>
+					</span>
 				</div>
 			</div>
 

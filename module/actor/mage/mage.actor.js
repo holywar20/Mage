@@ -58,14 +58,39 @@ export class MageActor extends Actor{
 		this._calculateSkills( data );
 
 		this._addEnchantsToCore( data ); // Calculate JUST trait, skill & Arcana bonus's from equipment & enchantments
+		this._addStatusEffectsToCore ( data );
 
 		this._calculateDerived( data );
 		this._calculateSaves( data );
 
 		this._addEnchantsToDerived( data ); // Calculate saves, derived stats and Resistance levels
+		this._addStatusEffectsToDerived( data );
 
 		this._prepareItems();
 
+	}
+
+	_addStatusEffectsToDerived( data ){
+		// Haste / Slow
+		data.actionPoints.max = data.actionPoints.max + +data.contestedStatusEffects.haste;
+		data.movement.max = data.movement.max + +data.contestedStatusEffects.haste;
+
+		// Lucky / Unlucky
+		data.defenses.grit.total = data.defenses.grit.total + data.contestedStatusEffects.lucky;
+		data.defenses.cunning.total = data.defenses.cunning.total + data.contestedStatusEffects.lucky;
+		data.defenses.will.total = data.defenses.will.total + data.contestedStatusEffects.lucky;
+	}
+
+	_addStatusEffectsToCore( data ){
+		// Vigor / Weak
+		data.traitParts.str.total = +data.traitParts.str.total + +data.contestedStatusEffects.vigor;
+		data.traitParts.dex.total = +data.traitParts.dex.total + +data.contestedStatusEffects.vigor;
+		data.traitParts.cha.total = +data.traitParts.cha.total + +data.contestedStatusEffects.vigor;
+
+		// Enlighten / Confusion
+		data.traitParts.int.total = +data.traitParts.cha.total + +data.contestedStatusEffects.enlighten;
+		data.traitParts.cor.total = +data.traitParts.cor.total + +data.contestedStatusEffects.enlighten;
+		data.traitParts.per.total = +data.traitParts.per.total + +data.contestedStatusEffects.enlighten;
 	}
 
 	_addEnchantsToCore( data ){
@@ -89,9 +114,9 @@ export class MageActor extends Actor{
 				case "skills" : 
 					this._applySkillsBonus( data, data.enchants[key].subtype, data.enchants[key].value );
 					break;
-				case "arcana" : 
-					this._applyArcanaBonus( data, data.enchants[key].subtype , data.enchants[key].value );
-					break;
+				//case "arcana" : 
+					//this._applyArcanaBonus( data, data.enchants[key].subtype , data.enchants[key].value );
+					//break;
 				}
 			}
 		}
@@ -115,10 +140,7 @@ export class MageActor extends Actor{
 			return;
 		}
 
-		console.log( arcanaName );
-
 		if( arcanaName == "allArcana"){
-			console.log('hitting them all!');
 			for( let key in data.arcana ){
 				console.log( data.arcana , key );
 				data.arcana[key].total = +data.arcana[key].total + +value;
@@ -309,16 +331,27 @@ export class MageActor extends Actor{
 
 		//console.log( this.data.name );
 		data.hp.current = 10;
+		data.hp.baseValue = 10;
 		data.hp.max = 10;
+
 		data.paradox.current = 5;
+		data.paradox.baseValue = 5;
 		data.paradox.max = 3;
-		data.carry.current = 3;
+
+		data.carry.current = 0;
+		data.carry.baseValue = 3;
 		data.carry.max = 3;
+
+		data.concentration.baseValue = 3;
 		data.concentration.current = 0;
 		data.concentration.max = 3;
+
 		data.actionPoints.current = 0;
+		data.actionPoints.baseValue = 3;
 		data.actionPoints.max = 3;
+
 		data.movement.current = 6;
+		data.movement.baseValue = 3;
 		data.movement.max = 6;
 	}
 
@@ -583,12 +616,7 @@ export class MageActor extends Actor{
 			cpParadoxBonus = Math.round( data.cp.spent / 10 );
 			carryBonus = Math.round( data.cp.spent / 50 );
 			concentrationBonus = Math.round( data.cp.spent / 50 );
-			
-			if( data.cp.spent == 0 ){
-				hpBonusMultiple = 0;
-			} else {
-				hpBonusMultiple = data.cp.spent / 100;
-			}
+			hpBonusMultiple = data.cp.spent / 100;
 		}
 
 		data.hp.max = Math.round( 15 + ( (+data.traitParts.str.value * 2) + +data.skills.grit.endurance.value * 2 ) * (1 + +hpBonusMultiple) ) + +data.hp.bonus;
@@ -602,12 +630,20 @@ export class MageActor extends Actor{
 		if( data.mystictraits.mental )
 			men = data.traitParts[data.mystictraits.mental].value;
 
-		data.carry.max = +data.skills.grit.carry.value + +data.traitParts.str.total + +3 +data.carry.bonus;
-		data.concentration.max = +data.skills.grit.concentration.value + +data.traitParts.int.total + +3 +data.concentration.bonus;
-		data.paradox.max = +phys + +men + +cpParadoxBonus + +5;
-		data.actionPoints.max = +data.actionPoints.bonus + +data.actionPoints.bonus;
+		data.carry.baseValue = +data.skills.grit.carry.value + +data.traitParts.str.total + +3 +  + +carryBonus;
+		data.carry.max = +data.carry.baseValue + +data.carry.bonus
 
-		data.carry.current = 0;
+		data.concentration.baseValue = +data.skills.grit.concentration.value + +data.traitParts.int.total + +3 + +data.concentration.bonus + +concentrationBonus;
+		data.concentration.max = +data.concentration.baseValue + +data.concentration.bonus;
+
+		data.paradox.baseValue = +phys + +men + +cpParadoxBonus + +3;
+		data.paradox.max = +data.paradox.baseValue + +data.paradox.bonus;
+
+		data.actionPoints.baseValue = 3;
+		data.actionPoints.max = +data.actionPoints.baseValue + +data.actionPoints.bonus;
+
+		data.movement.baseValue = 6;
+		data.movement.max = +data.movement.baseValue + +data.movement.bonus;
 	}
 
 	_calculateArcana( data ){
@@ -615,6 +651,8 @@ export class MageActor extends Actor{
 
 		if( data.mystictraits.mental ){ traitBonus += +data.traitParts[data.mystictraits.mental].value; }
 		if( data.mystictraits.physical ){ traitBonus += +data.traitParts[data.mystictraits.physical].value; }
+
+		console.log( traitBonus );
 
 		for( let sphere of Object.values( data.arcana ) ){
 			let potentialValue  = +traitBonus + +sphere.total - 5;
@@ -628,6 +666,7 @@ export class MageActor extends Actor{
 			}
 
 			sphere.value = potentialValue;
+			sphere.total = potentialValue;
 		}
 	}
 

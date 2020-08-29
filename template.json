@@ -4,12 +4,12 @@
 		"templates" : {},
 		"mage" :{
 			"templates" : [],
-			"hp" 					: { "current" : 0, "bonus" : 0 ,"max" : 0 },
-			"paradox" 			: { "current" : 0, "bonus" : 0 ,"max" : 0 },
-			"carry" 				: { "current" : 0, "bonus" : 0, "max" : 3 },
-			"concentration" 	: { "current" : 0, "bonus" : 0, "max" : 3 },
-			"actionPoints" 	: { "current" : 0, "bonus" : 0, "max" : 3 },
-			"movement"			: { "current" : 0, "bonus" : 0, "max" : 6 },
+			"hp" 					: { "current" : 0, "baseValue" : 0 , "bonus" : 0 ,"max" : 0 },
+			"paradox" 			: { "current" : 0, "baseValue" : 0 , "bonus" : 0 ,"max" : 0 },
+			"carry" 				: { "current" : 0, "baseValue" : 3 , "bonus" : 0, "max" : 3 },
+			"concentration" 	: { "current" : 0, "baseValue" : 3 , "bonus" : 0, "max" : 3 },
+			"actionPoints" 	: { "current" : 0, "baseValue" : 3 , "bonus" : 0, "max" : 3 },
+			"movement"			: { "current" : 0, "baseValue" : 6 , "bonus" : 0, "max" : 6 },
 			"contestedStatusEffects" : {
 				"haste" : 0,
 				"regen" : 0,
