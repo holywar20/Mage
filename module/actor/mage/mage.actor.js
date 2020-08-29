@@ -114,9 +114,9 @@ export class MageActor extends Actor{
 				case "skills" : 
 					this._applySkillsBonus( data, data.enchants[key].subtype, data.enchants[key].value );
 					break;
-				//case "arcana" : 
-					//this._applyArcanaBonus( data, data.enchants[key].subtype , data.enchants[key].value );
-					//break;
+				case "arcana" : 
+					this._applyArcanaBonus( data, data.enchants[key].subtype , data.enchants[key].value );
+					break;
 				}
 			}
 		}
